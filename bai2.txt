@@ -1,0 +1,858 @@
+ GIẢI HỆ HAI PHƯƠNG TRÌNH BẬC NHẤT HAI ẨN
+A. TRỌNG TÂM KIẾN THỨC
+1. Phương pháp thế
+Cách giải hệ phương trình bằng phương pháp thế:
+Bước 1: Từ một phương trình của hệ, biểu diễn một ẩn theo ẩn kia rồi thế vào phương trình còn lại của hệ để được phương trình chỉ còn chứa 1 ẩn.
+Bước 2: Giải phương trình một ẩn vừa nhận được, từ đó suy ra nghiệm của hệ đã cho.
+Nhận xét: Tùy theo hệ phương trình ta có thể lựa chọn cách biểu diễn  theo  hoặc biểu diễn  theo 
+* Chú ý:
+Giải và biện luận phương trình: 
+- Nếu 
+- Nếu  và  thì phương trình vô nghiệm
+- Nếu  và  thì phương trình có vô số nghiệm.
+2. Phương pháp cộng đại số
+Giải hệ phương trình bằng phương pháp cộng đại số:
+Để giải một hệ hai phương trình bậc nhất hai ẩn có hệ số của cùng một ẩn nào đó trong hai phương trình bằng nhau hoặc đối nhau, ta có thể làm như sau:
+Bước 1: Cộng hay trừ từng vế của hai phương trình trong hệ để được phương trình chỉ còn chứa một ẩn.
+Bước 2: Giải phương trình một ẩn vừa nhận được, từ đó suy ra nghiệm của hệ phương trình đã cho.
+Trường hợp trong hệ phương trình đã cho không có hai hệ số của cùng một ẩn bằng nhau hay đối nhau, ta có thể đưa về trường hợp đã xét bằng cách nhân hai vế của mỗi phương trình với một số thích hợp (khác 0).
+B. CÁC DẠNG BÀI TẬP
+A: Giải hệ phương trình bằng phương pháp thế
+Dạng 1: Giải hệ phương trình bằng phương pháp thế
+I. Phương pháp giải: Căn cứ vào quy tắc thế để giải hpt bậc nhất hai ẩn bằng phương pháp thế ta làm như sau
+- Từ 1 phương trình của hệ phương trình đã cho (coi như pt thứ nhất), ta biểu diễn 1 ẩn theo ẩn kia rồi thế vào phương trình thứ hai để được 1 phương trình mới (chỉ còn 1 ẩn).
+- Dùng phương trình mới ấy để thay thế cho phương trình thứ hai trong hệ phương trình và giữ nguyên phương trình thứ nhất, ta được hpt mới tương đương với hệ phương trình đã cho.
+*) Chú ý: Ta thường chọn phương trình có các hệ số có giá trị tuyệt đối không quá lớn thường là 1 và -1
+II. Bài toán
+Bài 1: Giải các hệ phương trình sau
+a.                                 b. 
+Lời giải
+a) Cách 1: Thế  theo  ở phương trình thứ nhất
+Ta có 
+Cách 2: Thế  theo  ở phương trình thứ nhất
+Ta có 
+Vậy phương trình có nghiệm duy nhất 
+b) Cách 1: Ta có 
+Ta thấy rằng  có nghiệm đúng với mọi 
+Do đó hệ phương trình vô số nghiệm.
+Cụ thể, tập nghiệm của nó cũng là tập nghiệm của phương trình bậc nhất hai ẩn  
+Do đó, hệ phương trình có nghiệm  tính bởi công thức 
+Cách 2: Ta có 
+Ta thấy rằng  có nghiệm đúng với mọi 
+Do đó hệ phương trình vô số nghiệm.
+Cụ thể, tập nghiệm của nó cũng là tập nghiệm của phương trình bậc nhất hai ẩn  
+Do đó, hệ phương trình có nghiệm  tính bởi công thức 
+Bài 2: Giải các hệ phương trình sau
+a. b.                    
+Lời giải
+a) Cách 1: Ta có 
+Ta thấy phương trình  vô nghiệm với mọi 
+Do đó  hệ phương trình vô nghiệm.
+Cách 2: Ta có 
+Ta thấy phương trình  vô nghiệm với mọi 
+Do đó  hệ phương trình vô nghiệm.
+b) 
+Vậy hệ phương trình có nghiệm duy nhất 
+Bài 3: Giải các hệ phương trình sau bằng phương pháp thế
+a) b) 
+c) d) 
+e) f)
+g) h) 
+Lời giải
+a) 
+Từ phương trình thứ nhất của hệ ta có . 
+Thế vào phương trình thứ hai của hệ ta được  hay  suy ra 
+Từ đó . 
+Vậy hệ phương trình đã cho có nghiệm là 
+b) 
+Từ phương trình thứ nhất của hệ ta có. 
+Thế vào phương trình thứ hai của hệ ta được  hay  suy ra 
+Từ đó. 
+Vậy hệ phương trình đã cho có nghiệm là 
+c) 
+Từ phương trình thứ nhất của hệ ta có. 
+Thế vào phương trình thứ hai của hệ ta được  hay  suy ra 
+Từ đó . 
+Vậy hệ phương trình đã cho có nghiệm là 
+d) 
+Từ phương trình thứ nhất của hệ ta có . 
+Thế vào phương trình thứ hai của hệ ta được  hay  
+Do không có giá trị nào của  thỏa mãn hệ thức  nên hệ phương trình đã cho vô nghiệm.
+e) 
+Từ phương trình thứ nhất của hệ ta có. 
+Thế vào phương trình thứ hai của hệ ta được  hay  (1)
+Do không có giá trị nào của  thỏa mãn hệ thức  nên hệ phương trình đã cho vô nghiệm.
+f)
+Từ phương trình thứ nhất của hệ ta có  (1)
+Thế vào phương trình thứ hai của hệ ta được  hay  suy ra  (2)
+Ta thấy với mọi giá của của  đều thỏa mãn (2)
+Với mỗi giá trị tùy ý của , giá trị tương ứng của  được tính bởi (1)
+Vậy hệ phương trình đã cho có nghiệm là  với  tùy ý.
+g) 
+Từ phương trình thứ nhất của hệ ta có
+Thế vào phương trình thứ hai của hệ ta được  hay  
+Suy ra 
+Ta thấy với mọi giá của của  đều thỏa mãn (2)
+Với mỗi giá trị tùy ý của , giá trị tương ứng của  được tính bởi (1)
+Vậy hệ phương trình đã cho có nghiệm là  với  tùy ý.
+h) 
+Từ phương trình  ta có . 
+Thay  vào phương trình  ta được 
+Giải phương trình này ta được 
+Thay  vào phương trình  ta được 
+Vậy hệ phương trình đã cho có nghiệm là 
+Bài 4: Giải các hệ phương trình sau bằng phương pháp thế
+a) b) 
+c) d)
+e)f) 
+Lời giải
+a) Đặt 
+Từ phương trình  ta có . Thay vào phương trình  ta được:
+ (vô nghiệm)
+Vậy hệ phương trình đã cho vô nghiệm
+b) 
+Từ phương trình  ta có . Thay vào phương trình  ta được
+(vô nghiệm)
+Vậy hệ phương trình đã cho vô nghiệm
+c) Đặt 
+Từ phương trình  ta có . Thay vào phương trình  ta được
+ (vô số nghiệm)
+Vậy hệ phương trình đã cho có vô số nghiệm.
+d) 
+Từ phương trình  ta có . Thay vào phương trình  ta được
+ (vô số nghiệm)
+Vậy hệ phương trình đã cho có vô số nghiệm.
+e) 
+Từ phương trình  ta có 
+Thay vào phương trình  ta được
+Thay giá trị  vào phương trình  ta có
+Vậy hệ phương trình đã cho có nghiệm duy nhất 
+f) 
+Từ phương trình  ta có 
+Thay vào phương trình  ta được:
+Thay giá trị  vào phương trình  ta có
+Vậy hệ phương trình đã cho có nghiệm duy nhất 
+Bài 5: Giải các hệ phương trình sau
+a.               b.                        
+Lời giải
+a) Điều kiện 
+Vậy hệ phương trình có nghiệm duy nhất 
+b) 
+Vậy hệ phương trình có nghiệm duy nhất 
+Bài 6: Giải các hệ phương trình sau
+a) b)  
+Lời giải
+a) 
+Vậy hệ phương trình có nghiệm duy nhất 
+b) 
+ (luôn đúng)
+Vậy hệ phương trình có vô số nghiệm.
+Bài 7: Giải các hệ phương trình sau
+a) b)  
+Lời giải
+a) Cách 1: Ta có 
+Vậy hệ phương trình có nghiệm duy nhất .
+Cách 2: Ta có 
+Vậy hệ phương trình có nghiệm duy nhất 
+b) Cách 1: Ta có 
+Giải riêng phương trình (*):
+Khi đó: 
+Vậy hệ phương trình có nghiệm duy nhất 
+Cách 2: Ta có: 
+Giải riêng phương trình (**) ta được:
+Khi đó 
+Vậy hệ phương trình có nghiệm duy nhất .
+Bài 8: Giải các phương trình sau bằng phương pháp thế
+a) b) 
+Lời giải
+a) Từ phương trình thứ nhất của hệ ta có . 
+Thay vào phương trình thứ hai ta được
+Từ đó 
+Vậy hệ phương trình có nghiệm duy nhất là .
+b) Từ phương trình thứ hai của hệ ta có . 
+Thay vào phương trình thứ nhất ta được
+Từ 
+Vậy hệ có nghiệm duy nhất là 
+Bài 9: Giải các hệ phương trình bằng phương pháp thế
+a) b) 
+c) 
+Lời giải
+a) Giải hệ phương trình 
+Từ phương trình  suy ra . Thay vào phương trình  ta có
+Khi  thay vào  ta có
+Vậy hệ phương trình có nghiệm duy nhất 
+b) Giải hệ phương trình 
+Từ phương trình  suy ra . Thay vào phương trình  ta có
+Khi  thay vào  ta có
+Vậy hệ phương trình có nghiệm duy nhất  
+c) 
+Từ phương trình  suy ra . Thay vào phương trình  ta có
+Khi  thay vào  ta có
+Vậy hệ phương trình có nghiệm duy nhất  
+Bài 10: Giải các hệ phương trình sau bằng phương pháp thế
+a) b) 
+Lời giải
+a) Giải hệ phương trình 
+Từ phương trình  suy ra . Thay vào phương trình  ta có
+Khi  suy ra 
+Vậy hệ phương trình có nghiệm duy nhất  
+b) Giải hệ phương trình 
+Từ phương trình  suy ra . Thay vào phương trình  ta có
+Khi  suy ra 
+Vậy hệ phương trình có nghiệm duy nhất  
+Bài 11: Cho hệ phương trình , trong đó  là số đã cho. Giải hệ phương trình tròn mỗi trường hợp sau
+a) b) c) 
+Lời giải
+a) Thay  ta có hệ 
+Từ phương trình thứ nhất của hệ ta có . Thế vào phương trình thứ hai của hệ ta được
+ hay  suy ra 
+Từ đó 
+Vậy hệ phương trình có nghiệm là 
+b) Thay  ta có hệ 
+Từ phương trình thứ nhất của hệ ta có . Thế vào phương trình thứ hai của hệ, ta được  hay (1)
+Do không có giá trị nào của  thỏa mãn hệ thức (1) nên hệ phương trình đã cho vô nghiệm,
+c) Thay  ta có hệ 
+Từ phương trình thứ nhất của hệ ta có . Thế vào phương trình thứ hai của hệ, ta được
+ hay 
+Ta thấy mọi giá trị của  đều thỏa mãn (1)
+Với giá trị tùy ý của  thì giá trị tương ứng của  được tính bởi phương trình 
+Vậy hệ phương trình đã cho có nghiệm  với  tùy ý.
+Dạng 2: Giải hệ phương trình quy về hệ phương trình bậc nhất hai ẩn
+I. Phương pháp giải
+- Biến đổi hệ phương trình đã cho về hệ phương trình bậc nhất hai ẩn
+- Giải hệ phương trình bậc nhất hai ẩn tìm được.
+II. Bài toán
+Bài 1: Giải các hệ phương trình sau
+a.                                         b. 
+Lời giải
+a) Ta có: 
+Vậy hệ phương trình có nghiệm duy nhất 
+b) Ta có: 
+Vậy hệ phương trình có nghiệm duy nhất 
+Bài 2: Giải các hệ phương trình sau
+a.                                        
+b. 
+Lời giải
+a. Ta có: 
+Vậy hệ phương trình có nghiệm duy nhất 
+b. 
+Vậy hệ phương trình có nghiệm duy nhất 
+Bài 3: Giải các hệ phương trình sau
+a.                               
+b. 
+Lời giải
+a) 
+  (thỏa mãn)
+Vậy hệ phương trình có nghiệm duy nhất 
+b) 
+Vậy hệ phương trình có nghiệm duy nhất 
+Bài 4: Giải hệ phương trình sau: 
+Lời giải
+Ta có: 
+Vậy hệ phương trình có nghiệm duy nhất 
+Bài 5: Giải các hệ phương trình sau
+a.                                          b. 
+Lời giải
+a) 
+Vậy hệ phương trình có nghiệm duy nhất 
+b. 
+Vậy hệ phương trình có nghiệm duy nhất .
+Dạng 3: Giải hệ phương trình bằng phương pháp đặt ẩn phụ
+I. Cách giải: Ta thực hiện theo các bước sau
+Bước 1: Chọn ẩn phụ cho các biểu thức của hệ phương trình đã cho để được hệ phương trình bậc nhất hai ẩn mới ở dạng cơ bản (tìm điều kiện của ẩn phụ nếu có).
+Bước 2: Giải hệ phương trình bậc nhất hai ẩn bằng phương pháp thế, từ đó tìm nghiệm của hệ phương trình đã cho.
+II. Bài toán
+Bài 1: Giải các hệ phương trình sau
+a.                                                   b.                   
+Lời giải
+a. Điều kiện . 
+Đặt , ta có:
+Vậy hệ phương trình có nghiệm duy nhất .
+b. 
+Đặt  
+Ta có: 
+Vậy hệ phương trình có nghiệm duy nhất 
+Bài 2: Giải hệ phương trình sau: 
+Lời giải
+Ta có:  . Điều kiện: 
+Đặt 
+Ta có: 
+Vậy hệ phương trình có nghiệm duy nhất 
+Bài 3: Giải các hệ phương trình sau
+a.                                b. 
+Lời giải
+a. 
+Vậy hệ phương trình có nghiệm duy nhất 
+b. . Điều kiện: 
+  (thỏa mãn)
+Vậy hệ phương trình có nghiệm duy nhất 
+Bài 4: Giải các hệ phương trình sau
+a.                     
+b. 
+c. 
+Lời giải
+a. . Đặt 
+Ta có HPT: 
+Vậy hệ phương trình có nghiệm duy nhất 
+b. 
+Điều kiện: 
+Vậy hệ phương trình có nghiệm duy nhất 
+Bài 5: Giải các hệ phương trình sau: 
+Lời giải
+Điều kiện: 
+Ta có: 
+Vậy hệ phương trình có nghiệm duy nhất 
+Bài 6: Giải các hệ phương trình sau
+a. 
+b. 
+Lời giải
+a. 
+Vậy hệ phương trình có nghiệm duy nhất 
+b. 
+Vậy hệ phương trình có 4 nghiệm: (3;-1); (3;-3); (-1;-1); (-1;-3)
+Bài 7: Giải các hệ phương trình sau
+a. b.  
+c. 
+Lời giải
+a. Đặt , ta được:
+Vậy hệ phương trình có nghiệm duy nhất 
+b. Đặt 
+Vậy hệ phương trình có hai nghiệm 
+c. Đặt  ,  ta được:
+. Vậy hệ phương trình có hai nghiệm .
+Dạng 4: Tìm điều kiện của tham số để hệ phương trình thỏa mãn điều kiện cho trước
+I. Cách giải: 
+Ta thường sử dụng các kiến thức sau
+- Hệ phương trình bậc nhất hai ẩn có nghiệm 
+- Đường thẳng  đi qua điểm 
+II. Bài toán
+Bài 1: Xác định các hệ số  và , biết rằng hệ phương trình sau:   có nghiệm là:
+a)         b) 
+Lời giải
+a) Vì  là một nghiệm của phương trình (I), nên thay giá trị này vào hệ phương trình (I) ta được: 
+Vậy 
+b) Tương tự ta có: 
+. Vậy 
+Bài 2: Cho hệ phương trình: . 
+Tìm các giá trị của  để hệ phương trình có nghiệm 
+Lời giải
+ Thay  vào hệ phương trình ta được: 
+Vậy 
+Bài 3: Biết rằng: Đa thức  chia hết cho đa thức  khi và chỉ khi 
+Hãy tìm các giá trị của  và  sao cho đa thức sau đồng thời chia hết cho  và :
+Lời giải
+Theo giả thiết  đồng thời chia hết cho đa thức  và , do đó ta có:
+Vậy  và .
+Bài 4: Cho hai đường thẳng .
+Tìm các giá trị của tham số  và  để  cắt nhau tại điểm 
+Lời giải
+ Vì  cắt nhau tại điểm  nên  
+Vậy  là các giá trị cần tìm.
+Bài 5: Tuyển sinh vào 10, Bắc Ninh
+Cho hệ phương trình: ,  là tham số
+a. Giải hệ phương trình khi 
+b. Tìm  để hệ có nghiệm  thỏa mãn 
+Lời giải
+Hệ phương trình tương đương 
+a. Với  ta được: 
+b. Hệ có nghiệm  thỏa mãn  khi và chỉ khi:
+Vậy  là các giá trị cần tìm.
+Bài 6: Cho hệ phương trình: ,  là tham số, giả sử hệ có nghiệm duy nhất 
+a. Tìm đẳng thức liên hệ giữa  và  không phụ thuộc vào 
+b. Tìm giá trị của  thỏa mãn 
+c. Tìm các giá trị nguyên của m để biểu thức  nhận giá trị nguyên.
+Lời giải
+a. Từ (1) ta có: , thay vào phương trình (2) ta được:  
+Hệ phương trình có nghiệm duy nhất 
+Ta có:  là hệ thức liên hệ giữa x và y không phụ thuộc vào m.
+b. Ta có:  
++) Với  
++) Với  (loại)
+Vậy  là giá trị cần tìm.
+c. Ta có  
+Vậy 
+Bài 7: Cho hệ phương trình:    
+a. Tìm  để hệ phương trình có nghiệm
+b. Tìm  để hệ có nghiệm duy nhất  thỏa mãn 
+c. Tìm  để hệ có nghiệm duy nhất  sao cho  đạt giá trị nhỏ nhất
+Lời giải
+Từ (1)   thay vào phương trình (2) ta được:
+a. Hệ có nghiệm khi và chỉ khi (*) có nghiệm 
+Vậy điều kiện: .
+b. Hệ có nghiệm duy nhất 
+Khi đó: 
+Do đó:  
+Vậy  hoặc  hoặc  là các giá trị cần tìm.
+c. Hệ có nghiệm duy nhất khi  , khi đó nghiệm của hệ là:  
+.
+BÀI TẬP TỰ LUYỆN
+Bài 1: Giải các phương trình sau bằng phương pháp thế
+a) b) 
+c) 
+Lời giải
+a) Từ phương trình thứu nhất ta có . Thế vào phương trình thứ hai, ta được  hay 
+suy ra 
+Từ đó . Vậy hệ phương trình có nghiệm là 
+b) Từ phương trình thứ  hai ta có . Thế vào phương trình thứ nhất, ta được  hay 
+suy ra 
+Từ đó . Vậy hệ phương trình có nghiệm là 
+c) Từ phương trình thứ hai ta có . Thế vào phương trình thứ nhất ta được  hay 
+Ta thấy với mọi giá trị của  đều thỏa mãn phương trình 
+Vậy với giá trị tùy ý của  giá trị tương ứng của  được tính bởi phương trình 
+Vậy hệ phương trình có nghiệm là  với  tùy ý.
+Bài 2: Giải các hệ phương trình sau bằng phương pháp thế
+a) b) 
+c) 
+Lời giải
+a) 
+Vậy hệ phương trình có nghiệm duy nhất là 
+b) 
+Phương trình  nghiệm đúng với mọi 
+Vậy hệ phương trình có vô số nghiệm. 
+Các nghiệm của hệ được viết như sau 
+c) 
+Phương trình  vô nghiệm
+Vậy hệ phương trình vô nghiệm.
+Bài 3: Giải hệ phương trình
+a) b) 
+c) d) 
+Lời giải
+a) 
+Vậy hệ phương trình có nghiệm duy nhất là 
+c) 
+Vậy hệ phương trình có nghiệm duy nhất là
+b) 
+Vậy hệ phương trình có nghiệm duy nhất là 
+d) 
+Vậy hệ phương trình có nghiệm duy nhất là 
+Bài 4: Giải các hệ phương trình sau
+a) b) 
+c) 
+Lời giải
+a) 
+Vậy hệ phương trình có nghiệm duy nhất 
+b) 
+Phương trình  vô nghiệm
+Vậy hệ phương trình vô nghiệm
+c) 
+Phương trình  nghiệm đúng với mọi 
+Vậy hệ phương trình có vô số nghiệm.
+Các nghiệm của hệ được viết như sau 
+Bài 5: Giải các hệ phương trình sau
+a) b) 
+c) d) 
+Lời giải
+a) a) 
+Vậy hệ phương trình có nghiệm duy nhất 
+b) 
+Vậy hệ phương trình có nghiệm duy nhất là 
+c) 
+Vậy hệ phương trình có nghiệm duy nhất là 
+d) 
+Nhân hai vế của phương trình thứ hai với  ta được
+Cộng từng vế của phương trình của hệ ta được  hay  hay 
+Thay kết quả vừa tìm đươc vào phương trình thứ hai ta được 
+Suy ra 
+Vậy hệ phương trình có nghiệm duy nhất là 
+Bài 6: Giải các hệ phương trình sau
+a.                                          
+b. 
+Lời giải
+a) 
+Vậy hệ phương trình có nghiệm duy nhất 
+b) 
+Vậy hệ phương trình có nghiệm duy nhất .
+B: Giải hệ phương trình bằng phương pháp cộng đại số
+Dạng 1: Giải hệ phương trình bằng phương pháp cộng đại số
+I. Cách giải:
+- Nếu hệ số của cùng một ẩn bằng nhau thì ta trừ vế với vế
+- Nếu hệ số của cùng một ẩn đối nhau thì ta cộng vế với vế
+- Nếu không có hệ số của ẩn nào bằng nhau hoặc đối nhau thì ta nhân hai vế của phương trình với số thích hợp rồi đưa về trường hợp thứ nhất.
+II. Bài toán
+Bài 1: Giải các hệ phương trình sau:
+a) b) 
+Lời giải
+a) Ta có 
+Vậy hệ phương trình có nghiệm duy nhất 
+b) Nhân cả hai vế của phương trình thứ nhất với 2 ta được phương trình tương đương
+Do đó hệ phương trình có vô số nghiệm
+Cụ thể, tập nghiệm của nó cũng là tập nghiệm của phương trình bậc nhất hai ẩn 
+Do đó, hệ phương trình có nghiệm  tính bởi công thức 
+Bài 2: Giải các hệ phương trình sau
+a) b) 
+Lời giải
+a) Nhân cả hai vế của phương trình thứ nhất với  ta có hệ phương trình tương đương
+Cộng từng vế của hai phương trình của hệ mới tạo thành, ta được 
+Ta có hệ phương trình: 
+Vậy hệ phương trình có nghiệm duy nhất .
+b) 
+Vậy hệ phương trình có nghiệm duy nhất 
+Bài 3: Giải các hệ phương trình sau bằng phương pháp cộng đại số:
+a) b) 
+c) d) 
+e) f) 
+g) h) 
+Lời giải
+a) Cộng từng vế của hai phương trình ta được  suy ra 
+Thế  vào phương trình thứ hai ta được  hay  suy ra 
+Vậy hệ phương trình đã cho có nghiệm là 
+b) Trừ từng vế của hai phương trình ta được  hay  suy ra 
+Thế  vào phương trình thứ nhất, ta được  hay  suy ra 
+Vậy hệ phương trình có nghiệm 
+c) Cộng từng vế của hai phương trình ta được  suy ra 
+thế  vào phương trình thứ nhất ta được  hay  suy ra 
+Vậy hệ phương trình có nghiệm 
+d) Trừ từng vế của hai phương trình ta được  suy ra 
+Thế  vào phương trình thứ nhất ta được  hay  suy ra 
+Vậy hệ phương trình có nghiệm 
+e) Nhân hai vế của phương trình thứ nhất với 3 và nhân hai vế của phương trình thứ 2, ta được
+Cộng từng vế của hai phương trình của hệ mới ta được  hay . Thế  vào phương trình thứ nhất của hệ đã cho ta có  suy ra 
+Vậy nghiệm của hệ phương trình có nghiệm là 
+f) Nhân hai vế của phương trình thứ nhát cho 5 và nhân của hai vế của phương trình thứ hai cho 4 ta được hệ 
+Cộng từng vế của hai phương trình của hệ mới ta được  suy ra 
+Thế  vào phương trình thứ nhất của hệ đã cho ta có  hay  suy ra 
+Vậy hệ phương trình đã cho có nghiệm là 
+g) Chia cả hai vế của phương trình thứ hai cho 2, ta được hệ 
+Cộng từng vế của hai phương trình của hệ mới ta được . Hệ thức này luôn thỏa mãn với các giá trị tùy ý của  và .
+Với giá trị tùy ý của  giá trị của  tính được nhờ hệ thức  suy ra 
+Vậy hệ phương trình có nghiệm là  với .
+h) Nhân hai vế của phương trình thứu nhất cho 4 ta được hệ 
+Cộng từng vế của hai phương trình của hệ mới ta được . Không tìm được bất kì giá trị  nào thỏa mãn hệ thức này.
+Vậy hệ phương trình vô nghiệm.
+Bài 4: Giải các hệ phương trình sau bằng phương pháp thế
+a) b) 
+c) 
+Lời giải
+a) Đặt 
+Trừ từng vế của hai phương trình  và  ta nhận được phương trình
+ tức là 
+Thế  vào phương trình  ta được phương trình
+Vậy hệ phương trình đã cho có nghiệm duy nhất 
+b)  Đặt 
+trừ từng vế của hai phương trình  và  ta nhận được phương trình
+ tức là 
+Thế  vào phương trình  ta được phương trình
+Vậy hệ phương trình đã cho có nghiệm duy nhất 
+c) Đặt 
+Nhân hai vế của phương trình  với 2 và nhân hai vế của phương trình với 3 ta được hệ phương trình 
+Cộng từng vế của hai phương trình  và  ta nhận được phương trình
+Thế giá trị  vào phương trình  ta được phương trình
+Vậy hệ phương trình đã cho có nghiệm 
+Bài 5: Giải các hệ phương trình sau
+a) b) 
+c) 
+Lời giải
+a)  Hệ phương trình vô nghiệm
+b) 
+Vậy hệ phương trình có nghiệm duy nhất 
+c) Nhân cả hai vế của phương trình thứ nhất với , nhân cả hai vế của phương trình thứ hai với , ta được hệ phương trình tương đương
+Vậy hệ phương trình có nghiệm duy nhất 
+Bài 6: Giải các hệ phương trình sau
+a) b) 
+Lời giải
+a) 
+Vậy hệ có nghiệm duy nhất .
+b) 
+Vậy hệ có nghiệm duy nhất .
+C. Sử dụng MTCT để giải hệ phương trình
+Bài 1: Tìm nghiệm của mỗi hệ phương trình sau bằng máy tính tính cầm tay
+a) b) c) 
+Lời giải
+a) Sử dụng loại máy tính phù hợp (chẳng hạn CASIO FX570 - VN PLUS), ấn liên tiếp các phím sau
+Màn hình hiện ra kết quả như sau: 
+Ấn = kết quả như hình sau 
+Vậy hệ phương trình có nghiệm duy nhất là 
+b) Sử dụng loại máy tính phù hợp (chẳng hạn CASIO FX570 - VN PLUS), ấn liên tiếp các phím sau
+Màn hình hiện ra kết quả như sau: 
+Ấn = kết quả như hình sau 
+Vậy hệ phương trình có nghiệm duy nhất là 
+c) Sử dụng loại máy tính phù hợp (chẳng hạn CASIO FX570 - VN PLUS), ấn liên tiếp các phím sau
+Màn hình hiện ra kết quả như sau: 
+Ấn = kết quả như hình sau 
+Vậy hệ phương trình có nghiệm duy nhất là 
+Bài 2: Dùng MTCT thích hợp để tìm nghiệm của các phương trình sau:
+a) b) c) 
+Lời giải
+a) 
+b) Hệ phương trình vô nghiệm
+c) Hệ phương trình vô số nghiệm
+Bài 3: Thực hiện lần lượt các yêu cầu sau để tính sô mililit dung dịch axit  nồng độ  và số mililit dung dịch axit  nồng độ  cần dùng để pha chết 2 lít dung dịch acid  nồng độ 
+a) Gọi  là sô mililit dung dịch acid  nồng độ  và  là số mililit dung dịch axit  nồng độ  cần lấy. Hãy biểu thị qua  và 
++ Thể tích của dung dịch acid  nồng độ  nhận được sau khi trộn lẫn hai dung dịch acid ban đầu
++ Tổng số gam acid  nguyên chất có trong hai dung dịch acid này
+b) Sửu dụng kết quả ở câu a, hãy lập một hệ hai phương trình bậc nhất với hai ẩn là 
+Dùng MTCT giải hệ phương trình này để tính số mililit cần lấy của mỗi dung dịch acid  ở trên.
+Lời giải
+a) Thể tích của dung dịch acid  nồng độ  nhận được sau khi trộn lẫn hai dung dịch acid ban đầu là 
+Tổng số gam acid  nguyên chất có trong hai dung dịch acid là 
+b) Theo câu a ta có hệ 
+Ta có  và  nên thể tích dung dịch  ban đầu là  và thể tích dung dịch  ban đầu là 
+Bài 4: Giải các hệ phương trình
+a) b) 
+c) 
+Lời giải
+a) Điều kiện 
+Đặt  ta có hệ phương trình
+Trở lại ẩn  ta có  do đó 
+Vậy hệ phương trình có nghiệm duy nhất 
+b) Điều kiện 
+Đặt  ta có hệ phương trình
+Khi  suy ra 
+So sánh với điều kiện  thấy thỏa mãn. Vậy hệ phương trình có nghiệm duy nhất 
+c) Điều kiện 
+Đặt  ta có hệ phương trình
+Trở lại ẩn  ta có  do đó 
+Vậy hệ có nghiệm duy nhất 
+D. Xác định đường thẳng, giao điểm giữa các đường thẳng
+Bài 1: Xác định  để đồ thị hàm số  đi qua hai điểm
+a)  và b)  và 
+c)  và 
+Lời giải
+a) Vì đồ thị hàm số  đi qua điểm  nên ta có phương trình 
+Vì đồ thị hàm số  đi qua điểm  nên ta có phương trình 
+Từ  và  ta có hệ phương trình 
+Vậy phương trình có nghiệm  duy nhất 
+Vậy khi  thì đồ thị hàm số  đi qua hai điểm  và 
+b) Hai điểm  và thuộc đường thẳng  nên ta có hệ phương trình ẩn  là
+Vậy với  thì đồ thị hàm số  đi qua hai điểm  và 
+c) Hai điểm  và  thuộc đường thẳng  nên ta có hệ phương trình ẩn  là
+Vậy với  thì đồ thị hàm số  đi qua hai điểm  và 
+Bài 2: Xác định tọa độ giao điểm của hai đường thẳng
+a)  và 
+b)  và 
+Lời giải
+a) Tọa độ gioa điểm  của  và  là nghiệm của hệ phương trình
+Giải hệ phương trình ta được nghiệm là 
+Vậy tọa độ giao điểm là 
+b) Tọa độ giao điểm  của  và  là nghiệm của hệ phương trình
+Hệ đã cho có vô số nghiệm nên  trùng với 
+Tọa độ giao điểm 
+Bài 3: Tìm  để ba đường thẳng sau đồng quy
+Lời giải
+Tọa độ giao điểm  của  và  là nghiệm của hệ phương trình
+Giải hệ phương trình ta được nghiệm là 
+Để  đồng quy thì  phải đi qua . Do đó
+ suy ra 
+Vậy với  thì ba đường thẳng đồng quy.
+E. Xác định tham số  để hệ phương trình thỏa mãn điều kiện về nghiệm số
+Bài 1: Cho hệ phương trình 
+Tìm các giá trị của  để cho hệ có nghiệm  với 
+Lời giải
+Từ phương trình  ta có . Thay vào  ta được
+   (3)
++ nếu  hoặc  thì phương trình  vô nghiệm
++ Điều kiện để phương trình có nghiệm duy nhất là . Khi đó 
++ Trước hết ta tìm  để 
+Để  thì  hay 
++ Với  thì 
++ Với  thì 
+Vậy với  thì hệ có nghiệm nguyên là .
+Bài 2: Cho hệ phương trình 
+a) Tìm số nguyên để hệ có nghiệm duy nhất  mà 
+b) Tìm số nguyên để hệ có nghiệm duy nhất  mà  là các số nguyên
+Lời giải
+a) + Với  thì hệ có nghiệm  thỏa mãn đề bài
++ Với  thì 
+Ta có 
+Vì  nên 
+Vậy với thì hệ có nghiệm duy nhất  mà 
+b) + Với  thì hệ có nghiệm  thỏa mãn đề bài
++ Với  thì hệ có nghiệm duy nhất 
+Trước hết tìm  để  thì 
+Mà  nên 
+Vì  nên .
+Bài 3: Với giá trị nào của  thì hai phương trình sau có nghiệm chung
+ và 
+Lời giải
+ Để thỏa mãn bài toán khi và chỉ khi hệ phương trình  có nghiệm.
+Đặt , điều kiện .
+Khi đó hệ phương trình  trở thành 
+Xét phương trình  suy ra . Thay vào phương trình  ta có
+So sánh với điều kiện uy ra 
+Do  nên
+Do  nên 
+So sánh với điều kiện thỏa mãn
+Vậy  thì hai phương trình có nghiệm chung.
+Bài 4: Cho hệ phương trình 
+a) Xác định các giá trị nguyên của  để hệ có nghiệm duy nhất  sao cho 
+b) Tìm giá trị nguyên của  để hệ có nghiệm duy nhất  với  là số nguyên dương.
+Lời giải
+a) Điều kiện để hệ có nghiệm duy nhất  là . Khi đó hệ có nghiệm .
+Mặt khác, theo điều kiện 
+Với 
+b) 
+Bài 5: Cho hệ phương trình 
+a) Giải hệ phương trình khi 
+b) Tìm giá trị nguyên của  để hệ có nghiệm duy nhất  sao cho biểu thức  nhận giá trị nguyên.
+Lời giải
+a) Khi  hệ phương trình có dạng 
+Giải hệ phương trình ta được nghiệm là 
+b) + Với mọi  hệ luôn có nghiệm 
++Xét 
+Để  mà  suy ra 
+Bài 6: Với giá trị nào của  thì hai phương trình sau có nghiệm chung
+ và 
+Lời giải
+Để thỏa mãn bài toán khi hệ phương trình  có nghiệm
+Mà 
+- Khi  thay vào  suy ra . Dễ thấy phương trình vô nghiệm.
+- Khi 
++Khi  thay vào  không thỏa mãn.
++ Khi  thay vào  suy ra 
+Giá trị của .
+BÀI TẬP TỰ LUYỆN
+Bài 1: Giải các hệ phương trình sau bằng phương pháp cộng đại số
+a) b) 
+c) 
+Lời giải
+a) Cộng từng vế của phương trình ta được  suy ra  
+Thế  vào phương tình thứ nhất ta được  hay  suy ra 
+b) Nhân hai vế của phương trình thứ nhất cho 4 ta được hệ 
+Cộng từng vế của phương trình ta được  suy ra 
+Thế  vào phương trình hai ta được  hay  suy ra 
+Vậy hệ phương trình đã cho có nghiệm 
+c) Nhân hai vế của phương trình thứ nhất cho , ta có hệ 
+Cộng từng vế của phương trình ta được . Hệ thức này luôn thỏa mán với các giá trị tuy ý của  và . Với giá trị tùy ý của , giá trị của  được tính nhờ hệ thức  suy ra .
+Vậy hệ phương trình đã cho có nghiệm là  với .
+Bài 2: Giải các hệ phương trình
+a) b) 
+Lời giải
+a) Cộng từng vế hai phương trình của hệ ta được  suy ra .
+Thay  vào phương trình thứ hai của hệ ta được  do đó 
+Vậy hệ phương trình có nghiệm duy nhất là 
+b) Nhân hai vế của phương trình thứ nhất với 2, nhân hai vế của phương trình thứ hai với -3 ta được 
+Cộng từng vế hai phương trình của hệ ta được  suy ta 
+Thay  vào phương trình  ta được . Do đó 
+Vậy hệ phương trình có nghiệm duy nhất là 
+Bài 3: Giải các hệ phương trình:
+a) b) 
+Lời giải
+a) Ta có:
+Vậy hệ phương trình có nghiệm duy nhất 
+b) Ta có
+Vậy hệ phương trình có nghiệm duy nhất 
+Bài 4: Giải ác phương trình sau bằng phương pháp cộng đại số
+a) b) 
+c) d) 
+Lời giải
+a) Cộng từng vế hai phương trình của hệ ta được  suy ra 
+Thay  vào phương trình thứ hai của hệ ta được  do đó 
+Vậy hệ phương trình có nghiệm duy nhất là 
+b) Nhân hai vế của phương trình thứ hai với -2 ta được 
+Cộng từng vế của hai phương trình của hệ ta được  suy ra 
+Thay  vào phương trình thứ nhất của hệ ta được  do đó 
+Vậy hệ phương trình có nghiệm duy nhất là 
+c) Nhân hai vế của phương trình hai với 6 ta được 
+Cộng từng vế hai phương trình của hệ ta được  nghiệm đúng với mọi . 
+Vậy hệ phương trình có vô số nghiệm.
+d) Nhân hai vế của phương trình thứ hai với 2 ta được 
+Cộng từng vế hai phương trình của hệ, ta được  là phương trình vô nghiệm
+Vậy hệ phương trình vô nghiệm.
+Bài 5: Giải các hệ phương trình sau
+a.                                    b. 
+Hướng dẫn giải
+a.    
+Vậy hệ phương trình có nghiệm duy nhất 
+b. 
+Vậy hệ phương trình có nghiệm duy nhất 
+Bài 6: Giải các hệ phương trình sau
+a.                                                b. 
+Hướng dẫn giải
+a) Điều kiện 
+Đặt 
+Vậy hệ phương trình có nghiệm duy nhất 
+b) Điều kiện        
+Đặt 
+Vậy hệ phương trình có nghiệm duy nhất 
+Bài 7: Giải các hệ phương trình sau
+a) b) 
+Lời giải
+a) Hệ phương trình được biến đổi thành 
+Giải hệ phương trình ta được nghiệm 
+b) Hệ phương trình được biến đổi thành 
+Giải hệ phương trình ta được nghiệm 
+Bài 8: Giải các hệ phương trình sau
+a) b) 
+Lời giải
+a)  Đặt . Hệ phương trình có dạng 
+Giải hệ ta được 
+Vậy nghiệm của hệ phương trình là 
+b) Đặt . Hệ phương trình trở thành 
+Do đó 
+Vậy nghiệm của hệ là 
+Bài 9: Giải các hệ phương trình sau
+a) 
+b) 
+Lời giải
+a) Hệ phương trình được biến đổi thành 
+Giải hệ phương trình ta được nghiệm 
+b) Hệ phương trình được biến đổi thành 
+Giải hệ phương trình ta được nghiệm .
+Bài 10: Giải các hệ phương trình sau
+a) b) 
+c) 
+Lời giải
+a) Đặt 
+Hệ phương trình có dạng  thỏa mãn
+Suy ra 
+Vậy nghiệm của hệ là 
+b) Đặt 
+Hệ phương trình có dạng 
+Suy ra 
+Vậy nghiệm của hệ là 
+c) Đặt 
+Hệ phương trình có dạng 
+Suy ra 
+Vậy nghiệm của hệ là .
+Bài 11: Dùng MTCT thích hợp để tìm nghiệm của các hệ phương trình sau:
+a) b) 
+c) d) 
+Lời giải
+a) 
+b) Hệ phương tình có vô số nghiệm
+c) Hệ phương trình vô nghiệm
+d) 
+Bài 12: Tìm nghiệm của các hệ phương trình sau bằng máy tính cầm tay
+a) b) 
+Lời giải
+Sử dụng máy tính cầm tay ta giải được nghiệm của các hệ phương trình là
+a) Hệ phương trình có nghiệm duy nhất  
+b) Hệ phương trình có nghiệm duy nhất  
+Bài 13: Xác định  để đồ thì hàm số  đi qua hai điểm  và  trong mỗi trường hợp sau:
+a)  và b)  và 
+Lời giải
+a) Đồ thì hàm số đi qua  nên ta có 
+Đồ thì hàm số đi qua nên ta có 
+Ta có hệ phương trình 
+Giải hệ phương trình ta được  và 
+Vậy đồ thị hàm số là 
+b) Đồ thì hàm số đi qua  nên ta có 
+Đồ thì hàm số đi qua nên ta có 
+Ta có hệ phương trình 
+Giải hệ phương trình ta được  và 
+Vậy đồ thị hàm số là 
+Bài 14: Xác định  để đồ thì hàm số  đi qua hai điểm  và  trong mỗi trường hợp sau:
+a)  và b)  và 
+Lời giải
+a) Gọi đồ thị của hàm số  là 
+Ta có  nên 
+b) Gọi đồ thị của hàm số  là 
+Ta có  nên 
+Bài 15: Xác định tọa độ giao điểm của hai đường thẳng
+a)  và 
+b)  và 
+c)  và 
+Lời giải
+Tọa độ giao điểm  của  và  là
+a) b) c) 
+Bài 16: Cho ba đường thẳng
+Xác định tham số  để ba đường thẳng đồng quy.
+Lời giải
+Tọa độ giao điểm của  và  là nghiệm của hệ phương trình
+Vậy tọa độ giao điểm của  và  là 
+Để ba đường thẳng đồng quy thì  hay
+Vậy với  thì ba đường thẳng đồng quy.
+Bài 17: Cho hệ phương trình   
+Với giá trị nào của  thì hệ phương trình có nghiệm  thỏa mãn: 
+Hướng dẫn giải
+Thay vào (*)  (thỏa mãn).

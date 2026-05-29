@@ -1,0 +1,107 @@
+{
+  "bai3": [
+    "Dạng 1: Toán về quan hệ giữa các số",
+    "Dạng 2: Toán liên quan đến chữ số",
+    "Dạng 3: Toán làm chung công việc",
+    "Dạng 4: Toán chuyển động",
+    "Dạng 5: Toán có nội dung lí, hóa"
+  ],
+  "bai4": [
+    "Dạng 1: Giải phương trình tích",
+    "Dạng 2: Giải phương trình đưa về dạng phương trình tích",
+    "Dạng 3: Giải phương trình chứa ẩn ở mẫu",
+    "Dạng 4: Biết phương trình có một trong các nghiệm là . Tìm giá trị của tham số",
+    "Dạng 5: Tìm giá trị của biến để giá trị của hai biểu thức có mối liên quan nào đó"
+  ],
+  "bai5": [
+    "Dạng 1: Viết bất đẳng thức và một số yếu tố liên quan",
+    "Dạng 2: Chứng minh bất đẳng thức",
+    "Dạng 3: So sánh hai số",
+    "Dạng 4: Bài toán thực tế",
+    "Dạng 5: Áp dụng bất đẳng thức để tìm giá trị lớn nhất, giá trị nhỏ nhất của một biểu thức"
+  ],
+  "bai6": [
+    "Dạng 1: Nhận biết bất phương trình bậc nhất, nghiệm của bất phương trình",
+    "Dạng 2: Giải bất phương trình bậc nhất một ẩn",
+    "Dạng 3: Giải bài toán bằng cách lập bất phương trình"
+  ],
+  "bai7": [
+    "Dạng 1: Tìm căn bậc hai của một số",
+    "Dạng 2: Tìm điều kiện xác định của biểu thức chứa căn. Tính giá trị của biểu thức",
+    "Dạng 3: Tính toán, rút gọn biểu thức dạng",
+    "Dạng 4: Rút gọn các biểu thức chứa biến",
+    "Dạng 4: Bài toán so sánh, bài toán tìm",
+    "Dạng 5: Bài toán thực tế",
+    "Dạng 6: Tìm giá trị lớn nhất, nhỏ nhất có chứa căn"
+  ],
+  "bai8": [
+    "Dạng 1: Khai căn một tích",
+    "Dạng 2: Nhân các căn bậc hai",
+    "Dạng 3: Khai căn một thương",
+    "Dạng 4: Chia các căn bậc hai",
+    "Dạng 5: Rút gọn, tính giá trị của biểu thức",
+    "Dạng 6: Chứng minh bất đẳng thức",
+    "Dạng 7: Bài toán tìm",
+    "Dạng 8: Bài toán vận dụng"
+  ],
+  "bai9": [
+    "Dạng 1: Đưa thừa số ra ngoài dấu căn",
+    "Dạng 2: Đưa thừa số vào trong dấu căn",
+    "Dạng 3: Khử mẫu của biểu thức lấy căn",
+    "Dạng 4: Trục căn thức ở mẫu",
+    "Dạng 5: So sánh hai số chứa căn",
+    "Dạng 6: Rút gọn biểu thức chứa căn",
+    "Dạng 7: Chứng minh đẳng thức",
+    "Dạng 8: Sử dụng các phép biến đổi căn thức bậc hai để giải phương trình"
+  ],
+  "bai10": [
+    "Dạng 1: Tính căn thức bậc ba",
+    "Dạng 2: Tính giá trị, rút gọn biểu thức chứa căn bậc ba",
+    "Dạng 2: Khử mẫu thức chứa căn bậc ba",
+    "Dạng 3: So sánh các căn bậc ba",
+    "Dạng 4: Giải phương trình chứa căn bậc ba",
+    "Dạng 4: Bài toán thực tế"
+  ],
+  "bai11": [
+    "Dạng 1: Sử dụng MTCT tính tỉ số lượng giác, tính góc",
+    "Dạng 2: Tính tỉ số lượng giác của góc nhọn trong một tam giác vuông",
+    "Dạng 3: Tính các cạnh trong một tam giác vuông sử dụng tỉ số lượng giác của góc nhọn.",
+    "Dạng 4: Dựng góc nhọn  biết một tỉ số lượng giác của góc đó bằng",
+    "Dạng 5: Tính giá trị của biểu thức lượng giác với các góc đặc biệt",
+    "Dạng 6: So sánh các tỉ số lượng giác mà không dùng máy tính hoặc bảng số"
+  ],
+  "bai12": [
+    "Dạng 1: Giải tam giác vuông"
+  ],
+  "bai13": [
+    "Dạng 1: Chứng minh nhiều điểm cùng nằm trên một đường tròn",
+    "Dạng 2: Xác định vị trí tương đối của điểm  với đường tròn .",
+    "Dạng 3: Tâm đối xứng, trục đối xứng của đường tròn"
+  ],
+  "bai14": [
+    "Dạng 1: So sánh hai đoạn thẳng",
+    "Dạng 2: Tính số đo góc ở tâm, số đo cung tròn.",
+    "Dạng 3: Tính độ dài của một dây. Tính khoảng cách từ tâm đến dây"
+  ],
+  "bai15": [
+    "Dạng 1: Tính độ dài đường tròn, cung tròn hoặc các đại lượng liên quan",
+    "Dạng 2: Tính diện tích hình tròn, hình quạt tròn và những yếu tố liên quan",
+    "Dạng 3: Tính diện tích hình vành khăn, hình viên phân và những yếu tố liên quan"
+  ],
+  "bai16": [
+    "Dạng 1: Xác định vị trí tương đối của đường thẳng và đường tròn",
+    "Dạng 2: Nhận biết một đường thẳng là tiếp tuyến của đường tròn",
+    "Dạng 2: Bài toán liên quan đến tính độ dài",
+    "Dạng 3: Bài toán vận dụng tính chất tiếp tuyến",
+    "Dạng 4: Chứng minh một số tính chất và hệ thức hình học",
+    "Dạng 5: Một số bài toán liên quan đến cực trị hình học"
+  ],
+  "bai17": [
+    "Dạng 1: Xác định vị trí tương đối của hai đường tròn",
+    "Dạng 2: Các bài toán liên quan đến hai đường tròn tiếp xúc nhau",
+    "Dạng 3: Các bài toán liên quan đến hai đường tròn cắt nhau",
+    "Dạng 3: Các bài toán về hai đường tròn không cắt nhau",
+    "Dạng 4: Chứng minh các tính chất về hệ thức hình học",
+    "Dạng 5: Tính độ dài đoạn thẳng"
+  ]
+}

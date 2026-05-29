@@ -1,0 +1,98 @@
+BÁO CÁO TỔNG HỢP CẤU TRÚC DẠNG BÀI VÀ PHƯƠNG PHÁP GIẢI TOÁN 9 (DỮ LIỆU NỀN TẢNG ANTIGRAVITY)
+I. CHUYÊN ĐỀ: CĂN BẬC HAI VÀ CĂN BẬC BA
+1. Trọng tâm lý thuyết
+Điều kiện xác định:  Căn thức  $\sqrt{A}$  có nghĩa khi và chỉ khi  $A \ge 0$ .
+Quy tắc khai phương một tích:   $\sqrt{A \cdot B} = \sqrt{A} \cdot \sqrt{B}$  (với  $A \ge 0, B \ge 0$ ).
+Quy tắc khai phương một thương:   $\sqrt{\frac{A}{B}} = \frac{\sqrt{A}}{\sqrt{B}}$  (với  $A \ge 0, B &gt; 0$ ).
+Biến đổi đơn giản căn thức bậc hai:
+Đưa thừa số ra ngoài dấu căn:  $\sqrt{A^2B} = |A|\sqrt{B}$  (với  $B \ge 0$ ).
+Đưa thừa số vào trong dấu căn:  $A\sqrt{B} = \sqrt{A^2B}$  (nếu  $A \ge 0$ ) và  $A\sqrt{B} = -\sqrt{A^2B}$  (nếu  $A &lt; 0$ ).
+Trục căn thức ở mẫu:
+Dạng đơn:  $\frac{A}{\sqrt{B}} = \frac{A\sqrt{B}}{B}$  (với  $B &gt; 0$ ).
+Dạng liên hợp:  $\frac{C}{\sqrt{A} \pm B} = \frac{C(\sqrt{A} \mp B)}{A - B^2}$  (với  $A \ge 0, A \neq B^2$ ).
+Bất đẳng thức Cô-si (Cauchy):  Cho hai số không âm  $a, b$ , ta có  $\frac{a+b}{2} \ge \sqrt{ab}$ . Dấu &quot;=&quot; xảy ra khi  $a = b$ .
+2. Phân loại các dạng bài tập và phương pháp giải
+Dạng 1: Thực hiện phép tính và rút gọn biểu thức số (Nhận biết/Thông hiểu).
+Phương pháp:  Sử dụng tính chất lũy thừa và các quy tắc nhân, chia căn thức để đưa về các căn thức đồng dạng.
+Dạng 2: Rút gọn biểu thức chứa biến và tính giá trị (Thông hiểu/Vận dụng).
+Phương pháp:  Luôn đặt  ĐKXĐ  làm bước đầu tiên. Thực hiện quy đồng mẫu thức hoặc trục căn thức để làm gọn biểu thức trước khi thay giá trị của biến.
+Dạng 3: Tìm x trong phương trình chứa căn thức (Vận dụng).
+Phương pháp:  Đặt  ĐKXĐ . Sử dụng hằng đẳng thức  $\sqrt{A^2} = |A|$  để phá dấu căn hoặc bình phương hai vế để khử căn thức.
+Dạng 4: Chứng minh bất đẳng thức và tìm cực trị (Vận dụng cao).
+Phương pháp:  Sử dụng biến đổi tương đương hoặc áp dụng trực tiếp bất đẳng thức Cô-si cho các đại lượng được xác định là không âm.
+3. Hệ thống ví dụ minh họa
+Ví dụ 1 (Thông hiểu):  Rút gọn biểu thức  $A = \sqrt{20} - \sqrt{45} + 3\sqrt{18} + \sqrt{72}$ .
+Phương pháp tư duy:  Tách các số dưới dấu căn thành tích của một số chính phương và một số nguyên tố ( $\sqrt{4 \cdot 5}, \sqrt{9 \cdot 5} \dots$ ) để đưa thừa số ra ngoài dấu căn.
+Lời giải:   $A = \sqrt{4 \cdot 5} - \sqrt{9 \cdot 5} + 3\sqrt{9 \cdot 2} + \sqrt{36 \cdot 2}$   $A = 2\sqrt{5} - 3\sqrt{5} + 9\sqrt{2} + 6\sqrt{2} = 15\sqrt{2} - \sqrt{5}$ .Ví dụ 2 (Vận dụng):  Giải phương trình  $\sqrt{x^2 - 6x + 9} = 9$ .
+Phương pháp tư duy:  Nhận dạng biểu thức dưới dấu căn là hằng đẳng thức  $(x-3)^2$ . Sử dụng quy tắc  $\sqrt{A^2} = |A|$  để đưa về phương trình trị tuyệt đối cơ bản. Việc dùng trị tuyệt đối giúp đảm bảo tính không âm của căn thức mà không cần đặt điều kiện phức tạp cho  $x$ .
+Lời giải:  Phương trình tương đương:  $\sqrt{(x-3)^2} = 9 \Rightarrow |x-3| = 9$ . Trường hợp 1:  $x-3 = 9 \Rightarrow x = 12$ . Trường hợp 2:  $x-3 = -9 \Rightarrow x = -6$ . Vậy tập nghiệm  $S = \{12; -6\}$ .
+II. CHUYÊN ĐỀ: BẤT PHƯƠNG TRÌNH BẬC NHẤT MỘT ẨN
+1. Khung lý thuyết căn bản
+Định nghĩa:  Bất phương trình bậc nhất một ẩn có dạng  $ax + b &gt; 0$  (hoặc  $&lt;, \ge, \le$ ), trong đó  $a \neq 0$ .
+Quy tắc biến đổi:
+Quy tắc chuyển vế: Khi chuyển một số hạng từ vế này sang vế kia, phải đổi dấu số hạng đó.
+Quy tắc nhân:
+Nhân/chia hai vế với số dương:  Giữ nguyên chiều  bất phương trình.
+Nhân/chia hai vế với số âm:  Phải đổi chiều  bất phương trình.
+2. Phân loại dạng bài tập
+Dạng 1: Kiểm tra nghiệm (Nhận biết).
+Phương pháp:  Thay giá trị vào hai vế và kiểm tra tính đúng đắn của khẳng định.
+Dạng 2: Giải bất phương trình và biểu diễn tập nghiệm (Thông hiểu).
+Phương pháp:  Áp dụng linh hoạt hai quy tắc biến đổi để cô lập ẩn  $x$ .
+Dạng 3: Bài toán ứng dụng thực tế (Vận dụng).
+Phương pháp:  Chú ý các từ khóa để chọn dấu bất đẳng thức: &quot;Ít nhất/Tối thiểu&quot; ( $\ge$ ), &quot;Nhiều nhất/Tối đa&quot; ( $\le$ ).
+3. Ví dụ hướng dẫn (Dữ liệu thực tế)
+Ví dụ 1 (Vận dụng - Bạn Thanh mua sắm):  Bạn Thanh có  $60$  nghìn đồng. Bạn muốn mua một cái bút giá  $4$  nghìn đồng và một số quyển vở giá  $7$  nghìn đồng/quyển. Hỏi Thanh mua được nhiều nhất bao nhiêu quyển vở?
+Phương pháp tư duy:  Tổng chi phí = Giá bút + (Giá vở  $\times$  Số lượng). Tổng chi phí này phải  $\le$  số tiền đang có.
+Lời giải:  Gọi  $x$  là số vở Thanh mua ( $x \in \mathbb{N}$ ). Ta có:  $4 + 7x \le 60 \Rightarrow 7x \le 56 \Rightarrow x \le 8$ . Vậy bạn Thanh mua được nhiều nhất  8 quyển vở .Ví dụ 2 (Vận dụng - Bác Ngọc gửi tiết kiệm):  Bác Ngọc gửi tiết kiệm kì hạn 12 tháng lãi suất  $6\%/$ năm. Bác dự định tổng số tiền nhận được (cả gốc lẫn lãi) sau 12 tháng ít nhất là  $318$  triệu đồng. Bác cần gửi ít nhất bao nhiêu tiền?
+Phương pháp tư duy:  Tổng tiền = Gốc + (Gốc  $\times$  Lãi suất). Thiết lập bất phương trình  $\ge 318$ .
+Lời giải:  Gọi  $x$  là số tiền gốc (triệu đồng,  $x &gt; 0$ ). Số tiền nhận được:  $x + 0,06x = 1,06x$ . Ta có:  $1,06x \ge 318 \Rightarrow x \ge 300$ . Vậy bác Ngọc cần gửi ít nhất  300 triệu đồng .Ví dụ 3 (Vận dụng - Bạn Hà thi Tiếng Anh):  Hà thi 4 kỹ năng. Điểm nghe, đọc, viết lần lượt là  $6,5; 8,0; 7,0$ . Để trung bình ít nhất đạt  $7,5$ , điểm kỹ năng nói tối thiểu là bao nhiêu?
+Lời giải:  Gọi  $x$  là điểm nói. Ta có:  $\frac{6,5 + 8,0 + 7,0 + x}{4} \ge 7,5 \Rightarrow 21,5 + x \ge 30 \Rightarrow x \ge 8,5$ . Vậy điểm nói tối thiểu là  8,5 .
+III. CHUYÊN ĐỀ: PHƯƠNG TRÌNH VÀ HỆ PHƯƠNG TRÌNH BẬC NHẤT HAI ẨN
+1. Kiến thức cần nhớ
+Phương trình bậc nhất hai ẩn:  Dạng  $ax + by = c$  ( $a \neq 0$  hoặc  $b \neq 0$ ).
+Hệ hai phương trình bậc nhất hai ẩn:   $\begin{cases} ax + by = c \\ a'x + b'y = c' \end{cases}$
+Xác định số nghiệm dựa trên tỉ số hệ số (với  $a', b', c' \neq 0$  ):| Tỉ số hệ số | Số nghiệm của hệ | Ý nghĩa hình học || ------ | ------ | ------ || $\frac{a}{a'} \neq \frac{b}{b'}$ | Có  1 nghiệm duy nhất | Hai đường thẳng cắt nhau || $\frac{a}{a'} = \frac{b}{b'} \neq \frac{c}{c'}$ | Vô nghiệm | Hai đường thẳng song song || $\frac{a}{a'} = \frac{b}{b'} = \frac{c}{c'}$ | Vô số nghiệm | Hai đường thẳng trùng nhau |
+2. Ví dụ minh họa
+Ví dụ (Nhận biết):  Trong các hệ thức  $2x - y = 3$ ;  $0x + 0y = 5$ ;  $x^2 + y = 2$ , hệ thức nào là phương trình bậc nhất hai ẩn?
+Lời giải:  Chỉ có  $2x - y = 3$  là phương trình bậc nhất hai ẩn vì có hệ số  $a=2, b=-1$  thỏa mãn điều kiện  $a^2 + b^2 \neq 0$ .
+IV. CHUYÊN ĐỀ: HỆ THỨC LƯỢNG TRONG TAM GIÁC VUÔNG
+1. Các hệ thức về cạnh và góc
+Trong tam giác  $ABC$  vuông tại  $A$ , cạnh huyền  $a$ , các cạnh góc vuông  $b, c$ :
+Hệ thức lượng:   $b = a \cdot \sin B = a \cdot \cos C$ ;  $b = c \cdot \tan B = c \cdot \cot C$ .
+Lựa chọn hàm số:  Dựa trên mối quan hệ giữa &quot;Dữ liệu đã biết&quot; và &quot;Đại lượng cần tìm&quot;. Nếu biết cạnh huyền và tìm cạnh đối, dùng  Sin . Nếu biết cạnh kề và tìm cạnh đối, dùng  Tan .
+2. Dạng bài tập ứng dụng thực tế (Vận dụng)
+Ví dụ 1 (Chiều cao tháp Eiffel):  Bạn Vân đứng cách tâm chân tháp  $173$ m, góc nâng nhìn thấy đỉnh tháp là  $62^\circ$ .
+Phương pháp tư duy:  Chiều cao tháp là cạnh đối của góc  $62^\circ$ , khoảng cách là cạnh kề. Ta dùng hàm Tangent.
+Lời giải:  Chiều cao tháp  $h = 173 \cdot \tan 62^\circ \approx 326$ m.Ví dụ 2 (Độ rộng khúc sông):  Một con đò qua sông rộng  $250$ m nhưng bị dòng nước đẩy xiên, phải đi đoạn đường  $320$ m mới sang được bờ kia. Tính góc lệch  $\alpha$  của dòng nước.
+Phương pháp tư duy:  Bề rộng sông là cạnh kề, quãng đường đi là cạnh huyền. Sử dụng hàm Cosine.
+Lời giải:   $\cos \alpha = \frac{250}{320} = 0,78125 \Rightarrow \alpha \approx 38^\circ 37'$ .Ví dụ 3 (Chiều cao cột cờ):  Cột cờ  $AB$  có bóng nắng trên mặt đất  $AC$  dài  $12$ m, tia nắng tạo với mặt đất góc  $35^\circ$ .
+Lời giải:  Chiều cao cột cờ  $h = 12 \cdot \tan 35^\circ \approx 8,40$ m.
+V. CHUYÊN ĐỀ: ĐƯỜNG TRÒN
+1. Lý thuyết trọng tâm
+Quan hệ dây và đường kính:  Đường kính là dây cung lớn nhất. Đường kính vuông góc với dây thì đi qua trung điểm dây.
+Vị trí tương đối của hai đường tròn (  $d$  là khoảng cách nối tâm):
+Tiếp xúc ngoài:  $d = R + r$ .
+Tiếp xúc trong:  $d = |R - r|$ .
+Cắt nhau:  $|R - r| &lt; d &lt; R + r$ .
+Tiếp tuyến:  Đường thẳng tiếp xúc với đường tròn tại 1 điểm. Tiếp tuyến luôn  vuông góc  với bán kính tại tiếp điểm.
+2. Ví dụ minh họa
+Ví dụ 1 (Vận dụng cao - Tầm nhìn trên biển):  Một thủy thủ đứng trên cột buồm cao  $25$ m. Bán kính Trái Đất  $R \approx 6400$ km. Tính tầm nhìn xa tối đa  $d$  của thủy thủ.
+Phương pháp tư duy:
+Bước quan trọng nhất: Đổi đơn vị chiều cao  $h = 25$ m  $= 0,025$ km để tương thích với bán kính  $R$  tính bằng km.
+Xét tam giác vuông tạo bởi tâm Trái Đất, đỉnh cột buồm và điểm tiếp xúc của tầm nhìn trên mặt biển.
+Áp dụng Pythagore:  $d = \sqrt{(R+h)^2 - R^2} = \sqrt{h(2R+h)}$ .
+Lời giải:   $d = \sqrt{0,025 \cdot (2 \cdot 6400 + 0,025)} = \sqrt{0,025 \cdot 12800,025} \approx 17,89$ km.Ví dụ 2 (Thông hiểu):  Bạn Mai căng dây chỉ  $AB=20$ cm trên khung thêu hình tròn bán kính  $R=10$ cm. Dây chỉ này có đi qua tâm không?
+Lời giải:  Đường kính khung thêu là  $2R = 20$ cm. Vì độ dài dây  $AB$  bằng đường kính nên dây  $AB$   đi qua tâm  của đường tròn.
+VI. PHỤ LỤC: BẢNG TRA CỨU NHANH VÀ LƯU Ý KỸ THUẬT
+1. Knowledge Map (Bảng tóm tắt công thức)
+Chuyên đề,Hệ thức/Công thức cốt lõi,Lưu ý đặc biệt
+Căn thức,$\sqrt{A^2} = \|A\|$,Luôn xét dấu biểu thức trong trị tuyệt đối
+Bất phương trình,$ax + b &gt; 0$,Đổi chiều khi nhân/chia với số âm
+Hệ thức lượng,&quot;$\sin = \frac{Đối}{Huyền}$ ,  $\cos = \frac{Kề}{Huyền}$ ,  $\tan = \frac{Đối}{Kề}$&quot;,Kiểm tra đơn vị của góc (Độ/Radian)
+Đường tròn,$d_{tt} \perp R$  tại tiếp điểm,Đường kính là dây lớn nhất
+2. Checklist kiểm tra lời giải dành cho học sinh
+Điều kiện xác định (ĐKXĐ):  Đã đặt điều kiện cho căn thức ( $A \ge 0$ ) và mẫu thức ( $M \neq 0$ ) chưa?
+Đơn vị đo lường:  Trong các bài toán thực tế (Tháp Eiffel, Tầm nhìn biển), các đại lượng đã đưa về cùng một đơn vị (m hoặc km) chưa?
+Dấu bất đẳng thức:  Khi giải bất phương trình, có bước nào nhân/chia với số âm mà quên đổi chiều không?
+Kết luận:  Đã đối chiếu nghiệm tìm được với  ĐKXĐ  ban đầu chưa?

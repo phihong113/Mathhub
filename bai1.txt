@@ -1,0 +1,709 @@
+ KHÁI NIỆM PHƯƠNG TRÌNH VÀ HỆ HAI PHƯƠNG TRÌNH BẬC NHẤT HAI ẨN
+A. Kiến thức cần nhớ
+1. Phương trình bậc nhất hai ẩn
+* Phương trình bậc nhất hai ẩn x và y là hệ thức có dạng  (1)
+Trong đó  và  là các số đã biết ( hoặc )
+* Nếu tại  và  ta có  là một khẳng định đúng thì cặp số  được gọi là một nghiệm của phương trình (1)
+* Mỗi phương trình bậc nhất hai ẩn đều có vô số nghiệm
+* Nhận xét: Trong mặt phẳng tọa độ, tập hợp các điểm có tọa độ  thỏa mãn phương trình bậc nhất hai ẩn  là một đường thẳng. Đường thẳng đó gọi là đường thẳng 
+2. Hệ hai phương trình bậc nhất hai ẩn
+* Một cặp gồm hai phương trình bậc nhất hai ẩn  và  được gọi là một hệ hai phương trình bậc nhất hai ẩn. Ta thường viết hệ phương trình đó dưới dạng:
+ (*)
+* Mỗi cặp số  được gọi là một nghiệm của hệ (*) nếu nó đồng thời là nghiệm của cả hai phương trình của hệ (*)
+* Lưu ý: Mỗi số cặp  là nghiệm của hệ phương trình (*) có nghĩa là điểm  vừ thuộc đường thẳng , vừa thuộc đường thẳng .
+Vậy  là giao điểm của hai đường thẳng  và .
+B. Các dạng toán
+Dạng 1: Nhận biết phương trình, nghiệm của phương trình bậc nhất hai ẩn
+I. Phương pháp giải
+* Phương trình bậc nhất hai ẩn  và  là hệ thức có dạng  (1)
+Trong đó  và  là các số đã biết ( hoặc )
+II. Bài toán
+Bài 1: Trong các hệ thức ; ; , hệ thức nào là phương trình bậc nhất hai ẩn? Hệ thức nào không phải là phương trình bậc nhất hai ẩn?
+Lời giải
+Cả ba hệ thức đều có dạng .
+Xét hệ thức  có hệ số  nên là phương trình bậc nhất hai ẩn
+Xét hệ thức  có hệ số  nên là phương trình bậc nhất hai ẩn
+Xét hệ thức  có , không thỏa mãn điều kiện nên hệ thức  không 
+phải là phương trình bậc nhất hai ẩn.
+Bài 2: Trong các phương trình sau, phương trình nào là bậc nhất hai ẩn ?
+a) b) 
+c) d) 
+Lời giải
+Phương trình ở câu  là phương trình bậc nhất hai ẩn .
+Phương trình ở câu d không phải là phương trình bậc nhất hai ẩn .
+Bài 3: Trong các phương trình sau, phương trình nào là bậc nhất hai ẩn ? Xác định các 
+hệ số  của các phương trình bậc nhất hai ẩn đó.
+a) b) 
+c) d) 
+Lời giải
+a)  là phương trình bậc nhất hai ẩn với  và 
+b)  là phương trình bậc nhất hai ẩn với  và 
+c)  là phương trình bậc nhất hai ẩn với  và 
+d)  không phải là phương trình bậc nhất hai ẩn vì .
+Bài 4: Xác định các hệ số  của mỗi phương trình bậc nhất hai ẩn sau:
+a) b) 
+c) d) 
+Lời giải
+a)  là phương trình bậc nhất hai ẩn với  và 
+b)  là phương trình bậc nhất hai ẩn với  và 
+c)  là phương trình bậc nhất hai ẩn với  và 
+d)  là phương trình bậc nhất hai ẩn với  và 
+Bài 5: Hãy viết một phương trình bậc nhất hai ẩn và chỉ ra một nghiệm của nó.
+Lời giải
+Phương trình bậc nhất hai ẩn 
+Cặp số  là một nghiệm của phương trình 
+Bài 6: Cho phương trình . Trong hai cặp số  và , cặp số nào là nghiệm 
+của phương trình đã cho?
+Lời giải
+Cặp số  là nghiệm của phương trình  vì 
+Cặp số  không phải là nghiệm của phương trình  vì 
+Bài 7: Trong các cặp số sau, cặp số nào là nghiệm của phương trình 
+a) b) 
+c) 
+Lời giải
+a) Thay  vào , ta có: 
+Vậy cặp số  là một nghiệm của phương trình đã cho.
+b) Thay  vào , ta có: 
+Vậy cặp số  không là nghiệm của phương trình đã cho.
+c) Thay  vào , ta có: 
+Vậy cặp số  là một nghiệm của phương trình đã cho.
+Bài 8: Cho phương trình . Chứng minh rằng các cặp số ,  là nghiệm 
+của phương trình trên.
+Lời giải
+Do  là khẳng định đúng nên cặp số  là nghiệm của phương trình 
+Tương tự cặp số  cũng là nghiệm của phương trình .
+Bài 9: Trong các cặp số  và , cặp số nào là nghiệm của phương trình 
+Lời giải
+Cặp số  là một nghiệm của phương trình , vì 
+Cặp số  không là nghiệm của phương trình , vì .
+Bài 10: Xét xem cặp số  có là nghiệm của mỗi phương trình sau không?
+a) b) 
+c) 
+Lời giải
+a) Thay  vào phương trình , ta được:
+Vậy cặp số  là nghiệm của phương trình 
+b) Thay  vào phương trình , ta được:
+Vậy cặp số  không là nghiệm của phương trình 
+c) Thay  vào phương trình , ta được:
+Vậy cặp số  là nghiệm của phương trình .
+Bài 11: Kiểm tra xem các cặp số . Cặp số nào là nghiệm 
+của phương trình .
+Lời giải
++ Thay  vào phương trình , ta được: 
+ (vô lý)
+Vậy cặp số  không là nghiệm của phương trình 
++ Thay  vào phương trình , ta được: 
+ (đúng)
+Vậy cặp số  là nghiệm của phương trình 
++ Thay  vào phương trình , ta được: 
+ (đúng)
+Vậy cặp số  là nghiệm của phương trình 
++ Thay  vào phương trình , ta được: 
+ (vô lý)
+Vậy cặp số  không là nghiệm của phương trình .
+Bài 12: Cho phương trình  (1)
+a) Trong hai cặp số  và , cặp số nào là nghiệm của phương trình (1)
+b) Tìm  để cặp số  là nghiệm của phương trình (1) 
+c) Tìm thêm hai nghiệm của phương trình (1)
+Lời giải
+a) Cặp số  không phải là nghiệm của phương trình (1) vì:
+Cặp số  là nghiệm của phương trình (1) vì:
+b) Vì cặp số  là nghiệm của phương trình (1) nên:
+Vậy .
+c) Cặp số  là nghiệm của phương trình (1) vì: 
+Cặp số  là nghiệm của phương trình (1) vì: 
+Bài 13: Giả sử  là nghiệm của phương trình bậc nhất hai ẩn 
+a) Hoàn thành bảng sau đây:
+?
+?
+?
+?
+?
+Từ đó suy ra 5 nghiệm của phương trình đã cho.
+b) Tính  theo . Từ đó cho biết phương trình đã cho có bao nhiêu nghiệm.
+Lời giải
+a) Ta có:
+Vậy 5 nghiệm của phương trình đã cho là: .
+b) Ta có: . Với mỗi giá trị  tùy ý cho trước, ta luôn tìm được một giá trị  tương 
+ứng. Do đó phương trình đã cho vô số nghiệm.
+Bài 14: Cô Hạnh có hai khoản đầu tư với lãi suất 8% và 10% mỗi năm. Cô Hạnh thu được 
+tiền lại từ hai khoản đầu tư đó là 160 triệu đồng mỗi năm. Viết phương trình bậc nhất hai 
+ẩn cho hai khoản đầu tư của cô Hạnh và chỉ ra ba nghiệm của phương trình đó.
+Lời giải
+Gọi  (triệu đồng) là khoản đầu tư với lãi suất là 8% mỗi năm (). Khi đó, tiền lãi thu 
+được mỗi năm từ khoản đầu tư này là:
+ (triệu đồng) 
+Gọi  (triệu đồng) là khoản đầu tư với lãi suất là 10% mỗi năm (). Khi đó, tiền lãi 
+thu được mỗi năm từ khoản đầu tư này là:
+ (triệu đồng) 
+Ta có phương trình bậc nhất hai ẩn  cho hai khoản đầu tư của cô Hạnh là:
+ hay 
+Ba nghiệm của phương trình trên là 
+Bài 15: Hai bạn Dũng, Huy vào siêu thị mua vở và bút bi để ủng hộ các bạn học sinh vùng 
+lũ lụt. Bạn Dũng mua 5 quyển vở và 3 chiếc bút bi với tổng số tiền phải trả  đồng. 
+Bạn Huy mua 6 quyển vở và 2 chiếc bút bi với tổng số tiền phải trả là  đồng. Giả sử 
+giá của mỗi quyển vở là  đồng (), giá của mỗi chiếc bút bi là  (đồng) ().
+a) Viết phương trình bậc nhất hai ẩn  lần lượt biểu thị tổng số tiền phải trả của bạn 
+Dũng, bạn Huy.
+b) Cặp số  có phải là nghiệm của từng phương trình bậc nhất đó hat 
+không? Vì sao?
+Lời giải
+a) Hai phương trình tương ứng là:  và 
+b) Vì  đồng thời thỏa mãn cả hai phương trình nói trên nên ta nói cặp 
+ là nghiệm của hệ phương trình: 
+Dạng 2: Phương trình chứa tham số
+Bài 1: Nếu cặp số  là một nghiệm của phương trình  thì  có giá trị là 
+bao nhiêu?
+Lời giải
+Vì cặp số  là một nghiệm của phương trình nên:
+Vậy .
+Bài 2: Để  là một nghiệm của phương trình  thì  có giá trị là bao 
+nhiêu?
+Lời giải
+Vì cặp số  là một nghiệm của phương trình nên:
+Vậy .
+Bài 3: Tìm  trong các trường hợp sau:
+a)  là nghiệm của phương trình 
+b) Điểm  thuộc đường thẳng 
+Lời giải
+a) Thay  vào phương trình ta có:
+Vậy .
+b) Thay  vào phương trình ta có:
+Vậy .
+Bài 4: Chứng minh rằng khi  thay đổi, các đường thẳng sau luôn đi qua điểm cố định
+a) 
+b) 
+Lời giải
+a) Giả sử  là điểm cố định mà đường thẳng luôn đi qua. Khi đó ta có:
+ với mọi 
+Vậy  là điểm cố định mà đường thẳng luôn đi qua khi  thay đổi.
+b) Giả sử Giả sử  là điểm cố định mà đường thẳng luôn đi qua. Khi đó ta có:
+ với mọi 
+Vậy  là điểm cố định mà đường thẳng luôn đi qua khi  thay đổi.
+Dạng 3: Tìm nghiệm tổng quát và vẽ đường thẳng biểu diễn tập nghiệm phương trình
+I. Phương pháp giải
+* Tìm nghiệm tổng quát của phương trình 
++ Nếu  thì  và viết công thức nghiệm tổng quát là 
++ Nếu  thì  và viết công thức nghiệm tổng quát là 
+* Vẽ đường thẳng có phương trình 
++ Nếu  thì vẽ đường thẳng 
++ Nếu  thì vẽ đường thẳng  cùng phương với trục tung.
+II. Bài toán
+Bài 1: Tìm nghiệm tổng quát của mỗi phương tình sau và vẽ đường thẳng biểu diễn tập nghiệm của nó
+a) b) 
+Lời giải
+a) Ta có: . Do đó, nghiệm tổng quát của phương trình là 
+Đồ thị: 
+b) Nghiệm tổng quát của phương trình  là: 
+Đồ thị: 
+Bài 2: Viết nghiệm và biểu diễn hình học tất cả các nghiệm của mỗi phương trình bậc nhất hai ẩn sau:
+a) b) 
+c) 
+Lời giải
+a) Xét phương trình  (1)
+Ta viết (1) dưới dạng: 
+Mỗi cặp số  với  tùy ý, là một nghiệm của (1).
+Khi đó ta nói phương trình (1) có nghiệm (tổng quát) là: 
+ với  tùy ý.
+Mỗi nghiệm này là tọa độ của một điểm thuộc đường thẳng . 
+Ta cũng gọi đường thẳng này là đường thẳng 
+Để vẽ đường thẳng , ta chỉ cần xác định hai điểm tùy ý của nó, chẳng hạn  và  rồi vẽ đường thẳng đi qua hai điểm đó.
+b) Xét phương trình  (2)
+Ta viết gọn (2) thành . Phương trình (2) có nghiệm là  với  tùy ý.
+Mỗi nghiệm này là tọa độ của một điểm thuộc đường thẳng song song với trục hoành và cắt trục tung tại điểm . Ta gọi đó là đường thẳng .
+c) Xét phương trình  (3)
+Ta viết gọn (3) thành . Phương trình (3) có nghiệm là  với  tùy ý.
+Mỗi nghiệm này là tọa độ của một điểm thuộc đường thẳng song song với trục tung và cắt trục tung tại điểm . Ta gọi đó là đường thẳng 
+Bài 3: Viết nghiệm và biểu diễn hình học tất cả các nghiệm của mỗi phương trình bậc nhất hai ẩn sau:
+a) b) 
+c) 
+Lời giải
+a) Xét phương trình  (1)
+Ta viết (1) dưới dạng . Mỗi cặp số  với  tùy ý, là một nghiệm của (1).
+Khi đó ta nói phương trình (1) có nghiệm (tổng quát) là:  với  tùy ý.
+Mỗi nghiệm này là tọa độ của một điểm thuộc đường thẳng . Ta cũng nói đường thẳng này là đường thẳng .
+Để vẽ đường thẳng , ta chỉ cần xác định hai điểm tùy ý của nó, chẳng hạn  và  rồi vẽ đường thẳng đi qua hai điểm đó.
+b) Xét phương trình  (2)
+Ta viết gọn thành . Phương trình (2) có nghiệm là  với  tùy ý
+Mỗi nghiệm này là tọa độ của một điểm thuộc đường thẳng song song với trục hoành và cắt trục tung tại điểm . Ta gọi đó là đường thẳng .
+c) Xét phương trình  (3)
+Ta viết gọn (3) thành . Phương trình (3) có nghiệm là  với  tùy ý.
+Mỗi nghiệm này là tọa độ của một điểm thuộc đường thẳng song song với trục tung và cắt trục tung tại điểm . Ta gọi đó là đường thẳng .
+Bài 4: Cho phương trình  (1)
+a) Tìm công thức nghiệm tổng quát của phương trình (1)
+b) Tìm nghiệm nguyên của phương trình
+Lời giải
+a) Ta tính  theo : 
+Phương trình có vô số nghiệm , với mọi 
+Ta cũng có thể viết nghiệm của phương trình 
+b) Ta có: 
+Để  thì 
+Đặt . Do đó:
+Vậy nghiệm tổng quát của phương trình là: , .
+Bài 5: Cho phương trình  (1). Hãy biểu diễn tất cả các nghiệm của phương trình (1) trên mặt phẳng tọa độ .
+Lời giải
+Ta viết lại phương trình thành . Từ đó, tất cả các nghiệm của phương trình  được biểu diễn bởi đường thẳng  đi qua hai điểm  và 
+Bài 6: Biểu diễn tất cả các nghiệm của phương trình sau trên mặt phẳng tọa độ 
+a) b) 
+c) 
+Lời giải
+a) Viết lại phương trình thành . Từ đó, tất cả các nghiệm của phương trình đã cho được biểu diễn bởi đường thẳng 
+b) Viết lại phương trình thành . Từ đó, tất cả các nghiệm của phương trình đã cho được biểu diễn bởi đường thẳng  vuông góc với  tại điểm 
+c) Viết lại phương trình thành . Từ đó, tất cả các nghiệm của phương trình đã cho được biểu diễn bởi đường thẳng  vuông góc với  tại điểm .
+Bài 7: Tìm nghiệm nguyên của các phương trình:
+a) b) 
+c) 
+Lời giải
+a) Biến đổi phương trình về dạng 
+Nhận xét rằng, với mọi , ta luôn có 
+Vậy phương trình có vô số nghiệm nguyên thỏa mãn  với 
+b) Biến đổi phương trình về dạng 
+Nhận xét rằng, với mọi , ta luôn có 
+Vậy phương trình có vô số nghiệm nguyên thỏa mãn  với 
+c) Biến đổi phương trình về dạng  (1)
+Đặt , 
+Thay  vào (1) ta được: 
+Vậy phương trình đã cho có vô số nghiệm nguyên thỏa mãn  với .
+Dạng 4: Nhận biết hệ phương trình, nghiệm của hệ phương trình bậc nhất hai ẩn
+Bài 1: Trong các hệ phương trình sau, hệ nào không phải là hệ phương trình bậc nhất hai ẩn, vì sao?
+a) b) 
+c) 
+Lời giải
+Hệ phương trình b) không phải là hệ hai phương trình bậc nhất hai ẩn, vì phương trình thứ hai của hệ là  không phải là phương trình bậc nhất hai ẩn.
+Bài 2: Trong những trường hợp sau đây, hãy chỉ ra các hệ hai phương trình bậc nhất hai ẩn
+a) b) 
+c) d)
+Lời giải
+Hệ phương trình ở các câu  là hệ hai phương trình bậc nhất hai ẩn. 
+Trường hợp ở câu d) không phải hệ hai phương trình bậc nhất hai ẩn. 
+Bài 3: Trong các hệ phương trình sau, hệ phương trình nào là hệ phương trình bậc nhất hai ẩn?
+a) b) 
+c) 
+Lời giải
+a) Hệ phương trình  là hệ hai phương trình bậc nhất hai ẩn với  và 
+b) Hệ phương trình  không phải là hệ hai phương trình bậc nhất hai ẩn vì 
+c) Hệ phương trình  là hệ hai phương trình bậc nhất hai ẩn với  và .
+Bài 4: Trong các hệ phương trình sau, hệ phương trình nào là hệ phương trình bậc nhất hai ẩn?
+a) b) 
+c) 
+Lời giải
+a) Hệ phương trình  là hệ hai phương trình bậc nhất hai ẩn với  và 
+b) Hệ phương trình  là hệ hai phương trình bậc nhất hai ẩn với  và 
+c) Hệ phương trình  không phải là hệ hai phương trình bậc nhất hai ẩn vì .
+Bài 5: Cho hệ phương trình . Trong hai cặp số  và , cặp số nào là nghiệm của hệ phương trình đã cho?
+Lời giải
+Cặp số  là nghiệm của hệ phương trình vì 
+Cặp số  không là nghiệm của hệ phương trình vì 
+Bài 6: Cho hệ phương trình . Trong hai cặp số  và , cặp số nào là nghiệm của hệ phương trình đã cho?
+Lời giải
+Cặp số  là nghiệm của hệ phương trình vì 
+Cặp số  không là nghiệm của hệ phương trình vì 
+Bài 7: Cho hệ phương trình . 
+Trong các cặp số sau, cặp số nào là nghiệm của hệ phương trình đã cho?
+a) b) 
+Lời giải
+a) Thay giá trị  vào mỗi phương trình trong hệ ta có:
+; 
+Suy ra cặp số  là nghiệm của từng phương trình trong hệ.
+Do đó cặp số  nghiệm của hệ phương trình đã cho.
+b) Thay giá trị  vào mỗi phương trình trong hệ ta có:
+; 
+Suy ra cặp số  không là nghiệm của phương trình thứ hai trong hệ.
+Do đó cặp số  không là nghiệm của hệ phương trình đã cho.
+Bài 8: Cho hệ phương trình . Kiểm tra xem cặp số nào sau đây là nghiệm của hệ phương trình đã cho?
+a) b) 
+Lời giải
+a) Thay giá trị  vào mỗi phương trình trong hệ ta có:
+Suy ra cặp số  không là nghiệm của hệ phương trình đã cho.
+Do đó cặp số  nghiệm của hệ phương trình đã cho.
+b) Thay giá trị  vào mỗi phương trình trong hệ ta có:
+; 
+Suy ra cặp số  là nghiệm của của phương trình đã cho.
+Bài 9: Trong hai cặp số  và , cặp số nào là nghiệm của hệ phương trình 
+Lời giải
+Ta thấy khi  và  thì:
+ nên  không là nghiệm của phương trình thứ hai.
+Vậy cặp số  không là nghiệm của hệ phương trình đã cho.
+Ta thấy khi  và  thì:
+ nên  là nghiệm của phương trình thứ nhất.
+ nên  là nghiệm của phương trình thứ hai.
+Vậy cặp số  là nghiệm chung của hai phương trình, nghĩa là  là nghiệm của hệ phương trình đã cho.
+Bài 10: Giải thích tại sao cặp số  là một nghiệm của hệ phương trình 
+Lời giải
+Ta thấy khi  và  thì:
++  nên  là nghiệm của phương trình thứ nhất.
++  nên  là nghiệm của phương trình thứ hai.
+Vậy  là nghiệm chung của hai phương trình. Do vậy  là nghiệm của hệ phương trình.
+Bài 11: Xét bài toán cổ sau:
+Quýt, cam mười bảy quả tươi
+Đem chia cho một trăm người cùng vui
+Chia ba mỗi quả quýt rồi,
+Còn cam, mỗi quả chia mười vừa xinh.
+Trăm người, trăm miếng ngọt lành.
+Quýt, cam mỗi loại tính rành là bao?
+Gọi  là số cam,  là số quýt cần tính (), ta có hệ phương trình bậc nhất hai ẩn sau:
+Trong hai cặp số  và , cặp số nào là nghiệm của hệ phương trình trên? Từ đó cho biết một phương án về số cam và số quýt thỏa mãn yêu cầu bài toán cổ.
+Lời giải
+* Ta thấy khi  và  thì:
+ nên  không là nghiệm của phương trình thứ hai. 
+Vậy  không là nghiệm của hệ phương trình đã cho.
+* Ta thấy khi  và  thì:
+ nên  là nghiệm của phương trình thứ nhất.
+ nên  là nghiệm của phương trình thứ hai.
+Vậy  là nghiệm chung của hai phương trình, nghĩa là  là một nghiệm của hệ phương trình đã cho. Vậy nen chia 7 quả cam mỗi quả thành 10 phần bằng nhau và chia 10 quả quýt mỗi quả thành 3 phần bằng nhau thì thỏa mãn yêu cầu bài toán.
+Bài 12: Đối với bài toán:
+“Một đàn em nhỏ đứng bên sông
+To nhỏ bàn nhau chuyện chia hồng
+Mỗi người năm trái thừa năm trái
+Mỗi người sáu trái một người không
+Hỡi người bạn trẻ đang dừng bước
+Có mấy em thơ, mấy trái hồng?
+Làm thế nào để tính được số em nhỏ (em thơ) và số trái hồng?
+Nếu gọi  là số em nhỏ,  là số quả hồng thì ta nhận được hệ hai phương trình bậc nhất hai ẩn nào?
+Lời giải
+Gọi  là số em nhỏ,  là số quả hồng.
+Vì mỗi người 5 quả thì thừa 5 quả nên ta có:    (1)
+Vì mỗi người 6 quả thì một người không có nên ta có:  (2)
+Từ (1) và (2) ta có hệ phương trình sau:  hay 
+Dạng 5: Đoán nhận số nghiệm của hệ phương trình
+I. Phương pháp giải
+Cho hệ phương trình  
++ Dựa vào hệ số góc và tung độ góc để biết số nghiệm của hệ, với 
++ Nếu  cắt  thì hệ  có nghiệm duy nhất 
++ Nếu  thì hệ  vô nghiệm 
++ Nếu  trùng với  thì hệ  có vô số nghiệm 
+II. Bài toán
+Bài 1: Không cần vẽ hình, hãy cho biết số nghiệm của mỗi hệ phương trình sau đây và giải sao?
+a) b) 
+c) 
+Lời giải
+a) Vì  nên hai đường thẳng đã cho cắt nhau
+Vậy hệ có nghiệm duy nhất.
+b) Ta có: 
+Vì  nên hai đường thẳng đã cho cắt nhau.
+Vậy hệ có nghiệm duy nhất.
+c) Ta có: 
+Vì ; nên hai đường thẳng đã cho trùng nhau.
+Vậy hệ có vô số nghiệm.
+Bài 2: Không vẽ đồ thị, hãy đoán nhận số nghiệm các hệ phương trình sau:
+a) b) 
+c) 
+Lời giải
+a) Ta có: 
+Vì  nên hai đường thẳng đã cho cắt nhau.
+Vậy hệ có nghiệm duy nhất.
+b) Ta có: 
+Vì  và   nên hai đường thẳng đã cho song song
+Vậy hệ vô nghiệm.
+c) Ta có: 
+Vì  nên hai đường thẳng đã cho cắt nhau.
+Vậy hệ có nghiệm duy nhất.
+BÀI TẬP VẬN DỤNG
+Bài 1: Trong các phương trình sau, phương trình nào là bậc nhất hai ẩn ?
+a) b) 
+c) d) 
+Lời giải
+Các phương trình ; ;  thỏa mãn điều kiện  hoặc  nên là phương trình bậc nhất hai ẩn.
+Bài 2: Trong các phương trình sau, phương trình nào là bậc nhất hai ẩn ? Xác định các 
+hệ số  của các phương trình bậc nhất hai ẩn đó.
+a) b) 
+c) d) 
+Lời giải
+a)  là phương trình bậc nhất hai ẩn với  và 
+b)  không là phương trình bậc nhất hai ẩn.
+c)  là phương trình bậc nhất hai ẩn với  và 
+d)  là phương trình bậc nhất hai ẩn với  và .
+Bài 3: Trong các cặp số , , , , cho biết cặp số nào là nghiệm của mỗi phương trình sau:
+a) b) 
+Lời giải
+a) Thay cặp số  vào phương trình    (1)
++ Với  thay vào (1), ta có 
+Suy ra  là một nghiệm của phương trình (1)
++ Với  thay vào (1), ta có 
+Suy ra  không là nghiệm của phương trình (1)
++ Với  thay vào (1), ta có 
+Suy ra  là một nghiệm của phương trình (1)
++ Với  thay vào (1), ta có 
+Suy ra  không là nghiệm của phương trình (1)
+b) Thay cặp số  vào phương trình    (2)
++ Với  thay vào (2), ta có 
+Suy ra  không là nghiệm của phương trình (2)
++ Với  thay vào (2), ta có 
+Suy ra  là nghiệm của phương trình (2).
++ Với  thay vào (2), ta có 
+Suy ra  là một nghiệm của phương trình (2)
++ Với  thay vào (2), ta có 
+Suy ra  không là nghiệm của phương trình (2).
+Bài 4: Đường thẳng  đi qua điểm nào trong các điểm sau:
+, , , 
+Lời giải
+Ta lần lượt xét:
++ Thay  vào phương trình, ta được:   (vô lý)
+Vậy đường thẳng không đi qua điểm 
++ Thay  vào phương trình, ta được:   (đúng)
+Vậy đường thẳng đi qua điểm 
++ Thay  vào phương trình, ta được:   (vô lý)
+Vậy đường thẳng không đi qua điểm 
++ Thay  vào phương trình, ta được:  
+ (đúng)
+Vậy đường thẳng đi qua điểm 
+Bài 5: Cho hệ phương trình . Trong các cặp số sau, cặp số nào là nghiệm của hệ phương trình đa cho?, , , 
+a) b) 
+Lời giải
+a) Thay giá trị  vào mỗi phương trình trong hệ, ta có:
++ 
++ 
+Suy ra cặp số  là nghiệm của phương trình thứ nhất mà không là nghiệm của phương trình thứ hai trong hê.
+Do đó cặp số  không phải là nghiệm của hệ phương trình đã cho.
+b) Thay giá trị  vào mỗi phương trình trong hệ, ta có:
++ 
++ 
+Suy ra cặp số  là nghiệm của mỗi phương trình trong hệ.
+Do đó cặp số  là nghiệm của hệ phương trình đã cho.
+Bài 6: Trong các cặp số  cặp số nào là nghiệm của mỗi phương trình sau?
+a) b) 
+Lời giải
+a) Cặp số  là nghiệm của phương trình  vì 
+Cặp số  là nghiệm của phương trình  vì 
+Cặp số  không là nghiệm của phương trình  vì 
+b) Cặp số  là nghiệm của phương trình  vì 
+Cặp số  không là nghiệm của phương trình  vì 
+Cặp số  không là nghiệm của phương trình  vì 
+Bài 7: 
+a. Tìm giá trị thích hợp thay cho dấu “?” trong bảng sau rồi cho biết 6 nghiệm của phương trình 
+b. Viết nghiệm tổng quát của phương trình đã cho
+Lời giải
+a) Ta có bảng sau:
+Các nghiệm của phương trình  là:
+b) Xét phương trình   (1)
+Ta viết (1) dưới dạng . Khi đó phương trình (1) có nghiệm (tổng quát) là:
+ với  tùy ý.
+Bài 8: Cặp số  là nghiệm của phương trình nào trong các phương trình sau?
+a) b) 
+a) b) 
+Lời giải
+Cặp số  là nghiệm của phương trình  và .
+Bài 9: Cho phương trình 
+a) Với , xét xem các cặp số sau, cặp số nào là nghiệm của phương trình
+i) ii) 
+iii) 
+b) Tìm nghiệm tổng quát của phương trình trên ứng với
+i) ii) 
+c) Tìm giá trị  tương ứng khi phương trình nhận các cặp số sau làm nghiệm
+i) ii) 
+Lời giải
+a) Với , ta có phương trình 
+i) Thay  vào phương trình, ta có:  
+nên  không là nghiệm của phương trình
+ii) Thay  vào phương trình ta có:  nên  là nghiệm của phương trình đã cho
+iii) Thay  vào phương trình ta có:  nên  không là nghiệm của phương trình.
+b) Tìm nghiệm tổng quát
+i. Với  ta có phương trình 
+Vậy phương trình có nghiệm tổng quát 
+ii. Với  ta có phương trình 
+Vậy phương trình có nghiệm tổng quát 
+Hoặc 
+Vậy phương trình có nghiệm tổng quát 
+c) Tìm giá trị  tương ứng khi phương trình nhận các cặp số sau làm nghiệm
+i) Thay  vào phương trình ta có 
+ii) Thay  vào phương trình ta có 
+Bài 10: Cho các cặp số  và hai phương trình 
+ (1);  (2)
+Trong các cặp số đã cho:
+a) Những cặp số nào là nghiệm của phương trình (1)
+b) Cặp số nào là nghiệm của hệ hai phương trình gồm (1) và (2)?
+c) Vẽ hai đường thẳng  và  trên cùng một mặt phẳng tọa độ để mình họa kết luận ở câu b).
+Lời giải
+a) Cặp số  là nghiệm của phương trình (1) vì 
+Cặp số  là nghiệm của phương trình (1) vì 
+b) Cặp số  là nghiệm của phương trình (2) vì 
+Do đó cặp số  là nghiệm của hệ hai phương trình gồm (1) và (2).
+c) Để vẽ đường thẳng , ta chỉ cần xác định hai điểm tùy ý của nó, chẳng hạn  và  rồi vẽ đường thẳng đi qua hai điểm đó.
+Để vẽ đường thẳng , ta chỉ cần xác định hai điểm tùy ý của nó, chẳng hạn  và  rồi vẽ đường thẳng đi qua hai điểm đó.
+Bài 11: Tìm  biết  là một nghiệm của phương trình 
+Lời giải
+Thay  vào phương trình  ta được:
+Bài 12: Cho phương trình 
+a) Hãy biểu diễn tập nghiệm của phương trình (1) trên mặt phẳng tọa độ (gọi là ).
+b) Tính diện tích tam giác tạo bởi  với trục .
+Lời giải
+a) Tập nghiệm của phương trình  được biểu diễn bởi hình vẽ bên
+b) Diện tích tam giác tạo bởi  với trục  và  là:
+ (đvdt).
+Bài 13: Viết nghiệm và biểu diễn hình học tất cả các nghiệm của mỗi phương trình bậc nhất hai ẩn sau:
+a) b) 
+c) 
+Lời giải
+a) Xét phương trình    (1)
+Ta viết (1) dưới dạng . Mỗi cặp số  với  tùy ý, là một nghiệm của (1). Khi đó ta nói phương trình (1) có nghiệm (tổng quát) là:
+ với  tùy ý.
+Mỗi nghiệm này là tọa độ của một điểm thuộc đường thẳng . Ta cũng gọi đường thẳng này là đường thẳng 
+Để vẽ đường thẳng , ta chỉ cần xác định hai điểm tùy ý của nó, chẳng hạn  và  rồi vẽ đường thẳng đi qua hai điểm đó.
+b) Xét phương trình    (2)
+Ta viết gọn (2) thành . Phương trình (2) có nghiệm là  với  tùy ý.
+Mỗi nghiệm này là tọa độ của một điểm thuộc đường thẳng song song với trục hoành và cắt trục tùng tại điểm . Ta gọi đó là đường thẳng 
+c) Xét phương trình    (3)
+Ta viết gọn (3) thành . Phương trình (3) có nghiệm là  với  tùy ý.
+Mỗi nghiệm này là tọa độ của một điểm thuộc đường thẳng song song với trục tung và cắt trục hoành tại điểm . Ta gọi đó là đường thẳng .
+Bài 14: Hãy biểu diễn tất cả các nghiệm của mỗi phương trình sau trên mặt phẳng tọa độ 
+a) b) 
+a) b) 
+Lời giải
+a) Viết lại phương trình thành . Từ đó, tất cả ác nghiệm của phương trình đã cho được biểu diễn bởi đường thẳng 
+b) Viết lại phương trình thành . Từ đó, tất cả ác nghiệm của phương trình đã cho được biểu diễn bởi đường thẳng  vuông góc với  tại điểm 
+c) Viết lại phương trình thành . Từ đó, tất cả các nghiệm của phương trình đã cho được biểu diễn bởi đường thẳng  vuông góc với  tại điểm 
+d) Viết lại phương trình thành . Từ đó, tất cả các nghiệm của phương trình đã cho được biểu diễn bởi đường thẳng 
+Bài 15: Tìm nghiệm nguyên của các phương trình sau:
+a) b) 
+c) d) 
+Lời giải
+a) Biến đổi phương trình về dạng 
+Nhận xét rằng, với mọi , ta luôn có 
+Vậy phương trình đã cho có vô số nghiệm nguyên thỏa mãn  với 
+b) Biến đổi phương trình về dạng 
+Nhận xét rằng, với mọi , ta luôn có 
+Vậy phương trình đã cho có vô số nghiệm nguyên thỏa mãn  với 
+c) Biến đổi phương trình về dạng 
+Nhận xét rằng, với mọi , ta luôn có 
+Vậy phương trình đã cho có vô số nghiệm nguyên thỏa mãn  với 
+d) Biến đổi phương trình đã cho về dạng     (1)
+Đặt , , từ đó 
+Thay  vào (1) ta được 
+Vậy phương trình đã cho có vô số nghiệm nguyên thỏa mãn  với 
+e) Biến đổi phương trình đã cho về dạng 
+Nhận xét rằng, với mọi , ta luôn có 
+Vậy phương trình đã cho có vô số nghiệm nguyên thỏa mãn  với .
+Bài 16: Chứng minh rằng khi  thay đổi, các đường thẳng sau luôn đi qua một điểm cố định.
+a) b) 
+Lời giải
+a) Giả sử  là điểm cố định mà đường thẳng luôn đi qua. Khi đó ta có:
+Vậy  là điểm cố định mà đường thẳng luôn đi qua với mọi .
+b) Giả sử  là điểm cố định mà đường thẳng luôn đi qua. Khi đó ta có:
+Vậy  là điểm cố định mà đường thẳng luôn đi qua với mọi .
+Bài 17: Cho hệ phương trình . Cặp số nào dưới đây là nghiệm của hệ phương trình đã cho?
+a) b) 
+c) 
+Lời giải
+a) Cặp số  không phải là nghiệm của hệ phương trình vì 
+b) Cặp số  là nghiệm của hệ phương trình vì 
+c) Cặp số  khônng phải là nghiệm của hệ phương trình vì 
+Bài 18: 
+a) Hệ phương trình  có là một hệ hai phương trình bậc nhất hia ẩn không? Vì sao?
+b) Cặp số  có là một nghiệm của hệ phương trình đó hay không, vì sao?
+Lời giải
+a) Các phương trình  và  thỏa mãn điều kiện  hoặc  nên là phương trình bậc nhất hai ẩn. Do đó hệ phương trình  là hệ hai phương trình bậc nhất hai ẩn.
+b) Ta thấy khi  và  thì:
+ nên  là nghiệm của phương trình thứ nhất.
+ nên  là nghiệm của phương trình thứ hai.
+Vậy  là nghiệm chung của hai phương trình, nghĩa là  là nghiệm của hệ phương trình đã cho.
+Bài 19: Cho hai đường thẳng  và 
+a) Vẽ hai đường thẳng đó trên cùng một hệ trục tọa độ
+b) Xác định tọa độ giao điểm A của hai đường thẳng trên.
+c) Tọa độ của điểm A có là nghiệm của hệ  không? Tại sao?
+Lời giải
+a) Vẽ hai đường thẳng  và  trên cùng một hệ trục tọa độ
+Bảng giá trị của hàm số 
+Bảng giá trị của hàm số 
+Vẽ đồ thị.
+b) Phương trình hoàn độ giao điểm của đường thẳng  và  là:
+Vậy  là tọa độ giao điểm của đường thẳng  và .
+c) Cặp số  là nghiệm của hệ phương trình vì 
+Bài 20: Nhân dịp tết Trung thu, một doanh nghiệp dự định sản xuất hai loại bánh: Bánh nướng và bánh dẻo. Lượng đường cần cho mỗi chiếc bánh nướng, bánh dẻo lần lượt là g và g. Gọi  và  lần lượt là số lượng bánh nướng và bánh dẻo mà doanh nghiệp dự định sản xuất để lượng đường sản xuất bánh là kg. Viết phương trình bậc nhất hai ẩn  và chỉ ra ba nghiệm của phương trình đó.
+Lời giải
+Ta có: kg = g
+Lượng đường để doanh nghiệp sản xuất  cái bánh nướng là  (g)
+Lượng đường để doanh nghiệp sản xuất  cái bánh nướng là  (g)
+Lượng đường để doanh nghiệp sản xuất cả hai bánh là  (g)
+Do đó ta có phương trình:
+ hay   (1)
++ Thay  vào phương trình (1) ta có: 
+ là một nghiệm của phương trình (1).
++ Thay  vào phương trình (1) ta có: 
+ là một nghiệm của phương trình (1).
++ Thay  vào phương trình (1) ta có: 
+ là một nghiệm của phương trình (1).
+Bài 22: Năm bạn Châu, Hà, Khang, Minh, Phong cùng đi mua sticker để trang trí vở. Có hai loại sticker: Loại  giá  ngìn đồng/chiếc và loại  giá  ngìn đồng/chiếc. Mỗi bạn mua  chiếc và tổng số tiền năm bạn phải trả là  nghìn đồng. Gọi  và  lần lượt là số sticker loại  và loại  mà năm bạn đã mua
+a) Viết hệ phương trình bậc nhất hai ẩn , 
+b) Cặp số  có phải là nghiệm của hệ phương trình ở câu a) hay không? Vì sao?
+Lời giải
+a) Gọi  và  lần lượt là số sticker loại I và loại II mà năm bạn đã mua
+Do đó ta có phương trình    (1)
+Số tiền trả cho sticker loại I là  nghìn đồng 
+Số tiền trả cho sticker loại II là  nghìn đồng 
+Do tổng số tiền mà năm bạn phải trả là 12 nghìn đồng nên ta có phương trình:    (2)
+Từ (1) và (2) ta có hệ phương trình bậc nhất hai ẩn 
+b) Thay giá trị  vào hai phương trình trong hệ, ta có:
++ 
++ 
+Suy ra cặp số  là nghiệm của cả hai phương trình trong hệ
+Do đó cặp số  là nghiệm của hệ phương trình trên.
+Bài 23: Để chuẩn bị cho buổi liên hoan của gia đình, bác Ngọc mua hai loại thực phẩm là thịt lợn và cá chép. Giá tiền thịt lợn là  nghìn đồng/kg, giá tiền cá chép là  nghìn đồng/kg. Bác Ngọc đã chi  nghìn đồng để mua ,5kg hai loại thực phẩm trên. Gọi  và  lần lượt là số kilogam thịt lợn và các chép mà bác Ngọc đã mua
+a) Viết hệ phương trình bậc nhất hai ẩn 
+b) Cặp số  có phải là nghiệm của hệ phương trình ở câu a) hay không? Vì sao?
+Lời giải
+a) Gọi  và  lần lượt là số kilôgam thịt lợn và cá chép mà bác Ngọc đã mua
+Do bán Ngọc mua kg cả hai loại thịt lợn và cá chép nên ta có:
+   (1)
+Số tiền để mua kg thịt lợn là  nghìn đồng
+Số tiền để mua kg thịt lợn là  nghìn đồng
+Bác Ngọc đã chi  nghìn đồng để mua hai loại thực phẩm trên nên ta có:
+ hay     (2)
+Từ (1) và (2) ta có hệ phương trình: 
+b) Thay giá trị ;  vào hai phương tình trong hệ, ta có:
++ 
++ 
+Suy ra cặp số  là nghiệm của cả hai phương trình trong hệ
+Do đó cặp số  là nghiệm của hệ phương trình trên.
+Bài 24: Người ta cần sơn hai loại sản phẩm ,  bằng hai loại sơn: sơn xanh và sơn vàng. Lượng sơn để sơn mỗi loại sản phẩm được cho bởi bảng (đươn vị: kg/1 sản phẩm)
+Người ta dự định sử dụng 85kg sơn xanh và 50kg sơn vàng để sơn tất cả các sản phẩm của hai loại đó. Gọi  lần lượt là số sản phẩm loại  và số sản phẩm loại  được sơn.
+a) Viết hệ phương trình bậc nhất hai ẩn 
+b) Cặp số  có phải là nghiệm của hệ phương trình ở câu a hay không? Vì sao?
+Lời giải
+Gọi  lần lượt là số sản phẩm loại A và số sản phẩm loại B được sơn.
+Sơn  sản phẩm loại A cần kg sơn màu xanh và kg sơn màu vàng
+Sơn  sản phẩm loại B cần kg sơn màu xanh và kg sơn màu vàng
+Cần sử dụng kg sơn xanh để sơn tất cả các sản phẩm của hai loại nên ta có:
+ hay     (1)
+Cần sử dụng kg sơn vàng để sơn tất cả các sản phẩm của hai loại nên ta có:
+ hay     (2)
+Từ (1) và (2) ta có hệ phương trình: 
+b) Thay giá trị  vào hai phương trình trong hệ ta có:
++ 
++ 
+Suy ra cặp số  là nghiệm của cả hai phương trình trong hệ.
+Do đó cặp số  là nghiệm của hệ phương trình trên.
+Bài 25: Không vẽ đồ thị, hãy đoán nhận số nghiệm của các hệ phương trình sau:
+a) b) 
+a) b) 
+Lời giải
+a) Xét , có  nên hệ có nghiệm duy nhất
+b) Xét , có  nên hệ vô nghiệm.
+c) Xét , có  nên hệ có vô số nghiệm.
+d) Xét , có  nên hệ có nghiệm duy nhất
+Bài 26: Không vẽ đồ thị, hãy đoán nhận số nghiệm của các hệ phương trình sau:
+a) b) 
+a) b) 
+Lời giải
+a) Hệ có nghiệm duy nhất
+b) Hệ có một nghiệm duy nhất
+c) Hệ vô nghiệm
+d) Hệ vô số nghiệm.
+Bài 27: Cho hệ phương trình . Tìm  để hệ
+a) Có nghiệm duy nhấtb) Vô nghiệm
+c) Vô số nghiệm
+Lời giải
+a) Hệ có nghiệm duy nhất 
+b) Hệ vô nghiệm 
+c) Hệ có vô số nghiệm 
+Bài 28: Cho hệ phương trình . Tìm  để hệ
+a) Giải hệ phương trình bằng đồ thị
+b) Nghiệm của hệ có phải là nghiệm của phương trình  hay không?
+Lời giải
+a) Hệ có nghiệm duy nhất 
+b) Nghiệm của hệ có là nghiệm của phương trình .
+Bài 29: Xét hệ phương trình 
+a) Chứng minh hệ đã cho luôn có nghiệm với mọi 
+b) Hệ đã cho có thể vô số nghiệm được không?
+Lời giải
+a) Hai đồ thị của hai phương trình trên luôn cắt nhau tại  nên hệ đã cho luôn có nghiệm
+b) Hệ đã cho có thể có vô nghiệm khi .

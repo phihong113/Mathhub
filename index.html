@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Hub - Luyện Tập Toán</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- MathJax for rendering Math formulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <header class="navbar">
+        <div class="container nav-content">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-infinity"></i> MathHub <span>Luyện Tập</span>
+            </a>
+            <!-- Đã bỏ nav-links dư thừa -->
+        </div>
+    </header>
+
+    <main>
+        <!-- Grade Selector -->
+        <div class="grade-selector-container">
+            <div class="grade-selector">
+                <button class="grade-btn disabled">Lớp 6</button>
+                <button class="grade-btn disabled">Lớp 7</button>
+                <button class="grade-btn disabled">Lớp 8</button>
+                <button class="grade-btn active">Lớp 9</button>
+                <button class="grade-btn disabled">Lớp 10</button>
+                <button class="grade-btn disabled">Lớp 11</button>
+                <button class="grade-btn disabled">Lớp 12</button>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container hero-content">
+                <div class="hero-text">
+                    <h1>Hệ Thống Luyện Tập Toán</h1>
+                    <p>Hệ thống bài tập trắc nghiệm đa dạng và chi tiết giúp bạn rèn luyện và đạt điểm cao trong các kỳ thi.</p>
+                    <a href="#daiso" class="btn btn-primary">Bắt Đầu Học Ngay</a>
+                </div>
+                <div class="hero-image">
+                    <div class="glass-card">
+                        <div class="math-symbols">
+                            <span class="symbol">∑</span>
+                            <span class="symbol">√</span>
+                            <span class="symbol">∫</span>
+                            <span class="symbol">π</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Background Decorations -->
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+        </section>
+
+        <!-- Main Content Layout -->
+        <section class="container content-section">
+            <div class="main-content">
+                <div id="all-chapters-section" class="subject-section" style="display: block;">
+                    <div class="content-module">
+                        <h3 style="text-align: center; font-size: 2rem; margin-bottom: 30px; color: var(--primary-light);">Chương Trình Toán Lớp 9 (17 Bài)</h3>
+                        <div id="all-practice-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; align-items: start;">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2024 MathHub. Xây dựng nền tảng vững chắc.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/data_math9.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

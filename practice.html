@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luyện Tập - Math Hub</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- MathJax for rendering Math formulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        .practice-container {
+            margin-top: 100px;
+            max-width: 800px;
+            padding-bottom: 50px;
+        }
+        .practice-header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .practice-title {
+            font-size: 2.5rem;
+            color: var(--secondary-light);
+            margin-bottom: 10px;
+        }
+        .question-card {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 16px;
+            border: var(--glass-border);
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+        .options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px; /* Giảm khoảng cách từ 15px xuống 8px */
+        }
+        .option {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 10px 15px; /* Giảm padding */
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .option:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        .option.selected {
+            border-color: var(--primary);
+            background: rgba(79, 70, 229, 0.2);
+        }
+        .option-label {
+            font-weight: bold;
+            color: var(--primary-light);
+            min-width: 25px;
+        }
+        
+        /* Status styles for grading */
+        .option.correct {
+            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+        .option.wrong {
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+        
+        .explanation-box {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid var(--accent-algebra);
+            border-radius: 0 8px 8px 0;
+            display: none; /* Hidden initially */
+            font-size: 0.95rem;
+            color: var(--text-primary);
+        }
+        
+        .submit-area {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        .score-display {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--secondary-light);
+            margin-bottom: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="container nav-content">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-infinity"></i> MathHub <span>Luyện Tập</span>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Quay Lại Trang Chủ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container practice-container">
+        <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Quay lại danh sách</a>
+        
+        <div class="practice-header">
+            <h1 class="practice-title" id="practice-title">Đang tải bài tập...</h1>
+            <p id="practice-meta" class="text-muted"></p>
+        </div>
+
+        <div id="questions-container">
+            <!-- Questions will be injected here by JS -->
+        </div>
+
+        <div class="submit-area">
+            <div id="score-display" class="score-display"></div>
+            <button id="submit-btn" class="btn btn-primary" onclick="submitQuiz()">Nộp Bài / Kiểm Tra</button>
+            <button id="retry-btn" class="btn btn-primary" style="display:none; background: var(--accent-algebra);" onclick="location.reload()">Làm Lại</button>
+        </div>
+    </main>
+
+    <script src="js/data_math9.js"></script>
+    <script src="js/generators.js"></script>
+    <script>
+        let currentQuestions = [];
+        let userAnswers = {};
+        let isSubmitted = false;
+        
+        // Cấu trúc nhãn đáp án
+        const labels = ['A', 'B', 'C', 'D'];
+
+        // Lấy params từ URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('id');
+        const type = urlParams.get('type');
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if(id && window.math9Data) {
+                let item = null;
+                let topicTitle = "";
+                let dataCategory = "";
+                
+                // Search across both algebra and geometry
+                for (const category of ['algebra', 'geometry']) {
+                    if (window.math9Data[category]) {
+                        for (const topic of window.math9Data[category].topics) {
+                            const found = topic.practice.find(i => i.id === id);
+                            if (found) {
+                                item = found;
+                                topicTitle = topic.title;
+                                dataCategory = window.math9Data[category].title;
+                                break;
+                            }
+                        }
+                    }
+                    if (item) break;
+                }
+                
+                if(item) {
+                    document.getElementById('practice-title').innerText = item.title;
+                    document.getElementById('practice-meta').innerText = `${dataCategory} - ${topicTitle}`;
+                    
+                    if (item.generator && window.MathGenerators && window.MathGenerators[item.generator]) {
+                        // Gọi hàm đẻ câu hỏi tự động
+                        currentQuestions = window.MathGenerators[item.generator](2);
+                        renderQuestions();
+                    } else if(item.questions && item.questions.length > 0) {
+                        // Dùng data tĩnh (nếu có)
+                        currentQuestions = item.questions;
+                        renderQuestions();
+                    } else {
+                        document.getElementById('questions-container').innerHTML = 
+                            '<div class="question-card text-center">Nội dung bài tập đang được cập nhật. Vui lòng quay lại sau!</div>';
+                        document.getElementById('submit-btn').style.display = 'none';
+                    }
+                } else {
+                    document.getElementById('practice-title').innerText = "Không tìm thấy bài tập";
+                    document.getElementById('submit-btn').style.display = 'none';
+                }
+            }
+        });
+
+        function renderQuestions() {
+            const container = document.getElementById('questions-container');
+            let html = '';
+            
+            currentQuestions.forEach((q, index) => {
+                let optionsHtml = '';
+                q.options.forEach((opt, optIndex) => {
+                    optionsHtml += `
+                        <div class="option" id="opt-${index}-${optIndex}" onclick="selectOption(${index}, ${optIndex})">
+                            <span class="option-label">${labels[optIndex]}.</span> 
+                            <span class="option-text">${opt}</span>
+                        </div>
+                    `;
+                });
+                
+                html += `
+                    <div class="question-card" id="q-card-${index}">
+                        <div class="question-text">Câu ${index + 1}: ${q.text}</div>
+                        <div class="options">
+                            ${optionsHtml}
+                        </div>
+                        <div class="explanation-box" id="exp-${index}">
+                            <strong>💡 Lời giải:</strong> ${q.explanation || 'Không có giải thích chi tiết.'}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+            
+            // Re-render MathJax
+            if (window.MathJax) {
+                MathJax.typesetPromise([container]).catch((err) => console.log(err.message));
+            }
+        }
+
+        window.selectOption = function(qIndex, optIndex) {
+            if(isSubmitted) return; // Không cho chọn lại nếu đã nộp
+            
+            // Xóa class selected của tất cả các option trong câu hỏi này
+            const card = document.getElementById(`q-card-${qIndex}`);
+            card.querySelectorAll('.option').forEach(el => el.classList.remove('selected'));
+            
+            // Thêm class selected cho option được click
+            const selectedOpt = document.getElementById(`opt-${qIndex}-${optIndex}`);
+            selectedOpt.classList.add('selected');
+            
+            // Lưu lại đáp án
+            userAnswers[qIndex] = optIndex;
+        };
+
+        window.submitQuiz = function() {
+            if(Object.keys(userAnswers).length < currentQuestions.length) {
+                alert("Bạn vui lòng chọn đầy đủ đáp án cho tất cả các câu trước khi nộp nhé!");
+                return;
+            }
+            
+            isSubmitted = true;
+            let score = 0;
+            
+            // Chấm điểm
+            currentQuestions.forEach((q, index) => {
+                const userAns = userAnswers[index];
+                const card = document.getElementById(`q-card-${index}`);
+                const expBox = document.getElementById(`exp-${index}`);
+                
+                // Vô hiệu hóa pointer events
+                card.style.pointerEvents = 'none';
+                
+                // Hiện phần giải thích
+                expBox.style.display = 'block';
+                
+                // Đánh dấu đúng sai
+                if (userAns === q.correctAnswer) {
+                    score++;
+                    document.getElementById(`opt-${index}-${userAns}`).classList.add('correct');
+                } else {
+                    document.getElementById(`opt-${index}-${userAns}`).classList.add('wrong');
+                    // Hiển thị đáp án đúng để user biết
+                    document.getElementById(`opt-${index}-${q.correctAnswer}`).classList.add('correct');
+                }
+            });
+            
+            // Hiện điểm
+            const scoreDisplay = document.getElementById('score-display');
+            scoreDisplay.innerHTML = `Điểm của bạn: ${score} / ${currentQuestions.length}`;
+            scoreDisplay.style.display = 'block';
+            
+            // Đổi nút
+            document.getElementById('submit-btn').style.display = 'none';
+            document.getElementById('retry-btn').style.display = 'inline-block';
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+    </script>
+</body>
+</html>

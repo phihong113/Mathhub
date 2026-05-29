@@ -1,0 +1,520 @@
+Dạng 1: Toán về quan hệ giữa các số
+Bài 1: Tìm hai số tự nhiên có tổng bằng , biết rằng nếu lấy số lớn chia cho số nhỏ thì được thương là  và số dư 
+Lời giải:
+Gọi hai số cần tìm là  và , trong đó . Số dư trong phép chia  cho  là   nên . Vậy điều kiện của hai ẩn là  và .
+Tổng hai số bằng  nên ta có phương trình 
+Khi chia  cho  ta được thương là  và số dư  nên ta có phương trình 
+Do đó ta có hệ phương trình 
+Giải hệ phương trình 
+Từ (2) thế  vào (1), ta được  hay , hay . Từ đó ta được 
+Các giá trị  và  thỏa mãn các điều kiện của ẩn. Vậy hai số cần tìm là  và 
+Bài 2: Tỉ số của hai số là . Nếu giảm số thứ nhất đi  và tăng số nhỏ thêm  thì tỉ số mới là . Tìm hai số đó
+Lời giải:
+Gọi số bé là  và số lớn là 
+Tỉ số của hai số là  thì ta có                          (1)
+Nếu giảm số thứ nhất đi  và tăng số nhỏ thêm  thì tỉ số mới là , ta có phwuowng trình
+                       (2)
+Từ (1) và (2) ta có hệ phương trình 
+Vậy hai số cần tìm là  và 
+Bài 3: Một trường trung học cơ sở mua  quyển vở để làm phần thưởng cho học sinh. Giá bán của mỗi quyển vở loại thứ nhất, loại thứ hai lần lượt là  đồng,  đồng. Hỏi nhà trường đã mua loại bao nhiêu quyển vở? Biết rằng số tiền nhà trường đã dùng để mua  quyển vở là 
+Lời giải:
+Gọi số quyển vở loại thứ nhất , loại thứ hai lần lượt là 
+Theo giải thiết, ta có phương trình 
+Mặt khác, ta có phương trình : , tức là  
+Ta có hệ phương trình 
+Nhân phương trình (1) cho , ta được 
+Trừ từng vế phương trình (3) cho phương trình (2), ta được 
+Thay giá trị  vào phương trình (1), ta được:
+, tức là 
+Do hệ phương trình đã cho có nghiệm duy nhất 
+Vậy nhà trường đã mua  quyển vở loại thứ nhất và  quyển vở loại thứ hai
+Bài 4: Một nhóm khách vào của hàng bán trà sữa. Nhóm khách đó đã mua 6 cốc trà sữa gồm trà sữa trân chấu và trà sữa phô mai.Giá mỗi cốc trà sữa trân châu, trà sữa phô mai lần lượt là  đồng và   đồng. Tổng số tiwwnf nhóm khách thanh toán cho cửa hàng là  đồng. Hỏi nhóm khách hàng đó mua bao nhiêu cốc tà sữa mỗi loại?
+Lời giải:
+Gọi  (cốc) lần lượt là số cốc trà sữa trân châu và trà sữa phô mai mà nhóm khách đã mua ()
+Vì nhóm khách đã mua 6 cốc trà sữa nên ta có phương trình: 
+Lại vì nhóm khách thanh toán cho cửa hàng là  đồng nên ta lại có phương trình
+ hay 
+Do đó, ta có hệ phương trình 
+Từ phương trình (1) ta có: 
+Thế (3) và (2) ta được:
+Thay giá trị  vào phương trình (3) ta có: 
+Do đó hệ phương trình có nghiệm duy nhất 
+Vậy nhóm khách hàng đó đã mua  cốc trà sữa trân châu và  cốc trà sữa phô mai
+Bài 5: Hai ngăn của một kệ sách có tổng cộng  cuốn sách. Nếu chuyển  cuốn sách từ ngăn thứ nhất sang ngăn thứ hai thì số sách ở ngăn thứ hai gấp 3 lần số sách ngăn thứ nhất. Tính số sách ở mỗi ngăn lúc đầu
+Lời giải:
+Gọi  lần lượt là số sách ở ngăn thứ nhất và ngăn thứ hai lúc đầu ( )
+Tổng số sách ở hai ngăn là  (1)
+Sau khi chuyển thì số sách ở ngăn thứ hai gấp  lần số sách ở ngăn thứ nhất, nên ta có phương trình  (2)
+ Từ (1) và (2), ta có hệ phương trình: 
+Giải hệ phương trình ta được  (thỏa mãn)
+Vậy lúc đầu ngăn thứ nhất có  cuốn sách, ngăn thứ hai có  cuốn sách
+Bài 6: Một mảnh vườn hình chữ nhật có chu vi là m. Nếu tăng chiều dài thêm m và tăng chiều rộng thêm m thì diện tích tăng thêm m. Tính chiều dài, chiều rộng của mảnh vườn đó
+Lời giải:
+Gọi chiều dài, chiều rộng ban đầu của hình chữ nhật ban đầu lần lượt là m, m
+Điều kiện: 
+Vì mảnh vườn hình chữ nhật có chu vi m nên ta có phương trình 
+Diện tích mảnh vườn lúc đầu là m
+Khi tăng chiều dài thêm m và tăng chiều rộng thêm m thì diện tích tăng thêm m, ta được phương trình là 
+Từ (1) và (2) ta có hệ phương trình 
+Ta có : 
+Vậy chiều dài ban đầu mảnh vườn là m, chiều rộng ban đâù của mảnh vườn là m
+Bài 7: Một thửa ruộng hình chữ nhật, nếu tăng chiều dài thêm  m, chiều rộng thêm  m thì diện tích tăng thêm m. Nếu giảm chiều dài và chiều rộng đi m thì diện tích giảm đi . Tính diện tích của thửa ruộng đó
+Lời giải:
+Gọi chiều dài thửa ruộng là (m) () và chiều rộng (m) ()
+nếu tăng chiều dài thêm  m, chiều rộng thêm  m thì diện tích tăng thêm m
+Ta có phương trình                                 (1)
+Nếu giảm chiều dài và chiều rộng đi m thì diện tích giảm đi m
+Ta có phương trình                                   (2)
+Từ (1) và (2) ta có hệ phương trình 
+Vậy diện tích của thửa ruộng là (m)
+Bài 8: Tháng thứ nhất hai tổ sản xuất được  chi tiết máy. Tháng thứ hai tổ I vượt mức  và tổ II vượt mức  so với tháng thứ nhất. Vì vậy hai tổ đã sản xuất được  chi tiết máy. Hỏi tháng thứ nhất mỗi tổ sản xuất được bao nhiêu chi tiết máy?
+Lời giải:
+Gọi số chi tiết máy của tổ I sản xuất được trong tháng thứ nhất là (chi tiết, )
+Gọi số chi tiết máy của tổ II sản xuất được trong tháng thứ nhất là ( chi tiết, )
+Tháng thứ nhất hai tổ sản xuất được  chi tiết máy có phương trình   (1)
+Tháng thứ hai tổ I vượt mức  và tổ II vượt mức  so với tháng thứ nhất. Vì vậy hai tổ đã sản xuất được  chi tiết máy, ta có phương trình
+                                                    (2)
+Từ (1) và (2) ta được hệ    (thỏa mãn điều kiện)
+Vậy trong tháng thứ nhất tổ I sản xuất được chi tiết, tổ II sản xuất được  chi tiết máy
+Bài 9: Hai kho chứa  tấn hàng. Nếu chuyển  tấn từ kho I sang kho II thic số hàng kho II bằng  số hàng kho I. Tính số hàng mỗi kho
+Lời giải:
+Gọi số hàng trong kho I là (tấn, ); số hàng trong kho II là (tấn, )
+Hai kho chứa  tấn hàng nên ta có phương trình: 
+                               (1)
+Nếu chuyển  tấn từ kho I sang kho II thic số hàng kho II bằng  số hàng kho I ta có phương trình 
+                     (2)
+Từ (1) và (2) ta có hệ phương trình 
+Vậy trong kho I có  tấn hàng, kho II có  tấn hàng.
+Dạng 2: Toán liên quan đến chữ số
+I. Phương pháp giải
+Viết số dưới dạng thập phân 
+Với điều kiện:  và 
+II. Bài toán
+Bài 1: Tìm số tự nhiên có hai chữ số biết rằng tổng các chữ số của nó bằng   và nếu viết số đó théo thứ tự ngược lại thì được số mới nhỏ hơn số ban đầu  đơn vị
+Lời giải:
+Gọi chữ số hàng chục là , chữ số hàng đơn vị là : 
+Theo bài ra ta có hệ phương trình 
+   (thỏa mãn điều kiện)
+Vậy số cần tìm là 
+Bài 2: Một số tự nhiên có hai chữ số. Tỉ số giữa chữ số hàng chục và chữ số hàng ssown vị là . Nếu viết thêm chữ số  xem vào giữa thì được số mới lớn hơn số đã cho là  đơn vị. Tìm số đã cho
+Lời giải:
+Gọi chữ số hàng chục là , chữ số hàng đơn vị là 
+Điều kiện: 
+Theo bài ra ta có hệ phương trình 
+ (thỏa mãn điều kiện)
+Vậy số cần tìm là 
+Bài 3: Tìm số có hai chữ số, biết rằng tổng của chữ số hàng đơn bị và hai lần chữ số hàng chục bằng . Ngoài ra, nếu đổi chữ số hàng chục và chữ số hàng đơn vị vho nhau thì sẽ được số mới nhỏ hơn số ban đầu  đơn vị
+Lời giải:
+Gọi số có hai chữ số là  với 
+Tổng của chữ số hàng đơn bị và hai lần chữ số hàng chục bằng , ta được
+       (1)
+Nếu đổi chữ số hàng chục và chữ số hàng đơn vị cho nhau thì sẽ được số mới () nhỏ hơn số ban đầu  đơn vị, ta được
+  (2)
+Từ (1) và (2), ta có hệ phương trình   (thỏa mãn điều kiện)
+Vậy số cần tìm là 
+Bài 4: Tìm số có hai chữ số. Biết rằng chữ số hàng chục lớn hơn chữ số hàng đơn vị  đơn vị. Nếu viết chữ số  vào giữa chữ số hàng chục và chữ số hàng đơn vị thì số tự nhiên đó tăng  đơn vị
+Lời giải:
+Gọi số có hai chữ số là với 
+Với giải thiết 
+Chữ số hàng chục lớn hơn chữ số hàng đơn vị  đơn vị, ta được
+       (1)
+ Khi viết chữ số  vào giữa chữ số hàng chục và chữ số hàng đơn vị thì số tự nhiên đó tăng  đơn vị, ta được
+    (2)
+Từ (1) và (2) ta có hệ phương trình 
+Vậy số cần tìm là .
+Dạng 3: Toán làm chung công việc
+I. Phương pháp giải
++ Toán làm chung công việc có ba đại lượng tham gia là toàn bộ công việc, phần việc trong một đơn thời gian; thời gian
++ Nếu một đội làm xong trong  ngày thì một ngày đội đó làm được  công việc
++ Xem toàn bộ công việc là 
+II. Bài toán
+Bài 1: Hai đội công nhân cùng làm một đoạn đường trong  ngày thì xong. Mỗi ngày, đội I làm được nhiều gấp rưỡi đội II. Hỏi nếu làm một mình thì mỗi đội làm xong đoạn đường đó trong bao nhiêu lâu?(Gỉa sử năng suất của mỗi đội là không đổi).
+Lời giải:
+Gọi  là số ngày để đội I hoàn thành công việc nếu làm riêng một mình;  là số ngày để đội II hoàn thành công việc nếu làm riêng một mình. Điều kiện  và 
+Mỗi ngày đội I làm được (công việc) và đội II làm được  (công việc)
+Mỗi ngày, đội I làm được nhiều gấp rưỡi đội II nên ta có phương trình  hay   (1)
+Hai đội làm cung trong 24 ngày thì xong công việc nên mỗi ngày, hai đội làm chung thì được (công việc). Ta có phương trình 
+         (2)
+Từ (1) và (2) ta có hệ phương trình (I) 
+Đặt  và  thì ta có hệ phương trình bậc nhất hai ẩn mới là  và  (II) 
+Thế  vào phương trình (4) ta được  hay , suy ra 
+Do đó  Từ đó, ta có 
+ suy ra  suy ra 
+Các giá trị tìm được của  và  thỏa mãn điều kiện của ẩn
+Trả lời: Nếu làm một mình thì đội I làm xong đoạn đường đó trong 40 ngày, còn đội II làm xong trong 60 ngày
+Bài 2: Hai công nhân cùng làm một công việc trong h thì xong. Nếu người thứ nhất là h và người thứ hai là h thì chỉ hoàn thành  công việc. Hỏi nếu làm riêng thì mỗi người hoàn thành công việc trong bao lâu?
+Lời giải:
+Gọi thời gian người thứ nhất làm một mình thì hoàn thành công việc là (giờ, ); người thứ hai lầm một mình hoàn thành công việc là (giờ, )
+Trong h người thứ nhất làm được  công việc, người thứ hai làm được  công việc
+Hai người làm chung h thì xong, ta có phương trình 
+                                       (1)
+Nếu người thứ nhất là h và người thứ hai là h thì chỉ hoàn thành  công việc, ta có phương trình
+               (2)
+Từ (1) và (2) ta có hệ phương trình 
+ (thỏa mãn điều kiện)
+Vậy nếu làm riêng thì người tứ nhất hoàn thành công việc rong 36h và người thứ hai hoàn thành công việc trong 36h
+Bài 3: Nếu hai vòi nước cùng chảy vào một bể không có nước thì bể sẽ đầy trong 1 giờ 20 phút. Nếu mở riêng vòi thứ nhất trong   phút và vòi thứ hai trong  phút thì chỉ được  bể nước. Hỏi nếu mở riêng từng vòi thì thời gian để mỗi vòi chảy đầy bể là bao nhiêu phút?
+Lời giải:
+Gọi  (phút) lần lượt là thời gian mỗi vòi chảy đầy bể nếu mở riêng từng vòi
+Trong một giờ, vòi thứ nhất chảy được (bể) và vòi thứ hai chảy được  (bể)
+Hai vòi cùng chảy vào bể thì sau  giờ  phút  phút thù đầy bể nên 
+Nên vòi thứ nhất chảy trong  phút và vòi thứ hau chảy trong  phút thì chảy được  bể nên 
+Ta có hệ phương trình 
+Đặt ẩn phụ  và , ta đưa về hệ phương trình , giải hệ phương trình ta được 
+ tức là  suy ra 
+Vậy nếu làm riêng thì người thứ nhất hoàn thành công việc trong  phút và người thứ hai hoàn thành công việc trong  phút
+Bài 4: Hai vòi nước cùng chảy vào một bể không có nước thì sau  giờ  phút sẽ đầy bể. Nếu mở vòi I chảy trong  phút rồi khóa lại và mở vòi thứ II chảy trong  phút thì được  bể. Hỏi nếu mỗi vòi chảy riêng thì bao lâu đầy bể?
+Lời giải:
+Ta có  giờ  phút h; phút h; phút h
+Gọi thời gian vòi I chảy một mình đầy bể là (h; )
+Thời gian vòi II chảy một mình đầy bể là  (h; )
+Hai vòi cùng chảy thì sau  giờ  phút sẽ đầy bể, ta có phương trình 
+                            (1)
+Vòi I chảy trong  phút và vòi thứ II chảy trong  phút thì được  bể ta có phương trình
+                         (2)
+Từ (1) và (2) ta có hệ phương trình 
+ (thỏa mãn điều kiện)
+Vậy nếu chảy riêng thì vòi I chảy đầy bể trong h, vòi II chảy đầy bể trong h
+Bài 5: Hai vòi nước cùng chảy vào một bể nước cạn (không có nước) thì sau  giờ đầy bể. Nếu lúc đầu chỉ mở vòi thứ nhất và sau  giờ sau mới mở thêm vòi thứ hai thì sau  giờ nữa mới đầy bể. Hỏi nếu ngay từ đầy chỉ  mở vòi thứ hai thì sau bao lâu sẽ đầy bể
+Lời giải:
+Gọi  và  là thời gian để vòi thứ nhất và vòi thứ hau chảy một mình thì đầy bể ( , đơn vị giờ)
+Trong  giờ vòi thứ nhất chảy được  phần của bể
+Trong  giờ vòi thứ hai chảy được  phần của bể
+Trong  giờ cả hai vòi chảy được  phần của bể
+Hai vòi cùng chảy thì trong  giờ sẽ đầy bể, nên mỗi giờ hai vòi chảy được  (bể).Do đó, ta có phương trình      (1)
+Nếu lúc đầu chỉ mở vòi thứ nhất và sau  giờ sau mới mở thêm vòi thứ hai thì sau  giờ nữa mới đầy bể.Do đó, ta có phương trình      (2)
+Từ (1) và (2), ta có hệ phương trình 
+Vậy nếu vòi thứ hai chảy một mình thì sau  giờ sẽ đầy bể
+Bài 6: Hai vòi nước cùng chảy vào một bể không có nước thì sau  giờ  phút sẽ đầy. Nếu mở vòi thứ nhất chảy trong  phút và vòi thứ hai chảy trong  phút thì đầy  bể. Hỏi mỗi vòi chảy một mình thì sau bao lâu mới đầy bể?
+Lời giải:
+Ta có thể lựa chọn một trong hai cách trình bày sau:
+Cách 1: Thiết lập ẩn thông qua giá trị cần tìm
+Gọi  là thời gian để vòi I chảy một mình cho đầy bể, điều kiện .Suy ra, mỗi giờ vòi I chảy được  bể
+Gọi  là thời gian để vòi II chảy một mình cho đầy bể, điều kiện .Suy ra, mỗi giờ vòi II chảy được  bể
+Ta thực hiện đổi đơn vị
+ giờ  phút  giờ;  phút giờ;     phút giờ
+Với giả thiết
+Hai vòi nước cùng chảy vào một bể không có nước thì sau  giờ  phút sẽ đầy,ta được
+    (1)
+Nếu mở vòi thứ nhất chảy trong  phút và vòi thứ hai chảy trong  phút thì đầy  bể, ta được 
+   (2)
+Từ (1) và (2) ta có hệ phương trình
+     (I)
+Đặt  
+Khi đó, hệ có dạng: 
+Vậy vòi I chảy trong  giờ sẽ đầy bể, vòi II chảy trong  giờ sẽ đầy bể
+Cách 2: Thiết lập ẩn thông qua giá trị trung gian
+Giả sử mỗi giờ vòi I chảy được  phần bể, điều kiện 
+Giả sử mỗi giờ vòi II chảy được  phần bể, điều kiện 
+Với giải thiết 
+Hai vòi nước cùng chảy vào một bể không có nước thì sau  giờ  phút sẽ đầy,ta được
+   (3)
+Nếu mở vòi thứ nhất chảy trong  phút và vòi thứ hai chảy trong  phút thì đầy  bể, ta được 
+    (4)
+Từ (3) và (4), ta có hệ phương trình 
+Vậy vòi I chảy trong  giờ sẽ đầy bể, vòi II chảy trong  giờ sẽ đầy bể.
+Dạng 4: Toán chuyển động
+I. Phương pháp giải
++ Toán chuyển động có ba đại lượng tham gia: vận tốc (), thời gian (), quãng đường ( )
++ 
+II. Bài toán
+Bài 1: Một chiếc xe khách đi từ Thành phố Hồ Chí Minh đến Cần Thơ, quãng đường dài km. Sau khi xe khách xuất phát  giờ  phút , một xe tải bắt đầu đi từ Cần Thơ về Thành phố Hồ Chí Minh và gặp xe khách sau đó  phút. Tính vận tốc của mỗi xe, biết rằng mỗi giờ xe khách đi nhanh hơn xe tải là  km.
+Lời giải:
+Gọi  (km/h) là vận tốc của xe tải và (km/h) là vận tốc của xe khách ()
+Do mỗi giờ xe khách đi nhanh hơn xe tải là  km nên 
+Sau khi xe khách xuất phát  giờ  phút , một xe tải bắt đầu đi từ Cần Thơ về Thành phố Hồ Chí Minh và gặp xe khách sau đó  phút nên tổng quãng đường của hai xe là . Từ đó, có phương trình 
+Từ đó, ta có hệ phương trình 
+Giải hệ phương trình trên, ta có nghiệm là 
+Vậy vận tốc của xe khách là(km/h), vận tốc của xe tải  (km/h)
+Bài 2: Một ca nô đi từ A đến B với vận tốc và thời gian dự định. Nếu ca nô tăng vận tốc thêm km/h thì thời gian rút ngắn được  giờ. Nếu ca nô giảm vận tốc đí km/h thì thời gian tăng  giờ. Tính vận tốc và thời gian dự định của ca nô
+Lời giải:
+Gọi vận tốc dự định của ca nô là (km/h; ) và thời gian dự định đi từ A đến B là (giờ, )
+Nếu ca nô tăng vận tốc thêm km/h thì thời gian rút ngắn được  giờ , ta có phương trình
+     (1)
+Nếu ca nô giảm vận tốc đí km/h thì thời gian tăng  giờ, ta có phương trình
+      (2)
+Từ (1) và (2) ta có hệ phương trình 
+ (thỏa mãn điều kiện)
+Vạy vận tốc dự định của can nô là   km/h và thời gian dự định của ca nô là  giờ
+Bài 3: Một ca nô chạy trên sông trong  giờ xuôi dòng được km và ngược dòng km. Một lần khác, ca nô chạy trên sông trong  giờ xuôi dòng km và ngược dòng km. Tính vận tốc riêng của ca nô và vận tốc dòng nước. (Biết vận tốc riêng của ca nô; vận tốc dòng nước không đổi)
+Lời giải:
+Gọi vận tốc riêng của ca nô là  (km/h; ) và vận tốc của dòng nước là (km/h )
+Suy ra vận tốc xuôi dòng của ca nô là   (km/h) và vận tốc ngược dòng của ca nô là  (km/h)
+Ca nô chạy trong  giờ xuôi dòng được  km và ngược dòng được  km. có phương trình
+                     (1)
+Ca nô chạy trong  giờ xuôi dòng km và ngược dòng km, ta có phương trình
+                     (2)
+Từ (1) và (2) ta có hệ phương trình 
+Đặt  ta có 
+Giải hệ ta có   (thỏa mãn điều kiện)
+Vậy vận tốc riêng của ca nô là km/h và vận tốc của dòng nước là km/h
+Bài 4: Một xe máy đi từ A đến B trong thời gian đã định. Nếu đi với vận tốc  km/h sẽ tới B chậm mất nửa giờ. Nếu đi với vận tốc  km/h thì sẽ đến B sớm hơn  phút. Tính quãng đường AB và thời gian dự định
+Lời giải:
+Ta có :  phút giờ 
+Gọi quãng đường  là (km; ) và thời gian dự định đi từ A đến B là (h; )
+ Nếu đi với vận tốc  km/h sẽ tới B chậm mất nửa giờ, ta có phương trình
+                              (1)
+Nếu đi với vận tốc  km/h thì sẽ đến B sớm hơn  phút, ta có phương trình
+                              (2)
+Từ (1) và (2) ta có hệ phương trình 
+Vậy quãng đường AB dài km và thời gian dự định đi từ A đến B hết  giờ
+Bài 5: Lúc  giờ một người đi xe máy khởi hành từ A với vận tốc km/h. Sau đó, lúc giờ  phút, một người khác cũng đi xe máy từ A đuổi theo với vận tốc  km/h. Hỏi hai người gặp nhau lúc mấy giờ ?
+Lời giải:
+Ta thực hiện đổi đơn vị : giờ phút  (giờ)
+Gọi  là thời gian hai người gặp nhau, điều kiện  
+Gọi  là độ dài quãng đường từ A tới điểm gặp nhau, điều kiện 
+Với giải thiết
+Người thứ nhất đi với vận tốc km/h và xuất phát lúc  giờ, ta được
+     (1)
+Người thứ hai đi với vận tốc  km/h và xuất phát từ lúc giờ  phút, ta được
+   (2)
+Từ (1) và (2) ta có hệ phương trình 
+Vậy họ gặp nhau lúc  giờ  phút
+Bài 6: Hai người ở hai địa điểm A và B cách nhau km, khởi hành cùng một lúc, đi ngược chiều và gặp nhau ở một địa điểm cách A là km. Nếu cả hai cùng giữ nguyên vận tốc như trong trường hợp trên, nhưng người đi chậm xuất phát trước người kiaphút thì họ sẽ gặp nhau ở chính giữa quãng đường. Tính vận tốc mỗi người
+Lời giải:
+Đổi phút  giờ
+Gọi  là vận tốc của người đi nhanh hơn (, đơn vị km/h)
+Gọi  là vận tốc của người đi chậm hơn (, đơn vị km/h)
+Hai người khởi khởi hành cùng một lúc, đi ngược chiều và gặp nhau ở một địa điểm cách A là km (nghĩa là cách B là km). Lúc đó:
+Người đi nhanh mất (h)
+Người đi chậm mất (h)
+Do đó, ta có phương trình     (1)
+Nếu cả hai cùng giữ nguyên vận tốc như trong trường hợp trên, nhưng người đi chậm xuất phát trước người kiaphút thì họ sẽ gặp nhau ở chính giữa quãng đường. Lúc đó:
+Người đi nhanh mất  (h)
+Người đi chậm mất (h)
+Do đó, ta có phương trình    (2)
+Từ (1) và (2) ta có hệ phương trình 
+Vậy vân tốc của người đi nhanh là km/h và vận tốc của người đi chậm là km/h
+Bài 7: Hai canô cùng khở hành từ A đến B cách nhau km, đi ngược chiều nhau. Sau  giờ  phút thì gặp nhau. Tính vận tốc riêng của mỗi cano. Biết rằng cano đi xuôi dòng lớn hơn vận tốc riêng của cano đi ngược km/h và vận tốc riêng của nước là km/h
+Lời giải:
+Ta thực hiện đổi đơn vị :  giờ  phút giờ
+Gọi  là vận tốc riêng của cano đi xuôi dòng, điều kiện . Do đó, khi xuôi dòng nó đi với vận tốc km/h
+Gọi  là vận tốc riêng của cano đi ngược dòng, điều kiện . Do đó, khi xuôi dòng nó đi với vận tốc km/h
+Với giải thiết 
+Vận tốc riêng của cano đi xuôi dòng lớn hơn vận tốc riêng của cano đi ngược km/h, ta được     (1)
+Sau  giờ  phút hai cano gặp nhau, ta được:
+    (2)
+Từ (1) và (2) ta có hệ phương trình 
+Vậy vận tốc riêng của cano đi xuôi bằng km/h, vận tốc riêng của cano đi ngược bằng km/h
+Bài 8: Hai vật chuyển động đều trên một đường tròn đường kính cm, xuất phá cùng một lúc, từ cùng một điểm. Nếu chuyển động cùng chiều thì cứ  giây chúng lại gặp nhau. Nếu chuyển động ngược chiều thì cứ  giây chúng lại gặp nhau, Tính vận tốc mỗi vật
+Lời giải:
+Gọi  và   là vận tốc các vật (, đơn vị cm/s)
+Nếu chuyển động cùng chiều thì cứ  giây chúng lại gặp nhau
+Do đó, ta có 
+Nếu chuyển động ngược chiều thì cứ  giây chúng lại gặp nhau
+Do đó, ta có 
+Ta có hệ phương trình 
+Vậy vận tốc của vật thứ nhất là m/s, vận tốc vật thứ hai là cm/s.
+Dạng 5: Toán có nội dung lí, hóa
+Bài 1: Tìm các hệ số  để cân bằng phản ứng hóa học
+Lời giải:
+Theo định luật bảo toàn nguyên tố đối với Fe và O, ta có 
+Từ phương trình (1) ta suy ra                     (3)
+Thế (3) vào (2), ta được 
+Thay giá trị  vào phương trình (3). Ta có:
+Do đó, hệ phương trình có nghiệm duy nhất 
+Vậy ta có phương trình sau cân bằng 
+Bài 2: Cân bằng phản ứng hóa học sau bằng phương pháp đại số 
+Lời giải:
+Gọi  lần lượt là hệ số của  và  thỏa mãn cân bằng phương trình hóa học
+Cân bằng số nguyên tử của , số nguyên tử của  ở cả hai vế ta được hệ
+Giải hệ phương trình này , ta được 
+Đưa các hệ số tìm được vào phương trình hóa học, ta được
+Do các hệ số của phương trình hóa học phải là số nguyên nên nhân hai vế của phương trình hóa học trên với 2, ta được
+Bài 3: Cân bằng phương trình phản ứng hóa học sau bằng phương pháp đại số
+Lời giải:
+Gọi  lần lượt là hệ số của  và  thỏa mãn cân bằng phương trình hóa học
+Cân bằng số nguyên tử của , số nguyên tử của  ở cả hai vế ta được hệ
+Giải hệ phương trình này , ta được 
+Đưa các hệ số tìm được vào phương trình hóa học, ta được
+Do các hệ số của phương trình hóa học phải là số nguyên nên nhân hai vế của phương trình hóa học trên với 2, ta được
+Bài 4: Có hai loại quặng chứa  sắt và  sắt. Tính khối lượng của mỗi loại quặng đem trộn để được  tấn quặng chứa  sắt
+Lời giải:
+Gọi khối lượng quặng chứa  sắt và  sắt là (tấn, )
+Theo bài ra ta có hệ phương trình (thỏa mãn điều kiện)
+Vậy đem  tấn loại quặng chứa  sắt,  tấn loại quặng chứa  sắt
+Bài 5: Người ta cho thêm kg nước vào dung dịch A thì được dung dịch B có nồng độ . Sau đó lại cho thêm kg axit vào dung dịch B thì được dung dịch C có nồng độ axit là . Tính mồng độ axit trong dung dịch A
+Lời giải:
+Gọi khối lượng axit trong dung dich A là (kg, ) và khối lượng nước trong dung dịch A là (kg, )
+Cho thêm kg nước vào dung dịch A thì được dung dịch B có nồng độ  ta có phương trình
+                       (1)
+Cho thêm kg axit vào dung dịch B thì được dung dịch C có nồng độ axit là , ta có phương trình
+                   (2)
+Từ (1) và (2) ta có hệ phương trình ( thỏa mãn điều kiện)
+Vậy nồng độ axit trong dung dịch A  là  .
+C. BÀI TẬP VẬN DỤNG
+Bài 1: Cho một số gồm hai chữ số. Nếu đổi chỗ hai chữ số của nó ta được số mới hơn số cũ là . Tổng của số đã cho và một số mới tạo thành là . Tìm số đã cho.
+Lời giải:
+Gọi chữ số hàng chục là , chữ số hàng đơn vị là 
+Điều kiện: 
+Theo bài ra ta có hệ phương trình   (thỏa mãn điều kiện)
+Vậy số đã cho là 
+Bài 2: Tìm hai số biết tổng của chúng là  và số lớn hơn số bé là 
+Lời giải:
+Gọi số lớn là  và số bé là  ()
+Theo bài ra ta có hệ phương trình (thỏa mãn điều kiện)
+Vậy hai số tự nhiên là 
+Bài 3: Tìm số tự nhiên  có hai chữ số, biết rằng tổng hai chữ số đó bằng , và nếu viết hai chữ số đó theo thứ tự ngược lại thì được số lớn hơn  là  đơn vị
+Lời giải:
+Gọi số tự nhiên cần tìm có dạng là 
+Tổng chữ số đó bằng  nên 
+Viết hai chữ số đó theo thứ tự ngược lại thì được số lớn hơn  là  đơn vị nên  hay 
+Ta có hệ phương trình  suy ra 
+Vậy số tự nhiên cần tìm là 
+Bài 4: Hai người thợ cùng làm công việc trong  giờ thì xong. Nếu người thứ nhất làm một mình trong  giờ rồi người thứ hai làm tiếp  giờ thì hoàn thành được  công việc. Hỏi mỗi người làm công việc đó một mình hoàn thành trong bao lâu?
+Lời giải:
+Gọi thời gian người thứ nhất làm một mình hoàn thành công việc là  (giờ, ); người thứ hai làm một mình hoàn thành công việc là  (giờ, )
+Theo bài ra ta có hệ phương trình (thỏa mãn điều kiện)
+Vậy nếu làm riêng thì người thứ nhất hoàn thành công việc trong  giờ, người thứ hai hoàn thành công việc trong  giờ
+Bài 5: Theo kế hoạch hai tổ sản xuất  sản phẩm trong một thời gian nhất định. Do áp dụng kĩ thuật mới nên tổ I đã vượt mức  và tổ II đã vượt mức . Vì vậy, trong thời gian quy định họ đã hoàn thành vượt mức   sản phẩm. Hỏi số sản phẩm được giao của mỗi tổ theo kế hoạch?
+Lời giải:
+Gọi số sản phẩm tổ I được giao là  (sản phẩm, ) và số sản phẩm tổ II được giao là   (sản phẩm; )
+Theo bài ra ta có hệ phương trình (thỏa mãn điều kiện)
+Vậy sản phẩm tổ I được giao là  sản phẩm; tổ II được giao là  sản phẩm
+Bài 6: Để hoàn thành một công việc, hai tổ phải làm chung trong  giờ. Sau  giờ làm chung thì tổ hai được điều đi làm việc khác, tổ một đã hoàn thành công việc còn lại trong  giờ. Hỏi nếu mỗi tổ làm riêng thì sau bao lâu sẽ làm xong công việc đó?
+Lời giải:
+Gọi thời gian tổ I làm một mình hoàn thành công việc là (giờ, ) và tổ II làm một mình hoàn thành công việc là (giờ, )
+Theo bài ra ta có hệ phương trình ( thỏa mãn điều kiện)
+Bài 7: Một ca nô đi xuôi dòng một quãng đường km hết giờ phút và ngược dòng quãng đường đó hết giờ phút. Tính tốc độ của ca nô khi nước yên lặng và tốc độ của dòng nước. Biết rằng tôc độ của ca nô khi nước yên lặng không đổi trên suốt quãng đường và tốc độ của dòng nước cũng không đổi khi ca nô chuyển động 
+Lời giải:
+Gọi (km/h) là tốc độ dòng nước và (km/h) là tốc độ của ca nô khi nước yên lặng ()
+Khi đó, tốc độ đi xuôi dòng là  và tốc độ đi ngược dòng là 
+Thời gian đi xuôi dòng là giờ phút, nên
+ hay            (1)
+Thời gian đi ngược dòng quãng đường đó hết giờ phút, nên
+ hay          (2)
+Từ (1) và (2) ta có hệ phương trình 
+Giải hệ phương trình, ta được 
+Vậy tốc độ của dòng nước là km/h và tốc độ của ca nô khi nước yên lặng là  km/h
+Bài 8: Một ca nô xuôi dòng km và ngược dòng km mất  giờ. Một lần khác, ca nô xuôi dòng km và ngược dòng km thì mất  phút. Tính vận tốc riêng của ca nô và vận tốc dòng nước.(Biết vận tốc riêng của ca nô, vận tốc của dòng nước không đổi)
+Lời giải:
+Gọi vận tốc riêng của ca nô là (km/h, ) và vận tốc của dòng nước là (km/h, )
+Theo bài ra ta có hệ phương trình 
+Đặt  ta có: 
+Giải hệ ta được ( thỏa mãn điều kiện)
+Bài 9: Một ô tô di từ Hà Nội và dự định đến Huế lúc giờ phút. Nếu xe đi với vận tốc km/h thì sẽ đến Huế chậm hơn so với dự định là giờ. Nếu xe chạy với vận tốc km/h thì xe sẽ đến Huế sớm hơn giờ so với dự định. Tính độ dài quãng đường Hà Nội -Huế và thời gian xe xuất phát từ Hà Nội
+Lời giải:
+Gọi quãng đường Hà Nội-Huế là (km/h, )
+thời gian ô tô dự định đi là (giờ, )
+Theo bài ra ta có hệ phương trình (thỏa mãn điều kiện)
+Vậy quãng đường Hà Nội-Huế là km và thời gian xe xuất phát từ Hà Nội là
+giờ phút- giờ  giờ  phút
+Bài 10: Một trường tổ chức cho học sinh đi tham quan bằng ô tô. Nếu xếp mỗi xe  học sinh thì còn thừa  học sinh. Nếu xếp mỗi xe  học sinh thì xe cuối cùng thiếu  học sinh. Hỏi có bao nhiêu học sinh đi tham quan và có bao nhiêu ô tô?
+Lời giải:
+Gọi số học sinh đi tham quan là (người; ) và số ô tô là (o tô; )
+Theo bài ra ta có hệ phương trình ( thỏa mãn điều kiện)
+Vậy số hóc inh đi tham quan là  học sinh và số ô tô là 
+Bài 11: Cho một hình chữ nhật .Nếu tăng độ dài mỗi cạnh của nó lên  cm thì diện tích của hình chữ nhật sẽ tăng thêm  cm. Nếu giảm chiều dài đi cm, chiều rộng đi cm thì diện tích của hình chữ nhật sẽ giảm đi  cm.Tính chiều dài và chiều rộng hình chữ nhật
+Lời giải:
+GOị chiều dài của hình chữ nhật là (cm, ) và chiều rộng là (cm, )
+Theo bài ra ta có hệ phương trình ( thỏa mãn điều kiện)
+Vậy chiều dài của hình chữ nhật là  cm, chiều rộng là  cm
+Bài 12: Điểm trung bình của một vận động viên bắn súng sau  lần bắn là  điểm.Kết quả cụ thể được ghi trong bảng sau, trong đó có hai ô bị mờ không đọc được (đánh dấu “?”)
+Điểm số mỗi lần bắn
+10
+9
+8
+7
+6
+Số lần bắn
+25
+42
+?
+15
+?
+Lời giải
+Gọi  lần lượt là số lần bắn được  điểm và  điểm
+Vạn động viên thực hiện  lần bắn nên , tức là 
+Điểm trung bình sau  lần bắn là  điểm nên
+Suy ra 
+Ta có hệ phương trình  suy ra 
+Vậy số lần bắn được  điểm là  lần và số lần bắn được  điểm là  lần
+Bài 13: Năm ngoái , hai đơn vị sản xuất nông nghiệp thu hoạch được  tấn thóc. Năm nay, hai đơn vị thu hoạch được  tấn thóc. Hỏi năm nay, mỗi đơn vị thu hoạch được bao nhiêu tấn thóc, biết rằng năm nay, đơn vị thứ nhất làm vượt mức  đơn vị thứ hai và làm vượt mức  so với năm ngoái?Hãy dùng máy tính cầm tay để kiểm tra lại kết quả thu được
+Lời giải:
+Gọi  lần lượt là số thóc mỗi đơn vị thu hoạch được trong năm nay
+Năm nay, hai đơn vị thu hoạch được  tấn thóc nên 
+Vì năm nay, đơn vị thứ nhất làm vượt mức  đơn vị thứ hai và làm vượt mức  so với năm ngoái nên lượng thóc thu hoạch được ở năm ngoái của mỗi đơn vị lần lượt là  và 
+Do đó 
+Ta có hệ phương trình  suy ra 
+Vậy năm nay đơn vị thứ nhất thu hoạch được  tấn thóc và đơn vị thứ hai thu hoạch được  tấn thóc
+Bài 14: Hai người thợ cùng làm một công việc trong  giờ thì xong. Nếu người thứ nhất làm trong  giờ và người thứ hai làm trong  giờ thì hoàn thành được  công việc. Hỏi nếu làm riêng thì mỗi người hoàn thành công việc trong bao lâu?
+Lời giải:
+Gọi (giờ)v lần lượt là thười gian mỗi người hoàn thành công việc nếu làm riêng một mình
+Trong một giờ, người thứ nhất làm được( công việc) và người thứ hai làm được  (công việc) 
+Hai người thợ cùng làm một công việc trong  giờ thì xong nên 
+Nếu người thứ nhất làm trong  giờ và người thứ hai làm trong  giờ thì hoàn thành được  công việc nên 
+Ta có hệ phương trình 
+Đặt ẩn phụ  và  ta đưa về hệ phương trình 
+Giải hệ phương trình ta được  tức là  Suy ra 
+Vậy nếu làm riêng thì người thứ nhất hoàn thành công việc trong  giờ và người thứ hai hoàn thành công việc trong  giờ
+Bài 15: Bác Phương chia số tiền  triệu đồng của mình cho hai khoản đấu tư. Sau một năm, tổng số tiền lãi bác thu được là  triệu đồng. Lãi suất cho khoản đầu tư thứ nhất là  năm và khoản đấu tư thứ hai là  năm. Tính số tiền bác Phương đầu tư cho mỗi khoản
+Lời giải:
+Gọi  lần lượt là số tiề hai khoản đầu tư của bác Phương ()
+Tổng số tiền bác Phương đầu tư là  triệu đồng nên ta có phương trình
+                 (1)
+Lãi suất cho khoản đầu tư thứ nhất là  năm và khoản đấu tư thứ hai là  năm, nên ta có phương trình
+     (2)
+Từ (1) và (2) ta có hệ phương trình 
+Giải hệ phương trình ta được (thỏa mãn)
+Vậy bác Phương đầu tư cho khoản thứ nhất và khoản thứ hai lần lượt là  triệu đồng và  triệu đồng
+Bài 16: Nhân dịp ngày Giỗ Tổ Hùng Vương, một siêu thị điện máy đã giảm giá nhiều mặt hàng để kích cầu mua sắm. Gía niêm yết của một chiếc tủ lạnh và một chiếc máy giặt có tổng số tiền là  triệu đồng. Tuy nhiên, trong dịp này tủ lạnh giảm  giá niêm yết và máy giặt giảm  giá niêm yết.Vì thế, cô Liên đã mua hai mặt hàng trên với tổng số tiền  triệu đồng. Hỏi giá niêm yết của mỗi mặt hàng trên là bao nhiêu?
+Lời giải:
+Gọi  là giá trị của tủ lạnh và máy giặt khi chưa giảm giá ()
+Tổng số tiền của một chiếc tủ lạnh và một chiếc máy giặt là  triệu đồng, nên ta có phương trình 
+                               (1)
+Tổng số tiền của một chiếc tủ lạnh và một chiếc máy giặt sau khi được giảm là  triệu đồng, nên ta có phương trình
+                 (2)
+Từ (1) và (2) ta có hệ phương trình 
+Giải hệ phương trình ta được (thỏa mãn)
+Bài 17: Trong tháng thứ nhất, hai tổ sản xuất được  chi tiết máy. So với tháng thứ nhất, trong tháng thứ hai, tổ một sản xuất vượt , tổ hai sản xuất vượt  nên trong tháng này, cả hai tổ đã sản xuất được  chi tiết máy. Hỏi trong tháng thứ nhất, mỗi tổ sản xuất được bao nhiêu chi tiết máy?
+Lời giải:
+Gọi số chi tiết máy mà tổ 1 sản xuất được trong tháng đầu là (chi tiết máy)
+Số chi tiết máy mà tổ 2 sản xuất được trong tháng đầu là (chi tiết máy)
+Điều kiện:  và 
+Trong tháng thứ nhất, hai tổ công nhân sản xuất được  chi tiết máy, nên ta có phương trình 
+ Trong tháng thứ hai, tổ một sản xuất vượt , tổ hai sản xuất vượt  nên trong tháng này, cả hai tổ đã sản xuất được  chi tiết máy nên ta có phương trình 
+Ta có hệ phương trình 
+Giải hệ phương trình ta được  (thỏa mãn)
+Vậy trong tháng đầu tổ một sản xuất được  chi tiết máy, tổ hai sản xuất được  chi tiết máy
+Bài 18: Hai tổ sản xuất cùng máy một loại áo khoác xuất khẩu.Nếu tổ thứ nhất may trong  ngày và tổ thứ hai may trong  ngày thì hai tổ may được  chiếc áo. Biết rằng trong mỗi ngày tổ thứ hai may được nhiều hơn tổ thứ nhất  chiếc áo. Hỏi trong một ngày mỗi tổ may được bao nhiêu chiếc áo?(Năng suất may áo của mỗi tổ trong các ngày là như nhau)
+Lời giải:
+Gọi  lần lượt là số áo may của tổ thứ nhất và tổ thứ hai ()
+Nếu tổ thứ nhất may trong  ngày và tổ thứ hai may trong  ngày thì hai tổ may được  chiếc áo, ta có phương trình 
+Biết rằng trong mỗi ngày tổ thứ hai may được nhiều hơn tổ thứ nhất  chiếc áo, ta có phương trinh  hay 
+Ta có hệ phương trình 
+Giải hệ phương trình, ta được  (thỏa mãn)
+Vậy tổ thứ nhất máy được  áo, tổ thứ hai may được  áo
+Bài 19: Trên mỗi cánh đồng, người ta cấy  ha lúa giống mới và ha lúa giống cũ, thu được tất cả  tấn thóc. Hỏi năng suất giống mới trên  ha bằng bao nhiêu? Biết rằng  ha trồng lúa giống mới thu hoạch được ít hơn  ha trồng lúa giống cũ là  tấn
+Lời giải:
+Gọi  lần lượt là năng suất lúa giống mới và lúa giống cũ trên  ha()
+Người ta cấy  ha lúa giống mới và ha lúa giống cũ, thu được tất cả  tấn thóc, nên ta có phương trình 
+    (1)
+Người ta thấy ha trồng lúa giống mới thu hoạch được ít hơn  ha trồng lúa giống cũ là  tấn, ta có phương trình
+             (2)
+Từ (1) và (2) ta có hệ phương trình 
+Giải hệ phương trình ta được (thỏa mãn)
+Vậy năng suất lúa giống mới là  ha và lúa giống cũ là  ha
+Bài 20: Tìm các hệ số  để cân bằng mỗi phương trình phản ứng hoashocj sau
+a)                                           b) 
+Lời giải:
+a) Gọi  lần lượt là hệ số của  và  thỏa mãn cân bằng phương trình hóa học
+Cân bằng số nguyên tử  và số nguyên tử  ở hai vế ta được hệ 
+Giải hệ phương trình ta được  và 
+Đưa các hệ số tìm được vào phương trình hóa học, ta có 
+b) Gọi  lần lượt là hệ số của  và  thỏa mãn cân bằng phương trình hóa học
+Cân bằng số nguyên tử  và số nguyên tử  ở hai vế ta được hệ 
+Giải hệ phương trình ta được  và 
+Đưa các hệ số tìm được vào phương trình hóa học, ta có 
+Bài 21: Cân bằng các phương trình hóa học sau bằng phương pháp đại số, trong mỗi trường hợp sau:
+a) b) 
+Lời giải:
+a) Gọi  lần lượt là hệ số của  và  trong phương trình hóa học ()
+Cân bằng số nguyên tử  và số nguyên tử  ở hai vế ta được hệ 
+Giải hệ phương trình ta được  và 
+Đưa các hệ số tìm được vào phương trình hóa học, ta có 
+Nhân hai vế của phương trình hóa học với , ta được
+b) Gọi  lần lượt là hệ số của  và  trong phương trình hóa học ()
+Cân bằng số nguyên tử   và số nguyên tử  ở hai vế ta được hệ 
+Giải hệ phương trình ta được  và 
+Đưa các hệ số tìm được vào phương trình hóa học, ta có 
+Nhân hai vế của phương trình hóa học với , ta được:
