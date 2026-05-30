@@ -2621,18 +2621,88 @@ Ta có: \\( \\sqrt{${a2} \\cdot ${b2}} = \\sqrt{${a2}} \\cdot \\sqrt{${b2}} = ${
     },
     b8_d2: function(count=5) {
         const q = [];
+        let types = [];
+        for (let i = 0; i < count; i++) {
+            if (i === 0) types.push(1);
+            else if (i === 1) types.push(2);
+            else types.push(Math.floor(Math.random() * 3));
+        }
+        types = this.shuffle(types);
+
         for(let i=0; i<count; i++) {
-            const f1 = Math.floor(Math.random()*4)+2;
-            const f2 = Math.floor(Math.random()*4)+2;
-            const f3 = Math.floor(Math.random()*3)+2;
-            const n1 = f1 * f3;
-            const n2 = f2 * f2 * f1 * f3;
-            const text = `Tính giá trị của phép nhân: \\( \\sqrt{${n1}} \\cdot \\sqrt{${n2}} \\)`;
-            const ans_val = f1 * f2 * f3;
-            const exp = `Áp dụng quy tắc nhân các căn bậc hai: \\( \\sqrt{a} \\cdot \\sqrt{b} = \\sqrt{a \\cdot b} \\).
-Ta có: \\( \\sqrt{${n1}} \\cdot \\sqrt{${n2}} = \\sqrt{${n1} \\cdot ${n2}} = \\sqrt{${n1 * n2}} = ${ans_val} \\).`;
-            const opts = this.shuffle([`${ans_val}`, `${ans_val+2}`, `${ans_val-2}`, `${ans_val*2}`]);
-            q.push({ id: 'b8_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(`${ans_val}`), explanation: exp });
+            const type = types[i];
+            if (type === 0) {
+                const f1 = Math.floor(Math.random()*4)+2;
+                const f2 = Math.floor(Math.random()*4)+2;
+                const f3 = Math.floor(Math.random()*3)+2;
+                const n1 = f1 * f3;
+                const n2 = f2 * f2 * f1 * f3;
+                const text = `Tính giá trị của phép nhân: \\( \\sqrt{${n1}} \\cdot \\sqrt{${n2}} \\)`;
+                const ans_val = f1 * f2 * f3;
+                const exp = `Áp dụng quy tắc nhân các căn bậc hai: \\( \\sqrt{a} \\cdot \\sqrt{b} = \\sqrt{a \\cdot b} \\).
+Ta có: \\( \\sqrt{${n1}} \\cdot \\sqrt{${n2}} = \\sqrt{${n1} \\cdot ${n2}} = \\sqrt{${n1 * n2}} = \\sqrt{${ans_val * ans_val}} = ${ans_val} \\).`;
+                const opts = this.shuffle([`${ans_val}`, `${ans_val+2}`, `${ans_val-2}`, `${ans_val*2}`]);
+                q.push({ id: 'b8_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(`${ans_val}`), explanation: exp });
+            } else if (type === 1) {
+                // (sqrt(A) +/- sqrt(B))^2
+                const c_vals = [2, 3, 5];
+                const c = c_vals[Math.floor(Math.random() * c_vals.length)];
+                let x = Math.floor(Math.random()*3)+1; // 1, 2, 3
+                let y = Math.floor(Math.random()*3)+1;
+                while (x === y) {
+                    y = Math.floor(Math.random()*3)+1;
+                }
+                const A = x * x * c;
+                const B = y * y * c;
+                const isPlus = Math.random() > 0.5;
+                const sign = isPlus ? '+' : '-';
+                
+                const text = `Thực hiện phép tính: \\( (\\sqrt{${A}} ${sign} \\sqrt{${B}})^2 \\)`;
+                
+                const term1 = A;
+                const term2 = B;
+                const cross = 2 * Math.sqrt(A * B);
+                const ans_val = isPlus ? (term1 + term2 + cross) : (term1 + term2 - cross);
+                
+                const exp = `Khai triển hằng đẳng thức \\( (a \\pm b)^2 = a^2 \\pm 2ab + b^2 \\):
+\\( (\\sqrt{${A}} ${sign} \\sqrt{${B}})^2 = (\\sqrt{${A}})^2 ${sign} 2\\sqrt{${A}}\\sqrt{${B}} + (\\sqrt{${B}})^2 \\)
+\\( = ${A} ${sign} 2\\sqrt{${A * B}} + ${B} \\)
+\\( = ${A + B} ${sign} 2 \\cdot ${cross / 2} = ${A + B} ${sign} ${cross} = ${ans_val} \\).`;
+                
+                const ansStr = `${ans_val}`;
+                const optSet = new Set([ansStr, `${ans_val + 2}`, `${ans_val - 2}`, `${Math.abs(term1 - term2)}`]);
+                while (optSet.size < 4) optSet.add(`${ans_val + Math.floor(Math.random()*10)+1}`);
+                const opts = this.shuffle(Array.from(optSet).slice(0, 4));
+                
+                q.push({ id: 'b8_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else {
+                // (x sqrt(a) - y sqrt(b))(x sqrt(a) + y sqrt(b))
+                const x = Math.floor(Math.random()*4)+2; // 2 to 5
+                const y = Math.floor(Math.random()*4)+2;
+                const primes = [2, 3, 5, 7];
+                const a = primes[Math.floor(Math.random()*4)];
+                let b = primes[Math.floor(Math.random()*4)];
+                while (a === b) {
+                    b = primes[Math.floor(Math.random()*4)];
+                }
+                
+                const text = `Thực hiện phép tính: \\( (${x}\\sqrt{${a}} - ${y}\\sqrt{${b}})(${x}\\sqrt{${a}} + ${y}\\sqrt{${b}}) \\)`;
+                
+                const term1 = x * x * a;
+                const term2 = y * y * b;
+                const ans_val = term1 - term2;
+                
+                const exp = `Áp dụng hằng đẳng thức \\( (A - B)(A + B) = A^2 - B^2 \\):
+\\( (${x}\\sqrt{${a}} - ${y}\\sqrt{${b}})(${x}\\sqrt{${a}} + ${y}\\sqrt{${b}}) = (${x}\\sqrt{${a}})^2 - (${y}\\sqrt{${b}})^2 \\)
+\\( = ${x*x} \\cdot ${a} - ${y*y} \\cdot ${b} = ${term1} - ${term2} = ${ans_val} \\).`;
+                
+                const ansStr = `${ans_val}`;
+                const optSet = new Set([ansStr, `${ans_val + 2}`, `${-ans_val}`, `${term1 + term2}`]);
+                while (optSet.size < 4) optSet.add(`${ans_val + Math.floor(Math.random()*10)+1}`);
+                const opts = this.shuffle(Array.from(optSet).slice(0, 4));
+                
+                q.push({ id: 'b8_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            }
         }
         return q;
     },
