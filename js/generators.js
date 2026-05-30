@@ -1154,7 +1154,7 @@ Thay \\( x = ${root} \\) (thỏa mãn ĐKXĐ) vào phương trình, ta có:
                 const m_str = m > 0 ? `+ ${m}` : `- ${Math.abs(m)}`;
                 
                 const root1_str = this.formatFraction(p, q_val);
-                const text = `Cho phương trình \\( \\frac{${a_str}x ${m_str}}{x - 1} = \\frac{${c_str}(x - 1)}{x + 1} \\). Biết rằng \\( x = ${root1_str} \\) là một nghiệm của phương trình. Tìm nghiệm còn lại của phương trình.`;
+                const text = `Cho phương trình \\( \\frac{${a_str}x + m}{x - 1} = \\frac{${c_str}(x - 1)}{x + 1} \\). Biết rằng \\( x = ${root1_str} \\) là một nghiệm của phương trình. Tìm nghiệm còn lại của phương trình.`;
                 
                 const ans = `\\( x = ${x2} \\)`;
                 const wrong1 = `\\( x = ${-x2} \\)`;
