@@ -1763,7 +1763,7 @@ Vì \\( x \\) là số nguyên lớn nhất thỏa mãn điều kiện nhỏ hơ
     b6_d3: function(count=5) {
         const q = [];
         for(let i=0; i<count; i++) {
-            const type = Math.floor(Math.random() * 3);
+            const type = Math.floor(Math.random() * 5);
             if (type === 0) {
                 // Điểm trung bình
                 const toan = Math.floor(Math.random()*3) + 6; // 6 to 8
@@ -1832,7 +1832,7 @@ Tổng số tiền phải trả: \\( ${km1} + ${kmn}(x - 1) \\leq ${money} \\)
 Vì quãng đường làm tròn số nguyên, nên Bình có thể đi tối đa ${max_x} km.`;
                 const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
                 q.push({ id: 'b6_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
-            } else {
+            } else if (type === 2) {
                 // Sản xuất
                 const total = Math.floor(Math.random()*10)*50 + 500; // 500 to 950 sp
                 const daily = Math.floor(Math.random()*5)*10 + 30; // 30 to 70 sp/day
@@ -1865,6 +1865,79 @@ Vì \\( x \\) là số nguyên, xưởng phải may ít nhất ${ans_val} bộ m
                 const wrong1 = `${ans_val + 1} bộ`;
                 const wrong2 = `${ans_val - 1 < 0 ? 2 : ans_val - 1} bộ`;
                 const wrong3 = `${ans_val + 5} bộ`;
+                
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b6_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else if (type === 3) {
+                // Bank interest problem
+                const rates = [6.0, 6.5, 7.0, 7.2, 7.5, 8.0, 8.5];
+                const rate = rates[Math.floor(Math.random() * rates.length)];
+                
+                // Principal in millions
+                const principal_mil = Math.floor(Math.random()*10)*5 + 10; // 10 to 55 million
+                const principal = principal_mil * 1000000;
+                
+                const target_total = principal * (1 + rate/100);
+                
+                // Format target_total nicely with dots
+                const target_str = target_total.toLocaleString('vi-VN');
+                const principal_str = principal.toLocaleString('vi-VN');
+                
+                const names = ["Bác Ngọc", "Cô Lan", "Chú Hùng", "Bác An"];
+                const name = names[Math.floor(Math.random() * names.length)];
+                
+                const text = `${name} gửi tiền tiết kiệm kì hạn 12 tháng ở một ngân hàng với lãi suất ${rate}%/năm. ${name} dự định tổng số tiền nhận được (cả gốc lẫn lãi) sau khi gửi 12 tháng ít nhất là ${target_str} đồng. Hỏi ${name} phải gửi số tiền tiết kiệm ít nhất là bao nhiêu để đạt được dự định đó?`;
+                
+                const ans = `${principal_str} đồng`;
+                const wrong1 = `${(principal + 1000000).toLocaleString('vi-VN')} đồng`;
+                const wrong2 = `${(principal - 1000000).toLocaleString('vi-VN')} đồng`;
+                const wrong3 = `${(principal + 500000).toLocaleString('vi-VN')} đồng`;
+                
+                const exp = `Gọi số tiền tiết kiệm ${name} cần gửi là \\( x \\) (đồng) (\\( x > 0 \\)).
+Sau 12 tháng (1 năm), số tiền lãi nhận được là: \\( x \\times ${rate}\\% = ${rate/100}x \\) (đồng).
+Tổng số tiền (cả gốc và lãi) nhận được là: \\( x + ${rate/100}x = ${(1 + rate/100)}x \\) (đồng).
+Để tổng số tiền nhận được ít nhất là ${target_str} đồng, ta có bất phương trình:
+\\( ${(1 + rate/100)}x \\geq ${target_total} \\)
+\\( \\Leftrightarrow x \\geq \\frac{${target_total}}{${(1 + rate/100)}} \\)
+\\( \\Leftrightarrow x \\geq ${principal} \\).
+Vậy ${name} phải gửi ít nhất ${principal_str} đồng.`;
+                
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b6_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else {
+                // Profit / Retail problem
+                const cost = Math.floor(Math.random()*4)*10 + 30; // 30k to 60k
+                const margin = Math.floor(Math.random()*3)*10 + 20; // 20k to 40k
+                const price = cost + margin;
+                const fixed_mil = Math.floor(Math.random()*3) + 2; // 2 to 4 million
+                const fixed_cost = fixed_mil * 1000000;
+                
+                const target_profit_mil = Math.floor(Math.random()*3) + 3; // 3 to 5 million
+                const target_profit = target_profit_mil * 1000000;
+                
+                const margin_real = margin * 1000; // in VND
+                // x * margin_real >= fixed_cost + target_profit
+                const needed_items = Math.ceil((fixed_cost + target_profit) / margin_real);
+                
+                const text = `Một cửa hàng kinh doanh áo thun có chi phí cố định (tiền thuê mặt bằng, điện nước...) mỗi tháng là ${fixed_mil} triệu đồng. Cửa hàng nhập mỗi chiếc áo thun với giá ${cost}.000 đồng và bán ra với giá ${price}.000 đồng. Hỏi trong một tháng, cửa hàng cần bán ít nhất bao nhiêu chiếc áo thun để thu được lợi nhuận ít nhất là ${target_profit_mil} triệu đồng?`;
+                
+                const ans = `${needed_items} chiếc`;
+                const wrong1 = `${needed_items + 10} chiếc`;
+                const wrong2 = `${needed_items - 5} chiếc`;
+                const wrong3 = `${needed_items + 5} chiếc`;
+                
+                const exp = `Đổi: ${fixed_mil} triệu đồng = ${fixed_cost.toLocaleString('vi-VN')} đồng; ${target_profit_mil} triệu đồng = ${target_profit.toLocaleString('vi-VN')} đồng.
+Gọi \\( x \\) là số chiếc áo thun cửa hàng cần bán trong một tháng (\\( x \\) là số nguyên dương).
+Số tiền bán \\( x \\) chiếc áo là: \\( ${price*1000}x \\) (đồng).
+Tiền vốn nhập \\( x \\) chiếc áo là: \\( ${cost*1000}x \\) (đồng).
+Lợi nhuận = (Tiền bán) - (Tiền vốn) - (Chi phí cố định).
+Theo đề bài, lợi nhuận ít nhất là ${target_profit_mil} triệu đồng nên ta có bất phương trình:
+\\( ${price*1000}x - ${cost*1000}x - ${fixed_cost} \\geq ${target_profit} \\)
+\\( \\Leftrightarrow ${margin_real}x - ${fixed_cost} \\geq ${target_profit} \\)
+\\( \\Leftrightarrow ${margin_real}x \\geq ${fixed_cost + target_profit} \\)
+\\( \\Leftrightarrow x \\geq \\frac{${fixed_cost + target_profit}}{${margin_real}} \\)
+\\( \\Leftrightarrow x \\geq ${((fixed_cost + target_profit)/margin_real).toFixed(2)} \\).
+Vì \\( x \\) là số nguyên, cửa hàng cần bán ít nhất ${needed_items} chiếc áo.`;
                 
                 const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
                 q.push({ id: 'b6_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
