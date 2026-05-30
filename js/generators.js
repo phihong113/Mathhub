@@ -2411,7 +2411,7 @@ Vì \\( ${a*a} < ${b} \\) nên \\( \\sqrt{${a*a}} < \\sqrt{${b}} \\). Vậy \\( 
     b7_d6: function(count=5) {
         const q = [];
         for(let i=0; i<count; i++) {
-            const type = Math.floor(Math.random() * 2);
+            const type = Math.floor(Math.random() * 4);
             if (type === 0) {
                 // Rơi tự do s = 5t^2
                 const t = Math.floor(Math.random()*5)+2; // 2 to 6
@@ -2426,7 +2426,7 @@ Vì \\( ${a*a} < ${b} \\) nên \\( \\sqrt{${a*a}} < \\sqrt{${b}} \\). Vậy \\( 
 Vì thời gian \\( t > 0 \\) nên \\( t = \\sqrt{${s/5}} = ${t} \\) (giây).`;
                 const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
                 q.push({ id: 'b7_d6_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
-            } else {
+            } else if (type === 1) {
                 // Hình vuông
                 const base = Math.floor(Math.random()*10)+5; // 5 to 14
                 const area = base * base;
@@ -2441,6 +2441,53 @@ Do \\( a > 0 \\) nên \\( a = \\sqrt{${area}} = ${base} \\) (m).
 Lưu ý: Độ dài cạnh không thể là số âm nên loại trường hợp \\( -${base} \\).`;
                 const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
                 q.push({ id: 'b7_d6_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else if (type === 2) {
+                // Tốc độ tối đa
+                const muOptions = [0.12, 0.15, 0.2];
+                const mu = muOptions[Math.floor(Math.random() * muOptions.length)];
+                // Choose r such that 10 * mu * r is a nice square if possible, or close to it
+                // We want 10 * mu * r = v^2 => r = v^2 / (10 * mu)
+                const v = Math.floor(Math.random()*10) + 15; // 15 to 24
+                const r = Math.round(v * v / (10 * mu));
+                
+                // Actual calculated v
+                const actual_v = Math.sqrt(10 * mu * r);
+                const rounded_v = actual_v.toFixed(1);
+                
+                const text = `Tốc độ tối đa cho phép \\( v \\) (m/s) để lái xe an toàn qua đoạn đường vòng được tính bởi công thức \\( v = \\sqrt{10\\mu r} \\), trong đó \\( r \\) là bán kính cung đường (m), \\( \\mu \\) là hệ số ma sát. 
+Tính tốc độ tối đa cho phép \\( v \\) khi đi qua cung đường có bán kính \\( r = ${r} \\) m và hệ số ma sát \\( \\mu = ${mu} \\) (làm tròn đến hàng phần mười).`;
+                
+                const ans = `${rounded_v} m/s`;
+                const wrong1 = `${(actual_v + 1).toFixed(1)} m/s`;
+                const wrong2 = `${(actual_v - 1).toFixed(1)} m/s`;
+                const wrong3 = `${(actual_v * 2).toFixed(1)} m/s`;
+                
+                const exp = `Thay \\( r = ${r} \\) và \\( \\mu = ${mu} \\) vào công thức \\( v = \\sqrt{10\\mu r} \\), ta được:
+\\( v = \\sqrt{10 \\times ${mu} \\times ${r}} = \\sqrt{${10 * mu * r}} \\approx ${rounded_v} \\) (m/s).`;
+                
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b7_d6_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else {
+                // Trạm phát sóng
+                const d = Math.floor(Math.random()*4) + 3; // 3 to 6
+                const x = Math.floor(Math.random()*4) + 4; // 4 to 7
+                const s = Math.sqrt(d*d + x*x);
+                const rounded_s = s.toFixed(1);
+                
+                const text = `Một trạm phát sóng được đặt ở vị trí \\( A \\) cách đường tàu thẳng một khoảng \\( ${d} \\) km. Đầu tàu đang ở vị trí \\( B \\), cách hình chiếu vuông góc của \\( A \\) trên đường tàu một khoảng \\( ${x} \\) km. 
+Khoảng cách từ trạm phát sóng đến đầu tàu là bao nhiêu km? (làm tròn đến hàng phần mười nếu cần)`;
+                
+                const ans = `${Number.isInteger(s) ? s : rounded_s} km`;
+                const wrong1 = `${d + x} km`;
+                const wrong2 = `${Math.abs(d - x)} km`;
+                const wrong3 = `${(s + 1).toFixed(1)} km`;
+                
+                const exp = `Khoảng cách từ trạm phát sóng đến đầu tàu là cạnh huyền của một tam giác vuông có hai cạnh góc vuông là ${d} km và ${x} km.
+Áp dụng định lý Pythagore, khoảng cách đó biểu thị bởi: \\( \\sqrt{${d}^2 + ${x}^2} = \\sqrt{${d*d + x*x}} \\).
+Giá trị tính được là \\( \\approx ${rounded_s} \\) km.`;
+                
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b7_d6_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
             }
         }
         return q;
@@ -2448,7 +2495,7 @@ Lưu ý: Độ dài cạnh không thể là số âm nên loại trường hợp
     b7_d7: function(count=5) {
         const q = [];
         for(let i=0; i<count; i++) {
-            const type = Math.floor(Math.random() * 2);
+            const type = Math.floor(Math.random() * 4);
             if (type === 0) {
                 // GTNN của sqrt(x - a) + b
                 const a = Math.floor(Math.random()*5)+1;
@@ -2465,7 +2512,7 @@ Dấu "=" xảy ra khi \\( x - ${a} = 0 \\Leftrightarrow x = ${a} \\).
 Vậy giá trị nhỏ nhất của \\( A \\) là ${b}.`;
                 const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
                 q.push({ id: 'b7_d7_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
-            } else {
+            } else if (type === 1) {
                 // GTLN của b - sqrt(x + a)
                 const a = Math.floor(Math.random()*5)+1;
                 const b = Math.floor(Math.random()*10)+5;
@@ -2480,6 +2527,60 @@ Do đó, \\( -\\sqrt{x + ${a}} \\leq 0 \\).
 Cộng cả hai vế với ${b}, ta được \\( B = ${b} - \\sqrt{x + ${a}} \\leq ${b} - 0 = ${b} \\).
 Dấu "=" xảy ra khi \\( x + ${a} = 0 \\Leftrightarrow x = -${a} \\).
 Vậy giá trị lớn nhất của \\( B \\) là ${b}.`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b7_d7_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else if (type === 2) {
+                // GTNN của sqrt(x^2 - 2mx + m^2 + k^2) + d
+                const m = Math.floor(Math.random()*4) + 1;
+                const k = Math.floor(Math.random()*4) + 1; // k^2 is the min of the quadratic
+                const d = Math.floor(Math.random()*10) + 1;
+                const sign_d = Math.random() > 0.5 ? 1 : -1;
+                
+                const b = -2 * m;
+                const c = m*m + k*k;
+                const d_str = sign_d > 0 ? `+ ${d}` : `- ${d}`;
+                
+                const text = `Tìm giá trị nhỏ nhất của biểu thức: \\( C = \\sqrt{x^2 ${b}x + ${c}} ${d_str} \\)`;
+                
+                const ans = `${k + sign_d * d}`;
+                const wrong1 = `${c + sign_d * d}`;
+                const wrong2 = `${k}`;
+                const wrong3 = `Không có GTNN`;
+                
+                const exp = `Ta phân tích biểu thức dưới dấu căn:
+\\( x^2 ${b}x + ${c} = x^2 - 2 \\cdot ${m} \\cdot x + ${m*m} + ${k*k} = (x - ${m})^2 + ${k*k} \\).
+Vì \\( (x - ${m})^2 \\geq 0 \\) với mọi \\( x \\), nên \\( (x - ${m})^2 + ${k*k} \\geq ${k*k} \\).
+Do đó \\( \\sqrt{x^2 ${b}x + ${c}} = \\sqrt{(x - ${m})^2 + ${k*k}} \\geq \\sqrt{${k*k}} = ${k} \\).
+Suy ra: \\( C \\geq ${k} ${d_str} = ${ans} \\).
+Dấu "=" xảy ra khi \\( x - ${m} = 0 \\Leftrightarrow x = ${m} \\).
+Vậy giá trị nhỏ nhất của biểu thức là ${ans}.`;
+
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b7_d7_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else {
+                // GTLN của d - sqrt(x^2 + 2mx + m^2 + k^2)
+                const m = Math.floor(Math.random()*4) + 1;
+                const k = Math.floor(Math.random()*4) + 1; // k^2 is the min of the quadratic
+                const d = Math.floor(Math.random()*10) + 5;
+                
+                const b = 2 * m;
+                const c = m*m + k*k;
+                
+                const text = `Tìm giá trị lớn nhất của biểu thức: \\( D = ${d} - \\sqrt{x^2 + ${b}x + ${c}} \\)`;
+                
+                const ans = `${d - k}`;
+                const wrong1 = `${d - c}`;
+                const wrong2 = `${d + k}`;
+                const wrong3 = `Không có GTLN`;
+                
+                const exp = `Ta phân tích biểu thức dưới dấu căn:
+\\( x^2 + ${b}x + ${c} = x^2 + 2 \\cdot ${m} \\cdot x + ${m*m} + ${k*k} = (x + ${m})^2 + ${k*k} \\).
+Vì \\( (x + ${m})^2 \\geq 0 \\) với mọi \\( x \\), nên \\( (x + ${m})^2 + ${k*k} \\geq ${k*k} \\).
+Do đó \\( \\sqrt{x^2 + ${b}x + ${c}} = \\sqrt{(x + ${m})^2 + ${k*k}} \\geq \\sqrt{${k*k}} = ${k} \\).
+Vì vậy \\( D = ${d} - \\sqrt{x^2 + ${b}x + ${c}} \\leq ${d} - ${k} = ${ans} \\).
+Dấu "=" xảy ra khi \\( x + ${m} = 0 \\Leftrightarrow x = -${m} \\).
+Vậy giá trị lớn nhất của biểu thức là ${ans}.`;
+
                 const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
                 q.push({ id: 'b7_d7_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
             }
