@@ -9,6 +9,21 @@ const Generators = {
         }
         return array;
     },
+    formatFraction: function(tu, mau) {
+        if (mau < 0) {
+            tu = -tu;
+            mau = -mau;
+        }
+        if (mau === 1) return tu.toString();
+        if (tu === 0) return "0";
+        const gcd = (a, b) => b === 0 ? a : gcd(b, a % b);
+        const d = gcd(Math.abs(tu), Math.abs(mau));
+        tu = tu / d;
+        mau = mau / d;
+        if (mau === 1) return tu.toString();
+        if (tu < 0) return `-\\frac{${-tu}}{${mau}}`;
+        return `\\frac{${tu}}{${mau}}`;
+    },
     fallback: function(count = 1) {
         return [{
             id: 'fallback_0', text: 'Đang tải thuật toán...', options: ['A','B','C','D'], correctAnswer: 0, explanation: ''
@@ -851,6 +866,312 @@ const Generators = {
                 const exp = `Gọi giá niêm yết tủ lạnh là \\( x \\), máy giặt là \\( y \\). Tổng: \\( x + y = ${S} \\). Giá sau giảm: \\( (1 - ${a/100})x + (1 - ${b/100})y = ${M_str} \\). Giải hệ ra \\( x = ${x}, y = ${y} \\).`;
                 const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
                 q.push({ id: 'b3_d5_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            }
+        }
+        return q;
+    },
+    b4_d1: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const type = Math.floor(Math.random() * 3);
+            if (type === 0) {
+                // (ax + b)(cx + d) = 0
+                const a = Math.floor(Math.random() * 4) + 1; // 1 to 4
+                let b = Math.floor(Math.random() * 9) - 4; // -4 to 4
+                if (b === 0) b = 1;
+                const c = Math.floor(Math.random() * 4) + 1;
+                let d = Math.floor(Math.random() * 9) - 4;
+                if (d === 0) d = -1;
+                
+                const b_str = b > 0 ? `+ ${b}` : `- ${Math.abs(b)}`;
+                const d_str = d > 0 ? `+ ${d}` : `- ${Math.abs(d)}`;
+                const a_str = a === 1 ? '' : a;
+                const c_str = c === 1 ? '' : c;
+                
+                const text = `Giải phương trình sau: \\( (${a_str}x ${b_str})(${c_str}x ${d_str}) = 0 \\)`;
+                
+                const ans1 = this.formatFraction(-b, a);
+                const ans2 = this.formatFraction(-d, c);
+                const ans = `\\( x = ${ans1} \\) hoặc \\( x = ${ans2} \\)`;
+                const wrong1 = `\\( x = ${this.formatFraction(b, a)} \\) hoặc \\( x = ${this.formatFraction(d, c)} \\)`;
+                const wrong2 = `\\( x = ${this.formatFraction(-b, c)} \\) hoặc \\( x = ${this.formatFraction(-d, a)} \\)`;
+                const wrong3 = `\\( x = ${ans1} \\)`;
+                
+                const exp = `Phương trình tích có dạng \\( A(x)B(x) = 0 \\Leftrightarrow A(x) = 0 \\) hoặc \\( B(x) = 0 \\).
+Suy ra:
+\\( \\begin{bmatrix} ${a_str}x ${b_str} = 0 \\\\ ${c_str}x ${d_str} = 0 \\end{bmatrix} \\)
+\\( \\Leftrightarrow \\begin{bmatrix} x = ${ans1} \\\\ x = ${ans2} \\end{bmatrix} \\).
+Vậy tập nghiệm của phương trình là \\( S = \\{${ans1}; ${ans2}\\} \\).`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b4_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else if (type === 1) {
+                // x(ax + b) = 0
+                const a = Math.floor(Math.random() * 5) + 2;
+                let b = Math.floor(Math.random() * 9) - 4;
+                if (b === 0) b = -2;
+                const b_str = b > 0 ? `+ ${b}` : `- ${Math.abs(b)}`;
+                
+                const text = `Tập nghiệm của phương trình \\( x(${a}x ${b_str}) = 0 \\) là:`;
+                const ans_frac = this.formatFraction(-b, a);
+                const ans = `\\( S = \\{0; ${ans_frac}\\} \\)`;
+                const wrong1 = `\\( S = \\{${ans_frac}\\} \\)`;
+                const wrong2 = `\\( S = \\{0; ${this.formatFraction(b, a)}\\} \\)`;
+                const wrong3 = `\\( S = \\{0; ${-b}\\} \\)`;
+                
+                const exp = `Phương trình tương đương: \\( \\begin{bmatrix} x = 0 \\\\ ${a}x ${b_str} = 0 \\end{bmatrix} \\)
+\\( \\Leftrightarrow \\begin{bmatrix} x = 0 \\\\ x = ${ans_frac} \\end{bmatrix} \\).
+Tập nghiệm là ${ans}.`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b4_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else {
+                // (ax + b)(x^2 - c^2) = 0
+                const a = Math.floor(Math.random() * 3) + 1;
+                let b = Math.floor(Math.random() * 5) + 1;
+                const c = Math.floor(Math.random() * 3) + 2; // 2, 3, 4
+                const c2 = c * c;
+                const a_str = a === 1 ? '' : a;
+                const b_str = `+ ${b}`;
+                
+                const text = `Số nghiệm của phương trình \\( (${a_str}x ${b_str})(x^2 - ${c2}) = 0 \\) là:`;
+                
+                // roots are -b/a, c, -c
+                // Ensure -b/a is not equal to c or -c to avoid duplicate roots
+                const root1 = -b/a;
+                let numRoots = (root1 === c || root1 === -c) ? 2 : 3;
+                
+                const ans = `${numRoots}`;
+                const wrong1 = `1`;
+                const wrong2 = `2`;
+                const wrong3 = `4`;
+                
+                // if numRoots happens to be 2, swap wrong2 to 3
+                let w2 = numRoots === 2 ? `3` : `2`;
+                let w1 = numRoots === 1 ? `0` : `1`; // Wait, root1, c, -c -> min 2 roots
+                
+                const exp = `Phương trình tương đương với:
+\\( \\begin{bmatrix} ${a_str}x ${b_str} = 0 \\\\ x^2 - ${c2} = 0 \\end{bmatrix} \\)
+\\( \\Leftrightarrow \\begin{bmatrix} x = ${this.formatFraction(-b, a)} \\\\ x = ${c} \\\\ x = -${c} \\end{bmatrix} \\).
+Vậy phương trình có ${numRoots} nghiệm.`;
+                let final_opts = this.shuffle([ans, w1, w2, wrong3]);
+                // fix duplicates
+                final_opts = [...new Set(final_opts)];
+                while(final_opts.length < 4) final_opts.push((Math.floor(Math.random()*5)+4).toString());
+                
+                q.push({ id: 'b4_d1_'+i, text, options: final_opts, correctAnswer: final_opts.indexOf(ans), explanation: exp });
+            }
+        }
+        return q;
+    },
+    b4_d2: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const type = Math.floor(Math.random() * 2);
+            if (type === 0) {
+                // ax^2 + bx = 0
+                const a = Math.floor(Math.random() * 4) + 2;
+                let b = Math.floor(Math.random() * 7) + 2;
+                if (Math.random() > 0.5) b = -b;
+                const b_str = b > 0 ? `+ ${b}x` : `- ${Math.abs(b)}x`;
+                
+                const text = `Giải phương trình: \\( ${a}x^2 ${b_str} = 0 \\)`;
+                const ans_frac = this.formatFraction(-b, a);
+                const ans = `\\( x = 0 \\) hoặc \\( x = ${ans_frac} \\)`;
+                const wrong1 = `\\( x = 0 \\) hoặc \\( x = ${this.formatFraction(b, a)} \\)`;
+                const wrong2 = `\\( x = ${ans_frac} \\)`;
+                const wrong3 = `\\( x = 0 \\)`;
+                const exp = `Đặt nhân tử chung:
+\\( ${a}x^2 ${b_str} = 0 \\Leftrightarrow x(${a}x ${b > 0 ? '+' : '-'} ${Math.abs(b)}) = 0 \\).
+Chia thành 2 trường hợp:
+\\( x = 0 \\) hoặc \\( ${a}x ${b > 0 ? '+' : '-'} ${Math.abs(b)} = 0 \\)
+\\( \\Leftrightarrow x = 0 \\) hoặc \\( x = ${ans_frac} \\).`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b4_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else {
+                // (ax+b)^2 - (cx+d)^2 = 0
+                const a = 2;
+                let b = Math.floor(Math.random() * 5) + 1;
+                const c = 1;
+                let d = Math.floor(Math.random() * 5) + 2;
+                if(b===d) d++;
+                
+                const text = `Nghiệm của phương trình \\( (${a}x + ${b})^2 - (x + ${d})^2 = 0 \\) là:`;
+                
+                // (2x+b - x - d)(2x+b + x + d) = 0
+                // (x + b-d)(3x + b+d) = 0
+                const root1 = d - b;
+                const root2 = this.formatFraction(-(b+d), 3);
+                
+                const ans = `\\( x = ${root1} \\) hoặc \\( x = ${root2} \\)`;
+                const wrong1 = `\\( x = ${b-d} \\) hoặc \\( x = ${root2} \\)`;
+                const wrong2 = `\\( x = ${root1} \\) hoặc \\( x = ${this.formatFraction(b+d, 3)} \\)`;
+                const wrong3 = `\\( x = ${-root1} \\) hoặc \\( x = ${this.formatFraction(-(b-d), 3)} \\)`;
+                
+                const exp = `Áp dụng hằng đẳng thức hiệu hai bình phương:
+\\( [(${a}x + ${b}) - (x + ${d})][(${a}x + ${b}) + (x + ${d})] = 0 \\)
+\\( \\Leftrightarrow (x ${b-d >= 0 ? '+' : '-'} ${Math.abs(b-d)})(3x + ${b+d}) = 0 \\)
+\\( \\Leftrightarrow \\begin{bmatrix} x = ${root1} \\\\ x = ${root2} \\end{bmatrix} \\).`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b4_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            }
+        }
+        return q;
+    },
+    b4_d3: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const type = Math.floor(Math.random() * 2);
+            if (type === 0) {
+                // (ax+b) / (cx+d) = 0
+                const a = Math.floor(Math.random()*3)+1;
+                const b = Math.floor(Math.random()*5)+1; // ax - b
+                const c = Math.floor(Math.random()*3)+1;
+                const d = Math.floor(Math.random()*5)+1; // cx - d
+                const a_str = a===1?'':a;
+                const c_str = c===1?'':c;
+                
+                const text = `Giải phương trình: \\( \\frac{${a_str}x - ${b}}{${c_str}x - ${d}} = 0 \\)`;
+                
+                const root = this.formatFraction(b, a);
+                const dk = this.formatFraction(d, c);
+                
+                let ans = "";
+                let exp = `Điều kiện: \\( ${c_str}x - ${d} \\neq 0 \\Leftrightarrow x \\neq ${dk} \\).
+Tử số bằng 0: \\( ${a_str}x - ${b} = 0 \\Leftrightarrow x = ${root} \\).`;
+                
+                let wrong1, wrong2, wrong3;
+                if (root === dk) {
+                    ans = `Phương trình vô nghiệm`;
+                    wrong1 = `\\( x = ${root} \\)`;
+                    wrong2 = `\\( x = ${dk} \\)`;
+                    wrong3 = `\\( x = -${root} \\)`;
+                    exp += ` Nhưng giá trị này vi phạm điều kiện xác định. Vậy phương trình vô nghiệm.`;
+                } else {
+                    ans = `\\( x = ${root} \\)`;
+                    wrong1 = `Phương trình vô nghiệm`;
+                    wrong2 = `\\( x = ${dk} \\)`;
+                    wrong3 = `\\( x = ${this.formatFraction(-b, a)} \\)`;
+                    exp += ` Giá trị này thỏa mãn ĐKXĐ. Vậy nghiệm là \\( x = ${root} \\).`;
+                }
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b4_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else {
+                // a/(x-1) = b/(x+1)
+                const a = Math.floor(Math.random()*5)+2;
+                let b = Math.floor(Math.random()*5)+2;
+                if (a === b) b++;
+                
+                const text = `Giải phương trình: \\( \\frac{${a}}{x - 1} = \\frac{${b}}{x + 1} \\)`;
+                const tu = a + b;
+                const mau = a - b;
+                const root = this.formatFraction(-tu, mau);
+                
+                const ans = `\\( x = ${root} \\)`;
+                const wrong1 = `\\( x = ${this.formatFraction(tu, mau)} \\)`;
+                const wrong2 = `\\( x = 1 \\)`;
+                const wrong3 = `Phương trình vô nghiệm`;
+                
+                const exp = `Điều kiện: \\( x \\neq \\pm 1 \\).
+Quy đồng và khử mẫu: \\( ${a}(x + 1) = ${b}(x - 1) \\)
+\\( \\Leftrightarrow ${a}x + ${a} = ${b}x - ${b} \\)
+\\( \\Leftrightarrow (${a} - ${b})x = -${b} - ${a} \\)
+\\( \\Leftrightarrow ${a-b}x = ${-(a+b)} \\Leftrightarrow x = ${root} \\).
+Giá trị này thỏa mãn ĐKXĐ.`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b4_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            }
+        }
+        return q;
+    },
+    b4_d4: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const type = Math.floor(Math.random() * 2);
+            if (type === 0) {
+                // (m-1)x + b = 0 has root x = r
+                const root = Math.floor(Math.random()*5)+1;
+                const b = Math.floor(Math.random()*10)+2; // constant
+                // (m-1)root + b = 0 => (m-1) = -b/root => m = 1 - b/root
+                // Let's ensure m is nice. b should be multiple of root.
+                const b_nice = root * (Math.floor(Math.random()*3)+1);
+                const isPlus = Math.random() > 0.5;
+                const b_str = isPlus ? `+ ${b_nice}` : `- ${b_nice}`;
+                const val = isPlus ? b_nice : -b_nice;
+                
+                const text = `Tìm \\( m \\) để phương trình \\( (m - 1)x ${b_str} = 0 \\) có nghiệm \\( x = ${root} \\).`;
+                const m_ans = 1 - val/root;
+                const ans = `\\( m = ${m_ans} \\)`;
+                const wrong1 = `\\( m = ${m_ans + 1} \\)`;
+                const wrong2 = `\\( m = ${-m_ans} \\)`;
+                const wrong3 = `\\( m = 1 \\)`;
+                
+                const exp = `Vì phương trình có nghiệm \\( x = ${root} \\), ta thay \\( x = ${root} \\) vào phương trình:
+\\( (m - 1)\\times ${root} ${b_str} = 0 \\)
+\\( \\Leftrightarrow ${root}m - ${root} ${b_str} = 0 \\)
+\\( \\Leftrightarrow ${root}m = ${root - val} \\)
+\\( \\Leftrightarrow m = ${m_ans} \\).`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b4_d4_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else {
+                // (x - m) / (x - 2) = 0 has root x = 5
+                const root = Math.floor(Math.random()*5)+3; // 3 to 7
+                const mau = Math.floor(Math.random()*2)+1; // 1 or 2
+                
+                const text = `Biết phương trình \\( \\frac{x - m}{x - ${mau}} = 0 \\) có một nghiệm là \\( x = ${root} \\). Tìm giá trị của \\( m \\).`;
+                const ans = `\\( m = ${root} \\)`;
+                const wrong1 = `\\( m = ${mau} \\)`;
+                const wrong2 = `\\( m = -${root} \\)`;
+                const wrong3 = `\\( m = ${root+mau} \\)`;
+                
+                const exp = `Điều kiện xác định: \\( x \\neq ${mau} \\).
+Thay \\( x = ${root} \\) (thỏa mãn ĐKXĐ) vào phương trình, ta có:
+\\( \\frac{${root} - m}{${root} - ${mau}} = 0 \\Leftrightarrow ${root} - m = 0 \\Leftrightarrow m = ${root} \\).`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b4_d4_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            }
+        }
+        return q;
+    },
+    b4_d5: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const type = Math.floor(Math.random() * 2);
+            if (type === 0) {
+                // A(x) = B(x) => ax+b = cx+d
+                const a = Math.floor(Math.random()*5)+2;
+                let c = Math.floor(Math.random()*5)+1;
+                if(a===c) c++;
+                const b = Math.floor(Math.random()*10)+1;
+                const d = Math.floor(Math.random()*10)+1;
+                
+                const text = `Tìm giá trị của \\( x \\) để giá trị của hai biểu thức \\( A = ${a}x + ${b} \\) và \\( B = ${c}x + ${d} \\) bằng nhau.`;
+                const root = this.formatFraction(d-b, a-c);
+                const ans = `\\( x = ${root} \\)`;
+                const wrong1 = `\\( x = ${this.formatFraction(b-d, a-c)} \\)`;
+                const wrong2 = `\\( x = ${this.formatFraction(d+b, a-c)} \\)`;
+                const wrong3 = `\\( x = ${this.formatFraction(d-b, a+c)} \\)`;
+                
+                const exp = `Cho \\( A = B \\Leftrightarrow ${a}x + ${b} = ${c}x + ${d} \\)
+\\( \\Leftrightarrow ${a}x - ${c}x = ${d} - ${b} \\)
+\\( \\Leftrightarrow ${a-c}x = ${d-b} \\Leftrightarrow x = ${root} \\).`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b4_d5_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else {
+                // A(x) * B(x) = 0
+                const a = Math.floor(Math.random()*3)+1;
+                const b = Math.floor(Math.random()*5)+1;
+                const a_str = a===1?'':a;
+                
+                const text = `Tìm \\( x \\) để biểu thức \\( P = x(${a_str}x - ${b}) \\) có giá trị bằng 0.`;
+                const root = this.formatFraction(b, a);
+                const ans = `\\( x = 0 \\) hoặc \\( x = ${root} \\)`;
+                const wrong1 = `\\( x = ${root} \\)`;
+                const wrong2 = `\\( x = 0 \\) hoặc \\( x = ${this.formatFraction(-b, a)} \\)`;
+                const wrong3 = `\\( x = 0 \\)`;
+                
+                const exp = `Ta có \\( P = 0 \\Leftrightarrow x(${a_str}x - ${b}) = 0 \\)
+\\( \\Leftrightarrow \\begin{bmatrix} x = 0 \\\\ ${a_str}x - ${b} = 0 \\end{bmatrix} \\Leftrightarrow \\begin{bmatrix} x = 0 \\\\ x = ${root} \\end{bmatrix} \\).`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b4_d5_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
             }
         }
         return q;
