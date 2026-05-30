@@ -1085,7 +1085,7 @@ Giá trị này thỏa mãn ĐKXĐ.`;
     b4_d4: function(count=5) {
         const q = [];
         for(let i=0; i<count; i++) {
-            const type = Math.floor(Math.random() * 2);
+            const type = Math.floor(Math.random() * 3);
             if (type === 0) {
                 // (m-1)x + b = 0 has root x = r
                 const root = Math.floor(Math.random()*5)+1;
@@ -1111,7 +1111,7 @@ Giá trị này thỏa mãn ĐKXĐ.`;
 \\( \\Leftrightarrow m = ${m_ans} \\).`;
                 const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
                 q.push({ id: 'b4_d4_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
-            } else {
+            } else if (type === 1) {
                 // (x - m) / (x - 2) = 0 has root x = 5
                 const root = Math.floor(Math.random()*5)+3; // 3 to 7
                 const mau = Math.floor(Math.random()*2)+1; // 1 or 2
@@ -1125,6 +1125,54 @@ Giá trị này thỏa mãn ĐKXĐ.`;
                 const exp = `Điều kiện xác định: \\( x \\neq ${mau} \\).
 Thay \\( x = ${root} \\) (thỏa mãn ĐKXĐ) vào phương trình, ta có:
 \\( \\frac{${root} - m}{${root} - ${mau}} = 0 \\Leftrightarrow ${root} - m = 0 \\Leftrightarrow m = ${root} \\).`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b4_d4_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else {
+                // (ax+m)/(x-1) = c(x-1)/(x+1)
+                let valid = false;
+                let a, c, m, p, q_val, x2;
+                let attempts = 0;
+                while(!valid && attempts < 100) {
+                    attempts++;
+                    q_val = Math.floor(Math.random()*4)+2;
+                    p = Math.floor(Math.random()*4)+1;
+                    const gcd = (x,y) => y===0?x:gcd(y,x%y);
+                    if(gcd(p,q_val)!==1 || p===q_val) continue;
+                    if(Math.random()>0.5) p = -p;
+                    x2 = Math.floor(Math.random()*8)-4;
+                    if(x2 >= -1 && x2 <= 1) x2 = 4;
+                    let k = 1;
+                    while((k*(p+q_val)*(x2+1)) % 4 !== 0) k++;
+                    c = k*(p+q_val)*(x2+1)/4;
+                    a = c - k*q_val;
+                    m = c - k*p*x2;
+                    if(a !== 0 && c !== 0) valid = true;
+                }
+                
+                const a_str = a === 1 ? '' : (a === -1 ? '-' : a);
+                const c_str = c === 1 ? '' : (c === -1 ? '-' : c);
+                const m_str = m > 0 ? `+ ${m}` : `- ${Math.abs(m)}`;
+                
+                const root1_str = this.formatFraction(p, q_val);
+                const text = `Cho phương trình \\( \\frac{${a_str}x ${m_str}}{x - 1} = \\frac{${c_str}(x - 1)}{x + 1} \\). Biết rằng \\( x = ${root1_str} \\) là một nghiệm của phương trình. Tìm nghiệm còn lại của phương trình.`;
+                
+                const ans = `\\( x = ${x2} \\)`;
+                const wrong1 = `\\( x = ${-x2} \\)`;
+                const wrong2 = `\\( x = ${x2+1} \\)`;
+                const wrong3 = `\\( x = ${x2-2} \\)`;
+                
+                const root1_val = p/q_val;
+                // m = c - k*p*x2, a = c - k*q -> c-a = kq
+                // Let's show the substitution step
+                const exp = `Thay \\( x = ${root1_str} \\) vào phương trình để tìm \\( m \\), ta giải được \\( m = ${m} \\).
+Với \\( m = ${m} \\), phương trình trở thành: \\( \\frac{${a_str}x ${m_str}}{x - 1} = \\frac{${c_str}(x - 1)}{x + 1} \\).
+ĐKXĐ: \\( x \\neq \\pm 1 \\).
+Quy đồng và khử mẫu:
+\\( (${a_str}x ${m_str})(x + 1) = ${c_str}(x - 1)^2 \\)
+\\( \\Leftrightarrow ${a}x^2 + ${a+m}x + ${m} = ${c}x^2 - ${2*c}x + ${c} \\)
+\\( \\Leftrightarrow ${c-a}x^2 - ${2*c+a+m}x + ${c-m} = 0 \\).
+Bấm máy giải phương trình bậc hai hoặc dùng Vi-ét, ta được hai nghiệm \\( x = ${root1_str} \\) và \\( x = ${x2} \\) (đều thỏa mãn ĐKXĐ).
+Nghiệm còn lại là \\( x = ${x2} \\).`;
                 const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
                 q.push({ id: 'b4_d4_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
             }
