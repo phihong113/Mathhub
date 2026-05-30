@@ -2090,7 +2090,7 @@ Chia hai vế cho số âm ${a_signed}, ta đổi chiều bất phương trình:
     b7_d3: function(count=5) {
         const q = [];
         for(let i=0; i<count; i++) {
-            const type = Math.floor(Math.random() * 2);
+            const type = Math.floor(Math.random() * 3);
             if (type === 0) {
                 // Rút gọn sqrt((a - sqrt(b))^2)
                 const a = Math.floor(Math.random()*3)+2; // 2, 3, 4
@@ -2122,14 +2122,14 @@ Do đó \\( |${a} - \\sqrt{${b}}| = \\sqrt{${b}} - ${a} \\).`;
                 }
                 const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
                 q.push({ id: 'b7_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
-            } else {
+            } else if (type === 1) {
                 // sqrt((sqrt(a) - sqrt(b))^2) + sqrt(a)
                 const a = Math.floor(Math.random()*5)+2; 
                 let b = Math.floor(Math.random()*5)+2;
                 if (a===b) b++;
                 
                 const is_a_bigger = a > b;
-                const text = `Rút gọn biểu thức \\( \\sqrt{(\\sqrt{${a}} - \\sqrt{${b}})^2} + \\sqrt{${b}} \\)`;
+                const text = `Tính giá trị biểu thức \\( \\sqrt{(\\sqrt{${a}} - \\sqrt{${b}})^2} + \\sqrt{${b}} \\)`;
                 
                 let ans, wrong1, wrong2, wrong3, exp;
                 if (is_a_bigger) { // sqrt(a) - sqrt(b) > 0
@@ -2148,6 +2148,54 @@ Biểu thức ban đầu trở thành: \\( (\\sqrt{${a}} - \\sqrt{${b}}) + \\sqr
                     exp = `Ta có: \\( \\sqrt{(\\sqrt{${a}} - \\sqrt{${b}})^2} = |\\sqrt{${a}} - \\sqrt{${b}}| \\).
 Vì \\( ${a} < ${b} \\) nên \\( \\sqrt{${a}} < \\sqrt{${b}} \\), do đó \\( |\\sqrt{${a}} - \\sqrt{${b}}| = \\sqrt{${b}} - \\sqrt{${a}} \\).
 Biểu thức ban đầu trở thành: \\( (\\sqrt{${b}} - \\sqrt{${a}}) + \\sqrt{${b}} = 2\\sqrt{${b}} - \\sqrt{${a}} \\).`;
+                }
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b7_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else {
+                // sqrt(A + B sqrt(C)) +- sqrt(A - B sqrt(C))
+                const Cs = [2, 3, 5, 6, 7];
+                const C = Cs[Math.floor(Math.random() * Cs.length)];
+                
+                const y = Math.floor(Math.random() * 2) + 1; // 1 or 2
+                const min_x = Math.ceil(y * Math.sqrt(C));
+                const x = min_x + Math.floor(Math.random() * 2) + 1; // Ensure x > y*sqrt(C)
+                
+                const A = x*x + y*y*C;
+                const B = 2*x*y;
+                
+                const isAdd = Math.random() > 0.5;
+                const op = isAdd ? "+" : "-";
+                
+                let text, ans, wrong1, wrong2, wrong3, exp;
+                if (isAdd) {
+                    text = `Tính giá trị của biểu thức: \\( \\sqrt{${A} + ${B}\\sqrt{${C}}} + \\sqrt{${A} - ${B}\\sqrt{${C}}} \\)`;
+                    ans = `${2*x}`;
+                    wrong1 = `${2*x + 1}`;
+                    wrong2 = `\\( 2\\sqrt{${C}} \\)`;
+                    wrong3 = `\\( ${2*y}\\sqrt{${C}} \\)`;
+                    exp = `Ta phân tích biểu thức dưới dấu căn thành hằng đẳng thức:
+\\( ${A} + ${B}\\sqrt{${C}} = ${x*x} + 2 \\cdot ${x} \\cdot ${y}\\sqrt{${C}} + ${y*y*C} = (${x})^2 + 2 \\cdot ${x} \\cdot ${y}\\sqrt{${C}} + (${y}\\sqrt{${C}})^2 = (${x} + ${y}\\sqrt{${C}})^2 \\).
+Tương tự: \\( ${A} - ${B}\\sqrt{${C}} = (${x} - ${y}\\sqrt{${C}})^2 \\).
+Khi đó biểu thức trở thành:
+\\( \\sqrt{(${x} + ${y}\\sqrt{${C}})^2} + \\sqrt{(${x} - ${y}\\sqrt{${C}})^2} = |${x} + ${y}\\sqrt{${C}}| + |${x} - ${y}\\sqrt{${C}}| \\).
+Vì \\( ${x} > ${y}\\sqrt{${C}} \\) (do \\( ${x*x} > ${y*y*C} \\)), ta có \\( |${x} - ${y}\\sqrt{${C}}| = ${x} - ${y}\\sqrt{${C}} \\).
+Vậy biểu thức bằng: \\( (${x} + ${y}\\sqrt{${C}}) + (${x} - ${y}\\sqrt{${C}}) = ${2*x} \\).`;
+                } else {
+                    text = `Tính giá trị của biểu thức: \\( \\sqrt{${A} + ${B}\\sqrt{${C}}} - \\sqrt{${A} - ${B}\\sqrt{${C}}} \\)`;
+                    // (x + y sqrtC) - (x - y sqrtC) = 2 y sqrtC
+                    let ansStr = `\\( ${2*y}\\sqrt{${C}} \\)`;
+                    if (2*y === 1) ansStr = `\\( \\sqrt{${C}} \\)`;
+                    ans = ansStr;
+                    wrong1 = `\\( ${2*x} \\)`;
+                    wrong2 = `\\( 2\\sqrt{${C}} \\)`;
+                    wrong3 = `\\( -${2*y}\\sqrt{${C}} \\)`;
+                    exp = `Ta phân tích biểu thức dưới dấu căn thành hằng đẳng thức:
+\\( ${A} + ${B}\\sqrt{${C}} = ${x*x} + 2 \\cdot ${x} \\cdot ${y}\\sqrt{${C}} + ${y*y*C} = (${x})^2 + 2 \\cdot ${x} \\cdot ${y}\\sqrt{${C}} + (${y}\\sqrt{${C}})^2 = (${x} + ${y}\\sqrt{${C}})^2 \\).
+Tương tự: \\( ${A} - ${B}\\sqrt{${C}} = (${x} - ${y}\\sqrt{${C}})^2 \\).
+Khi đó biểu thức trở thành:
+\\( \\sqrt{(${x} + ${y}\\sqrt{${C}})^2} - \\sqrt{(${x} - ${y}\\sqrt{${C}})^2} = |${x} + ${y}\\sqrt{${C}}| - |${x} - ${y}\\sqrt{${C}}| \\).
+Vì \\( ${x} > ${y}\\sqrt{${C}} \\) (do \\( ${x*x} > ${y*y*C} \\)), ta có \\( |${x} - ${y}\\sqrt{${C}}| = ${x} - ${y}\\sqrt{${C}} \\).
+Vậy biểu thức bằng: \\( (${x} + ${y}\\sqrt{${C}}) - (${x} - ${y}\\sqrt{${C}}) = ${2*y}\\sqrt{${C}} \\).`;
                 }
                 const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
                 q.push({ id: 'b7_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
