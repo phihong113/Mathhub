@@ -2586,6 +2586,245 @@ Vậy giá trị lớn nhất của biểu thức là ${ans}.`;
             }
         }
         return q;
+    },
+    b8_d1: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const type = Math.floor(Math.random() * 2);
+            if (type === 0) {
+                // Tính sqrt(a^2 * b^2)
+                const a = Math.floor(Math.random()*9)+2;
+                const b = Math.floor(Math.random()*9)+2;
+                const a2 = a*a;
+                const b2 = b*b;
+                const text = `Tính giá trị của biểu thức: \\( \\sqrt{${a2} \\cdot ${b2}} \\)`;
+                const ans = `${a*b}`;
+                const exp = `Áp dụng quy tắc khai phương một tích: \\( \\sqrt{a \\cdot b} = \\sqrt{a} \\cdot \\sqrt{b} \\).
+Ta có: \\( \\sqrt{${a2} \\cdot ${b2}} = \\sqrt{${a2}} \\cdot \\sqrt{${b2}} = ${a} \\cdot ${b} = ${a*b} \\).`;
+                const opts = this.shuffle([ans, `${a*b + 1}`, `${a+b}`, `${a*b - 1}`]);
+                q.push({ id: 'b8_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else {
+                // Tính sqrt(a^2 * b^4)
+                const a = Math.floor(Math.random()*5)+2;
+                const b = Math.floor(Math.random()*3)+2;
+                const a2 = a*a;
+                const b4 = b*b*b*b;
+                const text = `Tính giá trị của biểu thức: \\( \\sqrt{${a2} \\cdot ${b4}} \\)`;
+                const ans = `${a*b*b}`;
+                const exp = `Áp dụng quy tắc khai phương một tích:
+\\( \\sqrt{${a2} \\cdot ${b4}} = \\sqrt{${a2}} \\cdot \\sqrt{${b4}} = \\sqrt{${a}^2} \\cdot \\sqrt{(${b*b})^2} = ${a} \\cdot ${b*b} = ${a*b*b} \\).`;
+                const opts = this.shuffle([ans, `${a*b*b + 2}`, `${a*b}`, `${a*b*b*b}`]);
+                q.push({ id: 'b8_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            }
+        }
+        return q;
+    },
+    b8_d2: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const f1 = Math.floor(Math.random()*4)+2;
+            const f2 = Math.floor(Math.random()*4)+2;
+            const f3 = Math.floor(Math.random()*3)+2;
+            const n1 = f1 * f3;
+            const n2 = f2 * f2 * f1 * f3;
+            const text = `Tính giá trị của phép nhân: \\( \\sqrt{${n1}} \\cdot \\sqrt{${n2}} \\)`;
+            const ans_val = f1 * f2 * f3;
+            const exp = `Áp dụng quy tắc nhân các căn bậc hai: \\( \\sqrt{a} \\cdot \\sqrt{b} = \\sqrt{a \\cdot b} \\).
+Ta có: \\( \\sqrt{${n1}} \\cdot \\sqrt{${n2}} = \\sqrt{${n1} \\cdot ${n2}} = \\sqrt{${n1 * n2}} = ${ans_val} \\).`;
+            const opts = this.shuffle([`${ans_val}`, `${ans_val+2}`, `${ans_val-2}`, `${ans_val*2}`]);
+            q.push({ id: 'b8_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(`${ans_val}`), explanation: exp });
+        }
+        return q;
+    },
+    b8_d3: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const a = Math.floor(Math.random()*10)+2;
+            const b = Math.floor(Math.random()*10)+2;
+            const a2 = a*a;
+            const b2 = b*b;
+            const text = `Tính giá trị của biểu thức: \\( \\sqrt{\\frac{${a2}}{${b2}}} \\)`;
+            
+            const fracStr = this.formatFraction ? this.formatFraction(a, b) : `${a}/${b}`;
+            const wrong1 = this.formatFraction ? this.formatFraction(a+1, b) : `${a+1}/${b}`;
+            const wrong2 = this.formatFraction ? this.formatFraction(a, b+1) : `${a}/${b+1}`;
+            const wrong3 = this.formatFraction ? this.formatFraction(b, a) : `${b}/${a}`;
+            
+            const exp = `Áp dụng quy tắc khai phương một thương: \\( \\sqrt{\\frac{a}{b}} = \\frac{\\sqrt{a}}{\\sqrt{b}} \\).
+Ta có: \\( \\sqrt{\\frac{${a2}}{${b2}}} = \\frac{\\sqrt{${a2}}}{\\sqrt{${b2}}} = \\frac{${a}}{${b}} = ${fracStr} \\).`;
+            
+            const optArr = [fracStr, wrong1, wrong2, wrong3];
+            const optSet = new Set(optArr);
+            let c = 2;
+            while(optSet.size < 4) {
+                optSet.add(this.formatFraction ? this.formatFraction(a+c, b) : `${a+c}/${b}`);
+                c++;
+            }
+            const opts = this.shuffle(Array.from(optSet).slice(0, 4));
+            q.push({ id: 'b8_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(fracStr), explanation: exp });
+        }
+        return q;
+    },
+    b8_d4: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const b = Math.floor(Math.random()*5)+2;
+            const ans = Math.floor(Math.random()*8)+2;
+            const a = ans * ans * b;
+            
+            const text = `Tính giá trị của biểu thức: \\( \\frac{\\sqrt{${a}}}{\\sqrt{${b}}} \\)`;
+            const exp = `Áp dụng quy tắc chia các căn bậc hai: \\( \\frac{\\sqrt{A}}{\\sqrt{B}} = \\sqrt{\\frac{A}{B}} \\).
+Ta có: \\( \\frac{\\sqrt{${a}}}{\\sqrt{${b}}} = \\sqrt{\\frac{${a}}{${b}}} = \\sqrt{${ans*ans}} = ${ans} \\).`;
+            
+            const ansStr = `${ans}`;
+            const opts = this.shuffle([ansStr, `${ans+1}`, `${ans-1}`, `${ans*2}`]);
+            q.push({ id: 'b8_d4_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+        }
+        return q;
+    },
+    b8_d5: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const a = Math.floor(Math.random()*5)+2;
+            const a2 = a*a;
+            const text = `Rút gọn biểu thức \\( \\sqrt{\\frac{${a2}x^4}{y^2}} \\) với \\( y < 0 \\):`;
+            
+            const ans = `\\( \\frac{-${a}x^2}{y} \\)`;
+            const wrong1 = `\\( \\frac{${a}x^2}{y} \\)`;
+            const wrong2 = `\\( \\frac{-${a}x^2}{y^2} \\)`;
+            const wrong3 = `\\( \\frac{${a}x^4}{y} \\)`;
+            
+            const exp = `Ta có: \\( \\sqrt{\\frac{${a2}x^4}{y^2}} = \\frac{\\sqrt{${a2}x^4}}{\\sqrt{y^2}} = \\frac{${a}x^2}{|y|} \\).
+Vì \\( y < 0 \\) nên \\( |y| = -y \\).
+Vậy biểu thức bằng \\( \\frac{${a}x^2}{-y} = \\frac{-${a}x^2}{y} \\).`;
+            
+            const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+            q.push({ id: 'b8_d5_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+        }
+        return q;
+    },
+    b8_d6: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const text = `Với hai số \\( a > 0 \\) và \\( b > 0 \\), khẳng định nào sau đây là đúng?`;
+            
+            const ans = `\\( \\sqrt{a+b} < \\sqrt{a} + \\sqrt{b} \\)`;
+            const wrong1 = `\\( \\sqrt{a+b} > \\sqrt{a} + \\sqrt{b} \\)`;
+            const wrong2 = `\\( \\sqrt{a+b} = \\sqrt{a} + \\sqrt{b} \\)`;
+            const wrong3 = `\\( \\sqrt{a+b} \\geq \\sqrt{a} + \\sqrt{b} \\)`;
+            
+            const exp = `Ta xét hiệu bình phương hai vế:
+\\( (\\sqrt{a} + \\sqrt{b})^2 = a + b + 2\\sqrt{ab} \\).
+Vì \\( a > 0, b > 0 \\) nên \\( 2\\sqrt{ab} > 0 \\).
+Suy ra \\( (\\sqrt{a} + \\sqrt{b})^2 > a + b = (\\sqrt{a+b})^2 \\).
+Do cả hai vế đều dương nên \\( \\sqrt{a} + \\sqrt{b} > \\sqrt{a+b} \\). Khẳng định đúng là \\( \\sqrt{a+b} < \\sqrt{a} + \\sqrt{b} \\).`;
+            
+            const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+            q.push({ id: 'b8_d6_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+        }
+        return q;
+    },
+    b8_d7: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const type = Math.floor(Math.random() * 2);
+            if (type === 0) {
+                const A = Math.floor(Math.random()*5)+2;
+                const k = Math.floor(Math.random()*5)+1;
+                const B = A * k; 
+                const x_val = A * k * k;
+                const text = `Tìm \\( x \\), biết: \\( \\sqrt{${A}x} = ${B} \\)`;
+                const ans = `\\( x = ${x_val} \\)`;
+                const exp = `Điều kiện: \\( x \\geq 0 \\).
+Bình phương hai vế ta được: \\( ${A}x = ${B}^2 = ${B*B} \\).
+Suy ra \\( x = \\frac{${B*B}}{${A}} = ${x_val} \\) (thỏa mãn điều kiện).`;
+                const wrong1 = `\\( x = ${B*B} \\)`;
+                const wrong2 = `\\( x = ${k} \\)`;
+                const wrong3 = `\\( x = ${x_val + 2} \\)`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b8_d7_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else {
+                const sqrt_x = Math.floor(Math.random()*4)+2;
+                const x_val = sqrt_x * sqrt_x;
+                let A = Math.floor(Math.random()*5)+4;
+                let B = Math.floor(Math.random()*3)+1;
+                const C = (A - B) * sqrt_x;
+                const text = `Tìm \\( x \\), biết: \\( \\sqrt{${A*A}x} - \\sqrt{${B*B}x} = ${C} \\)`;
+                const ans = `\\( x = ${x_val} \\)`;
+                const exp = `Điều kiện: \\( x \\geq 0 \\).
+Ta có: \\( \\sqrt{${A*A}x} - \\sqrt{${B*B}x} = ${C} \\)
+\\( \\Leftrightarrow \\sqrt{${A*A}}\\sqrt{x} - \\sqrt{${B*B}}\\sqrt{x} = ${C} \\)
+\\( \\Leftrightarrow ${A}\\sqrt{x} - ${B}\\sqrt{x} = ${C} \\)
+\\( \\Leftrightarrow ${(A-B)}\\sqrt{x} = ${C} \\)
+\\( \\Leftrightarrow \\sqrt{x} = ${sqrt_x} \\)
+\\( \\Leftrightarrow x = ${x_val} \\) (thỏa mãn điều kiện).`;
+                const wrong1 = `\\( x = ${sqrt_x} \\)`;
+                const wrong2 = `\\( x = ${x_val + 1} \\)`;
+                const wrong3 = `\\( x = ${x_val * 2} \\)`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b8_d7_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            }
+        }
+        return q;
+    },
+    b8_d8: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const type = Math.floor(Math.random() * 2);
+            if (type === 0) {
+                const factor_P = [4, 9, 16][Math.floor(Math.random()*3)];
+                const factor_R = [1, 4, 9][Math.floor(Math.random()*3)];
+                const ratio = Math.sqrt(factor_P / factor_R);
+                let R_text = factor_R === 1 ? `giữ nguyên` : `giảm ${factor_R} lần`;
+                
+                const text = `Công suất \\( P \\), hiệu điện thế \\( U \\), điện trở \\( R \\) liên hệ với nhau theo công thức \\( P = \\frac{U^2}{R} \\). 
+Nếu công suất tăng gấp ${factor_P} lần, điện trở ${R_text} thì tỉ số giữa hiệu điện thế lúc sau và hiệu điện thế ban đầu bằng bao nhiêu?`;
+
+                const ansStr = this.formatFraction ? this.formatFraction(Math.sqrt(factor_P), Math.sqrt(factor_R)) : `${ratio}`;
+                const ans = ansStr;
+                
+                const exp = `Gọi công suất, hiệu điện thế, điện trở ban đầu là \\( P_1, U_1, R_1 \\). Lúc sau là \\( P_2, U_2, R_2 \\).
+Ta có: \\( P_1 = \\frac{U_1^2}{R_1} \\Rightarrow U_1 = \\sqrt{P_1 R_1} \\). Tương tự \\( U_2 = \\sqrt{P_2 R_2} \\).
+Theo bài ra: \\( P_2 = ${factor_P} P_1 \\) và \\( R_2 = \\frac{R_1}{${factor_R}} \\).
+Do đó: \\( U_2 = \\sqrt{${factor_P} P_1 \\cdot \\frac{R_1}{${factor_R}}} = \\sqrt{\\frac{${factor_P}}{${factor_R}}} \\cdot \\sqrt{P_1 R_1} = ${ans} \\cdot U_1 \\).
+Vậy tỉ số là ${ans}.`;
+
+                const wrong1 = `${factor_P * factor_R}`;
+                const wrong2 = this.formatFraction ? this.formatFraction(factor_P, factor_R) : `${factor_P / factor_R}`;
+                const wrong3 = `${Math.sqrt(factor_P * factor_R)}`;
+                
+                const optSet = new Set([ans, wrong1, wrong2, wrong3]);
+                while (optSet.size < 4) optSet.add(`${Math.floor(Math.random()*5)+2}`);
+                const opts = this.shuffle(Array.from(optSet).slice(0, 4));
+                
+                q.push({ id: 'b8_d8_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else {
+                const pairs = [[2, 4], [2, 1], [8, 1], [3, 6], [2, 9], [1, 18]];
+                const pair = pairs[Math.floor(Math.random() * pairs.length)];
+                const w = pair[0];
+                const h = pair[1];
+                const side = Math.sqrt(2 * w * h);
+                
+                const text = `Một hình chữ nhật có chiều dài là \\( ${Math.max(w, h)}\\sqrt{2} \\) (cm) và chiều rộng là \\( ${Math.min(w, h)}\\sqrt{2} \\) (cm). Một hình vuông có diện tích bằng diện tích hình chữ nhật này. Cạnh của hình vuông là bao nhiêu cm?`;
+                const ans = `${side} cm`;
+                const wrong1 = `${side*2} cm`;
+                const wrong2 = `${side*side} cm`;
+                const wrong3 = `${Math.max(w,h)*2} cm`;
+                
+                const exp = `Diện tích hình chữ nhật là: \\( S = ${Math.max(w, h)}\\sqrt{2} \\cdot ${Math.min(w, h)}\\sqrt{2} = ${w*h} \\cdot (\\sqrt{2})^2 = ${w*h} \\cdot 2 = ${w*h*2} \\) (\\( cm^2 \\)).
+Hình vuông có diện tích bằng ${w*h*2} (\\( cm^2 \\)) nên cạnh của nó là \\( \\sqrt{${w*h*2}} = ${side} \\) (cm).`;
+
+                const optSet = new Set([ans, wrong1, wrong2, wrong3]);
+                let c = 1;
+                while (optSet.size < 4) {
+                    optSet.add(`${side + c} cm`);
+                    c++;
+                }
+                const opts = this.shuffle(Array.from(optSet).slice(0, 4));
+                q.push({ id: 'b8_d8_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            }
+        }
+        return q;
     }
 };
 window.MathGenerators = Generators;
