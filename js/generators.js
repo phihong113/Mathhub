@@ -2206,7 +2206,7 @@ Vậy biểu thức bằng: \\( (${x} + ${y}\\sqrt{${C}}) - (${x} - ${y}\\sqrt{$
     b7_d4: function(count=5) {
         const q = [];
         for(let i=0; i<count; i++) {
-            const type = Math.floor(Math.random() * 2);
+            const type = Math.floor(Math.random() * 4);
             if (type === 0) {
                 // Rút gọn sqrt(a^2 x^2) với điều kiện x
                 const a = Math.floor(Math.random()*4)+2;
@@ -2232,7 +2232,7 @@ Vì \\( x \\geq 0 \\) nên \\( ${a}x \\geq 0 \\), do đó \\( |${a}x| = ${a}x \\
                 }
                 const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
                 q.push({ id: 'b7_d4_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
-            } else {
+            } else if (type === 1) {
                 // Rút gọn phân thức chứa căn
                 const b = Math.floor(Math.random()*4)+1;
                 const b2 = b*b;
@@ -2260,6 +2260,91 @@ Vì \\( x > ${b} \\) nên \\( x - ${b} > 0 \\), do đó \\( |x - ${b}| = x - ${b
 Biểu thức trở thành: \\( \\frac{x - ${b}}{x - ${b}} = 1 \\).`;
                 }
                 const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b7_d4_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else if (type === 2) {
+                // Tính P = ax - sqrt(x^2 - 2bx + b^2) tại x = c
+                const a = Math.floor(Math.random()*4) + 2; // 2 to 5
+                const b = Math.floor(Math.random()*5) + 2; // 2 to 6
+                
+                const isLess = Math.random() > 0.5;
+                let c;
+                if (isLess) {
+                    c = Math.floor(Math.random()*(b-1)); // 0 to b-1
+                } else {
+                    c = b + Math.floor(Math.random()*4) + 1; // b+1 to b+4
+                }
+                
+                const b2_2 = 2*b;
+                const b2 = b*b;
+                const text = `Cho biểu thức \\( P = ${a}x - \\sqrt{x^2 - ${b2_2}x + ${b2}} \\). Tính giá trị của \\( P \\) khi \\( x = ${c} \\).`;
+                
+                let ans_val;
+                let exp = `Ta có: \\( P = ${a}x - \\sqrt{(x - ${b})^2} = ${a}x - |x - ${b}| \\).\n`;
+                if (c >= b) {
+                    ans_val = a*c - (c - b);
+                    exp += `Vì \\( x = ${c} \\geq ${b} \\) nên \\( x - ${b} \\geq 0 \\Rightarrow |x - ${b}| = x - ${b} \\).\n`;
+                    exp += `Khi đó \\( P = ${a}x - (x - ${b}) = ${(a-1)}x + ${b} \\).\n`;
+                    exp += `Thay \\( x = ${c} \\), ta được \\( P = ${(a-1)} \\cdot ${c} + ${b} = ${ans_val} \\).`;
+                } else {
+                    ans_val = a*c + (c - b);
+                    exp += `Vì \\( x = ${c} < ${b} \\) nên \\( x - ${b} < 0 \\Rightarrow |x - ${b}| = -(x - ${b}) = ${b} - x \\).\n`;
+                    exp += `Khi đó \\( P = ${a}x - (${b} - x) = ${(a+1)}x - ${b} \\).\n`;
+                    exp += `Thay \\( x = ${c} \\), ta được \\( P = ${(a+1)} \\cdot ${c} - ${b} = ${ans_val} \\).`;
+                }
+                
+                const ans = `${ans_val}`;
+                const wrong1 = `${a*c - Math.abs(c - b) + 2}`;
+                const wrong2 = `${a*c + Math.abs(c - b)}`;
+                const wrong3 = `${a*c - Math.abs(c - b) - 2}`;
+                
+                // Ensure unique options
+                const optSet = new Set([ans, wrong1, wrong2, wrong3]);
+                while(optSet.size < 4) {
+                    optSet.add(`${ans_val + Math.floor(Math.random()*10) + 1}`);
+                }
+                
+                const opts = this.shuffle(Array.from(optSet).slice(0, 4));
+                q.push({ id: 'b7_d4_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else {
+                // Giải phương trình Q = ax - sqrt(x^2 + 2bx + b^2) = d
+                const a = Math.floor(Math.random()*3) + 2; // 2, 3, 4
+                const b = Math.floor(Math.random()*5) + 1; // 1 to 5
+                
+                const b2_2 = 2*b;
+                const b2 = b*b;
+                
+                // Pick a valid x1 >= -b
+                // To avoid trivial x1 = 0, let's pick x1 > 0
+                const x1 = Math.floor(Math.random()*5) + 1;
+                const d = (a-1)*x1 - b;
+                
+                const text = `Cho biểu thức \\( Q = ${a}x - \\sqrt{x^2 + ${b2_2}x + ${b2}} \\). Tìm giá trị của \\( x \\) để \\( Q = ${d} \\).`;
+                
+                const fracStr = this.formatFraction ? this.formatFraction(d-b, a+1) : `${(d-b)/(a+1)}`;
+                
+                const exp = `Ta có: \\( Q = ${a}x - \\sqrt{(x + ${b})^2} = ${a}x - |x + ${b}| \\).
+Ta phải xét hai trường hợp:
++ Nếu \\( x \\geq -${b} \\) thì \\( Q = ${a}x - (x + ${b}) = ${(a-1)}x - ${b} \\).
+  Khi đó \\( Q = ${d} \\Rightarrow ${(a-1)}x - ${b} = ${d} \\Leftrightarrow ${(a-1)}x = ${d+b} \\Leftrightarrow x = ${x1} \\) (thỏa mãn \\( x \\geq -${b} \\)).
++ Nếu \\( x < -${b} \\) thì \\( Q = ${a}x + (x + ${b}) = ${(a+1)}x + ${b} \\).
+  Khi đó \\( Q = ${d} \\Rightarrow ${(a+1)}x + ${b} = ${d} \\Leftrightarrow ${(a+1)}x = ${d-b} \\Leftrightarrow x = ${fracStr} \\) (không thỏa mãn \\( x < -${b} \\)).
+Vậy \\( Q = ${d} \\) khi \\( x = ${x1} \\).`;
+                
+                const ans = `\\( x = ${x1} \\)`;
+                const wrong1 = `\\( x = ${fracStr} \\)`;
+                const wrong2 = `\\( x = ${x1 + 2} \\)`;
+                const wrong3 = `\\( x = ${-x1} \\)`;
+                
+                // Ensure unique options
+                const optArr = [ans, wrong1, wrong2, wrong3];
+                const optSet = new Set(optArr);
+                let counter = 1;
+                while(optSet.size < 4) {
+                    optSet.add(`\\( x = ${x1 + counter} \\)`);
+                    counter++;
+                }
+                
+                const opts = this.shuffle(Array.from(optSet).slice(0, 4));
                 q.push({ id: 'b7_d4_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
             }
         }
