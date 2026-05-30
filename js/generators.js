@@ -1557,6 +1557,320 @@ Vậy giá trị nhỏ nhất của M là ${minVal}.`;
             }
         }
         return q;
+    },
+    b6_d1: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const type = Math.floor(Math.random() * 3);
+            if (type === 0) {
+                // Nhận biết BPT bậc nhất 1 ẩn
+                const text = `Trong các bất phương trình sau, bất phương trình nào là bất phương trình bậc nhất một ẩn?`;
+                const a = Math.floor(Math.random()*5)+2;
+                const b = Math.floor(Math.random()*5)+1;
+                
+                const ans = `\\( ${a}x - ${b} > 0 \\)`;
+                const wrong1 = `\\( ${a}x^2 - ${b} > 0 \\)`; // Bậc 2
+                const wrong2 = `\\( 0x + ${b} > 0 \\)`; // a = 0
+                const wrong3 = `\\( \\frac{${a}}{x} - ${b} > 0 \\)`; // Ẩn ở mẫu
+                
+                const exp = `Bất phương trình bậc nhất một ẩn có dạng \\( ax + b > 0 \\) (hoặc \\( <, \\leq, \\geq \\)) với \\( a \\neq 0 \\).
+Trong các đáp án, chỉ có \\( ${a}x - ${b} > 0 \\) thỏa mãn điều kiện này (ẩn \\( x \\) bậc 1 và hệ số \\( a = ${a} \\neq 0 \\)).`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b6_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else if (type === 1) {
+                // Kiểm tra nghiệm của BPT
+                const a = Math.floor(Math.random()*3)+2;
+                const b = Math.floor(Math.random()*10)+5; // 5 to 14
+                const isLess = Math.random() > 0.5;
+                const op = isLess ? "<" : ">";
+                
+                const text = `Số nào sau đây là một nghiệm của bất phương trình \\( ${a}x - ${b} ${op} 0 \\)?`;
+                
+                // Giải: ax > b => x > b/a
+                const threshold = b/a;
+                let ans, wrong1, wrong2, wrong3;
+                if (isLess) {
+                    // x < threshold
+                    ans = Math.floor(threshold) - 1;
+                    wrong1 = Math.ceil(threshold) + 1;
+                    wrong2 = Math.ceil(threshold) + 2;
+                    wrong3 = Math.ceil(threshold) + 3;
+                } else {
+                    // x > threshold
+                    ans = Math.ceil(threshold) + 1;
+                    wrong1 = Math.floor(threshold) - 1;
+                    wrong2 = Math.floor(threshold) - 2;
+                    wrong3 = Math.floor(threshold) - 3;
+                }
+                
+                const exp = `Thay lần lượt các giá trị vào bất phương trình:
+Với \\( x = ${ans} \\), ta có: \\( ${a} \\times (${ans}) - ${b} = ${a*ans - b} \\).
+Vì \\( ${a*ans - b} ${op} 0 \\) là mệnh đề đúng, nên \\( x = ${ans} \\) là nghiệm của bất phương trình.`;
+                const opts = this.shuffle([ans.toString(), wrong1.toString(), wrong2.toString(), wrong3.toString()]);
+                q.push({ id: 'b6_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ans.toString()), explanation: exp });
+            } else {
+                // Biểu diễn tập nghiệm trên trục số
+                const num = Math.floor(Math.random()*10)-5;
+                const signs = [">", "<", "\\geq", "\\leq"];
+                const sign = signs[Math.floor(Math.random()*signs.length)];
+                
+                const text = `Hình biểu diễn tập nghiệm trên trục số (gạch chéo phần không thuộc tập nghiệm) với ngoặc tròn "(" hoặc "[" tương ứng, phản ánh đúng tập nghiệm nào?
+Giả sử trục số giữ lại phần lớn hơn hoặc bằng ${num} (ngoặc vuông "["):`;
+                
+                // To keep it text-based, we ask them to match description
+                const text2 = `Tập nghiệm \\( x ${sign} ${num} \\) được biểu diễn trên trục số bằng cách:`;
+                
+                let ans, wrong1, wrong2, wrong3;
+                if (sign === ">") {
+                    ans = `Giữ lại phần bên phải số ${num}, gạch bỏ phần bên trái, dùng ngoặc tròn "("`;
+                    wrong1 = `Giữ lại phần bên phải số ${num}, gạch bỏ phần bên trái, dùng ngoặc vuông "["`;
+                    wrong2 = `Giữ lại phần bên trái số ${num}, gạch bỏ phần bên phải, dùng ngoặc tròn ")"`;
+                    wrong3 = `Giữ lại phần bên trái số ${num}, gạch bỏ phần bên phải, dùng ngoặc vuông "]"`;
+                } else if (sign === "<") {
+                    ans = `Giữ lại phần bên trái số ${num}, gạch bỏ phần bên phải, dùng ngoặc tròn ")"`;
+                    wrong1 = `Giữ lại phần bên trái số ${num}, gạch bỏ phần bên phải, dùng ngoặc vuông "]"`;
+                    wrong2 = `Giữ lại phần bên phải số ${num}, gạch bỏ phần bên trái, dùng ngoặc tròn "("`;
+                    wrong3 = `Giữ lại phần bên phải số ${num}, gạch bỏ phần bên trái, dùng ngoặc vuông "["`;
+                } else if (sign === "\\geq") {
+                    ans = `Giữ lại phần bên phải số ${num}, gạch bỏ phần bên trái, dùng ngoặc vuông "["`;
+                    wrong1 = `Giữ lại phần bên phải số ${num}, gạch bỏ phần bên trái, dùng ngoặc tròn "("`;
+                    wrong2 = `Giữ lại phần bên trái số ${num}, gạch bỏ phần bên phải, dùng ngoặc vuông "]"`;
+                    wrong3 = `Giữ lại phần bên trái số ${num}, gạch bỏ phần bên phải, dùng ngoặc tròn ")"`;
+                } else {
+                    ans = `Giữ lại phần bên trái số ${num}, gạch bỏ phần bên phải, dùng ngoặc vuông "]"`;
+                    wrong1 = `Giữ lại phần bên trái số ${num}, gạch bỏ phần bên phải, dùng ngoặc tròn ")"`;
+                    wrong2 = `Giữ lại phần bên phải số ${num}, gạch bỏ phần bên trái, dùng ngoặc vuông "["`;
+                    wrong3 = `Giữ lại phần bên phải số ${num}, gạch bỏ phần bên trái, dùng ngoặc tròn "("`;
+                }
+                
+                const exp = `Ký hiệu \\( ${sign} \\) mang ý nghĩa:
+- Nếu có dấu "=" (\\( \\leq, \\geq \\)) thì dùng ngoặc vuông [ hoặc ].
+- Nếu không có dấu "=" (\\( <, > \\)) thì dùng ngoặc tròn ( hoặc ).
+- Chiều lớn hơn (\\( >, \\geq \\)) thì giữ lại phần bên phải, gạch bên trái.
+- Chiều nhỏ hơn (\\( <, \\leq \\)) thì giữ lại phần bên trái, gạch bên phải.
+Áp dụng quy tắc trên, ta tìm được đáp án đúng.`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b6_d1_'+i, text: text2, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            }
+        }
+        return q;
+    },
+    b6_d2: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const type = Math.floor(Math.random() * 3);
+            if (type === 0) {
+                // Giải BPT cơ bản (hệ số a âm)
+                const a = -(Math.floor(Math.random()*4)+2); // a < 0
+                const b = Math.floor(Math.random()*20)+5;
+                const ops = [">", "<", "\\geq", "\\leq"];
+                const opIndex = Math.floor(Math.random()*4);
+                const op = ops[opIndex];
+                
+                const text = `Giải bất phương trình: \\( ${a}x + ${b} ${op} 0 \\)`;
+                
+                const flipOp = {
+                    ">": "<",
+                    "<": ">",
+                    "\\geq": "\\leq",
+                    "\\leq": "\\geq"
+                };
+                const flipped = flipOp[op];
+                const root = this.formatFraction(-b, a);
+                
+                const ans = `\\( x ${flipped} ${root} \\)`;
+                const wrong1 = `\\( x ${op} ${root} \\)`;
+                const wrong2 = `\\( x ${flipped} ${this.formatFraction(b, a)} \\)`;
+                const wrong3 = `\\( x ${op} ${this.formatFraction(b, a)} \\)`;
+                
+                const exp = `Ta có: \\( ${a}x + ${b} ${op} 0 \\)
+\\( \\Leftrightarrow ${a}x ${op} -${b} \\).
+Chia cả hai vế cho \\( ${a} \\) (là một số âm), ta phải **đổi chiều** bất phương trình:
+\\( x ${flipped} \\frac{-${b}}{${a}} \\Leftrightarrow x ${flipped} ${root} \\).`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b6_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else if (type === 1) {
+                // Giải BPT chứa mẫu số (Quy đồng)
+                const m1 = Math.floor(Math.random()*3)+2; // 2 to 4
+                let m2 = Math.floor(Math.random()*3)+2;
+                if(m1===m2) m2++;
+                const bscnn = m1 * m2;
+                
+                const text = `Tập nghiệm của bất phương trình \\( \\frac{x - 1}{${m1}} < \\frac{x + 2}{${m2}} \\) là:`;
+                
+                // (x-1)/m1 < (x+2)/m2
+                // m2(x-1) < m1(x+2)
+                // m2*x - m2 < m1*x + 2*m1
+                // (m2-m1)x < 2m1 + m2
+                
+                const a = m2 - m1;
+                const b = 2*m1 + m2;
+                
+                let ans, wrong1, wrong2, wrong3;
+                let exp = `Nhân cả hai vế với mẫu chung là ${bscnn} (số dương nên giữ nguyên chiều):
+\\( ${m2}(x - 1) < ${m1}(x + 2) \\)
+\\( \\Leftrightarrow ${m2}x - ${m2} < ${m1}x + ${2*m1} \\)
+\\( \\Leftrightarrow (${m2} - ${m1})x < ${2*m1} + ${m2} \\)
+\\( \\Leftrightarrow ${a}x < ${b} \\).`;
+
+                if (a > 0) {
+                    const r = this.formatFraction(b, a);
+                    ans = `\\( x < ${r} \\)`;
+                    wrong1 = `\\( x > ${r} \\)`;
+                    wrong2 = `\\( x < ${this.formatFraction(-b, a)} \\)`;
+                    wrong3 = `\\( x > ${this.formatFraction(-b, a)} \\)`;
+                    exp += `\nChia hai vế cho số dương ${a}, bất phương trình giữ nguyên chiều: \\( x < ${r} \\).`;
+                } else if (a < 0) {
+                    const r = this.formatFraction(b, a);
+                    ans = `\\( x > ${r} \\)`;
+                    wrong1 = `\\( x < ${r} \\)`;
+                    wrong2 = `\\( x > ${this.formatFraction(-b, a)} \\)`;
+                    wrong3 = `\\( x < ${this.formatFraction(-b, a)} \\)`;
+                    exp += `\nChia hai vế cho số âm ${a}, ta phải đổi chiều bất phương trình: \\( x > ${r} \\).`;
+                } else {
+                    // a = 0 (but we prevented m1 === m2, so a != 0 is guaranteed)
+                }
+                
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b6_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else {
+                // Tìm nghiệm nguyên lớn nhất/nhỏ nhất
+                const a = Math.floor(Math.random()*4)+2;
+                const b = Math.floor(Math.random()*10)+5; // 5 to 14
+                
+                // ax < b => x < b/a
+                const val = b/a;
+                const max_int = Math.floor(val);
+                // Ensure it's not a round integer to avoid boundary confusion in < vs <=, actually floor works fine for < if it's not integer.
+                // Wait, if val is integer, then x < val means max integer is val - 1.
+                const ans_val = Number.isInteger(val) ? max_int - 1 : max_int;
+                
+                const text = `Tìm nghiệm nguyên lớn nhất của bất phương trình: \\( ${a}x - ${b} < 0 \\).`;
+                const ans = `${ans_val}`;
+                const wrong1 = `${ans_val + 1}`;
+                const wrong2 = `${ans_val - 1}`;
+                const wrong3 = `${ans_val + 2}`;
+                
+                const exp = `Ta có: \\( ${a}x - ${b} < 0 \\Leftrightarrow ${a}x < ${b} \\Leftrightarrow x < ${this.formatFraction(b, a)} \\).
+Ta có \\( \\frac{${b}}{${a}} \\approx ${(b/a).toFixed(2)} \\).
+Vì \\( x \\) là số nguyên lớn nhất thỏa mãn điều kiện nhỏ hơn ${(b/a).toFixed(2)}, nên \\( x = ${ans_val} \\).`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b6_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            }
+        }
+        return q;
+    },
+    b6_d3: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const type = Math.floor(Math.random() * 3);
+            if (type === 0) {
+                // Điểm trung bình
+                const toan = Math.floor(Math.random()*3) + 6; // 6 to 8
+                const van = Math.floor(Math.random()*3) + 6; // 6 to 8
+                const target = Math.floor(Math.random()*2) + 7; // 7 or 8
+                
+                const text = `Điểm kiểm tra của bạn An môn Toán là ${toan} điểm (hệ số 2), môn Văn là ${van} điểm (hệ số 2). An sắp thi môn Tiếng Anh (hệ số 1). Hỏi An cần đạt ít nhất bao nhiêu điểm môn Tiếng Anh để điểm trung bình của 3 môn đạt từ ${target} điểm trở lên?`;
+                
+                // (Toan*2 + Van*2 + Anh*1)/5 >= target
+                // Anh >= target*5 - (Toan*2 + Van*2)
+                const total_current = toan*2 + van*2;
+                const needed = target*5 - total_current;
+                
+                let ans, wrong1, wrong2, wrong3, exp;
+                if (needed > 10) {
+                    ans = `Không thể đạt được`;
+                    wrong1 = `10 điểm`;
+                    wrong2 = `9 điểm`;
+                    wrong3 = `8 điểm`;
+                    exp = `Gọi điểm Tiếng Anh cần đạt là \\( x \\). 
+Theo đề bài, điểm trung bình là: \\( \\frac{${toan} \\times 2 + ${van} \\times 2 + x}{5} \\geq ${target} \\)
+\\( \\Leftrightarrow \\frac{${total_current} + x}{5} \\geq ${target} \\Leftrightarrow ${total_current} + x \\geq ${target*5} \\)
+\\( \\Leftrightarrow x \\geq ${needed} \\).
+Vì điểm thi tối đa là 10, nên An không thể đạt được mục tiêu này.`;
+                } else {
+                    const ans_val = Math.max(0, needed); // if negative, 0 is enough
+                    ans = `${ans_val} điểm`;
+                    wrong1 = `${ans_val + 1} điểm`;
+                    wrong2 = `${ans_val - 1 < 0 ? ans_val + 2 : ans_val - 1} điểm`;
+                    wrong3 = `${ans_val + 0.5} điểm`;
+                    exp = `Gọi điểm Tiếng Anh cần đạt là \\( x \\). 
+Theo đề bài, điểm trung bình là: \\( \\frac{${toan} \\times 2 + ${van} \\times 2 + x}{5} \\geq ${target} \\)
+\\( \\Leftrightarrow \\frac{${total_current} + x}{5} \\geq ${target} \\Leftrightarrow ${total_current} + x \\geq ${target*5} \\)
+\\( \\Leftrightarrow x \\geq ${needed} \\).
+Vậy An cần đạt ít nhất ${ans_val} điểm môn Tiếng Anh.`;
+                }
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b6_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else if (type === 1) {
+                // Taxi cost
+                const km1 = Math.floor(Math.random()*5) + 15; // 15 to 19k
+                const kmn = Math.floor(Math.random()*4) + 10; // 10 to 13k
+                const money = Math.floor(Math.random()*10)*10 + 100; // 100k to 190k
+                
+                const text = `Giá cước taxi được tính như sau: Giá mở cửa cho km đầu tiên là ${km1} nghìn đồng. Từ km thứ hai trở đi, giá mỗi km là ${kmn} nghìn đồng. Bạn Bình mang theo ${money} nghìn đồng. Hỏi Bình có thể đi được quãng đường tối đa là bao nhiêu km (làm tròn số nguyên nhỏ hơn)?`;
+                
+                // km1 + kmn*(x-1) <= money
+                // kmn*(x-1) <= money - km1
+                // x-1 <= (money - km1)/kmn
+                // x <= (money - km1)/kmn + 1
+                const max_x = Math.floor((money - km1)/kmn + 1);
+                
+                const ans = `${max_x} km`;
+                const wrong1 = `${max_x + 1} km`;
+                const wrong2 = `${max_x - 1} km`;
+                const wrong3 = `${max_x + 2} km`;
+                
+                const exp = `Gọi quãng đường tối đa đi được là \\( x \\) (km) (\\( x \\geq 1 \\)).
+Số tiền phải trả cho km đầu tiên là: ${km1} (nghìn đồng).
+Số tiền trả cho \\( x - 1 \\) km tiếp theo là: \\( ${kmn}(x - 1) \\) (nghìn đồng).
+Tổng số tiền phải trả: \\( ${km1} + ${kmn}(x - 1) \\leq ${money} \\)
+\\( \\Leftrightarrow ${kmn}x - ${kmn} + ${km1} \\leq ${money} \\)
+\\( \\Leftrightarrow ${kmn}x + ${km1 - kmn} \\leq ${money} \\)
+\\( \\Leftrightarrow ${kmn}x \\leq ${money - km1 + kmn} \\)
+\\( \\Leftrightarrow x \\leq ${((money - km1 + kmn)/kmn).toFixed(2)} \\).
+Vì quãng đường làm tròn số nguyên, nên Bình có thể đi tối đa ${max_x} km.`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b6_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else {
+                // Sản xuất
+                const total = Math.floor(Math.random()*10)*50 + 500; // 500 to 950 sp
+                const daily = Math.floor(Math.random()*5)*10 + 30; // 30 to 70 sp/day
+                const done_days = Math.floor(Math.random()*3) + 3; // 3 to 5 days
+                const days_left = Math.floor(Math.random()*3) + 4; // 4 to 6 days
+                
+                const done_sp = daily * done_days;
+                const text = `Một xưởng may nhận hợp đồng may ít nhất ${total} bộ quần áo. Trong ${done_days} ngày đầu, mỗi ngày xưởng may được ${daily} bộ. Xưởng muốn hoàn thành hợp đồng trong ${days_left} ngày còn lại. Hỏi mỗi ngày trong khoảng thời gian còn lại, xưởng phải may ít nhất bao nhiêu bộ quần áo (làm tròn số nguyên lớn hơn)?`;
+                
+                // done_sp + days_left * x >= total
+                // days_left * x >= total - done_sp
+                // x >= (total - done_sp) / days_left
+                const remain = total - done_sp;
+                let ans_val;
+                let exp;
+                if (remain <= 0) {
+                    ans_val = 0;
+                    exp = `Số quần áo đã may trong ${done_days} ngày đầu là: \\( ${daily} \\times ${done_days} = ${done_sp} \\) (bộ).
+Vì ${done_sp} đã vượt quá chỉ tiêu ${total} bộ, nên những ngày còn lại xưởng không cần may thêm bộ nào vẫn đạt hợp đồng.`;
+                } else {
+                    ans_val = Math.ceil(remain / days_left);
+                    exp = `Số quần áo đã may trong ${done_days} ngày đầu là: \\( ${daily} \\times ${done_days} = ${done_sp} \\) (bộ).
+Số quần áo còn lại phải may ít nhất là: \\( ${total} - ${done_sp} = ${remain} \\) (bộ).
+Gọi số bộ quần áo phải may mỗi ngày trong ${days_left} ngày còn lại là \\( x \\).
+Ta có bất phương trình: \\( ${days_left}x \\geq ${remain} \\Leftrightarrow x \\geq ${(remain/days_left).toFixed(2)} \\).
+Vì \\( x \\) là số nguyên, xưởng phải may ít nhất ${ans_val} bộ mỗi ngày.`;
+                }
+                
+                const ans = `${ans_val} bộ`;
+                const wrong1 = `${ans_val + 1} bộ`;
+                const wrong2 = `${ans_val - 1 < 0 ? 2 : ans_val - 1} bộ`;
+                const wrong3 = `${ans_val + 5} bộ`;
+                
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b6_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            }
+        }
+        return q;
     }
 };
 window.MathGenerators = Generators;
