@@ -1944,6 +1944,414 @@ Vì \\( x \\) là số nguyên, cửa hàng cần bán ít nhất ${needed_items
             }
         }
         return q;
+    },
+    b7_d1: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const type = Math.floor(Math.random() * 3);
+            if (type === 0) {
+                // Căn bậc hai (có 2 giá trị đối nhau)
+                const base = Math.floor(Math.random()*15) + 2; // 2 to 16
+                const square = base * base;
+                const text = `Căn bậc hai của số ${square} là:`;
+                const ans = `\\( \\pm ${base} \\)`;
+                const wrong1 = `\\( ${base} \\)`;
+                const wrong2 = `\\( -${base} \\)`;
+                const wrong3 = `\\( \\pm ${base*2} \\)`;
+                
+                const exp = `Mỗi số dương \\( a \\) có đúng hai căn bậc hai là hai số đối nhau: \\( \\sqrt{a} \\) và \\( -\\sqrt{a} \\).
+Vì vậy, căn bậc hai của ${square} là \\( \\pm \\sqrt{${square}} = \\pm ${base} \\).`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b7_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else if (type === 1) {
+                // Căn bậc hai số học (chỉ dương)
+                const base = Math.floor(Math.random()*15) + 2;
+                const square = base * base;
+                const text = `Căn bậc hai số học của ${square} là:`;
+                const ans = `\\( ${base} \\)`;
+                const wrong1 = `\\( \\pm ${base} \\)`;
+                const wrong2 = `\\( -${base} \\)`;
+                const wrong3 = `\\( ${base*2} \\)`;
+                
+                const exp = `Căn bậc hai số học của một số dương \\( a \\) là số dương \\( x \\) sao cho \\( x^2 = a \\).
+Ký hiệu là \\( \\sqrt{a} \\). Vậy căn bậc hai số học của ${square} là \\( \\sqrt{${square}} = ${base} \\).`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b7_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else {
+                // Biểu thức số học cơ bản
+                const a = Math.floor(Math.random()*5)+1;
+                const b = Math.floor(Math.random()*5)+1;
+                const a2 = a*a;
+                const b2 = b*b;
+                const text = `Giá trị của biểu thức \\( \\sqrt{${a2}} + \\sqrt{${b2}} \\) bằng:`;
+                const ans = `${a + b}`;
+                const wrong1 = `${a + b + 1}`;
+                const wrong2 = `${Math.abs(a - b)}`;
+                const wrong3 = `${a * b}`;
+                
+                const exp = `Ta có: \\( \\sqrt{${a2}} = ${a} \\) và \\( \\sqrt{${b2}} = ${b} \\).
+Vậy \\( \\sqrt{${a2}} + \\sqrt{${b2}} = ${a} + ${b} = ${a+b} \\).`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b7_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            }
+        }
+        return q;
+    },
+    b7_d2: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const type = Math.floor(Math.random() * 3);
+            if (type === 0) {
+                // Điều kiện xác định ax + b >= 0
+                const a = Math.floor(Math.random()*4)+2;
+                const b = Math.floor(Math.random()*10)+1;
+                const sign = Math.random() > 0.5 ? 1 : -1;
+                const a_signed = a * sign;
+                
+                const text = `Biểu thức \\( \\sqrt{${a_signed}x + ${b}} \\) xác định khi:`;
+                
+                let ans, wrong1, wrong2, wrong3, exp;
+                if (a_signed > 0) {
+                    ans = `\\( x \\geq \\frac{-${b}}{${a}} \\)`;
+                    wrong1 = `\\( x \\leq \\frac{-${b}}{${a}} \\)`;
+                    wrong2 = `\\( x \\geq \\frac{${b}}{${a}} \\)`;
+                    wrong3 = `\\( x \\leq \\frac{${b}}{${a}} \\)`;
+                    exp = `Biểu thức chứa căn xác định khi biểu thức dưới dấu căn không âm:
+\\( ${a_signed}x + ${b} \\geq 0 \\Leftrightarrow ${a_signed}x \\geq -${b} \\Leftrightarrow x \\geq \\frac{-${b}}{${a}} \\).`;
+                } else {
+                    const a_abs = Math.abs(a_signed);
+                    ans = `\\( x \\leq \\frac{${b}}{${a_abs}} \\)`;
+                    wrong1 = `\\( x \\geq \\frac{${b}}{${a_abs}} \\)`;
+                    wrong2 = `\\( x \\leq \\frac{-${b}}{${a_abs}} \\)`;
+                    wrong3 = `\\( x \\geq \\frac{-${b}}{${a_abs}} \\)`;
+                    exp = `Biểu thức chứa căn xác định khi biểu thức dưới dấu căn không âm:
+\\( ${a_signed}x + ${b} \\geq 0 \\Leftrightarrow ${a_signed}x \\geq -${b} \\).
+Chia hai vế cho số âm ${a_signed}, ta đổi chiều bất phương trình:
+\\( x \\leq \\frac{-${b}}{${a_signed}} \\Leftrightarrow x \\leq \\frac{${b}}{${a_abs}} \\).`;
+                }
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b7_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else if (type === 1) {
+                // Điều kiện xác định ở mẫu: 1 / sqrt(ax + b) => ax + b > 0
+                const a = Math.floor(Math.random()*3)+2;
+                const b = Math.floor(Math.random()*10)+1;
+                
+                const text = `Điều kiện xác định của biểu thức \\( \\frac{1}{\\sqrt{${a}x - ${b}}} \\) là:`;
+                
+                const ans = `\\( x > \\frac{${b}}{${a}} \\)`;
+                const wrong1 = `\\( x \\geq \\frac{${b}}{${a}} \\)`;
+                const wrong2 = `\\( x < \\frac{${b}}{${a}} \\)`;
+                const wrong3 = `\\( x \\neq \\frac{${b}}{${a}} \\)`;
+                
+                const exp = `Biểu thức \\( \\frac{1}{\\sqrt{A}} \\) xác định khi biểu thức dưới dấu căn dương (vì nằm dưới mẫu số):
+\\( ${a}x - ${b} > 0 \\Leftrightarrow ${a}x > ${b} \\Leftrightarrow x > \\frac{${b}}{${a}} \\).`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b7_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else {
+                // Tính giá trị biểu thức
+                const a = Math.floor(Math.random()*5)+1;
+                const b = Math.floor(Math.random()*5)+1;
+                const x = Math.floor(Math.random()*3)+1;
+                // sqrt(a x^2 + b)
+                const inner = a*x*x + b;
+                // make inner a perfect square by picking b carefully
+                const sq = Math.floor(Math.sqrt(inner)) + 1;
+                const b_adj = sq*sq - a*x*x;
+                const final_b = Math.abs(b_adj) > 0 ? b_adj : 1;
+                const final_sq = Math.sqrt(a*x*x + final_b);
+                
+                // If it's still not integer, fallback
+                if (!Number.isInteger(final_sq)) {
+                    // fallback to trivial
+                    const base = Math.floor(Math.random()*5)+2;
+                    const val = base*base;
+                    const x_val = 2;
+                    const a_val = val / 2; // could be float
+                    const text = `Tính giá trị của biểu thức \\( \\sqrt{${val-1}x + 1} \\) tại \\( x = 1 \\)`;
+                    const ans = `${base}`;
+                    const opts = this.shuffle([ans, `${base+1}`, `${base-1}`, `${base*2}`]);
+                    const exp = `Thay \\( x = 1 \\) vào biểu thức: \\( \\sqrt{${val-1}(1) + 1} = \\sqrt{${val}} = ${base} \\).`;
+                    q.push({ id: 'b7_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+                } else {
+                    const text = `Tính giá trị của biểu thức \\( \\sqrt{${a}x^2 + ${final_b}} \\) tại \\( x = ${x} \\)`;
+                    const ans = `${final_sq}`;
+                    const wrong1 = `${final_sq + 1}`;
+                    const wrong2 = `${final_sq - 1}`;
+                    const wrong3 = `${final_sq * 2}`;
+                    const exp = `Thay \\( x = ${x} \\) vào biểu thức, ta được:
+\\( \\sqrt{${a}(${x})^2 + ${final_b}} = \\sqrt{${a*x*x} + ${final_b}} = \\sqrt{${final_sq*final_sq}} = ${final_sq} \\).`;
+                    const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                    q.push({ id: 'b7_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+                }
+            }
+        }
+        return q;
+    },
+    b7_d3: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const type = Math.floor(Math.random() * 2);
+            if (type === 0) {
+                // Rút gọn sqrt((a - sqrt(b))^2)
+                const a = Math.floor(Math.random()*3)+2; // 2, 3, 4
+                const b = Math.floor(Math.random()*10)+5; // 5 to 14
+                
+                // Compare a and sqrt(b)
+                const is_a_bigger = a*a > b;
+                const text = `Rút gọn biểu thức \\( \\sqrt{(${a} - \\sqrt{${b}})^2} \\)`;
+                
+                let ans, wrong1, wrong2, wrong3, exp;
+                if (is_a_bigger) {
+                    ans = `\\( ${a} - \\sqrt{${b}} \\)`;
+                    wrong1 = `\\( \\sqrt{${b}} - ${a} \\)`;
+                    wrong2 = `\\( ${a} + \\sqrt{${b}} \\)`;
+                    wrong3 = `\\( ${a*a} - ${b} \\)`;
+                    exp = `Áp dụng hằng đẳng thức \\( \\sqrt{A^2} = |A| \\):
+\\( \\sqrt{(${a} - \\sqrt{${b}})^2} = |${a} - \\sqrt{${b}}| \\).
+Vì \\( ${a} = \\sqrt{${a*a}} > \\sqrt{${b}} \\) nên \\( ${a} - \\sqrt{${b}} > 0 \\).
+Do đó \\( |${a} - \\sqrt{${b}}| = ${a} - \\sqrt{${b}} \\).`;
+                } else {
+                    ans = `\\( \\sqrt{${b}} - ${a} \\)`;
+                    wrong1 = `\\( ${a} - \\sqrt{${b}} \\)`;
+                    wrong2 = `\\( ${a} + \\sqrt{${b}} \\)`;
+                    wrong3 = `\\( ${b} - ${a*a} \\)`;
+                    exp = `Áp dụng hằng đẳng thức \\( \\sqrt{A^2} = |A| \\):
+\\( \\sqrt{(${a} - \\sqrt{${b}})^2} = |${a} - \\sqrt{${b}}| \\).
+Vì \\( ${a} = \\sqrt{${a*a}} < \\sqrt{${b}} \\) nên \\( ${a} - \\sqrt{${b}} < 0 \\).
+Do đó \\( |${a} - \\sqrt{${b}}| = \\sqrt{${b}} - ${a} \\).`;
+                }
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b7_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else {
+                // sqrt((sqrt(a) - sqrt(b))^2) + sqrt(a)
+                const a = Math.floor(Math.random()*5)+2; 
+                let b = Math.floor(Math.random()*5)+2;
+                if (a===b) b++;
+                
+                const is_a_bigger = a > b;
+                const text = `Rút gọn biểu thức \\( \\sqrt{(\\sqrt{${a}} - \\sqrt{${b}})^2} + \\sqrt{${b}} \\)`;
+                
+                let ans, wrong1, wrong2, wrong3, exp;
+                if (is_a_bigger) { // sqrt(a) - sqrt(b) > 0
+                    ans = `\\( \\sqrt{${a}} \\)`;
+                    wrong1 = `\\( \\sqrt{${a}} + 2\\sqrt{${b}} \\)`;
+                    wrong2 = `\\( -\\sqrt{${a}} \\)`;
+                    wrong3 = `\\( \\sqrt{${a}} - 2\\sqrt{${b}} \\)`;
+                    exp = `Ta có: \\( \\sqrt{(\\sqrt{${a}} - \\sqrt{${b}})^2} = |\\sqrt{${a}} - \\sqrt{${b}}| \\).
+Vì \\( ${a} > ${b} \\) nên \\( \\sqrt{${a}} > \\sqrt{${b}} \\), do đó \\( |\\sqrt{${a}} - \\sqrt{${b}}| = \\sqrt{${a}} - \\sqrt{${b}} \\).
+Biểu thức ban đầu trở thành: \\( (\\sqrt{${a}} - \\sqrt{${b}}) + \\sqrt{${b}} = \\sqrt{${a}} \\).`;
+                } else { // sqrt(a) - sqrt(b) < 0
+                    ans = `\\( 2\\sqrt{${b}} - \\sqrt{${a}} \\)`;
+                    wrong1 = `\\( \\sqrt{${a}} \\)`;
+                    wrong2 = `\\( -\\sqrt{${a}} \\)`;
+                    wrong3 = `\\( 2\\sqrt{${b}} + \\sqrt{${a}} \\)`;
+                    exp = `Ta có: \\( \\sqrt{(\\sqrt{${a}} - \\sqrt{${b}})^2} = |\\sqrt{${a}} - \\sqrt{${b}}| \\).
+Vì \\( ${a} < ${b} \\) nên \\( \\sqrt{${a}} < \\sqrt{${b}} \\), do đó \\( |\\sqrt{${a}} - \\sqrt{${b}}| = \\sqrt{${b}} - \\sqrt{${a}} \\).
+Biểu thức ban đầu trở thành: \\( (\\sqrt{${b}} - \\sqrt{${a}}) + \\sqrt{${b}} = 2\\sqrt{${b}} - \\sqrt{${a}} \\).`;
+                }
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b7_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            }
+        }
+        return q;
+    },
+    b7_d4: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const type = Math.floor(Math.random() * 2);
+            if (type === 0) {
+                // Rút gọn sqrt(a^2 x^2) với điều kiện x
+                const a = Math.floor(Math.random()*4)+2;
+                const a2 = a*a;
+                const isLess = Math.random() > 0.5;
+                const text = `Rút gọn biểu thức \\( \\sqrt{${a2}x^2} \\) với \\( x ${isLess ? '<' : '\\geq'} 0 \\):`;
+                
+                let ans, wrong1, wrong2, wrong3, exp;
+                if (isLess) {
+                    ans = `\\( -${a}x \\)`;
+                    wrong1 = `\\( ${a}x \\)`;
+                    wrong2 = `\\( ${a2}x \\)`;
+                    wrong3 = `\\( -${a2}x \\)`;
+                    exp = `Ta có \\( \\sqrt{${a2}x^2} = \\sqrt{(${a}x)^2} = |${a}x| \\).
+Vì \\( x < 0 \\) nên \\( ${a}x < 0 \\), do đó \\( |${a}x| = -${a}x \\).`;
+                } else {
+                    ans = `\\( ${a}x \\)`;
+                    wrong1 = `\\( -${a}x \\)`;
+                    wrong2 = `\\( ${a2}x \\)`;
+                    wrong3 = `\\( -${a2}x \\)`;
+                    exp = `Ta có \\( \\sqrt{${a2}x^2} = \\sqrt{(${a}x)^2} = |${a}x| \\).
+Vì \\( x \\geq 0 \\) nên \\( ${a}x \\geq 0 \\), do đó \\( |${a}x| = ${a}x \\).`;
+                }
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b7_d4_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else {
+                // Rút gọn phân thức chứa căn
+                const b = Math.floor(Math.random()*4)+1;
+                const b2 = b*b;
+                const b2_2 = 2*b;
+                const isLess = Math.random() > 0.5;
+                
+                const text = `Rút gọn biểu thức \\( \\frac{\\sqrt{x^2 - ${b2_2}x + ${b2}}}{x - ${b}} \\) với \\( x ${isLess ? '<' : '>'} ${b} \\):`;
+                
+                let ans, wrong1, wrong2, wrong3, exp;
+                if (isLess) {
+                    ans = `-1`;
+                    wrong1 = `1`;
+                    wrong2 = `\\( x - ${b} \\)`;
+                    wrong3 = `\\( -(x - ${b}) \\)`;
+                    exp = `Tử số: \\( \\sqrt{x^2 - ${b2_2}x + ${b2}} = \\sqrt{(x - ${b})^2} = |x - ${b}| \\).
+Vì \\( x < ${b} \\) nên \\( x - ${b} < 0 \\), do đó \\( |x - ${b}| = -(x - ${b}) \\).
+Biểu thức trở thành: \\( \\frac{-(x - ${b})}{x - ${b}} = -1 \\).`;
+                } else {
+                    ans = `1`;
+                    wrong1 = `-1`;
+                    wrong2 = `\\( x - ${b} \\)`;
+                    wrong3 = `\\( -(x - ${b}) \\)`;
+                    exp = `Tử số: \\( \\sqrt{x^2 - ${b2_2}x + ${b2}} = \\sqrt{(x - ${b})^2} = |x - ${b}| \\).
+Vì \\( x > ${b} \\) nên \\( x - ${b} > 0 \\), do đó \\( |x - ${b}| = x - ${b} \\).
+Biểu thức trở thành: \\( \\frac{x - ${b}}{x - ${b}} = 1 \\).`;
+                }
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b7_d4_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            }
+        }
+        return q;
+    },
+    b7_d5: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const type = Math.floor(Math.random() * 2);
+            if (type === 0) {
+                // Giải phương trình sqrt(x) = a
+                const a = Math.floor(Math.random()*8)+2;
+                const hasNegative = Math.random() > 0.7; // sometimes show sqrt(x) = -a
+                
+                if (hasNegative) {
+                    const text = `Giải phương trình: \\( \\sqrt{x} = -${a} \\)`;
+                    const ans = `Vô nghiệm`;
+                    const wrong1 = `\\( x = ${a*a} \\)`;
+                    const wrong2 = `\\( x = -${a*a} \\)`;
+                    const wrong3 = `\\( x = ${a} \\)`;
+                    const exp = `Vì \\( \\sqrt{x} \\geq 0 \\) với mọi \\( x \\geq 0 \\), nên phương trình \\( \\sqrt{x} = -${a} \\) vô nghiệm (số âm không thể là kết quả của căn bậc hai số học).`;
+                    const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                    q.push({ id: 'b7_d5_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+                } else {
+                    const text = `Nghiệm của phương trình \\( \\sqrt{x} = ${a} \\) là:`;
+                    const ans = `\\( x = ${a*a} \\)`;
+                    const wrong1 = `\\( x = ${a} \\)`;
+                    const wrong2 = `\\( x = \\pm ${a*a} \\)`;
+                    const wrong3 = `\\( x = ${a*a*a} \\)`;
+                    const exp = `Điều kiện: \\( x \\geq 0 \\).
+Bình phương hai vế ta được: \\( (\\sqrt{x})^2 = ${a}^2 \\Leftrightarrow x = ${a*a} \\) (thỏa mãn).`;
+                    const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                    q.push({ id: 'b7_d5_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+                }
+            } else {
+                // So sánh a và sqrt(b)
+                const a = Math.floor(Math.random()*5)+2;
+                const b = a*a + (Math.random() > 0.5 ? 1 : -1) * (Math.floor(Math.random()*3)+1);
+                
+                const text = `Không sử dụng máy tính, hãy chọn khẳng định đúng khi so sánh ${a} và \\( \\sqrt{${b}} \\):`;
+                let ans, wrong1, wrong2, wrong3, exp;
+                
+                if (a*a > b) {
+                    ans = `\\( ${a} > \\sqrt{${b}} \\)`;
+                    wrong1 = `\\( ${a} < \\sqrt{${b}} \\)`;
+                    wrong2 = `\\( ${a} = \\sqrt{${b}} \\)`;
+                    wrong3 = `Không thể so sánh`;
+                    exp = `Ta có \\( ${a} = \\sqrt{${a*a}} \\).
+Vì \\( ${a*a} > ${b} \\) nên \\( \\sqrt{${a*a}} > \\sqrt{${b}} \\). Vậy \\( ${a} > \\sqrt{${b}} \\).`;
+                } else {
+                    ans = `\\( ${a} < \\sqrt{${b}} \\)`;
+                    wrong1 = `\\( ${a} > \\sqrt{${b}} \\)`;
+                    wrong2 = `\\( ${a} = \\sqrt{${b}} \\)`;
+                    wrong3 = `Không thể so sánh`;
+                    exp = `Ta có \\( ${a} = \\sqrt{${a*a}} \\).
+Vì \\( ${a*a} < ${b} \\) nên \\( \\sqrt{${a*a}} < \\sqrt{${b}} \\). Vậy \\( ${a} < \\sqrt{${b}} \\).`;
+                }
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b7_d5_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            }
+        }
+        return q;
+    },
+    b7_d6: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const type = Math.floor(Math.random() * 2);
+            if (type === 0) {
+                // Rơi tự do s = 5t^2
+                const t = Math.floor(Math.random()*5)+2; // 2 to 6
+                const s = 5 * t * t;
+                const text = `Quãng đường \\( s \\) (tính bằng mét) của một vật rơi tự do được cho bởi công thức \\( s = 5t^2 \\), trong đó \\( t \\) là thời gian rơi (tính bằng giây). Hỏi sau bao nhiêu giây thì vật chạm đất nếu được thả rơi từ độ cao ${s} mét?`;
+                const ans = `${t} giây`;
+                const wrong1 = `${t+1} giây`;
+                const wrong2 = `${t-1} giây`;
+                const wrong3 = `${t*t} giây`;
+                const exp = `Thay \\( s = ${s} \\) vào công thức \\( s = 5t^2 \\), ta có:
+\\( 5t^2 = ${s} \\Leftrightarrow t^2 = ${s/5} \\).
+Vì thời gian \\( t > 0 \\) nên \\( t = \\sqrt{${s/5}} = ${t} \\) (giây).`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b7_d6_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else {
+                // Hình vuông
+                const base = Math.floor(Math.random()*10)+5; // 5 to 14
+                const area = base * base;
+                const text = `Một hình vuông có diện tích bằng ${area} \\( m^2 \\). Cạnh của hình vuông đó là bao nhiêu?`;
+                const ans = `${base} m`;
+                const wrong1 = `${base*2} m`;
+                const wrong2 = `${base*base} m`;
+                const wrong3 = `\\( \\pm ${base} \\) m`;
+                const exp = `Gọi độ dài cạnh hình vuông là \\( a \\) (m) (\\( a > 0 \\)).
+Diện tích hình vuông là \\( a^2 = ${area} \\).
+Do \\( a > 0 \\) nên \\( a = \\sqrt{${area}} = ${base} \\) (m).
+Lưu ý: Độ dài cạnh không thể là số âm nên loại trường hợp \\( -${base} \\).`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b7_d6_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            }
+        }
+        return q;
+    },
+    b7_d7: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const type = Math.floor(Math.random() * 2);
+            if (type === 0) {
+                // GTNN của sqrt(x - a) + b
+                const a = Math.floor(Math.random()*5)+1;
+                const b = Math.floor(Math.random()*10)+2;
+                const text = `Giá trị nhỏ nhất của biểu thức \\( A = \\sqrt{x - ${a}} + ${b} \\) là:`;
+                const ans = `${b}`;
+                const wrong1 = `${b + a}`;
+                const wrong2 = `${b - a}`;
+                const wrong3 = `Không có giá trị nhỏ nhất`;
+                const exp = `Điều kiện xác định: \\( x \\geq ${a} \\).
+Với mọi \\( x \\geq ${a} \\), ta luôn có \\( \\sqrt{x - ${a}} \\geq 0 \\).
+Do đó, \\( A = \\sqrt{x - ${a}} + ${b} \\geq 0 + ${b} = ${b} \\).
+Dấu "=" xảy ra khi \\( x - ${a} = 0 \\Leftrightarrow x = ${a} \\).
+Vậy giá trị nhỏ nhất của \\( A \\) là ${b}.`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b7_d7_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else {
+                // GTLN của b - sqrt(x + a)
+                const a = Math.floor(Math.random()*5)+1;
+                const b = Math.floor(Math.random()*10)+5;
+                const text = `Giá trị lớn nhất của biểu thức \\( B = ${b} - \\sqrt{x + ${a}} \\) là:`;
+                const ans = `${b}`;
+                const wrong1 = `${b - a}`;
+                const wrong2 = `${b + a}`;
+                const wrong3 = `Không có giá trị lớn nhất`;
+                const exp = `Điều kiện xác định: \\( x \\geq -${a} \\).
+Với mọi \\( x \\geq -${a} \\), ta luôn có \\( \\sqrt{x + ${a}} \\geq 0 \\).
+Do đó, \\( -\\sqrt{x + ${a}} \\leq 0 \\).
+Cộng cả hai vế với ${b}, ta được \\( B = ${b} - \\sqrt{x + ${a}} \\leq ${b} - 0 = ${b} \\).
+Dấu "=" xảy ra khi \\( x + ${a} = 0 \\Leftrightarrow x = -${a} \\).
+Vậy giá trị lớn nhất của \\( B \\) là ${b}.`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b7_d7_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            }
+        }
+        return q;
     }
 };
 window.MathGenerators = Generators;
