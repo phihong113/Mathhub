@@ -1184,40 +1184,115 @@ Nghiệm còn lại là \\( x = ${x2} \\).`;
         for(let i=0; i<count; i++) {
             const type = Math.floor(Math.random() * 2);
             if (type === 0) {
-                // A(x) = B(x) => ax+b = cx+d
-                const a = Math.floor(Math.random()*5)+2;
-                let c = Math.floor(Math.random()*5)+1;
-                if(a===c) c++;
-                const b = Math.floor(Math.random()*10)+1;
-                const d = Math.floor(Math.random()*10)+1;
+                // A = a/(bx+c), B = d/(e-bx) where e = -f, C = g / ((bx+c)(bx+f))
+                const b = Math.floor(Math.random()*3)+2;
+                let c = Math.floor(Math.random()*7)-3; if(c===0) c=1;
+                let f = Math.floor(Math.random()*7)-3; if(f===0) f=-1;
+                if(c===f) { f++; if(f===0) f=1; }
+                const a = Math.floor(Math.random()*4)+1;
+                let d_val = Math.floor(Math.random()*4)+1;
+                if(a===d_val) d_val++;
                 
-                const text = `Tìm giá trị của \\( x \\) để giá trị của hai biểu thức \\( A = ${a}x + ${b} \\) và \\( B = ${c}x + ${d} \\) bằng nhau.`;
-                const root = this.formatFraction(d-b, a-c);
-                const ans = `\\( x = ${root} \\)`;
-                const wrong1 = `\\( x = ${this.formatFraction(b-d, a-c)} \\)`;
-                const wrong2 = `\\( x = ${this.formatFraction(d+b, a-c)} \\)`;
-                const wrong3 = `\\( x = ${this.formatFraction(d-b, a+c)} \\)`;
+                let x_ans;
+                let isRejected = false;
+                if (Math.random() < 0.3) {
+                    // Force a rejected root (e.g. x = -c/b or x = -f/b)
+                    isRejected = true;
+                    x_ans = Math.random() < 0.5 ? -c/b : -f/b;
+                } else {
+                    // Pick a nice integer root
+                    x_ans = Math.floor(Math.random()*5)-2;
+                    if(x_ans === -c/b || x_ans === -f/b) x_ans++; // Avoid accidental rejection
+                }
                 
-                const exp = `Cho \\( A = B \\Leftrightarrow ${a}x + ${b} = ${c}x + ${d} \\)
-\\( \\Leftrightarrow ${a}x - ${c}x = ${d} - ${b} \\)
-\\( \\Leftrightarrow ${a-c}x = ${d-b} \\Leftrightarrow x = ${root} \\).`;
+                const g = b*(a-d_val)*x_ans + a*f - d_val*c;
+                // If g is not integer (happens if x_ans is fraction and b doesn't cancel), we re-roll or just use Math.round.
+                // Wait, if x_ans = -c/b, then g = b(a-d)(-c/b) + af - dc = -c(a-d) + af - dc = -ac + dc + af - dc = a(f-c).
+                // So g is always an integer!
+                
+                const c_str = c > 0 ? `+ ${c}` : `- ${Math.abs(c)}`;
+                const f_str = f > 0 ? `+ ${f}` : `- ${Math.abs(f)}`;
+                const e_str = -f > 0 ? `${-f}` : `-${f}`; // e = -f
+                
+                const text = `Cho ba biểu thức \\( A = \\frac{${a}}{${b}x ${c_str}} \\); \\( B = \\frac{${d_val}}{${-f > 0 ? -f : '-'+Math.abs(f)} - ${b}x} \\); \\( C = \\frac{${g}}{(${b}x ${c_str})(${b}x ${f_str})} \\). Tìm các giá trị của \\( x \\) để tổng \\( A + B \\) có giá trị bằng giá trị của biểu thức \\( C \\).`;
+                
+                const root_str = Number.isInteger(x_ans) ? x_ans.toString() : this.formatFraction(Math.round(x_ans*b), b);
+                const dk1 = this.formatFraction(-c, b);
+                const dk2 = this.formatFraction(-f, b);
+                
+                const ans = isRejected ? `Phương trình vô nghiệm` : `\\( x = ${root_str} \\)`;
+                const wrong1 = isRejected ? `\\( x = ${root_str} \\)` : `Phương trình vô nghiệm`;
+                const wrong2 = `\\( x = ${this.formatFraction(c, b)} \\)`;
+                const wrong3 = `\\( x = ${this.formatFraction(f, b)} \\)`;
+                
+                const exp = `Ta có phương trình: \\( \\frac{${a}}{${b}x ${c_str}} + \\frac{${d_val}}{${-f} - ${b}x} = \\frac{${g}}{(${b}x ${c_str})(${b}x ${f_str})} \\).
+ĐKXĐ: \\( x \\neq ${dk1} \\) và \\( x \\neq ${dk2} \\).
+Biến đổi \\( B = \\frac{${d_val}}{-(${b}x ${f_str})} = \\frac{-${d_val}}{${b}x ${f_str}} \\).
+Quy đồng và khử mẫu:
+\\( ${a}(${b}x ${f_str}) - ${d_val}(${b}x ${c_str}) = ${g} \\)
+\\( \\Leftrightarrow ${a*b}x + ${a*f} - ${d_val*b}x - ${d_val*c} = ${g} \\)
+\\( \\Leftrightarrow ${b*(a-d_val)}x = ${g - a*f + d_val*c} \\Leftrightarrow x = ${root_str} \\).
+${isRejected ? `Nhưng giá trị này vi phạm ĐKXĐ nên bị loại. Vậy phương trình vô nghiệm.` : `Giá trị này thỏa mãn ĐKXĐ. Vậy nghiệm là \\( x = ${root_str} \\).`}`;
+                
                 const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
                 q.push({ id: 'b4_d5_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
             } else {
-                // A(x) * B(x) = 0
-                const a = Math.floor(Math.random()*3)+1;
+                // a/(x+b) + c/(x+d) = e
+                // e(x+b)(x+d) = a(x+d) + c(x+b)
+                // ex^2 + e(b+d)x + ebd = (a+c)x + ad+cb
+                // ex^2 + (eb+ed-a-c)x + (ebd-ad-cb) = 0
+                // Let's generate roots r1, r2 and e.
+                const r1 = Math.floor(Math.random()*5)-2; // -2 to 2
+                let r2 = Math.floor(Math.random()*5)-2; // -2 to 2
+                if(r1===r2) r2++;
+                const e = Math.floor(Math.random()*2)+1; // 1 or 2
+                
+                // We need to pick b, d such that b != -r1, b != -r2 etc.
                 const b = Math.floor(Math.random()*5)+1;
-                const a_str = a===1?'':a;
+                let d = Math.floor(Math.random()*5)+1;
+                if(b===d) d++;
                 
-                const text = `Tìm \\( x \\) để biểu thức \\( P = x(${a_str}x - ${b}) \\) có giá trị bằng 0.`;
-                const root = this.formatFraction(b, a);
-                const ans = `\\( x = 0 \\) hoặc \\( x = ${root} \\)`;
-                const wrong1 = `\\( x = ${root} \\)`;
-                const wrong2 = `\\( x = 0 \\) hoặc \\( x = ${this.formatFraction(-b, a)} \\)`;
-                const wrong3 = `\\( x = 0 \\)`;
+                // ex^2 - e(r1+r2)x + e(r1*r2) = 0
+                // Match coefficients:
+                // eb + ed - a - c = -e(r1+r2) => a+c = e(b+d+r1+r2)
+                // ebd - ad - cb = e(r1*r2)
+                // Let S = e(b+d+r1+r2). Then c = S - a.
+                // ebd - ad - (S-a)b = e*r1*r2
+                // ebd - ad - Sb + ab = e*r1*r2
+                // a(b-d) = e*r1*r2 - ebd + Sb
+                const S = e*(b + d + r1 + r2);
+                const a_num = e*r1*r2 - e*b*d + S*b;
+                const a_den = b - d;
                 
-                const exp = `Ta có \\( P = 0 \\Leftrightarrow x(${a_str}x - ${b}) = 0 \\)
-\\( \\Leftrightarrow \\begin{bmatrix} x = 0 \\\\ ${a_str}x - ${b} = 0 \\end{bmatrix} \\Leftrightarrow \\begin{bmatrix} x = 0 \\\\ x = ${root} \\end{bmatrix} \\).`;
+                if (a_num % a_den !== 0) {
+                    // Try again if not integer
+                    i--;
+                    continue;
+                }
+                const a_val = a_num / a_den;
+                const c_val = S - a_val;
+                
+                if (a_val === 0 || c_val === 0 || -b === r1 || -b === r2 || -d === r1 || -d === r2) {
+                    i--;
+                    continue;
+                }
+                
+                const b_str = b > 0 ? `+ ${b}` : `- ${Math.abs(b)}`;
+                const d_str = d > 0 ? `+ ${d}` : `- ${Math.abs(d)}`;
+                
+                const text = `Tìm \\( x \\) thỏa mãn phương trình: \\( \\frac{${a_val}}{x ${b_str}} + \\frac{${c_val}}{x ${d_str}} = ${e} \\).`;
+                const ans = `\\( x = ${r1} \\) hoặc \\( x = ${r2} \\)`;
+                const wrong1 = `\\( x = ${-r1} \\) hoặc \\( x = ${-r2} \\)`;
+                const wrong2 = `\\( x = ${r1+1} \\) hoặc \\( x = ${r2-1} \\)`;
+                const wrong3 = `Phương trình vô nghiệm`;
+                
+                const exp = `ĐKXĐ: \\( x \\neq ${-b} \\) và \\( x \\neq ${-d} \\).
+Quy đồng và khử mẫu:
+\\( ${a_val}(x ${d_str}) + ${c_val}(x ${b_str}) = ${e}(x ${b_str})(x ${d_str}) \\)
+\\( \\Leftrightarrow ${a_val}x + ${a_val*d} + ${c_val}x + ${c_val*b} = ${e}(x^2 + ${b+d}x + ${b*d}) \\)
+\\( \\Leftrightarrow ${e}x^2 - ${e*(r1+r2)}x + ${e*r1*r2} = 0 \\).
+Giải phương trình bậc hai ta được \\( x = ${r1} \\) và \\( x = ${r2} \\) (đều thỏa mãn ĐKXĐ).`;
+                
                 const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
                 q.push({ id: 'b4_d5_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
             }
