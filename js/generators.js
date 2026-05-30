@@ -1298,6 +1298,265 @@ Giải phương trình bậc hai ta được \\( x = ${r1} \\) và \\( x = ${r2}
             }
         }
         return q;
+    },
+    b5_d1: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const type = Math.floor(Math.random() * 3);
+            if (type === 0) {
+                // Sentence to inequality
+                const subjects = [
+                    { text: "không lớn hơn", op: "\\leq" },
+                    { text: "không vượt quá", op: "\\leq" },
+                    { text: "tối đa là", op: "\\leq" },
+                    { text: "ít nhất là", op: "\\geq" },
+                    { text: "tối thiểu là", op: "\\geq" },
+                    { text: "không nhỏ hơn", op: "\\geq" },
+                    { text: "nhỏ hơn", op: "<" },
+                    { text: "lớn hơn", op: ">" }
+                ];
+                const choice = subjects[Math.floor(Math.random() * subjects.length)];
+                const num = Math.floor(Math.random() * 20) + 1;
+                const varName = Math.random() > 0.5 ? 'x' : 'y';
+                
+                const text = `Phát biểu "Số \\( ${varName} \\) ${choice.text} ${num}" được viết dưới dạng bất đẳng thức là:`;
+                const ans = `\\( ${varName} ${choice.op} ${num} \\)`;
+                
+                const wrongOps = ["\\leq", "\\geq", "<", ">"].filter(o => o !== choice.op);
+                const wrong1 = `\\( ${varName} ${wrongOps[0]} ${num} \\)`;
+                const wrong2 = `\\( ${varName} ${wrongOps[1]} ${num} \\)`;
+                const wrong3 = `\\( ${varName} ${wrongOps[2]} ${num} \\)`;
+                
+                const exp = `Cụm từ "${choice.text}" tương đương với dấu bất đẳng thức "\\( ${choice.op} \\)".\nVậy bất đẳng thức đúng là \\( ${varName} ${choice.op} ${num} \\).`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b5_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else if (type === 1) {
+                // Property of inequality (+ c or * c)
+                const c = Math.floor(Math.random() * 10) + 2;
+                const isNegative = Math.random() > 0.5;
+                const multiplier = isNegative ? -c : c;
+                
+                const text = `Cho bất đẳng thức \\( a < b \\). Bất đẳng thức nào sau đây luôn đúng?`;
+                let ans, wrong1, wrong2, wrong3, exp;
+                
+                if (isNegative) {
+                    ans = `\\( ${multiplier}a > ${multiplier}b \\)`;
+                    wrong1 = `\\( ${multiplier}a < ${multiplier}b \\)`;
+                    wrong2 = `\\( a ${multiplier} < b ${multiplier} \\)`; // This is a - c < b - c which is true, wait. 
+                    wrong2 = `\\( a - ${c} > b - ${c} \\)`; // false
+                    wrong3 = `\\( \\frac{a}{${c}} > \\frac{b}{${c}} \\)`; // false
+                    exp = `Khi nhân cả hai vế của một bất đẳng thức với cùng một số âm (số ${multiplier} < 0), ta phải đổi chiều bất đẳng thức. Do đó từ \\( a < b \\) suy ra \\( ${multiplier}a > ${multiplier}b \\).`;
+                } else {
+                    ans = `\\( ${multiplier}a < ${multiplier}b \\)`;
+                    wrong1 = `\\( ${multiplier}a > ${multiplier}b \\)`;
+                    wrong2 = `\\( a + ${c} > b + ${c} \\)`; // false
+                    wrong3 = `\\( a - ${c} > b - ${c} \\)`; // false
+                    exp = `Khi nhân cả hai vế của một bất đẳng thức với cùng một số dương (số ${multiplier} > 0), chiều của bất đẳng thức được giữ nguyên. Do đó từ \\( a < b \\) suy ra \\( ${multiplier}a < ${multiplier}b \\).`;
+                }
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b5_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else {
+                // Transitive property
+                const text = `Cho ba số thực \\( a, b, c \\). Khẳng định nào sau đây là đúng về tính chất bắc cầu của bất đẳng thức?`;
+                const ans = `Nếu \\( a > b \\) và \\( b > c \\) thì \\( a > c \\)`;
+                const wrong1 = `Nếu \\( a > b \\) và \\( c > b \\) thì \\( a > c \\)`;
+                const wrong2 = `Nếu \\( a < b \\) và \\( b > c \\) thì \\( a < c \\)`;
+                const wrong3 = `Nếu \\( a > b \\) và \\( b > c \\) thì \\( a < c \\)`;
+                const exp = `Tính chất bắc cầu của bất đẳng thức phát biểu rằng: Nếu số thứ nhất lớn hơn số thứ hai, và số thứ hai lớn hơn số thứ ba, thì số thứ nhất lớn hơn số thứ ba. Vậy: Nếu \\( a > b \\) và \\( b > c \\) thì \\( a > c \\).`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b5_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            }
+        }
+        return q;
+    },
+    b5_d2: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const type = Math.floor(Math.random() * 2);
+            if (type === 0) {
+                // Prove true statement
+                const m = Math.floor(Math.random() * 5) + 2;
+                const n = Math.floor(Math.random() * 5) + 2;
+                const text = `Để chứng minh bất đẳng thức \\( x^2 + ${m*m} \\geq ${2*m}x \\) với mọi \\( x \\), ta biến đổi tương đương bất đẳng thức về dạng nào sau đây?`;
+                const ans = `\\( (x - ${m})^2 \\geq 0 \\)`;
+                const wrong1 = `\\( (x + ${m})^2 \\geq 0 \\)`;
+                const wrong2 = `\\( x^2 - ${2*m}x \\geq 0 \\)`;
+                const wrong3 = `\\( x(x - ${2*m}) \\geq -${m*m} \\)`;
+                const exp = `Chuyển vế phương trình, ta được: \\( x^2 - ${2*m}x + ${m*m} \\geq 0 \\).
+Áp dụng hằng đẳng thức bình phương của một hiệu, ta có: \\( (x - ${m})^2 \\geq 0 \\).
+Vì bình phương của mọi số thực luôn không âm, nên bất đẳng thức cuối cùng luôn đúng với mọi \\( x \\).`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b5_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else {
+                // Given a>b, deduce complex inequality
+                const a = Math.floor(Math.random() * 5) + 2;
+                const b = Math.floor(Math.random() * 10) + 1;
+                const text = `Cho \\( x > y \\). Bất đẳng thức nào sau đây chắc chắn đúng?`;
+                const ans = `\\( ${a}x + ${b} > ${a}y + ${b} \\)`;
+                const wrong1 = `\\( -${a}x + ${b} > -${a}y + ${b} \\)`;
+                const wrong2 = `\\( ${a}x - ${b} < ${a}y - ${b} \\)`;
+                const wrong3 = `\\( x - ${a}y > 0 \\)`;
+                const exp = `Nhân cả hai vế của \\( x > y \\) với ${a} (dương) ta được \\( ${a}x > ${a}y \\).
+Tiếp tục cộng thêm ${b} vào hai vế, bất đẳng thức giữ nguyên chiều: \\( ${a}x + ${b} > ${a}y + ${b} \\).`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b5_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            }
+        }
+        return q;
+    },
+    b5_d3: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const type = Math.floor(Math.random() * 2);
+            if (type === 0) {
+                // Compare fractions given condition
+                const a = Math.floor(Math.random() * 5) + 2;
+                const b = Math.floor(Math.random() * 5) + 2;
+                const text = `Cho \\( 0 < x < y \\). Hãy so sánh hai biểu thức \\( A = \\frac{${a}}{x} \\) và \\( B = \\frac{${a}}{y} \\).`;
+                const ans = `\\( A > B \\)`;
+                const wrong1 = `\\( A < B \\)`;
+                const wrong2 = `\\( A = B \\)`;
+                const wrong3 = `Không thể so sánh được`;
+                const exp = `Vì \\( x < y \\) và cả hai số đều dương, nên khi lấy nghịch đảo chiều bất đẳng thức sẽ đổi lại: \\( \\frac{1}{x} > \\frac{1}{y} \\).
+Nhân cả hai vế với số dương ${a}, ta được \\( \\frac{${a}}{x} > \\frac{${a}}{y} \\). Vậy \\( A > B \\).`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b5_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else {
+                // Evaluate an expression range
+                const a = Math.floor(Math.random() * 4) + 2;
+                const c = Math.floor(Math.random() * 4) + 2;
+                const b = Math.floor(Math.random() * 10) + 1;
+                const isLess = Math.random() > 0.5;
+                const op1 = isLess ? "<" : ">";
+                
+                const text = `Biết \\( x ${op1} ${c} \\). Hãy so sánh giá trị của biểu thức \\( P = ${a}x - ${b} \\) với số \\( ${a*c - b} \\).`;
+                const ans = `\\( P ${op1} ${a*c - b} \\)`;
+                const wrong1 = `\\( P ${isLess ? '>' : '<'} ${a*c - b} \\)`;
+                const wrong2 = `\\( P = ${a*c - b} \\)`;
+                const wrong3 = `\\( P \\geq ${a*c - b} \\)`;
+                const exp = `Từ giả thiết \\( x ${op1} ${c} \\).
+Nhân cả hai vế với ${a} (dương), ta được: \\( ${a}x ${op1} ${a*c} \\).
+Trừ cả hai vế cho ${b}, ta được: \\( ${a}x - ${b} ${op1} ${a*c} - ${b} \\).
+Hay \\( P ${op1} ${a*c - b} \\).`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b5_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            }
+        }
+        return q;
+    },
+    b5_d4: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const type = Math.floor(Math.random() * 2);
+            if (type === 0) {
+                // Cost problem
+                const a = (Math.floor(Math.random() * 5) + 2) * 10; // 20 to 60 thousand
+                const b = (Math.floor(Math.random() * 5) + 2) * 10;
+                const M = (Math.floor(Math.random() * 5) + 10) * 10; // 100 to 140 thousand
+                
+                const text = `Bạn Nam có ${M} nghìn đồng. Nam muốn mua \\( x \\) cuốn vở (giá ${a} nghìn đồng/cuốn) và \\( y \\) chiếc bút (giá ${b} nghìn đồng/chiếc). Bất đẳng thức nào mô tả giới hạn số tiền Nam có thể tiêu?`;
+                const ans = `\\( ${a}x + ${b}y \\leq ${M} \\)`;
+                const wrong1 = `\\( ${a}x + ${b}y < ${M} \\)`;
+                const wrong2 = `\\( ${a}x + ${b}y \\geq ${M} \\)`;
+                const wrong3 = `\\( ${a}x + ${b}y > ${M} \\)`;
+                
+                const exp = `Tổng số tiền mua \\( x \\) cuốn vở là \\( ${a}x \\) (nghìn đồng).
+Tổng số tiền mua \\( y \\) chiếc bút là \\( ${b}y \\) (nghìn đồng).
+Vì Nam chỉ có tối đa ${M} nghìn đồng, nên tổng số tiền tiêu không được vượt quá số tiền Nam có: \\( ${a}x + ${b}y \\leq ${M} \\).`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b5_d4_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else {
+                // Time/Speed problem
+                const S = (Math.floor(Math.random() * 10) + 5) * 10; // 50 to 140 km
+                const T = Math.floor(Math.random() * 3) + 2; // 2 to 4 hours
+                
+                const text = `Một ô tô dự định đi quãng đường ${S} km trong thời gian không quá ${T} giờ. Gọi \\( v \\) (km/h) là vận tốc trung bình của ô tô. Bất đẳng thức nào sau đây thể hiện đúng điều kiện của vận tốc?`;
+                const v_min = S / T;
+                const ans = `\\( v \\geq ${v_min} \\)`;
+                const wrong1 = `\\( v \\leq ${v_min} \\)`;
+                const wrong2 = `\\( v > ${v_min} \\)`;
+                const wrong3 = `\\( v < ${v_min} \\)`;
+                
+                const exp = `Thời gian đi là \\( t = \\frac{S}{v} = \\frac{${S}}{v} \\) (giờ).
+Yêu cầu thời gian không quá ${T} giờ, tức là \\( \\frac{${S}}{v} \\leq ${T} \\).
+Vì \\( v > 0 \\), nhân chéo ta được \\( ${S} \\leq ${T}v \\Leftrightarrow v \\geq \\frac{${S}}{${T}} = ${v_min} \\) (km/h).`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b5_d4_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            }
+        }
+        return q;
+    },
+    b5_d5: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const type = Math.floor(Math.random() * 3);
+            if (type === 0) {
+                // Min of x^2 - 2ax + b
+                const a = Math.floor(Math.random() * 5) + 1; // 1 to 5
+                const a2 = 2 * a;
+                const c = Math.floor(Math.random() * 10) + 1;
+                const b = a*a + c; // b = a^2 + c
+                
+                const text = `Giá trị nhỏ nhất của biểu thức \\( P = x^2 - ${a2}x + ${b} \\) là:`;
+                const ans = `${c}`;
+                const wrong1 = `${b}`;
+                const wrong2 = `${-c}`;
+                const wrong3 = `0`;
+                
+                const exp = `Ta biến đổi biểu thức về dạng bình phương:
+\\( P = x^2 - 2 \\times x \\times ${a} + ${a*a} + ${c} \\)
+\\( P = (x - ${a})^2 + ${c} \\).
+Vì \\( (x - ${a})^2 \\geq 0 \\) với mọi \\( x \\), nên \\( P \\geq ${c} \\).
+Dấu "=" xảy ra khi \\( x = ${a} \\).
+Vậy giá trị nhỏ nhất của P là ${c}.`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b5_d5_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else if (type === 1) {
+                // Max of -x^2 + 2ax + b
+                const a = Math.floor(Math.random() * 5) + 1; // 1 to 5
+                const a2 = 2 * a;
+                const c = Math.floor(Math.random() * 10) + 1; // max value
+                const b = c - a*a; 
+                const b_str = b >= 0 ? `+ ${b}` : `- ${Math.abs(b)}`;
+                
+                const text = `Tìm giá trị lớn nhất của biểu thức \\( Q = -x^2 + ${a2}x ${b_str} \\).`;
+                const ans = `${c}`;
+                const wrong1 = `${c + 2}`;
+                const wrong2 = `${-c}`;
+                const wrong3 = `${b}`;
+                
+                const exp = `Ta đặt dấu trừ ra ngoài và nhóm lại thành hằng đẳng thức:
+\\( Q = -(x^2 - ${a2}x) ${b_str} \\)
+\\( Q = -(x^2 - 2 \\times x \\times ${a} + ${a*a}) + ${a*a} ${b_str} \\)
+\\( Q = -(x - ${a})^2 + ${c} \\).
+Vì \\( -(x - ${a})^2 \\leq 0 \\) với mọi \\( x \\), nên \\( Q \\leq ${c} \\).
+Dấu "=" xảy ra khi \\( x = ${a} \\).
+Vậy giá trị lớn nhất của Q là ${c}.`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b5_d5_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else {
+                // Min using AM-GM (Cauchy)
+                // x + a^2 / x >= 2a
+                const a = Math.floor(Math.random() * 4) + 2; // 2, 3, 4, 5
+                const a2 = a * a; // 4, 9, 16, 25
+                const text = `Cho số thực \\( x > 0 \\). Giá trị nhỏ nhất của biểu thức \\( M = x + \\frac{${a2}}{x} \\) là:`;
+                const minVal = 2 * a;
+                
+                const ans = `${minVal}`;
+                const wrong1 = `${a2}`;
+                const wrong2 = `${a}`;
+                const wrong3 = `${minVal + 2}`;
+                
+                const exp = `Vì \\( x > 0 \\), nên \\( \\frac{${a2}}{x} > 0 \\).
+Áp dụng bất đẳng thức Cô-si (AM-GM) cho hai số dương \\( x \\) và \\( \\frac{${a2}}{x} \\), ta có:
+\\( x + \\frac{${a2}}{x} \\geq 2\\sqrt{x \\times \\frac{${a2}}{x}} = 2\\sqrt{${a2}} = 2 \\times ${a} = ${minVal} \\).
+Dấu "=" xảy ra khi \\( x = \\frac{${a2}}{x} \\Leftrightarrow x^2 = ${a2} \\Leftrightarrow x = ${a} \\) (vì \\( x > 0 \\)).
+Vậy giá trị nhỏ nhất của M là ${minVal}.`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b5_d5_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            }
+        }
+        return q;
     }
 };
 window.MathGenerators = Generators;
