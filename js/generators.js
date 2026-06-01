@@ -2737,18 +2737,78 @@ Ta có: \\( \\sqrt{\\frac{${a2}}{${b2}}} = \\frac{\\sqrt{${a2}}}{\\sqrt{${b2}}} 
     },
     b8_d4: function(count=5) {
         const q = [];
+        let types = [];
+        for (let i = 0; i < count; i++) {
+            if (i < 2) types.push(1); // ensure at least 2 questions are type 1
+            else types.push(0);
+        }
+        types = this.shuffle(types);
+
         for(let i=0; i<count; i++) {
-            const b = Math.floor(Math.random()*5)+2;
-            const ans = Math.floor(Math.random()*8)+2;
-            const a = ans * ans * b;
-            
-            const text = `Tính giá trị của biểu thức: \\( \\frac{\\sqrt{${a}}}{\\sqrt{${b}}} \\)`;
-            const exp = `Áp dụng quy tắc chia các căn bậc hai: \\( \\frac{\\sqrt{A}}{\\sqrt{B}} = \\sqrt{\\frac{A}{B}} \\).
+            const type = types[i];
+            if (type === 0) {
+                const b = Math.floor(Math.random()*5)+2;
+                const ans = Math.floor(Math.random()*8)+2;
+                const a = ans * ans * b;
+                
+                const text = `Tính giá trị của biểu thức: \\( \\frac{\\sqrt{${a}}}{\\sqrt{${b}}} \\)`;
+                const exp = `Áp dụng quy tắc chia các căn bậc hai: \\( \\frac{\\sqrt{A}}{\\sqrt{B}} = \\sqrt{\\frac{A}{B}} \\).
 Ta có: \\( \\frac{\\sqrt{${a}}}{\\sqrt{${b}}} = \\sqrt{\\frac{${a}}{${b}}} = \\sqrt{${ans*ans}} = ${ans} \\).`;
-            
-            const ansStr = `${ans}`;
-            const opts = this.shuffle([ansStr, `${ans+1}`, `${ans-1}`, `${ans*2}`]);
-            q.push({ id: 'b8_d4_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+                
+                const ansStr = `${ans}`;
+                const opts = this.shuffle([ansStr, `${ans+1}`, `${ans-1}`, `${ans*2}`]);
+                q.push({ id: 'b8_d4_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else {
+                const D_vals = [2, 3, 5];
+                const D = D_vals[Math.floor(Math.random() * D_vals.length)];
+                
+                const s1 = Math.floor(Math.random() * 4) + 2;
+                const s2 = Math.floor(Math.random() * 4) + 2;
+                const s3 = Math.floor(Math.random() * 4) + 1;
+                
+                const A = s1 * s1 * D;
+                const B = s2 * s2 * D;
+                const C = s3 * s3 * D;
+                
+                const c1 = Math.floor(Math.random() * 3) + 1;
+                const c2 = Math.floor(Math.random() * 3) + 1;
+                const c3 = Math.floor(Math.random() * 4) + 1;
+                
+                const c1_str = c1 === 1 ? '' : c1;
+                const c2_str = c2 === 1 ? '' : c2;
+                const c3_str = c3 === 1 ? '' : c3;
+                
+                const sign2 = Math.random() > 0.5 ? '+' : '-';
+                const sign3 = Math.random() > 0.5 ? '+' : '-';
+                
+                const text = `Thực hiện phép tính: \\( (${c1_str}\\sqrt{${A}} ${sign2} ${c2_str}\\sqrt{${B}} ${sign3} ${c3_str}\\sqrt{${C}}) : \\sqrt{${D}} \\)`;
+                
+                const t1_val = c1 * s1;
+                const t2_val = c2 * s2;
+                const t3_val = c3 * s3;
+                
+                let ans_val = t1_val;
+                ans_val += sign2 === '+' ? t2_val : -t2_val;
+                ans_val += sign3 === '+' ? t3_val : -t3_val;
+                
+                const step3_1 = c1 === 1 ? `${s1}` : `${c1} \\cdot ${s1}`;
+                const step3_2 = c2 === 1 ? `${s2}` : `${c2} \\cdot ${s2}`;
+                const step3_3 = c3 === 1 ? `${s3}` : `${c3} \\cdot ${s3}`;
+                
+                const exp = `Áp dụng quy tắc chia các căn bậc hai:
+\\( (${c1_str}\\sqrt{${A}} ${sign2} ${c2_str}\\sqrt{${B}} ${sign3} ${c3_str}\\sqrt{${C}}) : \\sqrt{${D}} \\)
+\\( = ${c1_str}\\sqrt{\\frac{${A}}{${D}}} ${sign2} ${c2_str}\\sqrt{\\frac{${B}}{${D}}} ${sign3} ${c3_str}\\sqrt{\\frac{${C}}{${D}}} \\)
+\\( = ${c1_str}\\sqrt{${s1*s1}} ${sign2} ${c2_str}\\sqrt{${s2*s2}} ${sign3} ${c3_str}\\sqrt{${s3*s3}} \\)
+\\( = ${step3_1} ${sign2} ${step3_2} ${sign3} ${step3_3} \\)
+\\( = ${t1_val} ${sign2} ${t2_val} ${sign3} ${t3_val} = ${ans_val} \\).`;
+
+                const ansStr = `${ans_val}`;
+                const optSet = new Set([ansStr, `${ans_val+2}`, `${ans_val-2}`, `${ans_val+5}`]);
+                while (optSet.size < 4) optSet.add(`${ans_val + Math.floor(Math.random()*10)+1}`);
+                const opts = this.shuffle(Array.from(optSet).slice(0, 4));
+                
+                q.push({ id: 'b8_d4_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            }
         }
         return q;
     },
