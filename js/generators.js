@@ -2960,62 +2960,183 @@ Rút gọn cả tử và mẫu cho phần chung, ta được:
     },
     b8_d6: function(count=5) {
         const q = [];
+        let types = [];
+        for (let i = 0; i < count; i++) {
+            types.push(i % 3);
+        }
+        types = this.shuffle(types);
+
         for(let i=0; i<count; i++) {
-            const text = `Với hai số \\( a > 0 \\) và \\( b > 0 \\), khẳng định nào sau đây là đúng?`;
-            
-            const ans = `\\( \\sqrt{a+b} < \\sqrt{a} + \\sqrt{b} \\)`;
-            const wrong1 = `\\( \\sqrt{a+b} > \\sqrt{a} + \\sqrt{b} \\)`;
-            const wrong2 = `\\( \\sqrt{a+b} = \\sqrt{a} + \\sqrt{b} \\)`;
-            const wrong3 = `\\( \\sqrt{a+b} \\geq \\sqrt{a} + \\sqrt{b} \\)`;
-            
-            const exp = `Ta xét hiệu bình phương hai vế:
+            const type = types[i];
+            if (type === 0) {
+                const A = Math.floor(Math.random()*100)+2000;
+                const text = `So sánh \\( \\sqrt{${A-1}} \\cdot \\sqrt{${A+1}} \\) và \\( ${A} \\), khẳng định nào sau đây là đúng?`;
+                const ans = `\\( \\sqrt{${A-1}} \\cdot \\sqrt{${A+1}} < ${A} \\)`;
+                const wrong1 = `\\( \\sqrt{${A-1}} \\cdot \\sqrt{${A+1}} > ${A} \\)`;
+                const wrong2 = `\\( \\sqrt{${A-1}} \\cdot \\sqrt{${A+1}} = ${A} \\)`;
+                const wrong3 = `Không thể so sánh`;
+                
+                const exp = `Ta có: \\( \\sqrt{${A-1}} \\cdot \\sqrt{${A+1}} = \\sqrt{(${A-1})(${A+1})} = \\sqrt{${A}^2 - 1} \\).
+Vì \\( ${A}^2 - 1 < ${A}^2 \\) nên \\( \\sqrt{${A}^2 - 1} < \\sqrt{${A}^2} = ${A} \\).
+Vậy \\( \\sqrt{${A-1}} \\cdot \\sqrt{${A+1}} < ${A} \\).`;
+                
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b8_d6_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else if (type === 1) {
+                const A = Math.floor(Math.random()*100)+2000;
+                const text = `So sánh \\( \\sqrt{${A-1}} + \\sqrt{${A+1}} \\) và \\( 2\\sqrt{${A}} \\), khẳng định nào sau đây là đúng?`;
+                const ans = `\\( \\sqrt{${A-1}} + \\sqrt{${A+1}} < 2\\sqrt{${A}} \\)`;
+                const wrong1 = `\\( \\sqrt{${A-1}} + \\sqrt{${A+1}} > 2\\sqrt{${A}} \\)`;
+                const wrong2 = `\\( \\sqrt{${A-1}} + \\sqrt{${A+1}} = 2\\sqrt{${A}} \\)`;
+                const wrong3 = `Không thể so sánh`;
+                
+                const exp = `Ta xét bình phương của \\( \\sqrt{${A-1}} + \\sqrt{${A+1}} \\):
+\\( (\\sqrt{${A-1}} + \\sqrt{${A+1}})^2 = ${A-1} + ${A+1} + 2\\sqrt{(${A-1})(${A+1})} = 2 \\cdot ${A} + 2\\sqrt{${A}^2 - 1} \\).
+Bình phương của \\( 2\\sqrt{${A}} \\) là \\( (2\\sqrt{${A}})^2 = 4 \\cdot ${A} = 2 \\cdot ${A} + 2 \\cdot ${A} \\).
+Vì \\( \\sqrt{${A}^2 - 1} < \\sqrt{${A}^2} = ${A} \\) nên \\( 2\\sqrt{${A}^2 - 1} < 2 \\cdot ${A} \\).
+Suy ra \\( (\\sqrt{${A-1}} + \\sqrt{${A+1}})^2 < (2\\sqrt{${A}})^2 \\).
+Do cả hai biểu thức đều dương nên \\( \\sqrt{${A-1}} + \\sqrt{${A+1}} < 2\\sqrt{${A}} \\).`;
+                
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b8_d6_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else {
+                const text = `Với hai số \\( a > 0 \\) và \\( b > 0 \\), khẳng định nào sau đây là đúng?`;
+                const ans = `\\( \\sqrt{a+b} < \\sqrt{a} + \\sqrt{b} \\)`;
+                const wrong1 = `\\( \\sqrt{a+b} > \\sqrt{a} + \\sqrt{b} \\)`;
+                const wrong2 = `\\( \\sqrt{a+b} = \\sqrt{a} + \\sqrt{b} \\)`;
+                const wrong3 = `\\( \\sqrt{a+b} \\geq \\sqrt{a} + \\sqrt{b} \\)`;
+                
+                const exp = `Ta xét hiệu bình phương hai vế:
 \\( (\\sqrt{a} + \\sqrt{b})^2 = a + b + 2\\sqrt{ab} \\).
 Vì \\( a > 0, b > 0 \\) nên \\( 2\\sqrt{ab} > 0 \\).
 Suy ra \\( (\\sqrt{a} + \\sqrt{b})^2 > a + b = (\\sqrt{a+b})^2 \\).
 Do cả hai vế đều dương nên \\( \\sqrt{a} + \\sqrt{b} > \\sqrt{a+b} \\). Khẳng định đúng là \\( \\sqrt{a+b} < \\sqrt{a} + \\sqrt{b} \\).`;
-            
-            const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
-            q.push({ id: 'b8_d6_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+                
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b8_d6_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            }
         }
         return q;
     },
     b8_d7: function(count=5) {
         const q = [];
+        let types = [];
+        for (let i = 0; i < count; i++) {
+            types.push(i % 3);
+        }
+        types = this.shuffle(types);
+
         for(let i=0; i<count; i++) {
-            const type = Math.floor(Math.random() * 2);
+            const type = types[i];
             if (type === 0) {
+                const A = Math.floor(Math.random()*5)+1;
+                const sign = Math.random() > 0.5 ? '+' : '-';
+                const B = Math.floor(Math.random()*4)+2;
+                const coeff = 2 * A;
+                const c2 = A * A;
+                
+                let eq_left = `x^2 ${sign} ${coeff}x + ${c2}`;
+                if (sign === '+') {
+                    eq_left = `x^2 + ${coeff}x + ${c2}`;
+                } else {
+                    eq_left = `x^2 - ${coeff}x + ${c2}`;
+                }
+                
+                const text = `Tập nghiệm của phương trình \\( \\sqrt{${eq_left}} = ${B} \\) là:`;
+                
+                const s1 = sign === '+' ? B - A : B + A;
+                const s2 = sign === '+' ? -B - A : -B + A;
+                const S_arr = [s1, s2].sort((a,b) => a-b);
+                const ans = `\\( S = \\{${S_arr[0]}; ${S_arr[1]}\\} \\)`;
+                
+                const exp = `Ta có: \\( \\sqrt{${eq_left}} = ${B} \\)
+\\( \\Leftrightarrow \\sqrt{(x ${sign} ${A})^2} = ${B} \\)
+\\( \\Leftrightarrow |x ${sign} ${A}| = ${B} \\).
+Trường hợp 1: \\( x ${sign} ${A} = ${B} \\Leftrightarrow x = ${s1} \\).
+Trường hợp 2: \\( x ${sign} ${A} = -${B} \\Leftrightarrow x = ${s2} \\).
+Vậy tập nghiệm của phương trình là \\( S = \\{${S_arr[0]}; ${S_arr[1]}\\} \\).`;
+
+                const wrong1 = `\\( S = \\{${B}; -${B}\\} \\)`;
+                const wrong2 = `\\( S = \\{${s1+1}; ${s2-1}\\} \\)`;
+                const wrong3 = `\\( S = \\{${Math.abs(s1)}; ${Math.abs(s2)}\\} \\)`;
+                const optSet = new Set([ans, wrong1, wrong2, wrong3]);
+                while(optSet.size < 4) optSet.add(`\\( S = \\{${Math.floor(Math.random()*10)}; -${Math.floor(Math.random()*10)}\\} \\)`);
+                const opts = this.shuffle(Array.from(optSet).slice(0, 4));
+                q.push({ id: 'b8_d7_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else if (type === 1) {
+                let hasSol = false;
+                while(!hasSol) {
+                    const A_c = Math.floor(Math.random()*3)+1;
+                    const c = Math.floor(Math.random()*2)+2; 
+                    const d_val = Math.floor(Math.random()*5)+1;
+                    let sol1 = null;
+                    if (c - 1 !== 0) {
+                        const num1 = d_val - A_c;
+                        const den1 = c - 1;
+                        if (num1 % den1 === 0) {
+                            let x1 = num1 / den1;
+                            if (x1 >= A_c && c*x1 - d_val >= 0) sol1 = x1;
+                        }
+                    }
+                    let sol2 = null;
+                    const num2 = A_c + d_val;
+                    const den2 = c + 1;
+                    if (num2 % den2 === 0) {
+                        let x2 = num2 / den2;
+                        if (x2 < A_c && c*x2 - d_val >= 0) sol2 = x2;
+                    }
+                    
+                    if (sol1 !== null || sol2 !== null) {
+                        hasSol = true;
+                        let eq_left = `x^2 - ${2*A_c}x + ${A_c*A_c}`;
+                        const text = `Tập nghiệm của phương trình \\( \\sqrt{${eq_left}} = ${c}x - ${d_val} \\) là:`;
+                        
+                        let s_arr = [];
+                        if (sol1 !== null) s_arr.push(sol1);
+                        if (sol2 !== null) s_arr.push(sol2);
+                        
+                        let ans = '';
+                        if (s_arr.length === 0) ans = `\\( S = \\emptyset \\)`;
+                        else if (s_arr.length === 1) ans = `\\( S = \\{${s_arr[0]}\\} \\)`;
+                        else ans = `\\( S = \\{${s_arr[0]}; ${s_arr[1]}\\} \\)`;
+                        
+                        let exp = `Điều kiện: \\( ${c}x - ${d_val} \\geq 0 \\Leftrightarrow x \\geq \\frac{${d_val}}{${c}} \\).
+Ta có: \\( \\sqrt{${eq_left}} = ${c}x - ${d_val} \\)
+\\( \\Leftrightarrow \\sqrt{(x - ${A_c})^2} = ${c}x - ${d_val} \\)
+\\( \\Leftrightarrow |x - ${A_c}| = ${c}x - ${d_val} \\).
+Trường hợp 1: \\( x - ${A_c} \\geq 0 \\Leftrightarrow x \\geq ${A_c} \\). Phương trình trở thành:
+\\( x - ${A_c} = ${c}x - ${d_val} \\Leftrightarrow ${(c-1)}x = ${d_val - A_c} \\Leftrightarrow x = ${(d_val - A_c)/(c-1)} \\).
+Kiểm tra điều kiện: ${sol1 !== null ? `Thỏa mãn` : `Loại`}.
+Trường hợp 2: \\( x - ${A_c} < 0 \\Leftrightarrow x < ${A_c} \\). Phương trình trở thành:
+\\( -(x - ${A_c}) = ${c}x - ${d_val} \\Leftrightarrow -x + ${A_c} = ${c}x - ${d_val} \\Leftrightarrow ${(c+1)}x = ${A_c + d_val} \\Leftrightarrow x = ${(A_c + d_val)/(c+1)} \\).
+Kiểm tra điều kiện: ${sol2 !== null ? `Thỏa mãn` : `Loại`}.
+Vậy ${ans}.`;
+                        
+                        let wrong1 = sol1 !== null ? `\\( S = \\{${sol1 + 1}\\} \\)` : `\\( S = \\{${sol2 + 1}\\} \\)`;
+                        let wrong2 = `\\( S = \\emptyset \\)`;
+                        if (ans === `\\( S = \\emptyset \\)`) wrong2 = `\\( S = \\{1\\} \\)`;
+                        let wrong3 = `\\( S = \\{${A_c}\\} \\)`;
+                        if (ans === `\\( S = \\{${A_c}\\} \\)`) wrong3 = `\\( S = \\{-${A_c}\\} \\)`;
+                        
+                        const optSet = new Set([ans, wrong1, wrong2, wrong3]);
+                        while(optSet.size < 4) optSet.add(`\\( S = \\{${Math.floor(Math.random()*10)}\\} \\)`);
+                        const opts = this.shuffle(Array.from(optSet).slice(0, 4));
+                        q.push({ id: 'b8_d7_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+                    }
+                }
+            } else {
                 const A = Math.floor(Math.random()*5)+2;
                 const k = Math.floor(Math.random()*5)+1;
                 const B = A * k; 
                 const x_val = A * k * k;
                 const text = `Tìm \\( x \\), biết: \\( \\sqrt{${A}x} = ${B} \\)`;
-                const ans = `\\( x = ${x_val} \\)`;
+                const ans = `\\( S = \\{${x_val}\\} \\)`;
                 const exp = `Điều kiện: \\( x \\geq 0 \\).
 Bình phương hai vế ta được: \\( ${A}x = ${B}^2 = ${B*B} \\).
 Suy ra \\( x = \\frac{${B*B}}{${A}} = ${x_val} \\) (thỏa mãn điều kiện).`;
-                const wrong1 = `\\( x = ${B*B} \\)`;
-                const wrong2 = `\\( x = ${k} \\)`;
-                const wrong3 = `\\( x = ${x_val + 2} \\)`;
-                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
-                q.push({ id: 'b8_d7_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
-            } else {
-                const sqrt_x = Math.floor(Math.random()*4)+2;
-                const x_val = sqrt_x * sqrt_x;
-                let A = Math.floor(Math.random()*5)+4;
-                let B = Math.floor(Math.random()*3)+1;
-                const C = (A - B) * sqrt_x;
-                const text = `Tìm \\( x \\), biết: \\( \\sqrt{${A*A}x} - \\sqrt{${B*B}x} = ${C} \\)`;
-                const ans = `\\( x = ${x_val} \\)`;
-                const exp = `Điều kiện: \\( x \\geq 0 \\).
-Ta có: \\( \\sqrt{${A*A}x} - \\sqrt{${B*B}x} = ${C} \\)
-\\( \\Leftrightarrow \\sqrt{${A*A}}\\sqrt{x} - \\sqrt{${B*B}}\\sqrt{x} = ${C} \\)
-\\( \\Leftrightarrow ${A}\\sqrt{x} - ${B}\\sqrt{x} = ${C} \\)
-\\( \\Leftrightarrow ${(A-B)}\\sqrt{x} = ${C} \\)
-\\( \\Leftrightarrow \\sqrt{x} = ${sqrt_x} \\)
-\\( \\Leftrightarrow x = ${x_val} \\) (thỏa mãn điều kiện).`;
-                const wrong1 = `\\( x = ${sqrt_x} \\)`;
-                const wrong2 = `\\( x = ${x_val + 1} \\)`;
-                const wrong3 = `\\( x = ${x_val * 2} \\)`;
+                const wrong1 = `\\( S = \\{${B*B}\\} \\)`;
+                const wrong2 = `\\( S = \\{${k}\\} \\)`;
+                const wrong3 = `\\( S = \\{${x_val + 2}\\} \\)`;
                 const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
                 q.push({ id: 'b8_d7_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
             }
