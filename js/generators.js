@@ -2895,6 +2895,247 @@ Hình vuông có diện tích bằng ${w*h*2} (\\( cm^2 \\)) nên cạnh của n
             }
         }
         return q;
+    },
+    b9_d1: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const a = Math.floor(Math.random()*6)+2;
+            const b_vals = [2, 3, 5, 6, 7];
+            const b = b_vals[Math.floor(Math.random()*b_vals.length)];
+            const n = a * a * b;
+            const text = `Đưa thừa số ra ngoài dấu căn: \\( \\sqrt{${n}} \\)`;
+            const ans = `\\( ${a}\\sqrt{${b}} \\)`;
+            const exp = `Ta có: \\( \\sqrt{${n}} = \\sqrt{${a*a} \\cdot ${b}} = \\sqrt{${a}^2} \\cdot \\sqrt{${b}} = ${a}\\sqrt{${b}} \\).`;
+            const wrong1 = `\\( ${a*a}\\sqrt{${b}} \\)`;
+            const wrong2 = `\\( ${b}\\sqrt{${a}} \\)`;
+            const wrong3 = `\\( ${a+1}\\sqrt{${b}} \\)`;
+            const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+            q.push({ id: 'b9_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+        }
+        return q;
+    },
+    b9_d2: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const isNegative = Math.random() > 0.5;
+            const a = Math.floor(Math.random()*5)+2;
+            const b_vals = [2, 3, 5, 7];
+            const b = b_vals[Math.floor(Math.random()*b_vals.length)];
+            const n = a * a * b;
+            if (isNegative) {
+                const text = `Đưa thừa số vào trong dấu căn: \\( -${a}\\sqrt{${b}} \\)`;
+                const ans = `\\( -\\sqrt{${n}} \\)`;
+                const exp = `Vì \\( -${a} \\) là số âm nên ta giữ nguyên dấu âm ở ngoài căn:
+\\( -${a}\\sqrt{${b}} = -\\sqrt{${a}^2 \\cdot ${b}} = -\\sqrt{${a*a} \\cdot ${b}} = -\\sqrt{${n}} \\).`;
+                const wrong1 = `\\( \\sqrt{${n}} \\)`;
+                const wrong2 = `\\( -\\sqrt{${a*b}} \\)`;
+                const wrong3 = `\\( \\sqrt{${a*b}} \\)`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b9_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else {
+                const text = `Đưa thừa số vào trong dấu căn: \\( ${a}\\sqrt{${b}} \\)`;
+                const ans = `\\( \\sqrt{${n}} \\)`;
+                const exp = `Ta có: \\( ${a}\\sqrt{${b}} = \\sqrt{${a}^2 \\cdot ${b}} = \\sqrt{${a*a} \\cdot ${b}} = \\sqrt{${n}} \\).`;
+                const wrong1 = `\\( -\\sqrt{${n}} \\)`;
+                const wrong2 = `\\( \\sqrt{${a*b}} \\)`;
+                const wrong3 = `\\( \\sqrt{${n+1}} \\)`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b9_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            }
+        }
+        return q;
+    },
+    b9_d3: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const primes = [2, 3, 5, 7, 11];
+            const p1 = primes[Math.floor(Math.random()*primes.length)];
+            let p2 = primes[Math.floor(Math.random()*primes.length)];
+            while (p1 === p2) p2 = primes[Math.floor(Math.random()*primes.length)];
+            
+            const ab = p1 * p2;
+            const ansStr = `\\( \\frac{\\sqrt{${ab}}}{${p2}} \\)`;
+            const text2 = `Khử mẫu của biểu thức lấy căn: \\( \\sqrt{\\frac{${p1}}{${p2}}} \\)`;
+            const exp = `Ta nhân cả tử và mẫu với ${p2}:
+\\( \\sqrt{\\frac{${p1}}{${p2}}} = \\sqrt{\\frac{${p1} \\cdot ${p2}}{${p2} \\cdot ${p2}}} = \\sqrt{\\frac{${ab}}{${p2}^2}} = \\frac{\\sqrt{${ab}}}{${p2}} \\).`;
+            const wrong1 = `\\( \\frac{\\sqrt{${p1}}}{${p2}} \\)`;
+            const wrong2 = `\\( \\frac{\\sqrt{${ab}}}{${p1}} \\)`;
+            const wrong3 = `\\( \\sqrt{${ab}} \\)`;
+            const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+            q.push({ id: 'b9_d3_'+i, text: text2, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+        }
+        return q;
+    },
+    b9_d4: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const a = Math.floor(Math.random()*8)+3;
+            let b = Math.floor(Math.random()*(a-1))+1;
+            const isPlus = Math.random() > 0.5;
+            const sign = isPlus ? '+' : '-';
+            const oppSign = isPlus ? '-' : '+';
+            const diff = a - b;
+            const c = diff;
+            const b_str = Math.sqrt(b) === Math.floor(Math.sqrt(b)) ? `${Math.sqrt(b)}` : `\\sqrt{${b}}`;
+            
+            const text = `Trục căn thức ở mẫu: \\( \\frac{${c}}{\\sqrt{${a}} ${sign} ${b_str}} \\)`;
+            const ansStr = `\\( \\sqrt{${a}} ${oppSign} ${b_str} \\)`;
+            const exp = `Nhân cả tử và mẫu với biểu thức liên hợp \\( \\sqrt{${a}} ${oppSign} ${b_str} \\):
+\\( \\frac{${c}(\\sqrt{${a}} ${oppSign} ${b_str})}{(\\sqrt{${a}} ${sign} ${b_str})(\\sqrt{${a}} ${oppSign} ${b_str})} = \\frac{${c}(\\sqrt{${a}} ${oppSign} ${b_str})}{${a} - ${b}} \\)
+\\( = \\frac{${c}(\\sqrt{${a}} ${oppSign} ${b_str})}{${diff}} = \\sqrt{${a}} ${oppSign} ${b_str} \\).`;
+            
+            const wrong1 = `\\( \\sqrt{${a}} ${sign} ${b_str} \\)`;
+            const wrong2 = `\\( \\frac{\\sqrt{${a}} ${oppSign} ${b_str}}{${diff}} \\)`;
+            const wrong3 = `\\( \\sqrt{${a+b}} \\)`;
+            
+            const optSet = new Set([ansStr, wrong1, wrong2, wrong3]);
+            while (optSet.size < 4) optSet.add(`\\( ${Math.floor(Math.random()*5)+1} \\)`);
+            const opts = this.shuffle(Array.from(optSet).slice(0, 4));
+            
+            q.push({ id: 'b9_d4_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+        }
+        return q;
+    },
+    b9_d5: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const a = Math.floor(Math.random()*4)+2;
+            const b = Math.floor(Math.random()*5)+2;
+            let c = Math.floor(Math.random()*4)+2;
+            let d = Math.floor(Math.random()*5)+2;
+            while(a*a*b === c*c*d) {
+                c = Math.floor(Math.random()*4)+2;
+                d = Math.floor(Math.random()*5)+2;
+            }
+            const n1 = a*a*b;
+            const n2 = c*c*d;
+            const text = `So sánh hai số \\( ${a}\\sqrt{${b}} \\) và \\( ${c}\\sqrt{${d}} \\):`;
+            
+            let ans, wrong1, wrong2, exp;
+            if (n1 > n2) {
+                ans = `\\( ${a}\\sqrt{${b}} > ${c}\\sqrt{${d}} \\)`;
+                wrong1 = `\\( ${a}\\sqrt{${b}} < ${c}\\sqrt{${d}} \\)`;
+                wrong2 = `\\( ${a}\\sqrt{${b}} = ${c}\\sqrt{${d}} \\)`;
+                exp = `Đưa các thừa số vào trong căn:
+\\( ${a}\\sqrt{${b}} = \\sqrt{${a}^2 \\cdot ${b}} = \\sqrt{${n1}} \\)
+\\( ${c}\\sqrt{${d}} = \\sqrt{${c}^2 \\cdot ${d}} = \\sqrt{${n2}} \\)
+Vì \\( ${n1} > ${n2} \\) nên \\( \\sqrt{${n1}} > \\sqrt{${n2}} \\).
+Vậy \\( ${a}\\sqrt{${b}} > ${c}\\sqrt{${d}} \\).`;
+            } else {
+                ans = `\\( ${a}\\sqrt{${b}} < ${c}\\sqrt{${d}} \\)`;
+                wrong1 = `\\( ${a}\\sqrt{${b}} > ${c}\\sqrt{${d}} \\)`;
+                wrong2 = `\\( ${a}\\sqrt{${b}} = ${c}\\sqrt{${d}} \\)`;
+                exp = `Đưa các thừa số vào trong căn:
+\\( ${a}\\sqrt{${b}} = \\sqrt{${a}^2 \\cdot ${b}} = \\sqrt{${n1}} \\)
+\\( ${c}\\sqrt{${d}} = \\sqrt{${c}^2 \\cdot ${d}} = \\sqrt{${n2}} \\)
+Vì \\( ${n1} < ${n2} \\) nên \\( \\sqrt{${n1}} < \\sqrt{${n2}} \\).
+Vậy \\( ${a}\\sqrt{${b}} < ${c}\\sqrt{${d}} \\).`;
+            }
+            
+            const wrong3 = `Không thể so sánh`;
+            const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+            q.push({ id: 'b9_d5_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+        }
+        return q;
+    },
+    b9_d6: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const c_vals = [2, 3, 5];
+            const c = c_vals[Math.floor(Math.random()*c_vals.length)];
+            const a = Math.floor(Math.random()*3)+2;
+            const b = Math.floor(Math.random()*3)+2;
+            const d = Math.floor(Math.random()*3)+1;
+            
+            const n1 = a*a*c;
+            const n2 = b*b*c;
+            const n3 = d*d*c;
+            
+            const text = `Rút gọn biểu thức: \\( \\sqrt{${n1}} + \\sqrt{${n2}} - \\sqrt{${n3}} \\)`;
+            const ansCoef = a + b - d;
+            
+            const ansStr = ansCoef === 1 ? `\\( \\sqrt{${c}} \\)` : (ansCoef === 0 ? `0` : `\\( ${ansCoef}\\sqrt{${c}} \\)`);
+            
+            const exp = `Đưa các thừa số ra ngoài dấu căn:
+\\( \\sqrt{${n1}} = \\sqrt{${a}^2 \\cdot ${c}} = ${a}\\sqrt{${c}} \\)
+\\( \\sqrt{${n2}} = \\sqrt{${b}^2 \\cdot ${c}} = ${b}\\sqrt{${c}} \\)
+\\( \\sqrt{${n3}} = \\sqrt{${d}^2 \\cdot ${c}} = ${d}\\sqrt{${c}} \\)
+Biểu thức trở thành: \\( ${a}\\sqrt{${c}} + ${b}\\sqrt{${c}} - ${d}\\sqrt{${c}} = (${a} + ${b} - ${d})\\sqrt{${c}} = ${ansCoef}\\sqrt{${c}} \\).`;
+            
+            const wrong1 = `\\( ${ansCoef+1}\\sqrt{${c}} \\)`;
+            const wrong2 = `\\( ${ansCoef-1}\\sqrt{${c}} \\)`;
+            const wrong3 = `\\( ${ansCoef+2}\\sqrt{${c}} \\)`;
+            
+            const optSet = new Set([ansStr, wrong1, wrong2, wrong3]);
+            while(optSet.size < 4) optSet.add(`\\( ${Math.floor(Math.random()*5)+1}\\sqrt{${c}} \\)`);
+            const opts = this.shuffle(Array.from(optSet).slice(0, 4));
+            
+            q.push({ id: 'b9_d6_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+        }
+        return q;
+    },
+    b9_d7: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const c = Math.floor(Math.random()*3)+2; 
+            const a = Math.floor(Math.random()*4)+2; 
+            const b = Math.floor(Math.random()*4)+2;
+            const n1 = a*a*c;
+            const n2 = b*b*c;
+            
+            const text = `Giá trị của biểu thức \\( (\\sqrt{${n1}} - \\sqrt{${n2}})\\sqrt{${c}} \\) là:`;
+            
+            const exp = `Ta có: \\( (\\sqrt{${n1}} - \\sqrt{${n2}})\\sqrt{${c}} \\)
+\\( = \\sqrt{${n1}} \\cdot \\sqrt{${c}} - \\sqrt{${n2}} \\cdot \\sqrt{${c}} \\)
+\\( = \\sqrt{${n1 * c}} - \\sqrt{${n2 * c}} \\)
+\\( = \\sqrt{${a*a*c*c}} - \\sqrt{${b*b*c*c}} = ${a*c} - ${b*c} = ${(a-b)*c} \\).`;
+            
+            const ansStr = `${(a-b)*c}`;
+            const wrong1 = `${(a+b)*c}`;
+            const wrong2 = `${(a-b)*c + 2}`;
+            const wrong3 = `${(a-b)*c - 2}`;
+            
+            const optSet = new Set([ansStr, wrong1, wrong2, wrong3]);
+            while(optSet.size < 4) optSet.add(`${Math.floor(Math.random()*10)}`);
+            const opts = this.shuffle(Array.from(optSet).slice(0, 4));
+            
+            q.push({ id: 'b9_d7_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+        }
+        return q;
+    },
+    b9_d8: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const a = Math.floor(Math.random()*3)+1;
+            const b = Math.floor(Math.random()*3)+2;
+            const sum = a + b;
+            const sq_x = Math.floor(Math.random()*3)+1;
+            const x = sq_x * sq_x;
+            const C = sum * sq_x;
+            
+            const n1 = a*a;
+            const n2 = b*b;
+            
+            const text = `Nghiệm của phương trình \\( \\sqrt{${n1}x} + \\sqrt{${n2}x} = ${C} \\) là:`;
+            const exp = `Điều kiện: \\( x \\geq 0 \\).
+Ta có: \\( \\sqrt{${n1}x} + \\sqrt{${n2}x} = ${C} \\)
+\\( \\Leftrightarrow ${a}\\sqrt{x} + ${b}\\sqrt{x} = ${C} \\)
+\\( \\Leftrightarrow ${sum}\\sqrt{x} = ${C} \\)
+\\( \\Leftrightarrow \\sqrt{x} = ${sq_x} \\)
+\\( \\Leftrightarrow x = ${x} \\).`;
+
+            const ansStr = `\\( x = ${x} \\)`;
+            const wrong1 = `\\( x = ${sq_x} \\)`;
+            const wrong2 = `\\( x = ${x*x} \\)`;
+            const wrong3 = `\\( x = ${x+1} \\)`;
+            
+            const optSet = new Set([ansStr, wrong1, wrong2, wrong3]);
+            while(optSet.size < 4) optSet.add(`\\( x = ${Math.floor(Math.random()*10)} \\)`);
+            const opts = this.shuffle(Array.from(optSet).slice(0, 4));
+            
+            q.push({ id: 'b9_d8_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+        }
+        return q;
     }
 };
 window.MathGenerators = Generators;
