@@ -2814,22 +2814,147 @@ Ta có: \\( \\frac{\\sqrt{${a}}}{\\sqrt{${b}}} = \\sqrt{\\frac{${a}}{${b}}} = \\
     },
     b8_d5: function(count=5) {
         const q = [];
-        for(let i=0; i<count; i++) {
-            const a = Math.floor(Math.random()*5)+2;
-            const a2 = a*a;
-            const text = `Rút gọn biểu thức \\( \\sqrt{\\frac{${a2}x^4}{y^2}} \\) với \\( y < 0 \\):`;
-            
-            const ans = `\\( \\frac{-${a}x^2}{y} \\)`;
-            const wrong1 = `\\( \\frac{${a}x^2}{y} \\)`;
-            const wrong2 = `\\( \\frac{-${a}x^2}{y^2} \\)`;
-            const wrong3 = `\\( \\frac{${a}x^4}{y} \\)`;
-            
-            const exp = `Ta có: \\( \\sqrt{\\frac{${a2}x^4}{y^2}} = \\frac{\\sqrt{${a2}x^4}}{\\sqrt{y^2}} = \\frac{${a}x^2}{|y|} \\).
-Vì \\( y < 0 \\) nên \\( |y| = -y \\).
-Vậy biểu thức bằng \\( \\frac{${a}x^2}{-y} = \\frac{-${a}x^2}{y} \\).`;
-            
-            const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
-            q.push({ id: 'b8_d5_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+        for (let i = 0; i < count; i++) {
+            const type = (i % 2 === 0) ? 1 : 2; 
+            if (type === 1) {
+                const primes = [2, 3, 5, 7, 11];
+                let p1 = primes[Math.floor(Math.random()*primes.length)];
+                let p2 = primes[Math.floor(Math.random()*primes.length)];
+                while(p1 === p2) p2 = primes[Math.floor(Math.random()*primes.length)];
+                
+                const k_vals = [2, 3, 4, 5, 6, 7, 8, 9, 10];
+                let k1 = k_vals[Math.floor(Math.random()*k_vals.length)];
+                let k2 = k_vals[Math.floor(Math.random()*k_vals.length)];
+                while(k1 === k2) k2 = k_vals[Math.floor(Math.random()*k_vals.length)];
+                
+                const sign = Math.random() > 0.5 ? '+' : '-';
+                const isFlipped = sign === '-' && Math.random() > 0.5; 
+                
+                const num1 = k1 * p1, num2 = k1 * p2;
+                let den1, den2;
+                if (isFlipped) {
+                    den1 = k2 * p2; den2 = k2 * p1;
+                } else {
+                    den1 = k2 * p1; den2 = k2 * p2;
+                }
+                
+                const text = `Rút gọn biểu thức: \\( \\frac{\\sqrt{${num1}} ${sign} \\sqrt{${num2}}}{\\sqrt{${den1}} ${sign} \\sqrt{${den2}}} \\)`;
+                
+                let ansSign = isFlipped ? '-' : '';
+                
+                let num_ins = k1 * k2;
+                let den_out = k2;
+                let extract = 1;
+                for (let sq = 10; sq >= 2; sq--) {
+                    if (num_ins % (sq * sq) === 0) {
+                        extract = sq;
+                        num_ins = num_ins / (sq * sq);
+                        break;
+                    }
+                }
+                const gcd = (a, b) => b === 0 ? a : gcd(b, a % b);
+                const g = gcd(extract, den_out);
+                const ex_simp = extract / g;
+                const den_simp = den_out / g;
+                
+                let rawAns = '';
+                if (num_ins === 1) { 
+                    if (den_simp === 1) rawAns = `${ansSign}${ex_simp}`;
+                    else rawAns = `${ansSign}\\frac{${ex_simp}}{${den_simp}}`;
+                } else {
+                    let topStr = ex_simp === 1 ? `\\sqrt{${num_ins}}` : `${ex_simp}\\sqrt{${num_ins}}`;
+                    if (den_simp === 1) rawAns = `${ansSign}${topStr}`;
+                    else rawAns = `${ansSign}\\frac{${topStr}}{${den_simp}}`;
+                }
+                
+                if (rawAns === '' || rawAns === '-') rawAns = rawAns + '1';
+                let ansStr = `\\( ${rawAns} \\)`;
+                
+                const k1_root = Math.sqrt(k1) === Math.floor(Math.sqrt(k1)) ? `${Math.sqrt(k1)}` : `\\sqrt{${k1}}`;
+                const k2_root = Math.sqrt(k2) === Math.floor(Math.sqrt(k2)) ? `${Math.sqrt(k2)}` : `\\sqrt{${k2}}`;
+                
+                let p_part = `(\\sqrt{${p1}} ${sign} \\sqrt{${p2}})`;
+                let den_p_part = isFlipped ? `(\\sqrt{${p2}} ${sign} \\sqrt{${p1}})` : `(\\sqrt{${p1}} ${sign} \\sqrt{${p2}})`;
+                
+                let exp = `Ta có: \\( \\frac{\\sqrt{${num1}} ${sign} \\sqrt{${num2}}}{\\sqrt{${den1}} ${sign} \\sqrt{${den2}}} = \\frac{${k1_root}\\sqrt{${p1}} ${sign} ${k1_root}\\sqrt{${p2}}}{${k2_root}\\sqrt{${isFlipped ? p2 : p1}} ${sign} ${k2_root}\\sqrt{${isFlipped ? p1 : p2}}} \\)
+\\( = \\frac{${k1_root}${p_part}}{${k2_root}${den_p_part}} \\)`;
+                
+                if (isFlipped) {
+                    exp += `\nĐổi dấu mẫu số: \\( ${den_p_part} = -${p_part} \\).
+\\( \\Rightarrow \\frac{${k1_root}${p_part}}{-${k2_root}${p_part}} = -\\frac{${k1_root}}{${k2_root}} = -\\sqrt{\\frac{${k1}}{${k2}}} = ${rawAns} \\).`;
+                } else {
+                    exp += `\n\\( = \\frac{${k1_root}}{${k2_root}} = \\sqrt{\\frac{${k1}}{${k2}}} = ${rawAns} \\).`;
+                }
+
+                const optSet = new Set([ansStr]);
+                while(optSet.size < 4) {
+                    let rf_top = Math.floor(Math.random()*5)+1;
+                    let rf_bot = Math.floor(Math.random()*4)+2;
+                    let rf_in = primes[Math.floor(Math.random()*primes.length)];
+                    let str = `\\frac{${rf_top === 1 ? '' : rf_top}\\sqrt{${rf_in}}}{${rf_bot}}`;
+                    if (Math.random() > 0.5) str = '-' + str;
+                    optSet.add(`\\( ${str} \\)`);
+                }
+                const opts = this.shuffle(Array.from(optSet).slice(0, 4));
+                q.push({ id: 'b8_d5_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else {
+                const primes = [2, 3, 5, 7];
+                const sp = this.shuffle([...primes]);
+                const p1 = sp[0], p2 = sp[1], p3 = sp[2];
+                
+                const x = Math.floor(Math.random()*3)+1;
+                const y = Math.floor(Math.random()*3)+1;
+                const z = Math.floor(Math.random()*3)+1;
+                
+                const k1 = Math.floor(Math.random()*4)+2; 
+                let k2 = Math.floor(Math.random()*4)+2;
+                while(k1 === k2) k2 = Math.floor(Math.random()*4)+2;
+                
+                const sign1 = Math.random() > 0.5 ? '+' : '-';
+                const sign2 = Math.random() > 0.5 ? '+' : '-';
+                
+                const nA = k1*k1*p1, nB = k1*k1*p2, nC = k1*k1*p3;
+                const dA = k2*k2*p1, dB = k2*k2*p2, dC = k2*k2*p3;
+                
+                const x_str = x === 1 ? '' : x;
+                const y_str = y === 1 ? '' : y;
+                const z_str = z === 1 ? '' : z;
+                
+                const text = `Rút gọn biểu thức: \\( \\frac{${x_str}\\sqrt{${nA}} ${sign1} ${y_str}\\sqrt{${nB}} ${sign2} ${z_str}\\sqrt{${nC}}}{${x_str}\\sqrt{${dA}} ${sign1} ${y_str}\\sqrt{${dB}} ${sign2} ${z_str}\\sqrt{${dC}}} \\)`;
+                
+                const gcd = (a, b) => b === 0 ? a : gcd(b, a % b);
+                const g = gcd(k1, k2);
+                let rawAns = '';
+                if (k2/g === 1) rawAns = `${k1/g}`;
+                else rawAns = `\\frac{${k1/g}}{${k2/g}}`;
+                let ansStr = `\\( ${rawAns} \\)`;
+                
+                const k1x = k1 * x, k1y = k1 * y, k1z = k1 * z;
+                const k2x = k2 * x, k2y = k2 * y, k2z = k2 * z;
+                
+                const exp = `Đưa thừa số ra ngoài dấu căn ở tử và mẫu:
+Tử số: \\( ${x_str}\\sqrt{${nA}} ${sign1} ${y_str}\\sqrt{${nB}} ${sign2} ${z_str}\\sqrt{${nC}} \\)
+\\( = ${k1x}\\sqrt{${p1}} ${sign1} ${k1y}\\sqrt{${p2}} ${sign2} ${k1z}\\sqrt{${p3}} \\)
+\\( = ${k1}(${x === 1 ? '' : x}\\sqrt{${p1}} ${sign1} ${y === 1 ? '' : y}\\sqrt{${p2}} ${sign2} ${z === 1 ? '' : z}\\sqrt{${p3}}) \\).
+
+Mẫu số: \\( ${x_str}\\sqrt{${dA}} ${sign1} ${y_str}\\sqrt{${dB}} ${sign2} ${z_str}\\sqrt{${dC}} \\)
+\\( = ${k2x}\\sqrt{${p1}} ${sign1} ${k2y}\\sqrt{${p2}} ${sign2} ${k2z}\\sqrt{${p3}} \\)
+\\( = ${k2}(${x === 1 ? '' : x}\\sqrt{${p1}} ${sign1} ${y === 1 ? '' : y}\\sqrt{${p2}} ${sign2} ${z === 1 ? '' : z}\\sqrt{${p3}}) \\).
+
+Rút gọn cả tử và mẫu cho phần chung, ta được:
+\\( \\frac{${k1}}{${k2}} = ${rawAns} \\).`;
+
+                const optSet = new Set([ansStr]);
+                while(optSet.size < 4) {
+                    let rf_top = Math.floor(Math.random()*5)+1;
+                    let rf_bot = Math.floor(Math.random()*4)+2;
+                    let g2 = gcd(rf_top, rf_bot);
+                    if (rf_bot/g2 === 1) optSet.add(`\\( ${rf_top/g2} \\)`);
+                    else optSet.add(`\\( \\frac{${rf_top/g2}}{${rf_bot/g2}} \\)`);
+                }
+                const opts = this.shuffle(Array.from(optSet).slice(0, 4));
+                q.push({ id: 'b8_d5_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            }
         }
         return q;
     },
