@@ -3145,59 +3145,121 @@ Suy ra \\( x = \\frac{${B*B}}{${A}} = ${x_val} \\) (thỏa mãn điều kiện).
     },
     b8_d8: function(count=5) {
         const q = [];
-        for(let i=0; i<count; i++) {
-            const type = Math.floor(Math.random() * 2);
+        let types = [];
+        for (let i = 0; i < count; i++) {
+            types.push(i % 2);
+        }
+        types = this.shuffle(types);
+
+        for (let i = 0; i < count; i++) {
+            const type = types[i];
             if (type === 0) {
-                const factor_P = [4, 9, 16][Math.floor(Math.random()*3)];
-                const factor_R = [1, 4, 9][Math.floor(Math.random()*3)];
-                const ratio = Math.sqrt(factor_P / factor_R);
-                let R_text = factor_R === 1 ? `giữ nguyên` : `giảm ${factor_R} lần`;
+                const k = Math.floor(Math.random()*3)+2; 
+                const V = k;
+                const m1 = Math.floor(Math.random()*3)+3; 
+                const m2 = Math.floor(Math.random()*(m1-1))+1; 
+                const N = k * (m1 - m2) + 1;
+                const D = N;
+                const c = Math.floor(Math.random()*2)+2; 
                 
-                const text = `Công suất \\( P \\), hiệu điện thế \\( U \\), điện trở \\( R \\) liên hệ với nhau theo công thức \\( P = \\frac{U^2}{R} \\). 
-Nếu công suất tăng gấp ${factor_P} lần, điện trở ${R_text} thì tỉ số giữa hiệu điện thế lúc sau và hiệu điện thế ban đầu bằng bao nhiêu?`;
-
-                const ansStr = this.formatFraction ? this.formatFraction(Math.sqrt(factor_P), Math.sqrt(factor_R)) : `${ratio}`;
-                const ans = ansStr;
+                let x_sol, d_val;
+                do {
+                    x_sol = Math.floor(Math.random()*4)+2;
+                    d_val = V*V - c*x_sol;
+                } while (d_val === 0);
                 
-                const exp = `Gọi công suất, hiệu điện thế, điện trở ban đầu là \\( P_1, U_1, R_1 \\). Lúc sau là \\( P_2, U_2, R_2 \\).
-Ta có: \\( P_1 = \\frac{U_1^2}{R_1} \\Rightarrow U_1 = \\sqrt{P_1 R_1} \\). Tương tự \\( U_2 = \\sqrt{P_2 R_2} \\).
-Theo bài ra: \\( P_2 = ${factor_P} P_1 \\) và \\( R_2 = \\frac{R_1}{${factor_R}} \\).
-Do đó: \\( U_2 = \\sqrt{${factor_P} P_1 \\cdot \\frac{R_1}{${factor_R}}} = \\sqrt{\\frac{${factor_P}}{${factor_R}}} \\cdot \\sqrt{P_1 R_1} = ${ans} \\cdot U_1 \\).
-Vậy tỉ số là ${ans}.`;
-
-                const wrong1 = `${factor_P * factor_R}`;
-                const wrong2 = this.formatFraction ? this.formatFraction(factor_P, factor_R) : `${factor_P / factor_R}`;
-                const wrong3 = `${Math.sqrt(factor_P * factor_R)}`;
+                const sign_d = d_val >= 0 ? '+' : '-';
+                const abs_d = Math.abs(d_val);
+                
+                const core_str = `${c}x ${sign_d} ${abs_d}`;
+                
+                const t1_c = m1*m1*c;
+                const t1_d = m1*m1*abs_d;
+                const t1_str = `\\sqrt{${t1_c}x ${sign_d} ${t1_d}}`;
+                
+                const t2_c = m2*m2*c;
+                const t2_d = m2*m2*abs_d;
+                const t2_str = `\\sqrt{${t2_c}x ${sign_d} ${t2_d}}`;
+                
+                const text = `Giải phương trình: \\( ${t1_str} - ${t2_str} + \\frac{1}{${k}}\\sqrt{${core_str}} = ${D} \\)`;
+                
+                const ans = `\\( x = ${x_sol} \\)`;
+                
+                const exp = `Điều kiện: \\( ${core_str} \\geq 0 \\Leftrightarrow x \\geq ${sign_d === '+' ? `-\\frac{${abs_d}}{${c}}` : `\\frac{${abs_d}}{${c}}`} \\).
+Ta có: \\( ${t1_str} - ${t2_str} + \\frac{1}{${k}}\\sqrt{${core_str}} = ${D} \\)
+\\( \\Leftrightarrow \\sqrt{${m1*m1}(${core_str})} - \\sqrt{${m2*m2}(${core_str})} + \\frac{1}{${k}}\\sqrt{${core_str}} = ${D} \\)
+\\( \\Leftrightarrow ${m1}\\sqrt{${core_str}} - ${m2}\\sqrt{${core_str}} + \\frac{1}{${k}}\\sqrt{${core_str}} = ${D} \\)
+\\( \\Leftrightarrow (${m1} - ${m2} + \\frac{1}{${k}})\\sqrt{${core_str}} = ${D} \\)
+\\( \\Leftrightarrow \\frac{${N}}{${k}}\\sqrt{${core_str}} = ${D} \\)
+\\( \\Leftrightarrow \\sqrt{${core_str}} = ${V} \\)
+\\( \\Leftrightarrow ${core_str} = ${V*V} \\)
+\\( \\Leftrightarrow ${c}x = ${V*V - d_val} \\Leftrightarrow x = ${x_sol} \\) (thỏa mãn điều kiện).
+Vậy phương trình có nghiệm duy nhất \\( x = ${x_sol} \\).`;
+                
+                const wrong1 = `\\( x = ${x_sol + 2} \\)`;
+                const wrong2 = `\\( x = ${Math.floor(x_sol / 2) || 1} \\)`;
+                const wrong3 = `\\( x = ${x_sol * 2} \\)`;
                 
                 const optSet = new Set([ans, wrong1, wrong2, wrong3]);
-                while (optSet.size < 4) optSet.add(`${Math.floor(Math.random()*5)+2}`);
+                while(optSet.size < 4) optSet.add(`\\( x = ${Math.floor(Math.random()*10)+1} \\)`);
                 const opts = this.shuffle(Array.from(optSet).slice(0, 4));
                 
                 q.push({ id: 'b8_d8_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
             } else {
-                const pairs = [[2, 4], [2, 1], [8, 1], [3, 6], [2, 9], [1, 18]];
-                const pair = pairs[Math.floor(Math.random() * pairs.length)];
-                const w = pair[0];
-                const h = pair[1];
-                const side = Math.sqrt(2 * w * h);
+                const V = Math.floor(Math.random()*2)+2; 
+                const max_m = Math.floor((V*V)/2);
+                const m = Math.floor(Math.random()*max_m)+1; 
                 
-                const text = `Một hình chữ nhật có chiều dài là \\( ${Math.max(w, h)}\\sqrt{2} \\) (cm) và chiều rộng là \\( ${Math.min(w, h)}\\sqrt{2} \\) (cm). Một hình vuông có diện tích bằng diện tích hình chữ nhật này. Cạnh của hình vuông là bao nhiêu cm?`;
-                const ans = `${side} cm`;
-                const wrong1 = `${side*2} cm`;
-                const wrong2 = `${side*side} cm`;
-                const wrong3 = `${Math.max(w,h)*2} cm`;
+                const B = Math.floor(Math.random()*2)+1; 
+                const A = B * V;
                 
-                const exp = `Diện tích hình chữ nhật là: \\( S = ${Math.max(w, h)}\\sqrt{2} \\cdot ${Math.min(w, h)}\\sqrt{2} = ${w*h} \\cdot (\\sqrt{2})^2 = ${w*h} \\cdot 2 = ${w*h*2} \\) (\\( cm^2 \\)).
-Hình vuông có diện tích bằng ${w*h*2} (\\( cm^2 \\)) nên cạnh của nó là \\( \\sqrt{${w*h*2}} = ${side} \\) (cm).`;
+                const c2 = Math.floor(Math.random()*2)+2;
+                const c1 = A + c2;
+                
+                const c4 = Math.floor(Math.random()*2)+1;
+                const c3 = B + c4;
+                
+                const K1 = Math.floor(Math.random()*4)+3; 
+                const C1 = c1 * K1;
+                
+                const K2 = (Math.random() > 0.5) ? 2 : 4;
+                const C2 = (c2 * K2) / 2;
+                
+                const K4 = (Math.random() > 0.5) ? 3 : 6;
+                const C4 = (c4 * K4) / 3;
+                
+                const t1_in = `\\frac{x - ${m}}{${K1*K1}}`;
+                const t2_in = `\\frac{4x - ${4*m}}{${K2*K2}}`;
+                const t4_in = `\\frac{9x^2 - ${9*m*m}}{${K4*K4}}`;
+                
+                const text = `Tập nghiệm của phương trình \\( ${C1}\\sqrt{${t1_in}} - ${C2}\\sqrt{${t2_in}} - ${c3}\\sqrt{x^2 - ${m*m}} + ${C4}\\sqrt{${t4_in}} = 0 \\) là:`;
+                
+                const x2 = V*V - m;
+                let ansStr = '';
+                if (m === x2) ansStr = `\\( S = \\{${m}\\} \\)`;
+                else ansStr = `\\( S = \\{${Math.min(m, x2)}; ${Math.max(m, x2)}\\} \\)`;
+                
+                const exp = `Điều kiện: \\( x \\geq ${m} \\).
+Ta có: \\( ${C1}\\sqrt{${t1_in}} - ${C2}\\sqrt{${t2_in}} - ${c3}\\sqrt{x^2 - ${m*m}} + ${C4}\\sqrt{${t4_in}} = 0 \\)
+\\( \\Leftrightarrow ${C1} \\cdot \\frac{1}{${K1}}\\sqrt{x - ${m}} - ${C2} \\cdot \\frac{2}{${K2}}\\sqrt{x - ${m}} - ${c3}\\sqrt{x^2 - ${m*m}} + ${C4} \\cdot \\frac{3}{${K4}}\\sqrt{x^2 - ${m*m}} = 0 \\)
+\\( \\Leftrightarrow ${c1}\\sqrt{x - ${m}} - ${c2}\\sqrt{x - ${m}} - ${c3}\\sqrt{x^2 - ${m*m}} + ${c4}\\sqrt{x^2 - ${m*m}} = 0 \\)
+\\( \\Leftrightarrow ${A}\\sqrt{x - ${m}} - ${B}\\sqrt{x^2 - ${m*m}} = 0 \\)
+\\( \\Leftrightarrow ${A}\\sqrt{x - ${m}} - ${B}\\sqrt{x - ${m}}\\sqrt{x + ${m}} = 0 \\)
+\\( \\Leftrightarrow \\sqrt{x - ${m}}(${A} - ${B}\\sqrt{x + ${m}}) = 0 \\)
+Trường hợp 1: \\( \\sqrt{x - ${m}} = 0 \\Leftrightarrow x = ${m} \\) (thỏa mãn).
+Trường hợp 2: \\( ${A} - ${B}\\sqrt{x + ${m}} = 0 \\Leftrightarrow \\sqrt{x + ${m}} = ${V} \\Leftrightarrow x + ${m} = ${V*V} \\Leftrightarrow x = ${x2} \\) (thỏa mãn).
+Vậy phương trình có tập nghiệm ${ansStr}.`;
 
-                const optSet = new Set([ans, wrong1, wrong2, wrong3]);
-                let c = 1;
-                while (optSet.size < 4) {
-                    optSet.add(`${side + c} cm`);
-                    c++;
-                }
+                let wrong1 = `\\( S = \\{${m}\\} \\)`;
+                if (ansStr === wrong1) wrong1 = `\\( S = \\{${m}; ${m+2}\\} \\)`;
+                const wrong2 = `\\( S = \\{${x2 + 1}; ${m}\\} \\)`;
+                const wrong3 = `\\( S = \\{-${Math.min(m, x2)}; ${Math.max(m, x2)}\\} \\)`;
+                
+                const optSet = new Set([ansStr, wrong1, wrong2, wrong3]);
+                while(optSet.size < 4) optSet.add(`\\( S = \\{${Math.floor(Math.random()*10)}; ${Math.floor(Math.random()*10)+5}\\} \\)`);
                 const opts = this.shuffle(Array.from(optSet).slice(0, 4));
-                q.push({ id: 'b8_d8_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+                
+                q.push({ id: 'b8_d8_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
             }
         }
         return q;
