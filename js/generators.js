@@ -4126,10 +4126,20 @@ Vậy \\( AC = ${BC} \\cdot ${alpha === 30 ? '\\frac{1}{2}' : alpha === 45 ? '\\
             
             let ansStr = '';
             let targetTrig = trig === 'sin' || trig === 'cos' ? 'tan' : 'sin';
+            let w1Str = '';
+            let w2Str = '';
             if (targetTrig === 'tan') {
-                ansStr = `\\( \\frac{${opp}}{${Number.isInteger(adj)?adj:`\\sqrt{${hyp*hyp - opp*opp}}`}} \\)`;
+                let denom = Number.isInteger(adj) ? adj : `\\sqrt{${hyp*hyp - opp*opp}}`;
+                let denom_no_sqrt = Number.isInteger(adj) ? adj : `${hyp*hyp - opp*opp}`;
+                ansStr = `\\( \\frac{${opp}}{${denom}} \\)`;
+                w1Str = `\\( \\frac{1}{${opp}} ${denom} \\)`;
+                w2Str = `\\( \\frac{${opp}}{${denom_no_sqrt}} \\)`;
             } else {
-                ansStr = `\\( \\frac{${opp}}{${Number.isInteger(hyp)?hyp:`\\sqrt{${opp*opp + adj*adj}}`}} \\)`;
+                let denom = Number.isInteger(hyp) ? hyp : `\\sqrt{${opp*opp + adj*adj}}`;
+                let denom_no_sqrt = Number.isInteger(hyp) ? hyp : `${opp*opp + adj*adj}`;
+                ansStr = `\\( \\frac{${opp}}{${denom}} \\)`;
+                w1Str = `\\( \\frac{1}{${opp}} ${denom} \\)`;
+                w2Str = `\\( \\frac{${opp}}{${denom_no_sqrt}} \\)`;
             }
 
             const exp = `Dựng một tam giác vuông có góc nhọn \\( \\alpha \\).\n` +
@@ -4137,11 +4147,11 @@ Vậy \\( AC = ${BC} \\cdot ${alpha === 30 ? '\\frac{1}{2}' : alpha === 45 ? '\\
                  trig === 'cos' ? `Vì \\( \\cos \\alpha = \\frac{${val}}{${val2}} \\), ta chọn cạnh kề = ${val}, cạnh huyền = ${val2}.\nCạnh đối = \\( \\sqrt{${val2}^2 - ${val}^2} = ${Number.isInteger(opp)?opp:`\\sqrt{${hyp*hyp - adj*adj}}`} \\).\n` :
                  trig === 'tan' ? `Vì \\( \\tan \\alpha = \\frac{${val}}{${val2}} \\), ta chọn cạnh đối = ${val}, cạnh kề = ${val2}.\nCạnh huyền = \\( \\sqrt{${val}^2 + ${val2}^2} = ${Number.isInteger(hyp)?hyp:`\\sqrt{${opp*opp + adj*adj}}`} \\).\n` :
                  `Vì \\( \\cot \\alpha = \\frac{${val}}{${val2}} \\), ta chọn cạnh kề = ${val}, cạnh đối = ${val2}.\nCạnh huyền = \\( \\sqrt{${val2}^2 + ${val}^2} = ${Number.isInteger(hyp)?hyp:`\\sqrt{${opp*opp + adj*adj}}`} \\).\n`) +
-                `Vậy \\( \\${targetTrig} \\alpha = ${ansStr} \\).`;
+                `Vậy \\( \\${targetTrig} \\alpha = \\) ${ansStr}.`;
             
-            const wrong1 = ansStr.replace('\\frac{', '\\frac{1}{');
-            const wrong2 = ansStr.replace('sqrt', '');
-            const wrong3 = `\\( \\frac{${val2}}{${val}} \\)`;
+            const wrong1 = w1Str;
+            const wrong2 = w2Str;
+            const wrong3 = `\\( \\frac{${val}}{${val2}} \\)`;
 
             const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
             q.push({ id: 'b11_d4_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
