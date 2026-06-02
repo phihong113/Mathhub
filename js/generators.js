@@ -215,9 +215,6 @@ const Generators = {
     b9_d7: function(count=5) {
         return this.generic_algebra('b9_d7', `Dạng 7: Chứng minh đẳng thức`, count);
     },
-    b12_d1: function(count=5) {
-        return this.generic_geometry('b12_d1', `Dạng 1: Giải tam giác vuông`, count);
-    },
     b13_d1: function(count=5) {
         return this.generic_geometry('b13_d1', `Dạng 1: Chứng minh nhiều điểm cùng nằm trên một đường tròn`, count);
     },
@@ -4214,6 +4211,281 @@ Vậy \\( A = 1 \\).`;
             
             const opts = this.shuffle([`\\( ${ansStr} \\)`, `\\( ${wrong1} \\)`, `\\( ${wrong2} \\)`, `\\( ${wrong3} \\)`]);
             q.push({ id: 'b11_d6_'+i, text, options: opts, correctAnswer: opts.findIndex(x => x === `\\( ${ansStr} \\)`), explanation: exp });
+        }
+        return q;
+    },
+    b12_d1: function(count=5) {
+        const q = [];
+        let types = [];
+        for(let i=0; i<count; i++) types.push(i % 2);
+        types = this.shuffle(types);
+        
+        for(let i=0; i<count; i++) {
+            if (types[i] === 0) {
+                const triples = [
+                    [3, 4, 5], [6, 8, 10], [5, 12, 13], 
+                    [8, 15, 17], [7, 24, 25], [9, 12, 15],
+                    [15, 20, 25], [12, 16, 20], [10, 24, 26]
+                ];
+                const tr = triples[Math.floor(Math.random() * triples.length)];
+                const a = tr[0], b = tr[1], c = tr[2];
+                const missing = Math.floor(Math.random()*3); 
+                
+                let text = `Giải tam giác ABC vuông tại A, biết `;
+                let ansStr = '';
+                let exp = `Sử dụng định lý Pythagore trong tam giác ABC vuông tại A:\n`;
+                let b_ang = Math.round(Math.asin(b/c) * 180 / Math.PI);
+                let c_ang = 90 - b_ang;
+                
+                if (missing === 0) {
+                    text += `\\( AC = ${b} \\) cm, \\( BC = ${c} \\) cm.`;
+                    ansStr = `\\( AB = ${a} \\text{ cm}; \\widehat{B} \\approx ${b_ang}^\\circ; \\widehat{C} \\approx ${c_ang}^\\circ \\)`;
+                    exp += `\\( AB = \\sqrt{BC^2 - AC^2} = \\sqrt{${c}^2 - ${b}^2} = ${a} \\) (cm).\n`;
+                    exp += `Tính góc: \\( \\sin B = \\frac{AC}{BC} = \\frac{${b}}{${c}} \\Rightarrow \\widehat{B} \\approx ${b_ang}^\\circ \\).\n`;
+                } else if (missing === 1) {
+                    text += `\\( AB = ${a} \\) cm, \\( BC = ${c} \\) cm.`;
+                    ansStr = `\\( AC = ${b} \\text{ cm}; \\widehat{B} \\approx ${b_ang}^\\circ; \\widehat{C} \\approx ${c_ang}^\\circ \\)`;
+                    exp += `\\( AC = \\sqrt{BC^2 - AB^2} = \\sqrt{${c}^2 - ${a}^2} = ${b} \\) (cm).\n`;
+                    exp += `Tính góc: \\( \\cos B = \\frac{AB}{BC} = \\frac{${a}}{${c}} \\Rightarrow \\widehat{B} \\approx ${b_ang}^\\circ \\).\n`;
+                } else {
+                    text += `\\( AB = ${a} \\) cm, \\( AC = ${b} \\) cm.`;
+                    ansStr = `\\( BC = ${c} \\text{ cm}; \\widehat{B} \\approx ${b_ang}^\\circ; \\widehat{C} \\approx ${c_ang}^\\circ \\)`;
+                    exp += `\\( BC = \\sqrt{AB^2 + AC^2} = \\sqrt{${a}^2 + ${b}^2} = ${c} \\) (cm).\n`;
+                    exp += `Tính góc: \\( \\tan B = \\frac{AC}{AB} = \\frac{${b}}{${a}} \\Rightarrow \\widehat{B} \\approx ${b_ang}^\\circ \\).\n`;
+                }
+                exp += `Suy ra \\( \\widehat{C} = 90^\\circ - \\widehat{B} \\approx ${c_ang}^\\circ \\).`;
+                
+                const w1 = ansStr.replace(`\\approx ${b_ang}^\\circ`, `\\approx ${c_ang}^\\circ`).replace(`\\approx ${c_ang}^\\circ`, `\\approx ${b_ang}^\\circ`);
+                let val_wrong = missing === 0 ? a+1 : missing === 1 ? b+1 : c+1;
+                const w2 = ansStr.replace(`= ${missing===0?a:missing===1?b:c} \\`, `= ${val_wrong} \\`);
+                const w3 = ansStr.replace(`\\approx ${b_ang}^\\circ`, `\\approx ${b_ang+5}^\\circ`);
+                
+                const opts = this.shuffle([ansStr, w1, w2, w3]);
+                q.push({ id: 'b12_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else {
+                const angles = [30, 45, 60];
+                const ang = angles[Math.floor(Math.random()*3)];
+                const isHyp = Math.random() > 0.5; 
+                const side = (Math.floor(Math.random()*5)+3)*2; 
+                
+                let text = `Giải tam giác ABC vuông tại A, biết \\( \\widehat{B} = ${ang}^\\circ \\) và `;
+                let ansStr = '';
+                let exp = `Vì tam giác ABC vuông tại A nên \\( \\widehat{C} = 90^\\circ - \\widehat{B} = 90^\\circ - ${ang}^\\circ = ${90-ang}^\\circ \\).\n`;
+                
+                if (isHyp) {
+                    text += `\\( BC = ${side} \\) cm.`;
+                    const ab = ang === 30 ? `${side}\\cdot \\frac{\\sqrt{3}}{2} = ${side/2}\\sqrt{3}` : ang === 45 ? `${side}\\cdot \\frac{\\sqrt{2}}{2} = ${side/2}\\sqrt{2}` : `${side}\\cdot \\frac{1}{2} = ${side/2}`;
+                    const ac = ang === 30 ? `${side}\\cdot \\frac{1}{2} = ${side/2}` : ang === 45 ? `${side/2}\\sqrt{2}` : `${side/2}\\sqrt{3}`;
+                    
+                    const ab_val = ang === 30 ? `${side/2}\\sqrt{3}` : ang === 45 ? `${side/2}\\sqrt{2}` : `${side/2}`;
+                    const ac_val = ang === 30 ? `${side/2}` : ang === 45 ? `${side/2}\\sqrt{2}` : `${side/2}\\sqrt{3}`;
+                    
+                    ansStr = `\\( \\widehat{C} = ${90-ang}^\\circ; AB = ${ab_val}\\text{ cm}; AC = ${ac_val}\\text{ cm} \\)`;
+                    exp += `Tính cạnh góc vuông: \\( AB = BC \\cdot \\cos B = ${side} \\cdot \\cos ${ang}^\\circ = ${ab} \\) (cm).\n`;
+                    exp += `Tính cạnh góc vuông: \\( AC = BC \\cdot \\sin B = ${side} \\cdot \\sin ${ang}^\\circ = ${ac} \\) (cm).`;
+                    
+                    const w1 = `\\( \\widehat{C} = ${90-ang}^\\circ; AB = ${ac_val}\\text{ cm}; AC = ${ab_val}\\text{ cm} \\)`; 
+                    const w2 = `\\( \\widehat{C} = ${ang}^\\circ; AB = ${ab_val}\\text{ cm}; AC = ${ac_val}\\text{ cm} \\)`; 
+                    const w3 = `\\( \\widehat{C} = ${90-ang}^\\circ; AB = ${side}\\sqrt{3}\\text{ cm}; AC = ${side}\\text{ cm} \\)`; 
+                    
+                    const opts = this.shuffle([ansStr, w1, w2, w3]);
+                    q.push({ id: 'b12_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+                } else {
+                    text += `\\( AB = ${side} \\) cm.`;
+                    
+                    const bc_val = ang === 30 ? `${side*2/3}\\sqrt{3}` : ang === 45 ? `${side}\\sqrt{2}` : `${side*2}`;
+                    const ac_val = ang === 30 ? `${side/3}\\sqrt{3}` : ang === 45 ? `${side}` : `${side}\\sqrt{3}`;
+                    
+                    ansStr = `\\( \\widehat{C} = ${90-ang}^\\circ; BC = ${bc_val}\\text{ cm}; AC = ${ac_val}\\text{ cm} \\)`;
+                    
+                    exp += `Tính cạnh góc vuông: \\( AC = AB \\cdot \\tan B = ${side} \\cdot \\tan ${ang}^\\circ = ${ac_val} \\) (cm).\n`;
+                    exp += `Tính cạnh huyền: \\( BC = \\frac{AB}{\\cos B} = \\frac{${side}}{\\cos ${ang}^\\circ} = ${bc_val} \\) (cm).`;
+                    
+                    const w1 = `\\( \\widehat{C} = ${90-ang}^\\circ; BC = ${ac_val}\\text{ cm}; AC = ${bc_val}\\text{ cm} \\)`;
+                    const w2 = `\\( \\widehat{C} = ${ang}^\\circ; BC = ${bc_val}\\text{ cm}; AC = ${ac_val}\\text{ cm} \\)`;
+                    const w3 = `\\( \\widehat{C} = ${90-ang}^\\circ; BC = ${side}\\text{ cm}; AC = ${side}\\sqrt{3}\\text{ cm} \\)`;
+                    
+                    const opts = this.shuffle([ansStr, w1, w2, w3]);
+                    q.push({ id: 'b12_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+                }
+            }
+        }
+        return q;
+    },
+    b12_d2: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const B = 45; 
+            const C = 60; 
+            const AH = (Math.floor(Math.random()*4)+2)*6; 
+            
+            const AB = AH * Math.sqrt(2); 
+            const AC = AH * 2 / Math.sqrt(3); 
+            
+            const AB_disp = `${AH}\\sqrt{2}`;
+            
+            const text = `Cho tam giác ABC nhọn, biết \\( \\widehat{B} = ${B}^\\circ \\), \\( \\widehat{C} = ${C}^\\circ \\), và \\( AB = ${AB_disp} \\) cm. Kẻ đường cao AH. Tính độ dài cạnh \\( AC \\) (kết quả chứa căn).`;
+            
+            const ac_val = (2 * AH) % 3 === 0 ? `${(2*AH/3)}\\sqrt{3}` : `\\frac{${2*AH}}{3}\\sqrt{3}`;
+            const ansStr = `\\( AC = ${ac_val} \\text{ cm} \\)`;
+            
+            const exp = `Kẻ đường cao \\( AH \\perp BC \\) (\\( H \\in BC \\)). Ta có hai tam giác vuông \\( AHB \\) và \\( AHC \\).\n` +
+                `Xét tam giác vuông \\( AHB \\): \\( AH = AB \\cdot \\sin B = ${AB_disp} \\cdot \\sin ${B}^\\circ = ${AB_disp} \\cdot \\frac{\\sqrt{2}}{2} = ${AH} \\) (cm).\n` +
+                `Xét tam giác vuông \\( AHC \\): \\( AC = \\frac{AH}{\\sin C} = \\frac{${AH}}{\\sin ${C}^\\circ} = \\frac{${AH}}{\\frac{\\sqrt{3}}{2}} = ${ac_val} \\) (cm).`;
+            
+            let wrong1 = `\\( AC = ${AH}\\sqrt{3} \\text{ cm} \\)`;
+            let wrong2 = `\\( AC = ${AH*2} \\text{ cm} \\)`;
+            let wrong3 = `\\( AC = ${(2 * AH) % 3 === 0 ? (2*AH/3) : `\\frac{${2*AH}}{3}`} \\sqrt{2} \\text{ cm} \\)`;
+            if (wrong1 === ansStr) wrong1 = `\\( AC = ${AH} \\text{ cm} \\)`;
+            
+            const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+            q.push({ id: 'b12_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+        }
+        return q;
+    },
+    b12_d3: function(count=5) {
+        const q = [];
+        let types = [];
+        for(let i=0; i<count; i++) types.push(i % 2);
+        types = this.shuffle(types);
+        
+        for(let i=0; i<count; i++) {
+            if (types[i] === 0) {
+                const a = (Math.floor(Math.random()*5)+2)*2; 
+                const b = (Math.floor(Math.random()*5)+3)*2; 
+                const angles = [30, 45, 60];
+                const C = angles[Math.floor(Math.random()*3)];
+                
+                const text = `Tính diện tích tam giác ABC biết \\( AC = ${b} \\) cm, \\( BC = ${a} \\) cm và góc xen giữa \\( \\widehat{C} = ${C}^\\circ \\).`;
+                
+                let S_val = '';
+                const S_coeff = (a * b) / 2;
+                if (C === 30) {
+                    S_val = `${S_coeff / 2}`;
+                } else if (C === 45) {
+                    S_val = `${S_coeff / 2}\\sqrt{2}`;
+                } else {
+                    S_val = `${S_coeff / 2}\\sqrt{3}`;
+                }
+                const ansStr = `\\( ${S_val} \\text{ cm}^2 \\)`;
+                
+                const exp = `Kẻ đường cao \\( AH \\perp BC \\).\n` +
+                    `Trong tam giác vuông \\( AHC \\), ta có \\( AH = AC \\cdot \\sin C = ${b} \\cdot \\sin ${C}^\\circ \\).\n` +
+                    `Diện tích tam giác \\( ABC \\) là:\n` +
+                    `\\( S = \\frac{1}{2} \\cdot BC \\cdot AH = \\frac{1}{2} \\cdot BC \\cdot AC \\cdot \\sin C \\)\n` +
+                    `\\( S = \\frac{1}{2} \\cdot ${a} \\cdot ${b} \\cdot \\sin ${C}^\\circ = ${S_coeff} \\cdot ${C === 30 ? '\\frac{1}{2}' : C === 45 ? '\\frac{\\sqrt{2}}{2}' : '\\frac{\\sqrt{3}}{2}'} = ${S_val} \\) (\\( \\text{cm}^2 \\)).`;
+
+                const wrong1 = `\\( ${S_coeff} \\text{ cm}^2 \\)`;
+                const wrong2 = C === 30 ? `\\( ${S_coeff / 2}\\sqrt{3} \\text{ cm}^2 \\)` : `\\( ${S_coeff / 2} \\text{ cm}^2 \\)`;
+                const wrong3 = `\\( ${S_coeff * 2} \\text{ cm}^2 \\)`;
+                
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b12_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else {
+                const a = (Math.floor(Math.random()*5)+2)*2; 
+                const b = (Math.floor(Math.random()*5)+3)*2; 
+                const angles = [30, 45, 60];
+                const C = angles[Math.floor(Math.random()*3)];
+                
+                const text = `Tính diện tích hình bình hành ABCD biết \\( AB = ${a} \\) cm, \\( AD = ${b} \\) cm và góc \\( \\widehat{A} = ${C}^\\circ \\).`;
+                
+                let S_val = '';
+                const S_coeff = a * b;
+                if (C === 30) {
+                    S_val = `${S_coeff / 2}`;
+                } else if (C === 45) {
+                    S_val = `${S_coeff / 2}\\sqrt{2}`;
+                } else {
+                    S_val = `${S_coeff / 2}\\sqrt{3}`;
+                }
+                const ansStr = `\\( ${S_val} \\text{ cm}^2 \\)`;
+                
+                const exp = `Kẻ đường cao \\( DH \\perp AB \\) (\\( H \\in AB \\)).\n` +
+                    `Trong tam giác vuông \\( AHD \\), ta có \\( DH = AD \\cdot \\sin A = ${b} \\cdot \\sin ${C}^\\circ \\).\n` +
+                    `Diện tích hình bình hành \\( ABCD \\) là tích của cạnh đáy và chiều cao tương ứng:\n` +
+                    `\\( S = AB \\cdot DH = AB \\cdot AD \\cdot \\sin A \\)\n` +
+                    `\\( S = ${a} \\cdot ${b} \\cdot \\sin ${C}^\\circ = ${S_coeff} \\cdot ${C === 30 ? '\\frac{1}{2}' : C === 45 ? '\\frac{\\sqrt{2}}{2}' : '\\frac{\\sqrt{3}}{2}'} = ${S_val} \\) (\\( \\text{cm}^2 \\)).`;
+
+                const wrong1 = `\\( ${S_coeff} \\text{ cm}^2 \\)`;
+                const wrong2 = C === 30 ? `\\( ${S_coeff / 2}\\sqrt{3} \\text{ cm}^2 \\)` : `\\( ${S_coeff / 2} \\text{ cm}^2 \\)`;
+                const wrong3 = `\\( ${S_coeff / 4} \\text{ cm}^2 \\)`;
+                
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b12_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            }
+        }
+        return q;
+    },
+    b12_d4: function(count=5) {
+        const q = [];
+        let types = [];
+        for(let i=0; i<count; i++) types.push(i % 3);
+        types = this.shuffle(types);
+        
+        for(let i=0; i<count; i++) {
+            if (types[i] === 0) {
+                const length = Math.floor(Math.random()*4)+4; 
+                const ang = Math.floor(Math.random()*15)+55; 
+                const text = `Một cái thang dài \\( ${length} \\) m tựa vào một bức tường. Góc tạo bởi cái thang và mặt đất là \\( ${ang}^\\circ \\). Hỏi chân thang cách chân tường bao nhiêu mét? (Làm tròn đến 2 chữ số thập phân).`;
+                
+                const dist = length * Math.cos(ang * Math.PI / 180);
+                const ansStr = `\\( ${dist.toFixed(2)} \\text{ m} \\)`;
+                
+                const exp = `Bài toán được mô hình hóa thành tam giác vuông, trong đó cái thang là cạnh huyền (\\( ${length} \\) m), khoảng cách từ chân thang đến chân tường là cạnh kề của góc tạo bởi thang và mặt đất (\\( ${ang}^\\circ \\)).\n` +
+                    `Sử dụng hệ thức: \\( \\text{cạnh kề} = \\text{cạnh huyền} \\cdot \\cos(\\text{góc}) \\)\n` +
+                    `\\( d = ${length} \\cdot \\cos ${ang}^\\circ \\approx ${dist.toFixed(2)} \\text{ m} \\).`;
+                
+                const w1 = `\\( ${(length * Math.sin(ang * Math.PI / 180)).toFixed(2)} \\text{ m} \\)`; 
+                const w2 = `\\( ${(length / Math.cos(ang * Math.PI / 180)).toFixed(2)} \\text{ m} \\)`;
+                const w3 = `\\( ${(length * Math.tan(ang * Math.PI / 180)).toFixed(2)} \\text{ m} \\)`;
+                
+                const opts = this.shuffle([ansStr, w1, w2, w3]);
+                q.push({ id: 'b12_d4_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else if (types[i] === 1) {
+                const v = Math.floor(Math.random()*200)+400; 
+                const t_min = Math.floor(Math.random()*5)+2; 
+                const ang = Math.floor(Math.random()*10)+10; 
+                
+                const text = `Một máy bay cất cánh với vận tốc \\( ${v} \\text{ km/h} \\) bay lên theo một đường thẳng tạo với mặt đất một góc \\( ${ang}^\\circ \\). Hỏi sau \\( ${t_min} \\) phút bay, máy bay ở độ cao bao nhiêu km so với mặt đất? (Làm tròn đến 2 chữ số thập phân).`;
+                
+                const dist = v * (t_min / 60); 
+                const height = dist * Math.sin(ang * Math.PI / 180);
+                const ansStr = `\\( ${height.toFixed(2)} \\text{ km} \\)`;
+                
+                const exp = `Đổi \\( ${t_min} \\) phút = \\( \\frac{${t_min}}{60} \\) giờ = \\( ${Number.isInteger(t_min/60) ? t_min/60 : `\\frac{${t_min}}{60}`} \\) giờ.\n` +
+                    `Quãng đường máy bay bay được (cạnh huyền của tam giác vuông): \\( s = v \\cdot t = ${v} \\cdot \\frac{${t_min}}{60} = ${dist} \\text{ km} \\).\n` +
+                    `Độ cao của máy bay là cạnh đối của góc \\( ${ang}^\\circ \\):\n` +
+                    `\\( h = s \\cdot \\sin ${ang}^\\circ = ${dist} \\cdot \\sin ${ang}^\\circ \\approx ${height.toFixed(2)} \\text{ km} \\).`;
+                
+                const w1 = `\\( ${(dist * Math.cos(ang * Math.PI / 180)).toFixed(2)} \\text{ km} \\)`; 
+                const w2 = `\\( ${(v * t_min * Math.sin(ang * Math.PI / 180)).toFixed(2)} \\text{ km} \\)`; 
+                const w3 = `\\( ${(dist * Math.tan(ang * Math.PI / 180)).toFixed(2)} \\text{ km} \\)`;
+                
+                const opts = this.shuffle([ansStr, w1, w2, w3]);
+                q.push({ id: 'b12_d4_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else {
+                const gk = (Math.floor(Math.random()*5)+13)/10; 
+                const dist = Math.floor(Math.random()*10)+20; 
+                const ang = Math.floor(Math.random()*15)+35; 
+                
+                const text = `Một người dùng giác kế đo chiều cao của một cái cây. Biết khoảng cách từ điểm đặt giác kế đến gốc cây là \\( ${dist} \\text{ m} \\), chiều cao của giác kế (tính từ mặt đất đến ống ngắm) là \\( ${gk} \\text{ m} \\) và góc nâng quan sát được đỉnh cây là \\( ${ang}^\\circ \\). Tính chiều cao của cây (làm tròn đến 2 chữ số thập phân).`;
+                
+                const height_rel = dist * Math.tan(ang * Math.PI / 180);
+                const height = height_rel + gk;
+                const ansStr = `\\( ${height.toFixed(2)} \\text{ m} \\)`;
+                
+                const exp = `Phần ngọn cây tính từ tầm mắt người đo tạo thành cạnh đối của một tam giác vuông có cạnh kề là khoảng cách từ người đo đến cây (\\( ${dist} \\text{ m} \\)).\n` +
+                    `Chiều cao phần ngọn cây so với giác kế là: \\( h_1 = ${dist} \\cdot \\tan ${ang}^\\circ \\approx ${height_rel.toFixed(2)} \\text{ m} \\).\n` +
+                    `Chiều cao tổng thể của cây bằng chiều cao phần ngọn cộng với chiều cao giác kế:\n` +
+                    `\\( H = h_1 + ${gk} \\approx ${height.toFixed(2)} \\text{ m} \\).`;
+                
+                const w1 = `\\( ${height_rel.toFixed(2)} \\text{ m} \\)`; 
+                const w2 = `\\( ${(dist * Math.sin(ang * Math.PI / 180) + gk).toFixed(2)} \\text{ m} \\)`;
+                const w3 = `\\( ${(dist * Math.cos(ang * Math.PI / 180) + gk).toFixed(2)} \\text{ m} \\)`;
+                
+                const opts = this.shuffle([ansStr, w1, w2, w3]);
+                q.push({ id: 'b12_d4_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            }
         }
         return q;
     }
