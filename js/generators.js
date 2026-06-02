@@ -216,27 +216,6 @@ const Generators = {
         return this.generic_algebra('b9_d7', `Dạng 7: Chứng minh đẳng thức`, count);
     },
     b9_d8: function(count=5) {
-        return this.generic_root('b9_d8', `Dạng 8: Sử dụng các phép biến đổi căn thức bậc hai để giải phương trình`, count);
-    },
-    b10_d1: function(count=5) {
-        return this.generic_root('b10_d1', `Dạng 1: Tính căn thức bậc ba`, count);
-    },
-    b10_d2: function(count=5) {
-        return this.generic_root('b10_d2', `Dạng 2: Tính giá trị, rút gọn biểu thức chứa căn bậc ba`, count);
-    },
-    b10_d3: function(count=5) {
-        return this.generic_root('b10_d3', `Dạng 2: Khử mẫu thức chứa căn bậc ba`, count);
-    },
-    b10_d4: function(count=5) {
-        return this.generic_root('b10_d4', `Dạng 3: So sánh các căn bậc ba`, count);
-    },
-    b10_d5: function(count=5) {
-        return this.generic_root('b10_d5', `Dạng 4: Giải phương trình chứa căn bậc ba`, count);
-    },
-    b10_d6: function(count=5) {
-        return this.generic_algebra('b10_d6', `Dạng 4: Bài toán thực tế`, count);
-    },
-    b11_d1: function(count=5) {
         return this.generic_geometry('b11_d1', `Dạng 1: Sử dụng MTCT tính tỉ số lượng giác, tính góc`, count);
     },
     b11_d2: function(count=5) {
@@ -3591,6 +3570,368 @@ Vậy phương trình có tập nghiệm ${ansStr}.`;
             }
         }
         return q;
+    },
+    b10_d1: function(count=5) {
+        const q = [];
+        let types = [];
+        for (let i = 0; i < count; i++) {
+            types.push(i % 2);
+        }
+        types = this.shuffle(types);
+
+        for (let i = 0; i < count; i++) {
+            const type = types[i];
+            if (type === 0) {
+                const a = (Math.random() > 0.5 ? 1 : -1) * (Math.floor(Math.random()*5)+2);
+                const b = Math.floor(Math.random()*5)+1;
+                const c = Math.floor(Math.random()*4)+2;
+                
+                const a3 = a*a*a;
+                const b3_dec = (b*b*b / 1000).toFixed(3).replace(/\.?0+$/, '');
+                const c3 = c*c*c;
+                
+                const text = `Tính giá trị của biểu thức: \\( A = \\sqrt[3]{${a3}} + \\sqrt[3]{${b3_dec}} - \\sqrt[3]{\\frac{1}{${c3}}} \\)`;
+                
+                const val_a = a;
+                const val_b = b/10;
+                
+                let ans_num = val_a*10*c + b*c - 10;
+                let ans_den = 10*c;
+                const gcd = (x, y) => y === 0 ? x : gcd(y, x % y);
+                const g = Math.abs(gcd(ans_num, ans_den));
+                ans_num /= g;
+                ans_den /= g;
+                
+                let ansStr = '';
+                if (ans_den === 1) ansStr = `\\( ${ans_num} \\)`;
+                else if (ans_num === 0) ansStr = `\\( 0 \\)`;
+                else if (ans_num < 0) ansStr = `\\( -\\frac{${-ans_num}}{${ans_den}} \\)`;
+                else ansStr = `\\( \\frac{${ans_num}}{${ans_den}} \\)`;
+                
+                const exp = `Ta đưa các số về dạng lập phương: 
+\\( ${a3} = (${a})^3 \\) ; \\( ${b3_dec} = (${val_b})^3 \\) ; \\( \\frac{1}{${c3}} = \\left(\\frac{1}{${c}}\\right)^3 \\).
+Thay vào biểu thức:
+\\( A = ${a} + ${val_b} - \\frac{1}{${c}} = ${ansStr} \\).`;
+
+                let wrong1 = ans_den === 1 ? `\\( ${ans_num + 1} \\)` : `\\( \\frac{${ans_num + 1}}{${ans_den}} \\)`;
+                let wrong2 = ans_den === 1 ? `\\( ${ans_num - 1} \\)` : `\\( \\frac{${ans_num - 1}}{${ans_den}} \\)`;
+                let wrong3 = ans_den === 1 ? `\\( ${ans_num + 2} \\)` : `\\( \\frac{${ans_num + 2}}{${ans_den}} \\)`;
+                
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b10_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else {
+                const a = (Math.random() > 0.5 ? 1 : -1) * (Math.floor(Math.random()*4)+1);
+                const x_val = Math.floor(Math.random()*10)+5;
+                const sign1 = a > 0 ? '+' : '-';
+                const a_abs = Math.abs(a);
+                
+                const c2 = 3 * a;
+                const c1 = 3 * a * a;
+                const c0 = a * a * a;
+                
+                const sign_c2 = c2 > 0 ? '+' : '-';
+                const sign_c0 = c0 > 0 ? '+' : '-';
+                
+                const text = `Tính giá trị của biểu thức: \\( B = \\sqrt[3]{x^3 ${sign_c2} ${Math.abs(c2)}x^2 + ${c1}x ${sign_c0} ${Math.abs(c0)}} \\) tại \\( x = ${x_val} \\)`;
+                
+                const ans_val = x_val + a;
+                const ansStr = `\\( ${ans_val} \\)`;
+                
+                const exp = `Sử dụng hằng đẳng thức \\( (A+B)^3 = A^3 + 3A^2B + 3AB^2 + B^3 \\), ta thấy biểu thức dưới căn là dạng khai triển của \\( (x ${sign1} ${a_abs})^3 \\).
+Rút gọn biểu thức: \\( B = \\sqrt[3]{(x ${sign1} ${a_abs})^3} = x ${sign1} ${a_abs} \\).
+Thay \\( x = ${x_val} \\) vào ta được: \\( B = ${x_val} ${sign1} ${a_abs} = ${ans_val} \\).`;
+
+                const wrong1 = `\\( ${ans_val + 1} \\)`;
+                const wrong2 = `\\( ${ans_val - 1} \\)`;
+                const wrong3 = `\\( ${ans_val + 2} \\)`;
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b10_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            }
+        }
+        return q;
+    },
+    b10_d2: function(count=5) {
+        const q = [];
+        let types = [];
+        for (let i = 0; i < count; i++) {
+            types.push(i % 2);
+        }
+        types = this.shuffle(types);
+
+        for (let i = 0; i < count; i++) {
+            const type = types[i];
+            if (type === 0) {
+                const a = Math.floor(Math.random()*4)+4;
+                const b = Math.floor(Math.random()*3)+1;
+                const p1 = Math.floor(Math.random()*3)+1;
+                const p2 = Math.floor(Math.random()*3)+1;
+                
+                const x_pow = 3 * p1;
+                const y_pow = 3 * p2;
+                
+                const text = `Rút gọn biểu thức: \\( C = \\sqrt[3]{${a*a*a}x^{${x_pow}}y^{${y_pow}}} - \\sqrt[3]{${b*b*b}x^{${x_pow}}y^{${y_pow}}} \\)`;
+                
+                const x_out = p1 === 1 ? 'x' : `x^${p1}`;
+                const y_out = p2 === 1 ? 'y' : `y^${p2}`;
+                
+                const ansStr = `\\( ${(a-b)}${x_out}${y_out} \\)`;
+                
+                const exp = `Sử dụng quy tắc khai căn bậc ba của một tích: 
+\\( C = \\sqrt[3]{(${a}${x_out}${y_out})^3} - \\sqrt[3]{(${b}${x_out}${y_out})^3} \\)
+\\( C = ${a}${x_out}${y_out} - ${b}${x_out}${y_out} = ${(a-b)}${x_out}${y_out} \\).`;
+
+                const wrong1 = `\\( ${(a+b)}${x_out}${y_out} \\)`;
+                const wrong2 = `\\( ${(a-b)}x^{${x_pow}}y^{${y_pow}} \\)`;
+                const wrong3 = `\\( ${(a-b+1)}${x_out}${y_out} \\)`;
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b10_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else {
+                const a = Math.floor(Math.random()*4)+1;
+                const V = Math.floor(Math.random()*15)+2;
+                
+                const c2 = 3 * a;
+                const c1 = 3 * a * a;
+                const c0 = a * a * a;
+                
+                const text = `Cho \\( x = \\sqrt[3]{${V}} + ${a} \\). Tính giá trị của đa thức \\( P(x) = x^3 - ${c2}x^2 + ${c1}x - ${c0} \\)`;
+                
+                const ansStr = `\\( ${V} \\)`;
+                
+                const exp = `Nhận xét đa thức \\( P(x) = x^3 - 3 \\cdot x^2 \\cdot ${a} + 3 \\cdot x \\cdot ${a}^2 - ${a}^3 = (x - ${a})^3 \\).
+Từ giả thiết \\( x = \\sqrt[3]{${V}} + ${a} \\Rightarrow x - ${a} = \\sqrt[3]{${V}} \\).
+Lập phương hai vế để thế vào đa thức: \\( P(x) = (x - ${a})^3 = (\\sqrt[3]{${V}})^3 = ${V} \\).`;
+
+                const wrong1 = `\\( ${V+1} \\)`;
+                const wrong2 = `\\( ${V*a} \\)`;
+                const wrong3 = `\\( ${V+a} \\)`;
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b10_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            }
+        }
+        return q;
+    },
+    b10_d3: function(count=5) {
+        const q = [];
+        let types = [];
+        for (let i = 0; i < count; i++) {
+            types.push(i % 2);
+        }
+        types = this.shuffle(types);
+
+        for (let i = 0; i < count; i++) {
+            const type = types[i];
+            if (type === 0) {
+                const a = Math.floor(Math.random()*4)+3;
+                let b = Math.floor(Math.random()*3)+1;
+                while(a===b) b = Math.floor(Math.random()*3)+1;
+                const sign = Math.random() > 0.5 ? '+' : '-';
+                
+                const denom_val = sign === '+' ? a + b : a - b;
+                const k = Math.floor(Math.random()*3)+1;
+                const A = k * denom_val;
+                
+                const text = `Trục căn thức ở mẫu: \\( M = \\frac{${A}}{\\sqrt[3]{${a}} ${sign} \\sqrt[3]{${b}}} \\)`;
+                
+                const opp_sign = sign === '+' ? '-' : '+';
+                const part2 = `\\sqrt[3]{${a*a}} ${opp_sign} \\sqrt[3]{${a*b}} + \\sqrt[3]{${b*b}}`;
+                
+                const ansStr = k === 1 ? `\\( ${part2} \\)` : `\\( ${k}(${part2}) \\)`;
+                
+                const exp = `Mẫu số có dạng \\( u ${sign} v \\), ta nhân cả tử và mẫu với lượng liên hợp là bình phương thiếu của ${sign === '+' ? 'hiệu' : 'tổng'}: \\( (\\sqrt[3]{${a}})^2 ${opp_sign} \\sqrt[3]{${a} \\cdot ${b}} + (\\sqrt[3]{${b}})^2 = ${part2} \\).
+\\( M = \\frac{${A}(${part2})}{(\\sqrt[3]{${a}} ${sign} \\sqrt[3]{${b}})(${part2})} \\)
+\\( M = \\frac{${A}(${part2})}{${a} ${sign} ${b}} = \\frac{${A}(${part2})}{${denom_val}} = ${ansStr} \\).`;
+
+                const part2_wrong1 = `\\sqrt[3]{${a*a}} ${sign} \\sqrt[3]{${a*b}} + \\sqrt[3]{${b*b}}`;
+                const part2_wrong2 = `\\sqrt[3]{${a*a}} ${opp_sign} 2\\sqrt[3]{${a*b}} + \\sqrt[3]{${b*b}}`;
+                
+                const wrong1 = k === 1 ? `\\( ${part2_wrong1} \\)` : `\\( ${k}(${part2_wrong1}) \\)`;
+                const wrong2 = k === 1 ? `\\( ${part2_wrong2} \\)` : `\\( ${k}(${part2_wrong2}) \\)`;
+                const wrong3 = k === 1 ? `\\( ${part2} + 1 \\)` : `\\( ${k+1}(${part2}) \\)`;
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b10_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else {
+                const a = Math.floor(Math.random()*4)+4; 
+                let b = Math.floor(Math.random()*3)+1; 
+                const sign = Math.random() > 0.5 ? '+' : '-'; 
+                const opp_sign = sign === '+' ? '-' : '+';
+                
+                const eval_denom = sign === '+' ? a - b : a + b;
+                
+                const k = Math.floor(Math.random()*4)+2;
+                const A = k * eval_denom;
+                
+                const text = `Trục căn thức ở mẫu: \\( N = \\frac{${A}}{\\sqrt[3]{${a*a}} ${sign} \\sqrt[3]{${a*b}} + \\sqrt[3]{${b*b}}} \\)`;
+                
+                const part2 = `\\sqrt[3]{${a}} ${opp_sign} \\sqrt[3]{${b}}`;
+                
+                const ansStr = k === 1 ? `\\( ${part2} \\)` : `\\( ${k}(${part2}) \\)`;
+                
+                const exp = `Mẫu số có dạng bình phương thiếu của ${sign === '+' ? 'tổng' : 'hiệu'}: \\( \\sqrt[3]{${a}^2} ${sign} \\sqrt[3]{${a} \\cdot ${b}} + \\sqrt[3]{${b}^2} \\), do đó ta cần nhân cả tử và mẫu với lượng liên hợp là ${sign === '+' ? 'hiệu' : 'tổng'} hai căn bậc ba: \\( ${part2} \\).
+\\( N = \\frac{${A}(${part2})}{(${part2})(\\sqrt[3]{${a*a}} ${sign} \\sqrt[3]{${a*b}} + \\sqrt[3]{${b*b}})} = \\frac{${A}(${part2})}{${a} ${opp_sign} ${b}} = \\frac{${A}(${part2})}{${eval_denom}} = ${ansStr} \\).`;
+
+                const part2_wrong1 = `\\sqrt[3]{${a}} ${sign} \\sqrt[3]{${b}}`;
+                const wrong1 = k === 1 ? `\\( ${part2_wrong1} \\)` : `\\( ${k}(${part2_wrong1}) \\)`;
+                const wrong2 = k === 1 ? `\\( \\sqrt[3]{${a*a}} ${opp_sign} \\sqrt[3]{${b*b}} \\)` : `\\( ${k}(\\sqrt[3]{${a*a}} ${opp_sign} \\sqrt[3]{${b*b}}) \\)`;
+                const wrong3 = `\\( ${k+1}(${part2}) \\)`;
+                
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b10_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            }
+        }
+        return q;
+    },
+    b10_d4: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const isNeg = Math.random() > 0.5;
+            const sign = isNeg ? '-' : '';
+            const A = Math.floor(Math.random()*3)+2;
+            const B = Math.floor(Math.random()*4)+2;
+            const inside = A*A*A*B;
+            const offset = Math.random() > 0.5 ? 1 : -1;
+            const C = inside + offset;
+            
+            const text = `So sánh \\( ${sign}${A}\\sqrt[3]{${B}} \\) và \\( ${sign}\\sqrt[3]{${C}} \\)`;
+            
+            let ans = '';
+            if (isNeg) {
+                if (inside < C) ans = `\\( -${A}\\sqrt[3]{${B}} > -\\sqrt[3]{${C}} \\)`;
+                else ans = `\\( -${A}\\sqrt[3]{${B}} < -\\sqrt[3]{${C}} \\)`;
+            } else {
+                if (inside < C) ans = `\\( ${A}\\sqrt[3]{${B}} < \\sqrt[3]{${C}} \\)`;
+                else ans = `\\( ${A}\\sqrt[3]{${B}} > \\sqrt[3]{${C}} \\)`;
+            }
+            
+            const wrong1 = ans.replace('<', '>').replace('>', '<');
+            const wrong2 = ans.replace('<', '=').replace('>', '=');
+            const wrong3 = `Không thể so sánh`;
+            
+            const exp = `Đưa thừa số vào trong dấu căn: \\( ${A}\\sqrt[3]{${B}} = \\sqrt[3]{${A}^3 \\cdot ${B}} = \\sqrt[3]{${A*A*A} \\cdot ${B}} = \\sqrt[3]{${inside}} \\).
+Vì \\( ${inside} ${inside < C ? '<' : '>'} ${C} \\) nên \\( \\sqrt[3]{${inside}} ${inside < C ? '<' : '>'} \\sqrt[3]{${C}} \\).
+${isNeg ? `Nhân hai vế với \\( -1 \\) ta phải đổi chiều bất đẳng thức: \\( -\\sqrt[3]{${inside}} ${inside < C ? '>' : '<'} -\\sqrt[3]{${C}} \\).\n` : ''}Vậy ${ans}.`;
+
+            const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+            q.push({ id: 'b10_d4_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+        }
+        return q;
+    },
+    b10_d5: function(count=5) {
+        const q = [];
+        let types = [];
+        for (let i = 0; i < count; i++) {
+            types.push(i % 2);
+        }
+        types = this.shuffle(types);
+
+        for (let i = 0; i < count; i++) {
+            const type = types[i];
+            if (type === 0) {
+                const V = (Math.random() > 0.5 ? 1 : -1) * (Math.floor(Math.random()*4)+2); 
+                const c = Math.floor(Math.random()*3)+2; 
+                const x_sol = (Math.random() > 0.5 ? 1 : -1) * (Math.floor(Math.random()*5)+1);
+                const d = V*V*V - c*x_sol;
+                const sign_d = d >= 0 ? '+' : '-';
+                
+                const text = `Giải phương trình: \\( \\sqrt[3]{${c}x ${sign_d} ${Math.abs(d)}} = ${V} \\)`;
+                const ansStr = `\\( S = \\{${x_sol}\\} \\)`;
+                
+                const exp = `Lập phương hai vế của phương trình: \\( ${c}x ${sign_d} ${Math.abs(d)} = (${V})^3 \\).
+\\( \\Leftrightarrow ${c}x ${sign_d} ${Math.abs(d)} = ${V*V*V} \\)
+\\( \\Leftrightarrow ${c}x = ${V*V*V - d} \\Leftrightarrow x = ${x_sol} \\).
+Vậy phương trình có tập nghiệm ${ansStr} (Không cần điều kiện xác định vì căn bậc ba xác định với mọi x).`;
+
+                const wrong1 = `\\( S = \\{${x_sol+1}\\} \\)`;
+                const wrong2 = `\\( S = \\{${-x_sol}\\} \\)`;
+                const wrong3 = `\\( S = \\emptyset \\)`;
+                
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b10_d5_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else {
+                const b_coef = (Math.random() > 0.5 ? 1 : -1) * 2 * (Math.floor(Math.random()*3)+1);
+                const c_coef = (b_coef/2) * (b_coef/2);
+                const D = Math.floor(Math.random()*2)+2;
+                
+                const sign_b = b_coef < 0 ? '+' : '-';
+                const text = `Giải phương trình: \\( \\sqrt[3]{x^2 ${sign_b} ${Math.abs(b_coef)}x + ${c_coef}} - ${D} = 0 \\)`;
+                
+                const center = Math.abs(b_coef)/2;
+                const actual_center = b_coef < 0 ? -center : center;
+                
+                let ansStr = `\\( S = \\{${actual_center} - ${D}\\sqrt{${D}}; ${actual_center} + ${D}\\sqrt{${D}}\\} \\)`;
+                
+                const exp = `\\( \\Leftrightarrow \\sqrt[3]{x^2 ${sign_b} ${Math.abs(b_coef)}x + ${c_coef}} = ${D} \\).
+Lập phương 2 vế: \\( x^2 ${sign_b} ${Math.abs(b_coef)}x + ${c_coef} = ${D*D*D} \\).
+\\( \\Leftrightarrow x^2 ${sign_b} ${Math.abs(b_coef)}x ${c_coef - D*D*D >= 0 ? '+' : '-'} ${Math.abs(c_coef - D*D*D)} = 0 \\).
+Giải phương trình bậc 2, ta có \\( \\Delta' = (${actual_center})^2 - 1 \\cdot (${c_coef - D*D*D}) = ${D*D*D} > 0 \\).
+Phương trình có 2 nghiệm: \\( x_1 = ${actual_center} + \\sqrt{${D*D*D}} = ${actual_center} + ${D}\\sqrt{${D}} \\) và \\( x_2 = ${actual_center} - \\sqrt{${D*D*D}} = ${actual_center} - ${D}\\sqrt{${D}} \\).
+Vậy tập nghiệm là ${ansStr}.`;
+
+                const wrong1 = `\\( S = \\{${actual_center} - \\sqrt{${D}}; ${actual_center} + \\sqrt{${D}}\\} \\)`;
+                const wrong2 = `\\( S = \\{${actual_center + 1} - ${D}\\sqrt{${D}}; ${actual_center + 1} + ${D}\\sqrt{${D}}\\} \\)`;
+                const wrong3 = `\\( S = \\{${-actual_center} - ${D}\\sqrt{${D}}; ${-actual_center} + ${D}\\sqrt{${D}}\\} \\)`;
+                
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b10_d5_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            }
+        }
+        return q;
+    },
+    b10_d6: function(count=5) {
+        const q = [];
+        let types = [];
+        for (let i = 0; i < count; i++) {
+            types.push(i % 2);
+        }
+        types = this.shuffle(types);
+
+        for (let i = 0; i < count; i++) {
+            const type = types[i];
+            if (type === 0) {
+                const a = Math.floor(Math.random()*5)+4; 
+                const V = a*a*a;
+                
+                const text = `Một bể nước có dạng hình lập phương chứa được đúng \\( ${V}\\text{ m}^3 \\) nước thì đầy bể. Tính độ dài cạnh của bể nước đó.`;
+                const ansStr = `\\( ${a}\\text{ m} \\)`;
+                
+                const exp = `Gọi độ dài cạnh của bể nước hình lập phương là \\( a \\) (\\( a > 0 \\), mét).
+Thể tích của hình lập phương là \\( V = a^3 = ${V} \\).
+Suy ra \\( a = \\sqrt[3]{${V}} = ${a} \\) (m).
+Vậy độ dài cạnh bể nước là ${a}m.`;
+
+                const wrong1 = `\\( ${a*a}\\text{ m} \\)`;
+                const wrong2 = `\\( ${a*3}\\text{ m} \\)`;
+                const wrong3 = `\\( ${a+1}\\text{ m} \\)`;
+                
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b10_d6_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else {
+                const t = Math.floor(Math.random()*5)+4; 
+                const t3 = t*t*t;
+                const k = (Math.floor(Math.random()*10)+50) + 0.5; 
+                const C = (Math.floor(Math.random()*20)+60) + 0.8; 
+                const h = parseFloat((k * t + C).toFixed(2));
+                
+                const text = `Chiều cao ngang vai \\( h \\) (cm) của một con voi đực ở châu Phi xấp xỉ tính theo tuổi \\( t \\) (năm) bằng công thức \\( h = ${k} \\cdot \\sqrt[3]{t} + ${C} \\). Nếu một con voi đực có chiều cao ngang vai là \\( ${h} \\) cm thì con voi đó khoảng bao nhiêu tuổi?`;
+                
+                const ansStr = `\\( ${t3} \\) tuổi`;
+                
+                const exp = `Thay chiều cao \\( h = ${h} \\) vào công thức sinh học đã cho, ta được một phương trình chứa căn bậc ba: 
+\\( ${h} = ${k} \\cdot \\sqrt[3]{t} + ${C} \\)
+\\( \\Leftrightarrow ${k} \\cdot \\sqrt[3]{t} = ${h} - ${C} = ${(h - C).toFixed(2)} \\)
+\\( \\Leftrightarrow \\sqrt[3]{t} = ${(h - C).toFixed(2)} : ${k} = ${t} \\).
+Lập phương 2 vế ta có \\( t = ${t}^3 = ${t3} \\).
+Vậy con voi đực đó khoảng ${t3} tuổi.`;
+
+                const wrong1 = `\\( ${t*t} \\) tuổi`;
+                const wrong2 = `\\( ${t*3} \\) tuổi`;
+                const wrong3 = `\\( ${t3 + 1} \\) tuổi`;
+                
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b10_d6_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            }
+        }
+        return q;
     }
+
 };
 window.MathGenerators = Generators;
