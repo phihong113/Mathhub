@@ -3473,35 +3473,122 @@ Biểu thức trở thành: \\( ${a}\\sqrt{${c}} + ${b}\\sqrt{${c}} - ${d}\\sqrt
     },
     b9_d8: function(count=5) {
         const q = [];
-        for(let i=0; i<count; i++) {
-            const a = Math.floor(Math.random()*3)+1;
-            const b = Math.floor(Math.random()*3)+2;
-            const sum = a + b;
-            const sq_x = Math.floor(Math.random()*3)+1;
-            const x = sq_x * sq_x;
-            const C = sum * sq_x;
-            
-            const n1 = a*a;
-            const n2 = b*b;
-            
-            const text = `Nghiệm của phương trình \\( \\sqrt{${n1}x} + \\sqrt{${n2}x} = ${C} \\) là:`;
-            const exp = `Điều kiện: \\( x \\geq 0 \\).
-Ta có: \\( \\sqrt{${n1}x} + \\sqrt{${n2}x} = ${C} \\)
-\\( \\Leftrightarrow ${a}\\sqrt{x} + ${b}\\sqrt{x} = ${C} \\)
-\\( \\Leftrightarrow ${sum}\\sqrt{x} = ${C} \\)
-\\( \\Leftrightarrow \\sqrt{x} = ${sq_x} \\)
-\\( \\Leftrightarrow x = ${x} \\).`;
+        let types = [];
+        for (let i = 0; i < count; i++) {
+            types.push(i % 2);
+        }
+        types = this.shuffle(types);
 
-            const ansStr = `\\( x = ${x} \\)`;
-            const wrong1 = `\\( x = ${sq_x} \\)`;
-            const wrong2 = `\\( x = ${x*x} \\)`;
-            const wrong3 = `\\( x = ${x+1} \\)`;
-            
-            const optSet = new Set([ansStr, wrong1, wrong2, wrong3]);
-            while(optSet.size < 4) optSet.add(`\\( x = ${Math.floor(Math.random()*10)} \\)`);
-            const opts = this.shuffle(Array.from(optSet).slice(0, 4));
-            
-            q.push({ id: 'b9_d8_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+        for (let i = 0; i < count; i++) {
+            const type = types[i];
+            if (type === 0) {
+                const k = Math.floor(Math.random()*3)+2; 
+                const V = k;
+                const m1 = Math.floor(Math.random()*3)+3; 
+                const m2 = Math.floor(Math.random()*(m1-1))+1; 
+                const N = k * (m1 - m2) + 1;
+                const D = N;
+                const c = Math.floor(Math.random()*2)+2; 
+                
+                let x_sol, d_val;
+                do {
+                    x_sol = Math.floor(Math.random()*4)+2;
+                    d_val = V*V - c*x_sol;
+                } while (d_val === 0);
+                
+                const sign_d = d_val >= 0 ? '+' : '-';
+                const abs_d = Math.abs(d_val);
+                
+                const core_str = `${c}x ${sign_d} ${abs_d}`;
+                
+                const t1_c = m1*m1*c;
+                const t1_d = m1*m1*abs_d;
+                const t1_str = `\\sqrt{${t1_c}x ${sign_d} ${t1_d}}`;
+                
+                const t2_c = m2*m2*c;
+                const t2_d = m2*m2*abs_d;
+                const t2_str = `\\sqrt{${t2_c}x ${sign_d} ${t2_d}}`;
+                
+                const text = `Giải phương trình: \\( ${t1_str} - ${t2_str} + \\frac{1}{${k}}\\sqrt{${core_str}} = ${D} \\)`;
+                
+                const ans = `\\( x = ${x_sol} \\)`;
+                
+                const exp = `Điều kiện: \\( ${core_str} \\geq 0 \\Leftrightarrow x \\geq ${sign_d === '+' ? `-\\frac{${abs_d}}{${c}}` : `\\frac{${abs_d}}{${c}}`} \\).
+Ta có: \\( ${t1_str} - ${t2_str} + \\frac{1}{${k}}\\sqrt{${core_str}} = ${D} \\)
+\\( \\Leftrightarrow \\sqrt{${m1*m1}(${core_str})} - \\sqrt{${m2*m2}(${core_str})} + \\frac{1}{${k}}\\sqrt{${core_str}} = ${D} \\)
+\\( \\Leftrightarrow ${m1}\\sqrt{${core_str}} - ${m2}\\sqrt{${core_str}} + \\frac{1}{${k}}\\sqrt{${core_str}} = ${D} \\)
+\\( \\Leftrightarrow (${m1} - ${m2} + \\frac{1}{${k}})\\sqrt{${core_str}} = ${D} \\)
+\\( \\Leftrightarrow \\frac{${N}}{${k}}\\sqrt{${core_str}} = ${D} \\)
+\\( \\Leftrightarrow \\sqrt{${core_str}} = ${V} \\)
+\\( \\Leftrightarrow ${core_str} = ${V*V} \\)
+\\( \\Leftrightarrow ${c}x = ${V*V - d_val} \\Leftrightarrow x = ${x_sol} \\) (thỏa mãn điều kiện).
+Vậy phương trình có nghiệm duy nhất \\( x = ${x_sol} \\).`;
+                
+                const wrong1 = `\\( x = ${x_sol + 2} \\)`;
+                const wrong2 = `\\( x = ${Math.floor(x_sol / 2) || 1} \\)`;
+                const wrong3 = `\\( x = ${x_sol * 2} \\)`;
+                
+                const optSet = new Set([ans, wrong1, wrong2, wrong3]);
+                while(optSet.size < 4) optSet.add(`\\( x = ${Math.floor(Math.random()*10)+1} \\)`);
+                const opts = this.shuffle(Array.from(optSet).slice(0, 4));
+                
+                q.push({ id: 'b9_d8_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else {
+                const V = Math.floor(Math.random()*2)+2; 
+                const max_m = Math.floor((V*V)/2);
+                const m = Math.floor(Math.random()*max_m)+1; 
+                
+                const B = Math.floor(Math.random()*2)+1; 
+                const A = B * V;
+                
+                const c2 = Math.floor(Math.random()*2)+2;
+                const c1 = A + c2;
+                
+                const c4 = Math.floor(Math.random()*2)+1;
+                const c3 = B + c4;
+                
+                const K1 = Math.floor(Math.random()*4)+3; 
+                const C1 = c1 * K1;
+                
+                const K2 = (Math.random() > 0.5) ? 2 : 4;
+                const C2 = (c2 * K2) / 2;
+                
+                const K4 = (Math.random() > 0.5) ? 3 : 6;
+                const C4 = (c4 * K4) / 3;
+                
+                const t1_in = `\\frac{x - ${m}}{${K1*K1}}`;
+                const t2_in = `\\frac{4x - ${4*m}}{${K2*K2}}`;
+                const t4_in = `\\frac{9x^2 - ${9*m*m}}{${K4*K4}}`;
+                
+                const text = `Tập nghiệm của phương trình \\( ${C1}\\sqrt{${t1_in}} - ${C2}\\sqrt{${t2_in}} - ${c3}\\sqrt{x^2 - ${m*m}} + ${C4}\\sqrt{${t4_in}} = 0 \\) là:`;
+                
+                const x2 = V*V - m;
+                let ansStr = '';
+                if (m === x2) ansStr = `\\( S = \\{${m}\\} \\)`;
+                else ansStr = `\\( S = \\{${Math.min(m, x2)}; ${Math.max(m, x2)}\\} \\)`;
+                
+                const exp = `Điều kiện: \\( x \\geq ${m} \\).
+Ta có: \\( ${C1}\\sqrt{${t1_in}} - ${C2}\\sqrt{${t2_in}} - ${c3}\\sqrt{x^2 - ${m*m}} + ${C4}\\sqrt{${t4_in}} = 0 \\)
+\\( \\Leftrightarrow ${C1} \\cdot \\frac{1}{${K1}}\\sqrt{x - ${m}} - ${C2} \\cdot \\frac{2}{${K2}}\\sqrt{x - ${m}} - ${c3}\\sqrt{x^2 - ${m*m}} + ${C4} \\cdot \\frac{3}{${K4}}\\sqrt{x^2 - ${m*m}} = 0 \\)
+\\( \\Leftrightarrow ${c1}\\sqrt{x - ${m}} - ${c2}\\sqrt{x - ${m}} - ${c3}\\sqrt{x^2 - ${m*m}} + ${c4}\\sqrt{x^2 - ${m*m}} = 0 \\)
+\\( \\Leftrightarrow ${A}\\sqrt{x - ${m}} - ${B}\\sqrt{x^2 - ${m*m}} = 0 \\)
+\\( \\Leftrightarrow ${A}\\sqrt{x - ${m}} - ${B}\\sqrt{x - ${m}}\\sqrt{x + ${m}} = 0 \\)
+\\( \\Leftrightarrow \\sqrt{x - ${m}}(${A} - ${B}\\sqrt{x + ${m}}) = 0 \\)
+Trường hợp 1: \\( \\sqrt{x - ${m}} = 0 \\Leftrightarrow x = ${m} \\) (thỏa mãn).
+Trường hợp 2: \\( ${A} - ${B}\\sqrt{x + ${m}} = 0 \\Leftrightarrow \\sqrt{x + ${m}} = ${V} \\Leftrightarrow x + ${m} = ${V*V} \\Leftrightarrow x = ${x2} \\) (thỏa mãn).
+Vậy phương trình có tập nghiệm ${ansStr}.`;
+
+                let wrong1 = `\\( S = \\{${m}\\} \\)`;
+                if (ansStr === wrong1) wrong1 = `\\( S = \\{${m}; ${m+2}\\} \\)`;
+                const wrong2 = `\\( S = \\{${x2 + 1}; ${m}\\} \\)`;
+                const wrong3 = `\\( S = \\{-${Math.min(m, x2)}; ${Math.max(m, x2)}\\} \\)`;
+                
+                const optSet = new Set([ansStr, wrong1, wrong2, wrong3]);
+                while(optSet.size < 4) optSet.add(`\\( S = \\{${Math.floor(Math.random()*10)}; ${Math.floor(Math.random()*10)+5}\\} \\)`);
+                const opts = this.shuffle(Array.from(optSet).slice(0, 4));
+                
+                q.push({ id: 'b9_d8_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            }
         }
         return q;
     }
