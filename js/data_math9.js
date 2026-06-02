@@ -391,6 +391,21 @@ const math9Data = {
                         "id": "b12_d1",
                         "title": "Dạng 1: Giải tam giác vuông",
                         "generator": "b12_d1"
+                    },
+                    {
+                        "id": "b12_d2",
+                        "title": "Dạng 2: Giải tam giác nhọn (Tam giác thường)",
+                        "generator": "b12_d2"
+                    },
+                    {
+                        "id": "b12_d3",
+                        "title": "Dạng 3: Tính diện tích tam giác, tứ giác",
+                        "generator": "b12_d3"
+                    },
+                    {
+                        "id": "b12_d4",
+                        "title": "Dạng 4: Ước lượng chiều cao và khoảng cách (Ứng dụng thực tế)",
+                        "generator": "b12_d4"
                     }
                 ]
             },
