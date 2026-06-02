@@ -215,24 +215,6 @@ const Generators = {
     b9_d7: function(count=5) {
         return this.generic_algebra('b9_d7', `Dạng 7: Chứng minh đẳng thức`, count);
     },
-    b9_d8: function(count=5) {
-        return this.generic_geometry('b11_d1', `Dạng 1: Sử dụng MTCT tính tỉ số lượng giác, tính góc`, count);
-    },
-    b11_d2: function(count=5) {
-        return this.generic_geometry('b11_d2', `Dạng 2: Tính tỉ số lượng giác của góc nhọn trong một tam giác vuông`, count);
-    },
-    b11_d3: function(count=5) {
-        return this.generic_geometry('b11_d3', `Dạng 3: Tính các cạnh trong một tam giác vuông sử dụng tỉ số lượng giác của góc nhọn.`, count);
-    },
-    b11_d4: function(count=5) {
-        return this.generic_geometry('b11_d4', `Dạng 4: Dựng góc nhọn  biết một tỉ số lượng giác của góc đó bằng`, count);
-    },
-    b11_d5: function(count=5) {
-        return this.generic_geometry('b11_d5', `Dạng 5: Tính giá trị của biểu thức lượng giác với các góc đặc biệt`, count);
-    },
-    b11_d6: function(count=5) {
-        return this.generic_geometry('b11_d6', `Dạng 6: So sánh các tỉ số lượng giác mà không dùng máy tính hoặc bảng số`, count);
-    },
     b12_d1: function(count=5) {
         return this.generic_geometry('b12_d1', `Dạng 1: Giải tam giác vuông`, count);
     },
@@ -3929,6 +3911,299 @@ Vậy con voi đực đó khoảng ${t3} tuổi.`;
                 const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
                 q.push({ id: 'b10_d6_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
             }
+        }
+        return q;
+    },
+    b11_d1: function(count=5) {
+        const q = [];
+        let types = [];
+        for (let i = 0; i < count; i++) {
+            types.push(i % 2);
+        }
+        types = this.shuffle(types);
+
+        for(let i=0; i<count; i++) {
+            const type = types[i];
+            const trig = ['sin', 'cos', 'tan', 'cot'][Math.floor(Math.random()*4)];
+            if (type === 0) {
+                const deg = Math.floor(Math.random()*80)+5;
+                const min = Math.floor(Math.random()*60);
+                const angleRad = (deg + min/60) * Math.PI / 180;
+                let val = 0;
+                if (trig === 'sin') val = Math.sin(angleRad);
+                else if (trig === 'cos') val = Math.cos(angleRad);
+                else if (trig === 'tan') val = Math.tan(angleRad);
+                else val = 1 / Math.tan(angleRad);
+                
+                const valStr = val.toFixed(3);
+                
+                const text = `Sử dụng máy tính cầm tay, tính giá trị của \\( \\${trig} ${deg}^\\circ ${min}' \\) (làm tròn đến chữ số thập phân thứ 3).`;
+                const ans = `\\( ${valStr} \\)`;
+                
+                const exp = trig === 'cot' 
+                    ? `Đối với \\( \\cot \\), ta bấm \\( \\frac{1}{\\tan(${deg}^\\circ ${min}')} \\) trên máy tính. Kết quả xấp xỉ \\( ${valStr} \\).`
+                    : `Bấm trực tiếp phím \\( \\${trig} \\) rồi nhập \\( ${deg}^\\circ ${min}' \\). Kết quả làm tròn 3 chữ số thập phân là \\( ${valStr} \\).`;
+                
+                const wrong1 = `\\( ${(val + 0.1).toFixed(3)} \\)`;
+                const wrong2 = `\\( ${(val - 0.05).toFixed(3)} \\)`;
+                const wrong3 = `\\( ${(val * 1.5).toFixed(3)} \\)`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b11_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            } else {
+                let val = 0;
+                if (trig === 'sin' || trig === 'cos') val = (Math.floor(Math.random()*90)+5)/100;
+                else val = (Math.floor(Math.random()*300)+10)/100; 
+                
+                let angleRad = 0;
+                if (trig === 'sin') angleRad = Math.asin(val);
+                else if (trig === 'cos') angleRad = Math.acos(val);
+                else if (trig === 'tan') angleRad = Math.atan(val);
+                else angleRad = Math.atan(1/val);
+                
+                const angleDeg = angleRad * 180 / Math.PI;
+                const d = Math.floor(angleDeg);
+                const m = Math.round((angleDeg - d) * 60);
+                
+                const text = `Sử dụng máy tính cầm tay, tìm số đo góc nhọn \\( \\alpha \\) (làm tròn đến phút) biết \\( \\${trig} \\alpha = ${val.toFixed(2)} \\).`;
+                const ans = `\\( \\alpha \\approx ${d}^\\circ ${m}' \\)`;
+                
+                const exp = trig === 'cot'
+                    ? `Vì \\( \\cot \\alpha = ${val.toFixed(2)} \\) nên \\( \\tan \\alpha = \\frac{1}{${val.toFixed(2)}} \\). Sử dụng phím Shift + tan để tìm góc \\( \\alpha \\). Kết quả xấp xỉ \\( ${d}^\\circ ${m}' \\).`
+                    : `Sử dụng phím Shift + \\( \\${trig} \\) rồi nhập \\( ${val.toFixed(2)} \\). Bấm phím độ, phút để ra kết quả. Kết quả xấp xỉ \\( ${d}^\\circ ${m}' \\).`;
+                
+                const wrong1 = `\\( \\alpha \\approx ${d+1}^\\circ ${m}' \\)`;
+                const wrong2 = `\\( \\alpha \\approx ${d}^\\circ ${(m+15)%60}' \\)`;
+                const wrong3 = `\\( \\alpha \\approx ${d-1}^\\circ ${m}' \\)`;
+                const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b11_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+            }
+        }
+        return q;
+    },
+    b11_d2: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const triples = [
+                [3, 4, 5], [6, 8, 10], [5, 12, 13], 
+                [8, 15, 17], [7, 24, 25], [9, 12, 15]
+            ];
+            const tr = triples[Math.floor(Math.random() * triples.length)];
+            let a, b, c;
+            if (Math.random() > 0.5) { a = tr[0]; b = tr[1]; c = tr[2]; }
+            else { a = tr[1]; b = tr[0]; c = tr[2]; }
+            
+            const missing = Math.floor(Math.random()*3);
+            
+            let given1, given2, missing_var;
+            if (missing === 0) {
+                given1 = `AC = ${b}`; given2 = `BC = ${c}`; missing_var = 'AB';
+            } else if (missing === 1) {
+                given1 = `AB = ${a}`; given2 = `BC = ${c}`; missing_var = 'AC';
+            } else {
+                given1 = `AB = ${a}`; given2 = `AC = ${b}`; missing_var = 'BC';
+            }
+            
+            const trig = ['sin', 'cos', 'tan', 'cot'][Math.floor(Math.random()*4)];
+            const angle = ['B', 'C'][Math.floor(Math.random()*2)];
+            
+            const text = `Cho tam giác ABC vuông tại A có \\( ${given1} \\) cm, \\( ${given2} \\) cm. Tính \\( \\${trig} ${angle} \\).`;
+            
+            let num, den;
+            if (angle === 'B') {
+                if (trig === 'sin') { num = b; den = c; }
+                else if (trig === 'cos') { num = a; den = c; }
+                else if (trig === 'tan') { num = b; den = a; }
+                else { num = a; den = b; }
+            } else {
+                if (trig === 'sin') { num = a; den = c; }
+                else if (trig === 'cos') { num = b; den = c; }
+                else if (trig === 'tan') { num = a; den = b; }
+                else { num = b; den = a; }
+            }
+            
+            const gcd = (x, y) => y === 0 ? x : gcd(y, x % y);
+            const g = gcd(num, den);
+            num /= g; den /= g;
+            
+            let ans = den === 1 ? `\\( ${num} \\)` : `\\( \\frac{${num}}{${den}} \\)`;
+            
+            const exp = `Sử dụng định lý Pythagore trong tam giác ABC vuông tại A: \\( AB^2 + AC^2 = BC^2 \\).
+Ta tính được \\( ${missing_var} = ${[a,b,c][missing]} \\) cm.
+Các cạnh của tam giác là: \\( AB = ${a}, AC = ${b}, BC = ${c} \\).
+Góc \\( ${angle} \\) có cạnh đối là \\( ${angle === 'B' ? 'AC' : 'AB'} \\), cạnh kề là \\( ${angle === 'B' ? 'AB' : 'AC'} \\), cạnh huyền là \\( BC \\).
+Theo định nghĩa: \\( \\${trig} ${angle} = \\frac{\\text{${trig === 'sin' ? 'đối' : trig === 'cos' ? 'kề' : trig === 'tan' ? 'đối' : 'kề'}}}{\\text{${trig === 'sin' || trig === 'cos' ? 'huyền' : trig === 'tan' ? 'kề' : 'đối'}}} = \\frac{${num*g}}{${den*g}} = ${ans} \\).`;
+
+            let wrong1 = `\\( \\frac{${den}}{${num}} \\)`; 
+            let w_num2 = angle === 'B' ? a : b;
+            let w_den2 = c;
+            const g2 = gcd(w_num2, w_den2);
+            let wrong2 = `\\( \\frac{${w_num2/g2}}{${w_den2/g2}} \\)`; 
+            if (ans === wrong2) wrong2 = `\\( \\frac{${Math.abs(num-1) || 2}}{${den+1}} \\)`;
+            
+            let w_num3 = angle === 'B' ? a : b;
+            let w_den3 = angle === 'B' ? b : a;
+            const g3 = gcd(w_num3, w_den3);
+            let wrong3 = `\\( \\frac{${w_num3/g3}}{${w_den3/g3}} \\)`;
+            if (ans === wrong3 || wrong2 === wrong3) wrong3 = `\\( \\frac{${num+1}}{${den}} \\)`;
+            
+            const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+            q.push({ id: 'b11_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+        }
+        return q;
+    },
+    b11_d3: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const angles = [30, 45, 60];
+            const alpha = angles[Math.floor(Math.random()*3)];
+            const BC = Math.floor(Math.random()*5)*2 + 10; 
+            
+            const text = `Cho tam giác ABC vuông tại A có cạnh huyền \\( BC = ${BC} \\) cm và góc \\( \\widehat{B} = ${alpha}^\\circ \\). Tính độ dài cạnh \\( AC \\) (kết quả có chứa căn hoặc số nguyên).`;
+            
+            let AC_val = "";
+            if (alpha === 30) {
+                AC_val = `${BC/2}`;
+            } else if (alpha === 45) {
+                AC_val = `${BC/2}\\sqrt{2}`;
+            } else if (alpha === 60) {
+                AC_val = `${BC/2}\\sqrt{3}`;
+            }
+            const ans = `\\( ${AC_val} \\) cm`;
+            
+            const exp = `Trong tam giác vuông ABC, cạnh góc vuông \\( AC \\) là cạnh đối của góc \\( \\widehat{B} \\), và \\( BC \\) là cạnh huyền.
+Theo hệ thức lượng giác: \\( \\sin B = \\frac{AC}{BC} \\Rightarrow AC = BC \\cdot \\sin B \\).
+\\( AC = ${BC} \\cdot \\sin ${alpha}^\\circ \\).
+Tra bảng lượng giác: \\( \\sin ${alpha}^\\circ = ${alpha === 30 ? '\\frac{1}{2}' : alpha === 45 ? '\\frac{\\sqrt{2}}{2}' : '\\frac{\\sqrt{3}}{2}'} \\).
+Vậy \\( AC = ${BC} \\cdot ${alpha === 30 ? '\\frac{1}{2}' : alpha === 45 ? '\\frac{\\sqrt{2}}{2}' : '\\frac{\\sqrt{3}}{2}'} = ${AC_val} \\) (cm).`;
+
+            let wrong1 = alpha === 60 ? `\\( ${BC/2} \\) cm` : `\\( ${BC/2}\\sqrt{3} \\) cm`;
+            let wrong2 = alpha === 45 ? `\\( ${BC/2} \\) cm` : `\\( ${BC/2}\\sqrt{2} \\) cm`;
+            let wrong3 = `\\( ${BC*2} \\) cm`;
+            
+            const opts = this.shuffle([ans, wrong1, wrong2, wrong3]);
+            q.push({ id: 'b11_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ans), explanation: exp });
+        }
+        return q;
+    },
+    b11_d4: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const ratios = [
+                {a: 1, b: 2}, {a: 2, b: 3}, {a: 3, b: 4}, 
+                {a: 4, b: 5}, {a: 1, b: 3}, {a: 2, b: 5}
+            ];
+            const rat = ratios[Math.floor(Math.random() * ratios.length)];
+            const trig = ['sin', 'cos', 'tan', 'cot'][Math.floor(Math.random()*4)];
+            
+            let val = rat.a;
+            let val2 = rat.b;
+            if (trig === 'tan' || trig === 'cot') {
+                val = Math.floor(Math.random()*5)+1;
+                val2 = Math.floor(Math.random()*5)+2;
+                while (val === val2) val2 = Math.floor(Math.random()*5)+2;
+            }
+            
+            const gcd = (x, y) => y === 0 ? x : gcd(y, x % y);
+            const g = gcd(val, val2);
+            val /= g; val2 /= g;
+            
+            const text = `Biết \\( \\${trig} \\alpha = \\frac{${val}}{${val2}} \\). Tính ${trig === 'sin' || trig === 'cos' ? '\\( \\tan \\alpha \\)' : '\\( \\sin \\alpha \\)'}.`;
+            
+            let opp, adj, hyp;
+            if (trig === 'sin') {
+                opp = val; hyp = val2;
+                adj = Math.sqrt(hyp*hyp - opp*opp);
+            } else if (trig === 'cos') {
+                adj = val; hyp = val2;
+                opp = Math.sqrt(hyp*hyp - adj*adj);
+            } else if (trig === 'tan') {
+                opp = val; adj = val2;
+                hyp = Math.sqrt(opp*opp + adj*adj);
+            } else {
+                adj = val; opp = val2;
+                hyp = Math.sqrt(opp*opp + adj*adj);
+            }
+            
+            let ansStr = '';
+            let targetTrig = trig === 'sin' || trig === 'cos' ? 'tan' : 'sin';
+            if (targetTrig === 'tan') {
+                ansStr = `\\( \\frac{${opp}}{${Number.isInteger(adj)?adj:`\\sqrt{${hyp*hyp - opp*opp}}`}} \\)`;
+            } else {
+                ansStr = `\\( \\frac{${opp}}{${Number.isInteger(hyp)?hyp:`\\sqrt{${opp*opp + adj*adj}}`}} \\)`;
+            }
+
+            const exp = `Dựng một tam giác vuông có góc nhọn \\( \\alpha \\).\n` +
+                (trig === 'sin' ? `Vì \\( \\sin \\alpha = \\frac{${val}}{${val2}} \\), ta chọn cạnh đối = ${val}, cạnh huyền = ${val2}.\nCạnh kề = \\( \\sqrt{${val2}^2 - ${val}^2} = ${Number.isInteger(adj)?adj:`\\sqrt{${hyp*hyp - opp*opp}}`} \\).\n` :
+                 trig === 'cos' ? `Vì \\( \\cos \\alpha = \\frac{${val}}{${val2}} \\), ta chọn cạnh kề = ${val}, cạnh huyền = ${val2}.\nCạnh đối = \\( \\sqrt{${val2}^2 - ${val}^2} = ${Number.isInteger(opp)?opp:`\\sqrt{${hyp*hyp - adj*adj}}`} \\).\n` :
+                 trig === 'tan' ? `Vì \\( \\tan \\alpha = \\frac{${val}}{${val2}} \\), ta chọn cạnh đối = ${val}, cạnh kề = ${val2}.\nCạnh huyền = \\( \\sqrt{${val}^2 + ${val2}^2} = ${Number.isInteger(hyp)?hyp:`\\sqrt{${opp*opp + adj*adj}}`} \\).\n` :
+                 `Vì \\( \\cot \\alpha = \\frac{${val}}{${val2}} \\), ta chọn cạnh kề = ${val}, cạnh đối = ${val2}.\nCạnh huyền = \\( \\sqrt{${val2}^2 + ${val}^2} = ${Number.isInteger(hyp)?hyp:`\\sqrt{${opp*opp + adj*adj}}`} \\).\n`) +
+                `Vậy \\( \\${targetTrig} \\alpha = ${ansStr} \\).`;
+            
+            const wrong1 = ansStr.replace('\\frac{', '\\frac{1}{');
+            const wrong2 = ansStr.replace('sqrt', '');
+            const wrong3 = `\\( \\frac{${val2}}{${val}} \\)`;
+
+            const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+            q.push({ id: 'b11_d4_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+        }
+        return q;
+    },
+    b11_d5: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const alpha = Math.floor(Math.random()*40)+10; 
+            const beta = 90 - alpha;
+            const text = `Tính giá trị của biểu thức: \\( A = \\sin^2 ${alpha}^\\circ + \\sin^2 ${beta}^\\circ \\)`;
+            const ansStr = `\\( A = 1 \\)`;
+            
+            const exp = `Vì \\( ${alpha}^\\circ + ${beta}^\\circ = 90^\\circ \\) nên hai góc này phụ nhau.
+Áp dụng tính chất tỉ số lượng giác của hai góc phụ nhau: \\( \\sin ${beta}^\\circ = \\cos ${alpha}^\\circ \\).
+Thay vào biểu thức: \\( A = \\sin^2 ${alpha}^\\circ + \\cos^2 ${alpha}^\\circ \\).
+Lại có công thức cơ bản: \\( \\sin^2 \\alpha + \\cos^2 \\alpha = 1 \\).
+Vậy \\( A = 1 \\).`;
+
+            const wrong1 = `\\( A = 0 \\)`;
+            const wrong2 = `\\( A = 2 \\)`;
+            const wrong3 = `\\( A = \\sin ${alpha}^\\circ \\)`;
+            const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+            q.push({ id: 'b11_d5_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+        }
+        return q;
+    },
+    b11_d6: function(count=5) {
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const arr = [];
+            for (let j=0; j<4; j++) {
+                let isSin = Math.random() > 0.5;
+                let ang = Math.floor(Math.random()*80)+5; 
+                arr.push({ orig: `\\${isSin?'sin':'cos'} ${ang}^\\circ`, val: Math.sin((isSin?ang:(90-ang))*Math.PI/180), equivAng: isSin?ang:90-ang });
+            }
+            arr.sort((a,b) => a.val - b.val); 
+            
+            const items = this.shuffle([...arr]); 
+            const listStr = items.map(x => x.orig).join(', ');
+            
+            const text = `Sắp xếp các tỉ số lượng giác sau theo thứ tự tăng dần: \\( ${listStr} \\).`;
+            
+            const ansStr = arr.map(x => x.orig).join(' < ');
+            
+            let exp = `Đổi các tỉ số lượng giác về cùng hàm \\( \\sin \\) (sử dụng tính chất 2 góc phụ nhau: \\( \\cos \\alpha = \\sin(90^\\circ - \\alpha) \\)):\n`;
+            for (let x of items) {
+                if (x.orig.includes('cos')) {
+                    exp += `\\( ${x.orig} = \\sin ${x.equivAng}^\\circ \\).\n`;
+                }
+            }
+            exp += `Sắp xếp các góc theo thứ tự tăng dần: \\( ${arr.map(x => x.equivAng + '^\\circ').join(' < ')} \\).\n`;
+            exp += `Vì góc nhọn càng lớn thì sin càng lớn, suy ra: \\( ${arr.map(x => '\\sin ' + x.equivAng + '^\\circ').join(' < ')} \\).\n`;
+            exp += `Vậy ta có thứ tự: \\( ${ansStr} \\).`;
+
+            let wrong1 = [...arr].reverse().map(x => x.orig).join(' < '); 
+            let wrong2 = this.shuffle([...arr]).map(x => x.orig).join(' < ');
+            let wrong3 = this.shuffle([...arr]).map(x => x.orig).join(' < ');
+            
+            const opts = this.shuffle([`\\( ${ansStr} \\)`, `\\( ${wrong1} \\)`, `\\( ${wrong2} \\)`, `\\( ${wrong3} \\)`]);
+            q.push({ id: 'b11_d6_'+i, text, options: opts, correctAnswer: opts.findIndex(x => x === `\\( ${ansStr} \\)`), explanation: exp });
         }
         return q;
     }
