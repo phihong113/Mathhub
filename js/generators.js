@@ -4293,8 +4293,9 @@ Vậy \\( A = 1 \\).`;
                 } else {
                     text += `\\( AB = ${side} \\) cm.`;
                     
-                    const bc_val = ang === 30 ? `${side*2/3}\\sqrt{3}` : ang === 45 ? `${side}\\sqrt{2}` : `${side*2}`;
-                    const ac_val = ang === 30 ? `${side/3}\\sqrt{3}` : ang === 45 ? `${side}` : `${side}\\sqrt{3}`;
+                    const fmtNum = (n) => Number.isInteger(n) ? n : parseFloat(n.toFixed(3));
+                    const bc_val = ang === 30 ? `${fmtNum(side*2/3)}\\sqrt{3}` : ang === 45 ? `${side}\\sqrt{2}` : `${side*2}`;
+                    const ac_val = ang === 30 ? `${fmtNum(side/3)}\\sqrt{3}` : ang === 45 ? `${side}` : `${side}\\sqrt{3}`;
                     
                     ansStr = `\\( \\widehat{C} = ${90-ang}^\\circ; BC = ${bc_val}\\text{ cm}; AC = ${ac_val}\\text{ cm} \\)`;
                     
