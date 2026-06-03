@@ -442,14 +442,312 @@ const Generators = {
     },
 
     b14_d1: function(count=5) {
-        return this.generic_algebra('b14_d1', `Dạng 1: So sánh hai đoạn thẳng`, count);
+        const q = [];
+        let types = [];
+        for(let i=0; i<count; i++) types.push(i % 3);
+        types = this.shuffle(types);
+        
+        for(let i=0; i<count; i++) {
+            if (types[i] === 0) {
+                // So sánh dây -> cung
+                const ab = Math.floor(Math.random()*3)+3; // 3 to 5
+                const cd = Math.floor(Math.random()*4)+6; // 6 to 9
+                const text = `Cho đường tròn (O) và hai dây cung AB, CD (không đi qua tâm). Biết $AB = ${ab}\\text{ cm}$ và $CD = ${cd}\\text{ cm}$. Khẳng định nào sau đây là **đúng** về số đo hai cung nhỏ AB và CD?`;
+                const ansStr = `Số đo cung nhỏ AB bé hơn số đo cung nhỏ CD.`;
+                const wrong1 = `Số đo cung nhỏ AB lớn hơn số đo cung nhỏ CD.`;
+                const wrong2 = `Số đo cung nhỏ AB bằng số đo cung nhỏ CD.`;
+                const wrong3 = `Không thể so sánh được vì không biết bán kính.`;
+                
+                const svgCode = `
+<div style="text-align: center; margin: 15px 0;">
+  <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="100" cy="100" r="80" fill="none" stroke="blue" stroke-width="1.5" />
+    <circle cx="100" cy="100" r="3" fill="red" />
+    <text x="95" y="95" font-size="14" font-family="sans-serif">O</text>
+    <!-- Chord AB (small) -->
+    <line x1="25" y1="70" x2="60" y2="30" stroke="green" stroke-width="2" />
+    <text x="15" y="80" font-size="14" font-family="sans-serif">A</text>
+    <text x="60" y="25" font-size="14" font-family="sans-serif">B</text>
+    <!-- Chord CD (large) -->
+    <line x1="160" y1="150" x2="160" y2="50" stroke="purple" stroke-width="2" />
+    <text x="165" y="155" font-size="14" font-family="sans-serif">C</text>
+    <text x="165" y="45" font-size="14" font-family="sans-serif">D</text>
+  </svg>
+</div>`;
+                const exp = `Theo định lý liên hệ giữa cung và dây trong cùng một đường tròn: Dây lớn hơn thì căng cung lớn hơn.\n` +
+                            `Vì $AB = ${ab} < CD = ${cd}$ nên cung nhỏ AB nhỏ hơn cung nhỏ CD.\n` + svgCode;
+                
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b14_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else if (types[i] === 1) {
+                // So sánh góc ở tâm -> dây
+                const g1 = (Math.floor(Math.random()*4)+3)*10; // 30 to 60
+                const g2 = (Math.floor(Math.random()*5)+7)*10; // 70 to 110
+                const text = `Cho đường tròn (O), hai góc ở tâm $\\widehat{AOB} = ${g1}^\\circ$ và $\\widehat{COD} = ${g2}^\\circ$. Hãy so sánh độ dài hai dây cung AB và CD.`;
+                const ansStr = `$AB < CD$`;
+                const wrong1 = `$AB > CD$`;
+                const wrong2 = `$AB = CD$`;
+                const wrong3 = `Không thể so sánh được vì các dây có thể cắt nhau.`;
+                
+                const svgCode = `
+<div style="text-align: center; margin: 15px 0;">
+  <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="100" cy="100" r="80" fill="none" stroke="blue" stroke-width="1.5" />
+    <circle cx="100" cy="100" r="3" fill="red" />
+    <text x="105" y="115" font-size="14" font-family="sans-serif">O</text>
+    <!-- AB Sector -->
+    <path d="M 100 100 L 100 20 A 80 80 0 0 1 156.5 43.4 Z" fill="rgba(0,255,0,0.2)" stroke="none" />
+    <line x1="100" y1="100" x2="100" y2="20" stroke="black" />
+    <line x1="100" y1="100" x2="156.5" y2="43.4" stroke="black" />
+    <line x1="100" y1="20" x2="156.5" y2="43.4" stroke="green" stroke-width="2" />
+    <text x="95" y="15" font-size="14" font-family="sans-serif">A</text>
+    <text x="165" y="45" font-size="14" font-family="sans-serif">B</text>
+    
+    <!-- CD Sector -->
+    <path d="M 100 100 L 20 100 A 80 80 0 0 0 100 180 Z" fill="rgba(128,0,128,0.2)" stroke="none" />
+    <line x1="100" y1="100" x2="20" y2="100" stroke="black" />
+    <line x1="100" y1="100" x2="100" y2="180" stroke="black" />
+    <line x1="20" y1="100" x2="100" y2="180" stroke="purple" stroke-width="2" />
+    <text x="10" y="105" font-size="14" font-family="sans-serif">C</text>
+    <text x="95" y="195" font-size="14" font-family="sans-serif">D</text>
+  </svg>
+</div>`;
+                const exp = `Số đo góc ở tâm bằng số đo cung bị chắn. Ta có $\\text{sđ}\\overparen{AB} = ${g1}^\\circ$ và $\\text{sđ}\\overparen{CD} = ${g2}^\\circ$.\n` +
+                            `Vì $${g1}^\\circ < ${g2}^\\circ$ nên cung nhỏ AB nhỏ hơn cung nhỏ CD.\n` +
+                            `Trong một đường tròn, cung nhỏ hơn thì căng dây nhỏ hơn, do đó $AB < CD$.\n` + svgCode;
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b14_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else {
+                // Khoảng cách
+                const text = `Cho đường tròn (O), OH và OK lần lượt là khoảng cách từ tâm O đến hai dây AB và CD. Biết rằng $OH < OK$, khẳng định nào sau đây là **đúng**?`;
+                const ansStr = `$AB > CD$`;
+                const wrong1 = `$AB < CD$`;
+                const wrong2 = `$AB = CD$`;
+                const wrong3 = `Hai dây AB và CD song song với nhau.`;
+                
+                const svgCode = `
+<div style="text-align: center; margin: 15px 0;">
+  <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="100" cy="100" r="80" fill="none" stroke="blue" stroke-width="1.5" />
+    <circle cx="100" cy="100" r="3" fill="red" />
+    <text x="105" y="115" font-size="14" font-family="sans-serif">O</text>
+    
+    <!-- Dây AB gần tâm -->
+    <line x1="25" y1="70" x2="175" y2="70" stroke="green" stroke-width="2" />
+    <text x="15" y="75" font-size="14" font-family="sans-serif">A</text>
+    <text x="180" y="75" font-size="14" font-family="sans-serif">B</text>
+    <line x1="100" y1="100" x2="100" y2="70" stroke="black" stroke-dasharray="4" />
+    <circle cx="100" cy="70" r="2" fill="black" />
+    <text x="105" y="65" font-size="14" font-family="sans-serif">H</text>
+    
+    <!-- Dây CD xa tâm -->
+    <line x1="160" y1="150" x2="160" y2="50" stroke="purple" stroke-width="2" />
+    <text x="165" y="160" font-size="14" font-family="sans-serif">C</text>
+    <text x="165" y="45" font-size="14" font-family="sans-serif">D</text>
+    <line x1="100" y1="100" x2="160" y2="100" stroke="black" stroke-dasharray="4" />
+    <circle cx="160" cy="100" r="2" fill="black" />
+    <text x="165" y="115" font-size="14" font-family="sans-serif">K</text>
+  </svg>
+</div>`;
+                const exp = `Theo định lý về khoảng cách từ tâm đến dây trong cùng một đường tròn: Dây nào gần tâm hơn thì dây đó lớn hơn.\n` +
+                            `Vì $OH < OK$ (khoảng cách đến dây AB nhỏ hơn) nên dây AB gần tâm O hơn dây CD.\n` +
+                            `Do đó $AB > CD$.\n` + svgCode;
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b14_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            }
+        }
+        return q;
     },
     b14_d2: function(count=5) {
-        return this.generic_algebra('b14_d2', `Dạng 2: Tính số đo góc ở tâm, số đo cung tròn.`, count);
+        const q = [];
+        let types = [];
+        for(let i=0; i<count; i++) types.push(i % 2);
+        types = this.shuffle(types);
+        
+        for(let i=0; i<count; i++) {
+            if (types[i] === 0) {
+                // Kim đồng hồ
+                const t1 = Math.floor(Math.random()*4)+1; // 1 to 4
+                const t2 = t1 + Math.floor(Math.random()*4)+2; // t1+2 to t1+5, max 9
+                
+                const text = `Kim giờ của đồng hồ quay được một góc ở tâm bằng bao nhiêu độ từ ${t1} giờ đến ${t2} giờ cùng ngày?`;
+                const ansStr = `$${(t2-t1)*30}^\\circ$`;
+                const wrong1 = `$${(t2-t1+1)*30}^\\circ$`;
+                const wrong2 = `$${(t2-t1)*15}^\\circ$`;
+                const wrong3 = `$${(t2-t1)*60}^\\circ$`;
+                
+                // SVG for clock
+                let clockLines = "";
+                for(let h=1; h<=12; h++) {
+                    const ang = (h * 30 - 90) * Math.PI / 180;
+                    const x1 = 100 + 70 * Math.cos(ang);
+                    const y1 = 100 + 70 * Math.sin(ang);
+                    const x2 = 100 + 80 * Math.cos(ang);
+                    const y2 = 100 + 80 * Math.sin(ang);
+                    clockLines += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="black" stroke-width="2" />\n`;
+                    const tx = 100 + 60 * Math.cos(ang) - 5;
+                    const ty = 100 + 60 * Math.sin(ang) + 5;
+                    clockLines += `<text x="${tx}" y="${ty}" font-size="12" font-family="sans-serif">${h}</text>\n`;
+                }
+                const a1 = (t1 * 30 - 90) * Math.PI / 180;
+                const h1x = 100 + 40 * Math.cos(a1);
+                const h1y = 100 + 40 * Math.sin(a1);
+                const a2 = (t2 * 30 - 90) * Math.PI / 180;
+                const h2x = 100 + 40 * Math.cos(a2);
+                const h2y = 100 + 40 * Math.sin(a2);
+                
+                const svgCode = `
+<div style="text-align: center; margin: 15px 0;">
+  <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="100" cy="100" r="80" fill="none" stroke="blue" stroke-width="2" />
+    ${clockLines}
+    <!-- Hands -->
+    <line x1="100" y1="100" x2="${h1x}" y2="${h1y}" stroke="red" stroke-width="3" stroke-dasharray="2" />
+    <line x1="100" y1="100" x2="${h2x}" y2="${h2y}" stroke="red" stroke-width="3" />
+    <circle cx="100" cy="100" r="4" fill="black" />
+  </svg>
+</div>`;
+                const exp = `Mặt đồng hồ được chia thành 12 khoảng bằng nhau, mỗi khoảng (1 giờ) tương ứng với góc ở tâm là: $\\frac{360^\\circ}{12} = 30^\\circ$.\n` +
+                            `Từ ${t1} giờ đến ${t2} giờ là khoảng thời gian ${t2-t1} giờ.\n` +
+                            `Do đó, kim giờ quay được góc ở tâm là: $${t2-t1} \\times 30^\\circ = ${(t2-t1)*30}^\\circ$.\n` + svgCode;
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b14_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else {
+                // Cung lớn cung nhỏ
+                const ang = (Math.floor(Math.random()*9)+4)*10; // 40 to 120
+                const text = `Cho đường tròn (O), có góc ở tâm $\\widehat{AOB} = ${ang}^\\circ$. Tính số đo cung nhỏ $\\overparen{AB}$ và cung lớn $\\overparen{AB}$.`;
+                const ansStr = `Cung nhỏ $= ${ang}^\\circ$, cung lớn $= ${360-ang}^\\circ$`;
+                const wrong1 = `Cung nhỏ $= ${ang/2}^\\circ$, cung lớn $= ${360-ang/2}^\\circ$`;
+                const wrong2 = `Cung nhỏ $= ${ang}^\\circ$, cung lớn $= ${180-ang}^\\circ$`;
+                const wrong3 = `Cung nhỏ $= ${ang*2}^\\circ$, cung lớn $= ${360-ang*2}^\\circ$`;
+                
+                const radStart = -90 * Math.PI / 180;
+                const radEnd = (ang - 90) * Math.PI / 180;
+                const x2 = 100 + 80 * Math.cos(radEnd);
+                const y2 = 100 + 80 * Math.sin(radEnd);
+                const isLarge = ang > 180 ? 1 : 0;
+                
+                const svgCode = `
+<div style="text-align: center; margin: 15px 0;">
+  <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(0,0,0,0.1)" stroke-width="1.5" />
+    <path d="M 100 20 A 80 80 0 ${isLarge} 1 ${x2} ${y2}" fill="none" stroke="red" stroke-width="3" />
+    <path d="M ${x2} ${y2} A 80 80 0 ${1-isLarge} 1 100 20" fill="none" stroke="blue" stroke-width="3" stroke-dasharray="5,5" />
+    
+    <line x1="100" y1="100" x2="100" y2="20" stroke="black" />
+    <line x1="100" y1="100" x2="${x2}" y2="${y2}" stroke="black" />
+    
+    <text x="95" y="15" font-size="14" font-family="sans-serif">A</text>
+    <text x="${x2 + 5}" y="${y2 + 10}" font-size="14" font-family="sans-serif">B</text>
+    <circle cx="100" cy="100" r="3" fill="red" />
+    <text x="105" y="110" font-size="14" font-family="sans-serif">O</text>
+  </svg>
+</div>`;
+                const exp = `Số đo của cung nhỏ bằng chính số đo của góc ở tâm chắn cung đó.\n` +
+                            `Nên $\\text{sđ}\\overparen{AB}\\text{(nhỏ)} = \\widehat{AOB} = ${ang}^\\circ$.\n` +
+                            `Số đo của cung lớn bằng $360^\\circ$ trừ đi số đo cung nhỏ.\n` +
+                            `Nên $\\text{sđ}\\overparen{AB}\\text{(lớn)} = 360^\\circ - ${ang}^\\circ = ${360-ang}^\\circ$.\n` + svgCode;
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b14_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            }
+        }
+        return q;
     },
     b14_d3: function(count=5) {
-        return this.generic_geometry('b14_d3', `Dạng 3: Tính độ dài của một dây. Tính khoảng cách từ tâm đến dây`, count);
+        const q = [];
+        const triples = [
+            { a: 3, b: 4, c: 5 },
+            { a: 6, b: 8, c: 10 },
+            { a: 5, b: 12, c: 13 },
+            { a: 8, b: 15, c: 17 }
+        ];
+        
+        for(let i=0; i<count; i++) {
+            const tr = triples[Math.floor(Math.random()*triples.length)];
+            const isFindDist = Math.random() > 0.5;
+            
+            if (isFindDist) {
+                // Cho R, dây AB, tìm d
+                const R = tr.c;
+                const AB = tr.b * 2;
+                const d = tr.a;
+                
+                const text = `Cho đường tròn tâm O bán kính $R = ${R}\\text{ cm}$ và một dây cung $AB = ${AB}\\text{ cm}$. Tính khoảng cách từ tâm O đến dây AB.`;
+                const ansStr = `$${d}\\text{ cm}$`;
+                const wrong1 = `$${tr.b}\\text{ cm}$`;
+                const wrong2 = `$${Math.abs(R - AB/2)}\\text{ cm}$`;
+                const wrong3 = `$${d+1}\\text{ cm}$`;
+                
+                const svgCode = `
+<div style="text-align: center; margin: 15px 0;">
+  <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="100" cy="100" r="80" fill="none" stroke="blue" stroke-width="1.5" />
+    <circle cx="100" cy="100" r="3" fill="red" />
+    <text x="95" y="95" font-size="14" font-family="sans-serif">O</text>
+    
+    <line x1="40" y1="140" x2="160" y2="140" stroke="black" stroke-width="2" />
+    <text x="30" y="150" font-size="14" font-family="sans-serif">A</text>
+    <text x="165" y="150" font-size="14" font-family="sans-serif">B</text>
+    
+    <line x1="100" y1="100" x2="100" y2="140" stroke="green" stroke-width="2" />
+    <circle cx="100" cy="140" r="3" fill="red" />
+    <text x="105" y="155" font-size="14" font-family="sans-serif">H</text>
+    
+    <line x1="100" y1="100" x2="40" y2="140" stroke="red" stroke-dasharray="4" />
+  </svg>
+</div>`;
+                const exp = `Kẻ $OH \\perp AB$ tại H. Theo tính chất đường kính và dây cung, H là trung điểm của AB.\n` +
+                            `Nên $AH = \\frac{AB}{2} = \\frac{${AB}}{2} = ${tr.b}\\text{ cm}$.\n` +
+                            `Áp dụng định lý Pythagore trong tam giác vuông OHA (vuông tại H):\n` +
+                            `$OH^2 + AH^2 = OA^2 \\implies OH^2 = OA^2 - AH^2 = ${R}^2 - ${tr.b}^2 = ${d*d}$.\n` +
+                            `Vậy khoảng cách $OH = \\sqrt{${d*d}} = ${d}\\text{ cm}$.\n` + svgCode;
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b14_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else {
+                // Cho R, d, tìm AB
+                const R = tr.c;
+                const d = tr.a;
+                const AB = tr.b * 2;
+                
+                const text = `Cho đường tròn (O; ${R} cm). Lấy một điểm M tùy ý thuộc (O). Vẽ dây AB vuông góc với OM tại H sao cho khoảng cách $OH = ${d}\\text{ cm}$. Tính độ dài dây cung AB.`;
+                const ansStr = `$${AB}\\text{ cm}$`;
+                const wrong1 = `$${tr.b}\\text{ cm}$`;
+                const wrong2 = `$${AB/2}\\text{ cm}$`;
+                const wrong3 = `$${d+R}\\text{ cm}$`;
+                
+                const svgCode = `
+<div style="text-align: center; margin: 15px 0;">
+  <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="100" cy="100" r="80" fill="none" stroke="blue" stroke-width="1.5" />
+    <circle cx="100" cy="100" r="3" fill="red" />
+    <text x="95" y="95" font-size="14" font-family="sans-serif">O</text>
+    
+    <line x1="40" y1="140" x2="160" y2="140" stroke="black" stroke-width="2" />
+    <text x="30" y="150" font-size="14" font-family="sans-serif">A</text>
+    <text x="165" y="150" font-size="14" font-family="sans-serif">B</text>
+    
+    <line x1="100" y1="100" x2="100" y2="180" stroke="black" />
+    <circle cx="100" cy="180" r="3" fill="black" />
+    <text x="105" y="195" font-size="14" font-family="sans-serif">M</text>
+    
+    <circle cx="100" cy="140" r="3" fill="red" />
+    <text x="105" y="135" font-size="14" font-family="sans-serif">H</text>
+    
+    <line x1="100" y1="100" x2="40" y2="140" stroke="red" stroke-dasharray="4" />
+  </svg>
+</div>`;
+                const exp = `Vì $OH \\perp AB$ tại H nên H là trung điểm của AB (tính chất đường kính và dây cung).\n` +
+                            `Trong tam giác vuông OHA (vuông tại H), ta có $OA = R = ${R}$, $OH = ${d}$.\n` +
+                            `Áp dụng Pythagore: $AH^2 = OA^2 - OH^2 = ${R}^2 - ${d}^2 = ${tr.b * tr.b}$.\n` +
+                            `Suy ra $AH = ${tr.b}\\text{ cm}$.\n` +
+                            `Vậy dây cung $AB = 2 \\times AH = 2 \\times ${tr.b} = ${AB}\\text{ cm}$.\n` + svgCode;
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b14_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            }
+        }
+        return q;
     },
+
     b15_d1: function(count=5) {
         return this.generic_geometry('b15_d1', `Dạng 1: Tính độ dài đường tròn, cung tròn hoặc các đại lượng liên quan`, count);
     },
