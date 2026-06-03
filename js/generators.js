@@ -1345,19 +1345,274 @@ const Generators = {
         return q;
     },
     b17_d2: function(count=5) {
-        return this.generic_geometry('b17_d2', `Dạng 2: Các bài toán liên quan đến hai đường tròn tiếp xúc nhau`, count);
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const type = i % 2;
+            if (type === 0) {
+                const isOut = Math.random() > 0.5;
+                const R = Math.floor(Math.random()*4) + 5;
+                const r = Math.floor(Math.random()*3) + 2;
+                const d = isOut ? R + r : R - r;
+                
+                const text = `Cho hai điểm O và O' sao cho \\( OO' = ${d}\\text{ cm} \\). Biết đường tròn (O; \\( ${R}\\text{ cm} \\)) và (O'; \\( ${r}\\text{ cm} \\)) tiếp xúc với nhau. Vị trí tiếp xúc của chúng là gì?`;
+                const ansStr = isOut ? "Tiếp xúc ngoài" : "Tiếp xúc trong";
+                const wrong1 = isOut ? "Tiếp xúc trong" : "Tiếp xúc ngoài";
+                const wrong2 = "Cắt nhau tại 2 điểm";
+                const wrong3 = "Không giao nhau";
+                
+                const exp = `Ta có tổng hai bán kính: \\( R + r = ${R} + ${r} = ${R+r}\\text{ cm} \\).\n` +
+                            `Hiệu hai bán kính: \\( R - r = ${R} - ${r} = ${R-r}\\text{ cm} \\).\n` +
+                            `Khoảng cách hai tâm \\( d = OO' = ${d}\\text{ cm} \\).\n` +
+                            (isOut ? `Vì \\( d = R + r \\) (${d} = ${R+r}) nên hai đường tròn tiếp xúc ngoài.` : `Vì \\( d = R - r \\) (${d} = ${R-r}) nên hai đường tròn tiếp xúc trong.`);
+                
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b17_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else {
+                // Tiếp tuyến chung ngoài của 2 đường tròn tiếp xúc ngoài
+                // BC = 2 * sqrt(R*r). Need R*r to be a perfect square.
+                const squares = [4, 9, 16, 25, 36];
+                const sq = squares[Math.floor(Math.random()*squares.length)];
+                // Find R, r such that R*r = sq, R > r
+                let R = sq, r = 1;
+                if (sq === 16) { R = 8; r = 2; }
+                if (sq === 36) { R = 12; r = 3; }
+                if (sq === 9) { R = 9; r = 1; }
+                
+                const text = `Cho hai đường tròn (O; \\( R = ${R}\\text{ cm} \\)) và (O'; \\( r = ${r}\\text{ cm} \\)) tiếp xúc ngoài tại A. Kẻ tiếp tuyến chung ngoài BC (với \\( B \\in (O) \\), \\( C \\in (O') \\)). Tính độ dài đoạn thẳng BC.`;
+                const BC = 2 * Math.sqrt(R * r);
+                const ansStr = `\\( BC = ${BC}\\text{ cm} \\)`;
+                const wrong1 = `\\( BC = ${BC+1}\\text{ cm} \\)`;
+                const wrong2 = `\\( BC = ${R+r}\\text{ cm} \\)`;
+                const wrong3 = `\\( BC = ${R-r}\\text{ cm} \\)`;
+                
+                const exp = `Vì (O) và (O') tiếp xúc ngoài nên \\( OO' = R + r = ${R} + ${r} = ${R+r}\\text{ cm} \\).\n` +
+                            `Kẻ \\( O'H \\perp OB \\) tại H. Tứ giác O'HCB là hình chữ nhật (có 3 góc vuông) nên \\( BC = O'H \\) và \\( HB = O'C = ${r}\\text{ cm} \\).\n` +
+                            `Suy ra \\( OH = OB - HB = R - r = ${R} - ${r} = ${R-r}\\text{ cm} \\).\n` +
+                            `Áp dụng định lý Pytago vào \\( \\Delta OHO' \\) vuông tại H:\n` +
+                            `\\( O'H^2 = OO'^2 - OH^2 = (${R+r})^2 - (${R-r})^2 = 4 R r = 4 \\cdot ${R} \\cdot ${r} = ${4*R*r} \\).\n` +
+                            `Vậy \\( BC = O'H = \\sqrt{${4*R*r}} = ${BC}\\text{ cm} \\).`;
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b17_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            }
+        }
+        return q;
     },
     b17_d3: function(count=5) {
-        return this.generic_geometry('b17_d3', `Dạng 3: Các bài toán liên quan đến hai đường tròn cắt nhau`, count);
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const type = i % 2;
+            if (type === 0) {
+                const m = Math.floor(Math.random()*2)+2;
+                const n = 1;
+                const a = m*m - n*n;
+                const b = 2*m*n;
+                const c = m*m + n*n;
+                
+                const R = Math.max(a, b);
+                const r = Math.min(a, b);
+                const d = c;
+                
+                const text = `Cho hai đường tròn (O; \\( ${R}\\text{ cm} \\)) và (O'; \\( ${r}\\text{ cm} \\)) có khoảng cách hai tâm \\( OO' = ${d}\\text{ cm} \\). Gọi A là một giao điểm của hai đường tròn. Khẳng định nào sau đây là **đúng**?`;
+                const ansStr = `O'A là tiếp tuyến của (O) và OA là tiếp tuyến của (O')`;
+                const wrong1 = `Chỉ có OA là tiếp tuyến của (O')`;
+                const wrong2 = `Chỉ có O'A là tiếp tuyến của (O)`;
+                const wrong3 = `Cả OA và O'A đều không phải là tiếp tuyến`;
+                
+                const exp = `Xét tam giác OO'A có các cạnh: \\( OA = R = ${R} \\), \\( O'A = r = ${r} \\), \\( OO' = d = ${d} \\).\n` +
+                            `Ta thấy: \\( OA^2 + O'A^2 = ${R}^2 + ${r}^2 = ${R*R + r*r} \\).\n` +
+                            `Khoảng cách \\( OO'^2 = ${d}^2 = ${d*d} \\).\n` +
+                            `Vì \\( OA^2 + O'A^2 = OO'^2 \\), theo định lý Pytago đảo, \\( \\Delta OO'A \\) vuông tại A (tức là \\( OA \\perp O'A \\)).\n` +
+                            `Vì \\( O'A \\perp OA \\) tại A thuộc (O) nên O'A là tiếp tuyến của (O).\n` +
+                            `Tương tự, \\( OA \\perp O'A \\) tại A thuộc (O') nên OA là tiếp tuyến của (O').`;
+                
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b17_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else {
+                const text = `Cho hai đường tròn (O) và (O') cắt nhau tại A và B. Kẻ đường kính AC của đường tròn (O) và đường kính AD của đường tròn (O'). Khẳng định nào sau đây về ba điểm C, B, D là **đúng**?`;
+                const ansStr = `Ba điểm C, B, D thẳng hàng`;
+                const wrong1 = `Tam giác CBD là tam giác vuông tại B`;
+                const wrong2 = `B là trung điểm của đoạn thẳng CD`;
+                const wrong3 = `CD song song với đường nối tâm OO'`;
+                
+                const exp = `Vì điểm C nằm trên đường tròn (O) có đường kính AC nên \\( \\Delta ABC \\) là tam giác nội tiếp chắn nửa đường tròn, do đó vuông tại B \\( \\implies \\widehat{ABC} = 90^\\circ \\).\n` +
+                            `Tương tự, điểm D nằm trên đường tròn (O') có đường kính AD nên \\( \\Delta ABD \\) vuông tại B \\( \\implies \\widehat{ABD} = 90^\\circ \\).\n` +
+                            `Tổng hai góc: \\( \\widehat{CBD} = \\widehat{ABC} + \\widehat{ABD} = 90^\\circ + 90^\\circ = 180^\\circ \\).\n` +
+                            `Góc bẹt chứng tỏ ba điểm C, B, D thẳng hàng.`;
+                
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b17_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            }
+        }
+        return q;
     },
     b17_d4: function(count=5) {
-        return this.generic_geometry('b17_d4', `Dạng 3: Các bài toán về hai đường tròn không cắt nhau`, count);
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const type = i % 2;
+            if (type === 0) {
+                // Tiếp tuyến chung ngoài
+                const m = Math.floor(Math.random()*2)+2;
+                const n = 1;
+                const a = m*m - n*n;
+                const b = 2*m*n;
+                const c = m*m + n*n;
+                
+                const R_minus_r = Math.min(a,b);
+                const l = Math.max(a,b);
+                const d = c;
+                
+                const r = Math.floor(Math.random()*3)+2;
+                const R = r + R_minus_r;
+                
+                const text = `Cho hai đường tròn (O; \\( R = ${R}\\text{ cm} \\)) và (O'; \\( r = ${r}\\text{ cm} \\)) ở ngoài nhau. Khoảng cách hai tâm \\( OO' = ${d}\\text{ cm} \\). Kẻ tiếp tuyến chung ngoài AB (với \\( A \\in (O) \\), \\( B \\in (O') \\)). Tính độ dài đoạn thẳng AB.`;
+                const ansStr = `\\( AB = ${l}\\text{ cm} \\)`;
+                const wrong1 = `\\( AB = ${l+1}\\text{ cm} \\)`;
+                const wrong2 = `\\( AB = ${l+2}\\text{ cm} \\)`;
+                const wrong3 = `\\( AB = ${Math.sqrt(d*d - (R+r)*(R+r)) | 0}\\text{ cm} \\)`;
+                
+                const exp = `Kẻ \\( O'H \\perp OA \\) tại H. Tứ giác ABO'H có 3 góc vuông nên là hình chữ nhật.\n` +
+                            `Suy ra \\( AB = O'H \\) và \\( HA = O'B = ${r}\\text{ cm} \\).\n` +
+                            `Ta có \\( OH = OA - HA = R - r = ${R} - ${r} = ${R_minus_r}\\text{ cm} \\).\n` +
+                            `Áp dụng định lý Pytago trong \\( \\Delta OHO' \\) vuông tại H:\n` +
+                            `\\( O'H = \\sqrt{OO'^2 - OH^2} = \\sqrt{${d}^2 - ${R_minus_r}^2} = \\sqrt{${l*l}} = ${l}\\text{ cm} \\).\n` +
+                            `Vậy tiếp tuyến chung ngoài \\( AB = ${l}\\text{ cm} \\).`;
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b17_d4_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else {
+                // Tiếp tuyến chung trong
+                const m = Math.floor(Math.random()*2)+3; // 3, 4
+                const n = Math.floor(Math.random()*(m-2))+1; 
+                const a = m*m - n*n;
+                const b = 2*m*n;
+                const c = m*m + n*n;
+                
+                const R_plus_r = Math.min(a,b);
+                const l = Math.max(a,b);
+                const d = c;
+                
+                // Ensure R+r >= 4 to split into R and r
+                const r = Math.floor(Math.random()*(R_plus_r - 2)) + 1;
+                const R = R_plus_r - r;
+                
+                const text = `Cho hai đường tròn (O; \\( R = ${R}\\text{ cm} \\)) và (O'; \\( r = ${r}\\text{ cm} \\)) ở ngoài nhau. Khoảng cách hai tâm \\( OO' = ${d}\\text{ cm} \\). Kẻ tiếp tuyến chung trong CD (với \\( C \\in (O) \\), \\( D \\in (O') \\)). Tính độ dài tiếp tuyến chung trong CD.`;
+                const ansStr = `\\( CD = ${l}\\text{ cm} \\)`;
+                const wrong1 = `\\( CD = ${l+1}\\text{ cm} \\)`;
+                const wrong2 = `\\( CD = ${d}\\text{ cm} \\)`;
+                const wrong3 = `\\( CD = ${l-1}\\text{ cm} \\)`;
+                
+                const exp = `Kẻ \\( O'K \\perp OC \\) kéo dài tại K. Tứ giác CDO'K có 3 góc vuông nên là hình chữ nhật.\n` +
+                            `Suy ra \\( CD = O'K \\) và \\( CK = O'D = ${r}\\text{ cm} \\).\n` +
+                            `Ta có \\( OK = OC + CK = R + r = ${R} + ${r} = ${R_plus_r}\\text{ cm} \\).\n` +
+                            `Áp dụng định lý Pytago trong \\( \\Delta OKO' \\) vuông tại K:\n` +
+                            `\\( O'K = \\sqrt{OO'^2 - OK^2} = \\sqrt{${d}^2 - ${R_plus_r}^2} = \\sqrt{${l*l}} = ${l}\\text{ cm} \\).\n` +
+                            `Vậy tiếp tuyến chung trong \\( CD = ${l}\\text{ cm} \\).`;
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b17_d4_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            }
+        }
+        return q;
     },
     b17_d5: function(count=5) {
-        return this.generic_system('b17_d5', `Dạng 4: Chứng minh các tính chất về hệ thức hình học`, count);
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const type = i % 2;
+            if (type === 0) {
+                const text = `Cho hai đường tròn (O) và (O') tiếp xúc ngoài tại A. Kẻ tiếp tuyến chung ngoài BC (\\( B \\in (O) \\), \\( C \\in (O') \\)). Tiếp tuyến chung trong tại A cắt BC tại M. Khẳng định nào sau đây là **sai**?`;
+                const ansStr = `OM song song với O'C`;
+                const wrong1 = `Tam giác OMO' là tam giác vuông tại M`;
+                const wrong2 = `Điểm M là trung điểm của BC`;
+                const wrong3 = `Góc BAC bằng \\( 90^\\circ \\)`;
+                
+                const exp = `Theo tính chất hai tiếp tuyến cắt nhau:\n` +
+                            `- Đối với (O): \\( MB = MA \\) và OM là tia phân giác của góc \\( \\widehat{BMA} \\).\n` +
+                            `- Đối với (O'): \\( MC = MA \\) và O'M là tia phân giác của góc \\( \\widehat{CMA} \\).\n` +
+                            `Từ đó \\( MB = MC = MA \\), nên M là trung điểm của BC (đúng).\n` +
+                            `Vì \\( MA = \\frac{1}{2}BC \\) nên tam giác ABC vuông tại A, hay \\( \\widehat{BAC} = 90^\\circ \\) (đúng).\n` +
+                            `Góc \\( \\widehat{BMA} \\) và \\( \\widehat{CMA} \\) kề bù, nên hai tia phân giác OM và O'M vuông góc với nhau \\( \\implies \\widehat{OMO'} = 90^\\circ \\) (đúng).\n` +
+                            `Khẳng định OM song song với O'C là sai.`;
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b17_d5_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else {
+                const text = `Cho hai đường tròn (O) và (O') cắt nhau tại hai điểm A và B. Gọi I là trung điểm của dây chung AB. Đường thẳng nối tâm OO' cắt AB tại H. Khẳng định nào sau đây là **đúng**?`;
+                const ansStr = `Điểm I trùng với điểm H`;
+                const wrong1 = `OO' song song với AB`;
+                const wrong2 = `OO' đi qua trung điểm của đoạn OA`;
+                const wrong3 = `Tam giác OAB là tam giác đều`;
+                
+                const exp = `Tính chất đường nối tâm của hai đường tròn cắt nhau:\n` +
+                            `Đường nối tâm OO' là đường trung trực của dây chung AB.\n` +
+                            `Do đó, OO' vuông góc với AB tại trung điểm của AB.\n` +
+                            `Vì H là giao điểm của OO' và AB, nên H chính là trung điểm của AB.\n` +
+                            `Mà I là trung điểm của AB (giả thiết), suy ra điểm I trùng với điểm H.`;
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b17_d5_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            }
+        }
+        return q;
     },
     b17_d6: function(count=5) {
-        return this.generic_geometry('b17_d6', `Dạng 5: Tính độ dài đoạn thẳng`, count);
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const type = i % 2;
+            if (type === 0) {
+                // Tính dây chung AB
+                // Triples for O-H-A and O'-H-A.
+                // E.g. HA = 12. OH = 5 (OA = 13), O'H = 9 (O'A = 15). OO' = 14.
+                const triples = [
+                    { h: 12, oh1: 5, r1: 13, oh2: 9, r2: 15, d: 14 },
+                    { h: 24, oh1: 7, r1: 25, oh2: 10, r2: 26, d: 17 },
+                    { h: 8, oh1: 6, r1: 10, oh2: 15, r2: 17, d: 21 },
+                    { h: 4, oh1: 3, r1: 5, oh2: 3, r2: 5, d: 6 }
+                ];
+                const t = triples[Math.floor(Math.random()*triples.length)];
+                const R = t.r1, r = t.r2, d = t.d;
+                const AB = t.h * 2;
+                
+                const text = `Cho hai đường tròn (O; \\( R = ${R}\\text{ cm} \\)) và (O'; \\( r = ${r}\\text{ cm} \\)) cắt nhau tại A và B. Biết khoảng cách hai tâm \\( OO' = ${d}\\text{ cm} \\). Tính độ dài dây chung AB.`;
+                const ansStr = `\\( AB = ${AB}\\text{ cm} \\)`;
+                const wrong1 = `\\( AB = ${AB/2}\\text{ cm} \\)`;
+                const wrong2 = `\\( AB = ${AB-2}\\text{ cm} \\)`;
+                const wrong3 = `\\( AB = ${AB+2}\\text{ cm} \\)`;
+                
+                const exp = `Gọi H là giao điểm của OO' và AB. Ta có OO' là đường trung trực của AB nên \\( OO' \\perp AB \\) tại H và \\( HA = HB = \\frac{AB}{2} \\).\n` +
+                            `Trong \\( \\Delta OAO' \\), gọi độ dài đoạn OH là \\( x \\), khi đó \\( O'H = ${d} - x \\).\n` +
+                            `Áp dụng định lý Pytago cho hai tam giác vuông OHA và O'HA:\n` +
+                            `\\( HA^2 = OA^2 - OH^2 = ${R}^2 - x^2 \\)\n` +
+                            `\\( HA^2 = O'A^2 - O'H^2 = ${r}^2 - (${d} - x)^2 \\)\n` +
+                            `Giải phương trình ta tìm được \\( x = ${t.oh1}\\text{ cm} \\).\n` +
+                            `Suy ra \\( HA^2 = ${R}^2 - ${t.oh1}^2 = ${t.h*t.h} \\implies HA = ${t.h}\\text{ cm} \\).\n` +
+                            `Vậy độ dài dây chung là \\( AB = 2 \\cdot HA = 2 \\cdot ${t.h} = ${AB}\\text{ cm} \\).`;
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b17_d6_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else {
+                // Tính độ dài đường nối tâm OO'
+                const triples = [
+                    { h: 12, oh1: 5, r1: 13, oh2: 9, r2: 15, d: 14 },
+                    { h: 8, oh1: 6, r1: 10, oh2: 15, r2: 17, d: 21 },
+                    { h: 4, oh1: 3, r1: 5, oh2: 3, r2: 5, d: 6 }
+                ];
+                const t = triples[Math.floor(Math.random()*triples.length)];
+                const R = t.r1, r = t.r2, AB = t.h * 2;
+                const d = t.d;
+                
+                const text = `Cho hai đường tròn (O; \\( ${R}\\text{ cm} \\)) và (O'; \\( ${r}\\text{ cm} \\)) cắt nhau tại hai điểm A, B. Dây chung \\( AB = ${AB}\\text{ cm} \\). Tính khoảng cách hai tâm OO' biết O và O' nằm về hai phía đối với dây AB.`;
+                const ansStr = `\\( OO' = ${d}\\text{ cm} \\)`;
+                const wrong1 = `\\( OO' = ${d+2}\\text{ cm} \\)`;
+                const wrong2 = `\\( OO' = ${t.oh1}\\text{ cm} \\)`;
+                const wrong3 = `\\( OO' = ${Math.abs(t.oh1 - t.oh2)}\\text{ cm} \\)`;
+                
+                const exp = `Gọi H là giao điểm của OO' và AB. OO' là trung trực của AB nên \\( HA = \\frac{AB}{2} = \\frac{${AB}}{2} = ${t.h}\\text{ cm} \\).\n` +
+                            `Vì O, O' nằm về hai phía so với AB nên H nằm giữa O và O'. \\( OO' = OH + O'H \\).\n` +
+                            `Áp dụng định lý Pytago trong tam giác vuông OHA:\n` +
+                            `\\( OH = \\sqrt{OA^2 - HA^2} = \\sqrt{${R}^2 - ${t.h}^2} = ${t.oh1}\\text{ cm} \\).\n` +
+                            `Áp dụng định lý Pytago trong tam giác vuông O'HA:\n` +
+                            `\\( O'H = \\sqrt{O'A^2 - HA^2} = \\sqrt{${r}^2 - ${t.h}^2} = ${t.oh2}\\text{ cm} \\).\n` +
+                            `Khoảng cách hai tâm là: \\( OO' = OH + O'H = ${t.oh1} + ${t.oh2} = ${d}\\text{ cm} \\).`;
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b17_d6_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            }
+        }
+        return q;
     },
     b1_d1: function(count=5) {
         const q = [];
