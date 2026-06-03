@@ -229,9 +229,28 @@ const Generators = {
                 const wrong1 = `Tâm của đường tròn là A, bán kính \\( R = AC \\).`;
                 const wrong2 = `Tâm của đường tròn là O, bán kính \\( R = AB \\).`;
                 const wrong3 = `Bốn điểm A, B, C, D không cùng nằm trên một đường tròn.`;
+                const svgRect = `
+<div style="text-align: center; margin: 15px 0;">
+  <svg width="220" height="140" viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="110" cy="70" r="89.44" fill="none" stroke="blue" stroke-width="1.5" stroke-dasharray="5,5" />
+    <polygon points="30,30 190,30 190,110 30,110" fill="none" stroke="black" stroke-width="2" />
+    <line x1="30" y1="30" x2="190" y2="110" stroke="black" stroke-width="1" />
+    <line x1="30" y1="110" x2="190" y2="30" stroke="black" stroke-width="1" />
+    <circle cx="30" cy="30" r="3" fill="red" />
+    <text x="20" y="25" font-size="14" font-family="sans-serif">A</text>
+    <circle cx="190" cy="30" r="3" fill="red" />
+    <text x="195" y="25" font-size="14" font-family="sans-serif">B</text>
+    <circle cx="190" cy="110" r="3" fill="red" />
+    <text x="195" y="125" font-size="14" font-family="sans-serif">C</text>
+    <circle cx="30" cy="110" r="3" fill="red" />
+    <text x="20" y="125" font-size="14" font-family="sans-serif">D</text>
+    <circle cx="110" cy="70" r="3" fill="red" />
+    <text x="105" y="60" font-size="14" font-family="sans-serif">O</text>
+  </svg>
+</div>`;
                 const exp = `Vì ABCD là hình chữ nhật nên hai đường chéo AC và BD bằng nhau và cắt nhau tại trung điểm O của mỗi đường.\n` + 
                             `Do đó, \\( OA = OB = OC = OD = \\frac{AC}{2} \\).\n` +
-                            `Vậy bốn điểm A, B, C, D cùng cách đều điểm O, nên chúng cùng nằm trên đường tròn tâm O, bán kính \\( R = \\frac{AC}{2} \\).`;
+                            `Vậy bốn điểm A, B, C, D cùng cách đều điểm O, nên chúng cùng nằm trên đường tròn tâm O, bán kính \\( R = \\frac{AC}{2} \\).\n` + svgRect;
                 
                 const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
                 q.push({ id: 'b13_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
@@ -242,9 +261,29 @@ const Generators = {
                 const wrong1 = `Bốn điểm B, C, D, E cùng thuộc đường tròn đường kính DE.`;
                 const wrong2 = `Bốn điểm B, C, D, E cùng thuộc đường tròn đường kính AB.`;
                 const wrong3 = `Bốn điểm B, C, D, E không cùng nằm trên một đường tròn.`;
+                const svgTri = `
+<div style="text-align: center; margin: 15px 0;">
+  <svg width="220" height="150" viewBox="0 0 220 150" xmlns="http://www.w3.org/2000/svg">
+    <path d="M 20 120 A 80 80 0 0 1 180 120" fill="none" stroke="blue" stroke-width="1.5" stroke-dasharray="5,5" />
+    <path d="M 180 120 A 80 80 0 0 1 20 120" fill="none" stroke="blue" stroke-width="1.5" stroke-dasharray="5,5" />
+    <polygon points="60,20 20,120 180,120" fill="none" stroke="black" stroke-width="2" />
+    <line x1="20" y1="120" x2="85.6" y2="41.3" stroke="black" stroke-width="1" />
+    <line x1="180" y1="120" x2="42.1" y2="64.8" stroke="black" stroke-width="1" />
+    <circle cx="60" cy="20" r="3" fill="red" />
+    <text x="55" y="15" font-size="14" font-family="sans-serif">A</text>
+    <circle cx="20" cy="120" r="3" fill="red" />
+    <text x="10" y="135" font-size="14" font-family="sans-serif">B</text>
+    <circle cx="180" cy="120" r="3" fill="red" />
+    <text x="185" y="135" font-size="14" font-family="sans-serif">C</text>
+    <circle cx="85.6" cy="41.3" r="3" fill="red" />
+    <text x="92" y="40" font-size="14" font-family="sans-serif">D</text>
+    <circle cx="42.1" cy="64.8" r="3" fill="red" />
+    <text x="25" y="65" font-size="14" font-family="sans-serif">E</text>
+  </svg>
+</div>`;
                 const exp = `Vì BD là đường cao nên \\( \\widehat{BDC} = 90^\\circ \\). Do đó tam giác BDC vuông tại D, suy ra D thuộc đường tròn đường kính BC.\n` + 
                             `Vì CE là đường cao nên \\( \\widehat{BEC} = 90^\\circ \\). Do đó tam giác BEC vuông tại E, suy ra E thuộc đường tròn đường kính BC.\n` +
-                            `Vậy bốn điểm B, C, D, E cùng nằm trên đường tròn đường kính BC (tâm là trung điểm của BC).`;
+                            `Vậy bốn điểm B, C, D, E cùng nằm trên đường tròn đường kính BC (tâm là trung điểm của BC).\n` + svgTri;
                 
                 const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
                 q.push({ id: 'b13_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
@@ -255,10 +294,37 @@ const Generators = {
                 const wrong1 = `Tâm A.`;
                 const wrong2 = `Tâm là trung điểm của AB.`;
                 const wrong3 = `Bốn điểm M, N, P, Q không cùng nằm trên một đường tròn.`;
+                const svgRhombus = `
+<div style="text-align: center; margin: 15px 0;">
+  <svg width="220" height="150" viewBox="0 0 220 150" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="110" cy="70" r="46.1" fill="none" stroke="blue" stroke-width="1.5" stroke-dasharray="5,5" />
+    <polygon points="110,10 180,70 110,130 40,70" fill="none" stroke="black" stroke-width="2" />
+    <line x1="110" y1="10" x2="110" y2="130" stroke="black" stroke-width="1" />
+    <line x1="40" y1="70" x2="180" y2="70" stroke="black" stroke-width="1" />
+    <circle cx="110" cy="10" r="3" fill="red" />
+    <text x="105" y="8" font-size="14" font-family="sans-serif">A</text>
+    <circle cx="180" cy="70" r="3" fill="red" />
+    <text x="185" y="75" font-size="14" font-family="sans-serif">B</text>
+    <circle cx="110" cy="130" r="3" fill="red" />
+    <text x="105" y="145" font-size="14" font-family="sans-serif">C</text>
+    <circle cx="40" cy="70" r="3" fill="red" />
+    <text x="25" y="75" font-size="14" font-family="sans-serif">D</text>
+    <circle cx="110" cy="70" r="3" fill="red" />
+    <text x="115" y="65" font-size="14" font-family="sans-serif">O</text>
+    <circle cx="145" cy="40" r="3" fill="green" />
+    <text x="150" y="35" font-size="14" font-family="sans-serif">M</text>
+    <circle cx="145" cy="100" r="3" fill="green" />
+    <text x="150" y="115" font-size="14" font-family="sans-serif">N</text>
+    <circle cx="75" cy="100" r="3" fill="green" />
+    <text x="60" y="115" font-size="14" font-family="sans-serif">P</text>
+    <circle cx="75" cy="40" r="3" fill="green" />
+    <text x="60" y="35" font-size="14" font-family="sans-serif">Q</text>
+  </svg>
+</div>`;
                 const exp = `Trong hình thoi ABCD, hai đường chéo AC và BD vuông góc với nhau tại O. Suy ra các tam giác OAB, OBC, OCD, ODA là các tam giác vuông tại O.\n` +
                             `M, N, P, Q là trung điểm các cạnh huyền nên các trung tuyến OM, ON, OP, OQ bằng nửa cạnh huyền tương ứng.\n` +
                             `Vì AB = BC = CD = DA (tính chất hình thoi) nên \\( OM = ON = OP = OQ \\).\n` +
-                            `Vậy bốn điểm M, N, P, Q cùng cách đều điểm O, tức là cùng nằm trên đường tròn tâm O.`;
+                            `Vậy bốn điểm M, N, P, Q cùng cách đều điểm O, tức là cùng nằm trên đường tròn tâm O.\n` + svgRhombus;
                 
                 const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
                 q.push({ id: 'b13_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
