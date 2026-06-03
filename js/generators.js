@@ -1221,10 +1221,88 @@ const Generators = {
         return q;
     },
     b16_d5: function(count=5) {
-        return this.generic_system('b16_d5', `Dạng 4: Chứng minh một số tính chất và hệ thức hình học`, count);
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const type = i % 2;
+            if (type === 0) {
+                const text = `Cho đường tròn (O) và điểm M nằm ngoài đường tròn. Kẻ hai tiếp tuyến MA, MB (A, B là các tiếp điểm). Kẻ đường kính AC của đường tròn (O). Khẳng định nào sau đây là **đúng**?`;
+                const ansStr = `\\( BC \\parallel OM \\)`;
+                const wrong1 = `\\( BC \\perp OM \\)`;
+                const wrong2 = `\\( AB \\parallel OM \\)`;
+                const wrong3 = `\\( MC \\parallel OB \\)`;
+                
+                const exp = `Vì MA, MB là tiếp tuyến cắt nhau tại M nên OM là tia phân giác của góc \\( \\widehat{AOB} \\) và OM là đường trung trực của đoạn thẳng AB.\n` +
+                            `Suy ra \\( OM \\perp AB \\) tại trung điểm của AB.\n` +
+                            `Mặt khác, xét đường tròn (O) có AC là đường kính, B thuộc đường tròn nên \\( \\Delta ABC \\) vuông tại B \\( \\implies BC \\perp AB \\).\n` +
+                            `Hai đường thẳng OM và BC cùng vuông góc với AB nên chúng song song với nhau: \\( BC \\parallel OM \\).`;
+                
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b16_d5_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else {
+                const text = `Cho đường tròn (O; R) và điểm M nằm ngoài đường tròn. Kẻ các tiếp tuyến MA, MB với đường tròn (A, B là tiếp điểm). Gọi H là giao điểm của OM và AB. Khẳng định nào sau đây là **sai**?`;
+                const ansStr = `\\( AH \\cdot OM = R^2 \\)`;
+                const wrong1 = `OM là đường trung trực của AB`;
+                const wrong2 = `\\( \\Delta MAB \\) cân tại M`;
+                const wrong3 = `\\( OH \\cdot OM = R^2 \\)`;
+                
+                const exp = `Theo tính chất hai tiếp tuyến cắt nhau, ta có MA = MB và OM là tia phân giác góc AMB, do đó \\( \\Delta MAB \\) cân tại M (đúng).\n` +
+                            `OM là phân giác của tam giác cân MAB nên cũng là đường trung trực của AB (đúng).\n` +
+                            `Vì \\( OM \\perp AB \\) tại H, áp dụng hệ thức lượng trong tam giác vuông OAM (vuông tại A, đường cao AH):\n` +
+                            `\\( OH \\cdot OM = OA^2 = R^2 \\) (đúng).\n` +
+                            `Hệ thức \\( AH \\cdot OM = R^2 \\) là sai vì \\( AH \\cdot OM \\) không tương đương với bình phương cạnh góc vuông nào cả.`;
+                
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b16_d5_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            }
+        }
+        return q;
     },
     b16_d6: function(count=5) {
-        return this.generic_algebra('b16_d6', `Dạng 5: Một số bài toán liên quan đến cực trị hình học`, count);
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const type = i % 2;
+            const R = Math.floor(Math.random()*6)*2 + 4; // 4, 6, 8, 10, 12, 14
+            
+            if (type === 0) {
+                const text = `Cho nửa đường tròn tâm O đường kính AB = ${2*R} cm. Lấy điểm M tùy ý trên nửa đường tròn (M khác A và B). Gọi H là hình chiếu vuông góc của M trên AB. Tìm giá trị lớn nhất của diện tích tam giác AMB.`;
+                const ansStr = `\\( ${R*R}\\text{ cm}^2 \\)`;
+                const wrong1 = `\\( ${R*R*2}\\text{ cm}^2 \\)`;
+                const wrong2 = `\\( ${R*R*Math.PI.toFixed(2)}\\text{ cm}^2 \\)`;
+                const wrong3 = `\\( ${R*R/2}\\text{ cm}^2 \\)`;
+                
+                const exp = `Vì M nằm trên nửa đường tròn đường kính AB nên góc \\( \\widehat{AMB} = 90^\\circ \\) (góc nội tiếp chắn nửa đường tròn).\n` +
+                            `Kẻ \\( MH \\perp AB \\). Diện tích tam giác AMB là \\( S = \\frac{1}{2} \\cdot AB \\cdot MH \\).\n` +
+                            `Vì AB không đổi (\\( AB = 2R = ${2*R}\\text{ cm} \\)), nên diện tích S lớn nhất khi và chỉ khi chiều cao MH lớn nhất.\n` +
+                            `M thuộc đường tròn (O; R) nên \\( MH \\le MO = R = ${R}\\text{ cm} \\). Dấu "=" xảy ra khi M nằm chính giữa cung AB.\n` +
+                            `Vậy giá trị lớn nhất của diện tích tam giác AMB là: \\( S_{max} = \\frac{1}{2} \\cdot ${2*R} \\cdot ${R} = ${R*R}\\text{ cm}^2 \\).`;
+                
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b16_d6_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else {
+                const text = `Cho đường tròn (O; R = ${R} cm) và dây cung BC cố định sao cho khoảng cách từ tâm O đến dây BC là ${R/2} cm. Điểm A di động trên cung lớn BC. Tìm giá trị lớn nhất của diện tích tam giác ABC.`;
+                
+                // h_max = R + R/2 = 1.5R
+                // BC = 2 * sqrt(R^2 - (R/2)^2) = 2 * sqrt(3/4 R^2) = R*sqrt(3)
+                // S_max = 1/2 * BC * h_max = 1/2 * R*sqrt(3) * 1.5R = 0.75 * R^2 * sqrt(3) = 3/4 R^2 sqrt(3)
+                const coeff = (3 * R * R) / 4;
+                const S_max = coeff === Math.floor(coeff) ? `${coeff}\\sqrt{3}` : `\\frac{${3*R*R}\\sqrt{3}}{4}`;
+                const ansStr = `\\( ${S_max}\\text{ cm}^2 \\)`;
+                const wrong1 = `\\( ${coeff*2}\\sqrt{3}\\text{ cm}^2 \\)`;
+                const wrong2 = `\\( ${R*R}\\sqrt{3}\\text{ cm}^2 \\)`;
+                const wrong3 = `\\( ${coeff}\\text{ cm}^2 \\)`;
+                
+                const exp = `Kẻ đường cao AH của tam giác ABC và đường vuông góc OK từ tâm O đến dây BC.\n` +
+                            `Độ dài dây BC là: \\( BC = 2\\sqrt{OB^2 - OK^2} = 2\\sqrt{R^2 - (${R/2})^2} = ${R}\\sqrt{3} \\text{ cm} \\).\n` +
+                            `Diện tích \\( \\Delta ABC \\) là \\( S = \\frac{1}{2} \\cdot BC \\cdot AH \\). Vì BC không đổi nên S lớn nhất khi AH lớn nhất.\n` +
+                            `Chiều cao AH lớn nhất khi A nằm trên điểm chính giữa cung lớn BC, lúc đó A, O, K thẳng hàng.\n` +
+                            `Giá trị lớn nhất của chiều cao AH là: \\( AH_{max} = AO + OK = R + \\frac{R}{2} = ${1.5*R} \\text{ cm} \\).\n` +
+                            `Diện tích lớn nhất: \\( S_{max} = \\frac{1}{2} \\cdot ${R}\\sqrt{3} \\cdot ${1.5*R} = ${S_max} \\text{ cm}^2 \\).`;
+                
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b16_d6_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            }
+        }
+        return q;
     },
     b17_d1: function(count=5) {
         const q = [];
