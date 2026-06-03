@@ -216,14 +216,165 @@ const Generators = {
         return this.generic_algebra('b9_d7', `Dạng 7: Chứng minh đẳng thức`, count);
     },
     b13_d1: function(count=5) {
-        return this.generic_geometry('b13_d1', `Dạng 1: Chứng minh nhiều điểm cùng nằm trên một đường tròn`, count);
+        const q = [];
+        let types = [];
+        for(let i=0; i<count; i++) types.push(i % 3);
+        types = this.shuffle(types);
+        
+        for(let i=0; i<count; i++) {
+            if (types[i] === 0) {
+                // Hình chữ nhật
+                const text = `Cho hình chữ nhật ABCD có hai đường chéo AC và BD cắt nhau tại O. Khẳng định nào sau đây là **đúng** về đường tròn đi qua 4 điểm A, B, C, D?`;
+                const ansStr = `Tâm của đường tròn là O, bán kính \\( R = \\frac{AC}{2} \\).`;
+                const wrong1 = `Tâm của đường tròn là A, bán kính \\( R = AC \\).`;
+                const wrong2 = `Tâm của đường tròn là O, bán kính \\( R = AB \\).`;
+                const wrong3 = `Bốn điểm A, B, C, D không cùng nằm trên một đường tròn.`;
+                const exp = `Vì ABCD là hình chữ nhật nên hai đường chéo AC và BD bằng nhau và cắt nhau tại trung điểm O của mỗi đường.\n` + 
+                            `Do đó, \\( OA = OB = OC = OD = \\frac{AC}{2} \\).\n` +
+                            `Vậy bốn điểm A, B, C, D cùng cách đều điểm O, nên chúng cùng nằm trên đường tròn tâm O, bán kính \\( R = \\frac{AC}{2} \\).`;
+                
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b13_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else if (types[i] === 1) {
+                // Tam giác 2 đường cao
+                const text = `Cho tam giác ABC (góc A nhọn), các đường cao BD và CE (D thuộc AC, E thuộc AB). Khẳng định nào sau đây là **đúng**?`;
+                const ansStr = `Bốn điểm B, C, D, E cùng thuộc đường tròn đường kính BC.`;
+                const wrong1 = `Bốn điểm B, C, D, E cùng thuộc đường tròn đường kính DE.`;
+                const wrong2 = `Bốn điểm B, C, D, E cùng thuộc đường tròn đường kính AB.`;
+                const wrong3 = `Bốn điểm B, C, D, E không cùng nằm trên một đường tròn.`;
+                const exp = `Vì BD là đường cao nên \\( \\widehat{BDC} = 90^\\circ \\). Do đó tam giác BDC vuông tại D, suy ra D thuộc đường tròn đường kính BC.\n` + 
+                            `Vì CE là đường cao nên \\( \\widehat{BEC} = 90^\\circ \\). Do đó tam giác BEC vuông tại E, suy ra E thuộc đường tròn đường kính BC.\n` +
+                            `Vậy bốn điểm B, C, D, E cùng nằm trên đường tròn đường kính BC (tâm là trung điểm của BC).`;
+                
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b13_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else {
+                // Hình thoi
+                const text = `Cho hình thoi ABCD có hai đường chéo AC và BD cắt nhau tại O. Gọi M, N, P, Q lần lượt là trung điểm của AB, BC, CD, DA. Bốn điểm M, N, P, Q cùng nằm trên đường tròn có tâm là điểm nào?`;
+                const ansStr = `Tâm O (giao điểm của AC và BD).`;
+                const wrong1 = `Tâm A.`;
+                const wrong2 = `Tâm là trung điểm của AB.`;
+                const wrong3 = `Bốn điểm M, N, P, Q không cùng nằm trên một đường tròn.`;
+                const exp = `Trong hình thoi ABCD, hai đường chéo AC và BD vuông góc với nhau tại O. Suy ra các tam giác OAB, OBC, OCD, ODA là các tam giác vuông tại O.\n` +
+                            `M, N, P, Q là trung điểm các cạnh huyền nên các trung tuyến OM, ON, OP, OQ bằng nửa cạnh huyền tương ứng.\n` +
+                            `Vì AB = BC = CD = DA (tính chất hình thoi) nên \\( OM = ON = OP = OQ \\).\n` +
+                            `Vậy bốn điểm M, N, P, Q cùng cách đều điểm O, tức là cùng nằm trên đường tròn tâm O.`;
+                
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b13_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            }
+        }
+        return q;
     },
     b13_d2: function(count=5) {
-        return this.generic_geometry('b13_d2', `Dạng 2: Xác định vị trí tương đối của điểm  với đường tròn .`, count);
+        const q = [];
+        let types = [];
+        for(let i=0; i<count; i++) types.push(i % 2);
+        types = this.shuffle(types);
+        
+        for(let i=0; i<count; i++) {
+            if (types[i] === 0) {
+                // Dùng d và R
+                const R = Math.floor(Math.random()*5)+4; // 4 to 8
+                let d = Math.floor(Math.random()*8)+2; // 2 to 9
+                let pos = "";
+                let exp_pos = "";
+                if (d < R) { pos = "nằm bên trong"; exp_pos = `d < R (${d} < ${R})`; }
+                else if (d === R) { pos = "nằm trên"; exp_pos = `d = R (${d} = ${R})`; }
+                else { pos = "nằm bên ngoài"; exp_pos = `d > R (${d} > ${R})`; }
+                
+                const text = `Cho đường tròn (O; ${R} cm) và điểm A. Biết khoảng cách từ A đến tâm O là OA = ${d} cm. Vị trí tương đối của điểm A đối với đường tròn (O) là:`;
+                const ansStr = `Điểm A ${pos} đường tròn (O).`;
+                let wrong1, wrong2, wrong3;
+                if (pos === "nằm bên trong") {
+                    wrong1 = `Điểm A nằm trên đường tròn (O).`;
+                    wrong2 = `Điểm A nằm bên ngoài đường tròn (O).`;
+                } else if (pos === "nằm trên") {
+                    wrong1 = `Điểm A nằm bên trong đường tròn (O).`;
+                    wrong2 = `Điểm A nằm bên ngoài đường tròn (O).`;
+                } else {
+                    wrong1 = `Điểm A nằm bên trong đường tròn (O).`;
+                    wrong2 = `Điểm A nằm trên đường tròn (O).`;
+                }
+                wrong3 = `Không thể xác định được.`;
+                
+                const exp = `Ta so sánh khoảng cách từ điểm đến tâm (d = OA) với bán kính R của đường tròn:\n` +
+                            `Ở đây, d = ${d} cm, R = ${R} cm.\n` +
+                            `Vì ${exp_pos} nên điểm A ${pos} đường tròn (O).`;
+                            
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b13_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else {
+                // Điểm M là trung điểm
+                const l = (Math.floor(Math.random()*5)+2)*2; // 4, 6, 8, 10, 12
+                const text = `Cho đoạn thẳng AB dài ${l} cm. Gọi I là trung điểm của đoạn thẳng AB. Khẳng định nào sau đây là **đúng** về vị trí của điểm I đối với đường tròn tâm A bán kính ${l/2} cm?`;
+                const ansStr = `Điểm I nằm trên đường tròn.`;
+                const wrong1 = `Điểm I nằm bên trong đường tròn.`;
+                const wrong2 = `Điểm I nằm bên ngoài đường tròn.`;
+                const wrong3 = `Điểm I trùng với tâm của đường tròn.`;
+                
+                const exp = `Vì I là trung điểm của AB nên khoảng cách từ A đến I là: \\( AI = \\frac{AB}{2} = \\frac{${l}}{2} = ${l/2} \\) (cm).\n` +
+                            `Bán kính của đường tròn là R = ${l/2} cm.\n` +
+                            `Ta thấy khoảng cách AI đúng bằng bán kính R (AI = R = ${l/2} cm).\n` +
+                            `Vậy điểm I nằm trên đường tròn (A; ${l/2} cm).`;
+                
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b13_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            }
+        }
+        return q;
     },
     b13_d3: function(count=5) {
-        return this.generic_geometry('b13_d3', `Dạng 3: Tâm đối xứng, trục đối xứng của đường tròn`, count);
+        const q = [];
+        let types = [];
+        for(let i=0; i<count; i++) types.push(i % 3);
+        types = this.shuffle(types);
+        
+        for(let i=0; i<count; i++) {
+            if (types[i] === 0) {
+                const text = `Khẳng định nào sau đây là **đúng** khi nói về tâm đối xứng và trục đối xứng của đường tròn?`;
+                const ansStr = `Đường tròn có duy nhất một tâm đối xứng là tâm của nó và có vô số trục đối xứng.`;
+                const wrong1 = `Đường tròn có vô số tâm đối xứng và có duy nhất một trục đối xứng.`;
+                const wrong2 = `Đường tròn không có tâm đối xứng nhưng có vô số trục đối xứng.`;
+                const wrong3 = `Đường tròn có duy nhất một tâm đối xứng và có duy nhất một trục đối xứng.`;
+                
+                const exp = `Theo tính chất đối xứng của đường tròn:\n` +
+                            `- Đường tròn có tâm đối xứng, và tâm đối xứng duy nhất chính là tâm của đường tròn đó.\n` +
+                            `- Mỗi đường thẳng đi qua tâm đều chia đường tròn thành 2 phần bằng nhau và chồng khít lên nhau, do đó đường tròn có vô số trục đối xứng.`;
+                
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b13_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else if (types[i] === 1) {
+                const text = `Đường thẳng nào dưới đây là trục đối xứng của đường tròn (O; R)?`;
+                const ansStr = `Đường thẳng d đi qua tâm O của đường tròn.`;
+                const wrong1 = `Đường thẳng d tiếp xúc với đường tròn.`;
+                const wrong2 = `Đường thẳng d cắt đường tròn nhưng không đi qua tâm O.`;
+                const wrong3 = `Đường thẳng d nằm hoàn toàn ngoài đường tròn.`;
+                
+                const exp = `Hình tròn / Đường tròn có trục đối xứng là bất kỳ đường thẳng nào đi qua tâm O của nó.\n` +
+                            `Chỉ có đường thẳng đi qua tâm mới là trục đối xứng của đường tròn.`;
+                
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b13_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else {
+                const text = `Cho đường tròn (O) và điểm M thuộc (O). Điểm M' đối xứng với M qua tâm O. Khẳng định nào sau đây là **đúng**?`;
+                const ansStr = `Điểm M' cũng thuộc đường tròn (O) và đoạn thẳng MM' là một đường kính của (O).`;
+                const wrong1 = `Điểm M' nằm bên trong đường tròn (O).`;
+                const wrong2 = `Điểm M' nằm bên ngoài đường tròn (O).`;
+                const wrong3 = `M và M' tạo thành một dây cung nhưng không đi qua tâm.`;
+                
+                const exp = `Vì M thuộc (O) nên khoảng cách OM = R.\n` +
+                            `Vì M' đối xứng với M qua tâm O nên O là trung điểm của MM'. Suy ra OM' = OM = R.\n` +
+                            `Do đó M' cũng thuộc đường tròn (O).\n` +
+                            `Hơn nữa, 3 điểm M, O, M' thẳng hàng (do tính đối xứng qua điểm O), nên MM' là dây cung đi qua tâm, tức là đường kính của (O).`;
+                
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b13_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            }
+        }
+        return q;
     },
+
     b14_d1: function(count=5) {
         return this.generic_algebra('b14_d1', `Dạng 1: So sánh hai đoạn thẳng`, count);
     },
