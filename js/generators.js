@@ -951,6 +951,21 @@ const Generators = {
         }
         return q;
     },
+    b16_d2: function(count=5) {
+        return this.generic_geometry('b16_d2', `Dạng 2: Nhận biết một đường thẳng là tiếp tuyến của đường tròn`, count);
+    },
+    b16_d3: function(count=5) {
+        return this.generic_geometry('b16_d3', `Dạng 2: Bài toán liên quan đến tính độ dài`, count);
+    },
+    b16_d4: function(count=5) {
+        return this.generic_algebra('b16_d4', `Dạng 3: Bài toán vận dụng tính chất tiếp tuyến`, count);
+    },
+    b16_d5: function(count=5) {
+        return this.generic_system('b16_d5', `Dạng 4: Chứng minh một số tính chất và hệ thức hình học`, count);
+    },
+    b16_d6: function(count=5) {
+        return this.generic_algebra('b16_d6', `Dạng 5: Một số bài toán liên quan đến cực trị hình học`, count);
+    },
     b17_d1: function(count=5) {
         const q = [];
         for(let i=0; i<count; i++) {
