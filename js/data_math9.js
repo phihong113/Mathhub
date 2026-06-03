@@ -529,17 +529,17 @@ const math9Data = {
                     },
                     {
                         "id": "b17_d4",
-                        "title": "Dạng 3: Các bài toán về hai đường tròn không cắt nhau",
+                        "title": "Dạng 4: Các bài toán về hai đường tròn không cắt nhau",
                         "generator": "b17_d4"
                     },
                     {
                         "id": "b17_d5",
-                        "title": "Dạng 4: Chứng minh các tính chất về hệ thức hình học",
+                        "title": "Dạng 5: Chứng minh các tính chất về hệ thức hình học",
                         "generator": "b17_d5"
                     },
                     {
                         "id": "b17_d6",
-                        "title": "Dạng 5: Tính độ dài đoạn thẳng",
+                        "title": "Dạng 6: Tính độ dài đoạn thẳng",
                         "generator": "b17_d6"
                     }
                 ]
