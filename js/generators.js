@@ -749,34 +749,247 @@ const Generators = {
     },
 
     b15_d1: function(count=5) {
-        return this.generic_geometry('b15_d1', `Dạng 1: Tính độ dài đường tròn, cung tròn hoặc các đại lượng liên quan`, count);
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const isArc = Math.random() > 0.5;
+            const R = Math.floor(Math.random()*8)+2;
+            if (!isArc) {
+                const text = `Tính độ dài đường tròn (chu vi) có bán kính $R = ${R}\\text{ cm}$.`;
+                const ansStr = `$C = ${2*R}\\pi\\text{ cm}$`;
+                const wrong1 = `$C = ${R}\\pi\\text{ cm}$`;
+                const wrong2 = `$C = ${R*R}\\pi\\text{ cm}$`;
+                const wrong3 = `$C = ${2*R}\\text{ cm}$`;
+                
+                const svgCode = `
+<div style="text-align: center; margin: 15px 0;">
+  <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="100" cy="100" r="80" fill="none" stroke="blue" stroke-width="2.5" />
+    <circle cx="100" cy="100" r="3" fill="red" />
+    <line x1="100" y1="100" x2="180" y2="100" stroke="green" stroke-width="2" />
+    <text x="135" y="95" font-size="14" font-family="sans-serif">R = ${R}</text>
+  </svg>
+</div>`;
+                const exp = `Công thức tính chu vi đường tròn là $C = 2\\pi R$.\n` +
+                            `Thay $R = ${R}$ vào, ta được $C = 2 \\times ${R} \\times \\pi = ${2*R}\\pi\\text{ cm}$.\n` + svgCode;
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b15_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else {
+                const ang = (Math.floor(Math.random()*12)+3)*10;
+                const text = `Tính độ dài cung tròn $n = ${ang}^\\circ$ của đường tròn bán kính $R = ${R}\\text{ cm}$.`;
+                const l = (Math.PI * R * ang / 180).toFixed(2);
+                
+                const num = R * ang;
+                const den = 180;
+                const gcd = function(a, b) { return b === 0 ? a : gcd(b, a % b); };
+                const g = gcd(num, den);
+                const n1 = num/g, d1 = den/g;
+                const piStr = (d1 === 1) ? (n1 === 1 ? "\\pi" : `${n1}\\pi`) : `\\frac{${n1}\\pi}{${d1}}`;
+                
+                const ansStr = `$l = ${piStr}\\text{ cm} \\approx ${l}\\text{ cm}$`;
+                const wrong1 = `$l = \\frac{${n1+1}\\pi}{${d1}}\\text{ cm}$`;
+                const wrong2 = `$l = ${(R*ang*2/180).toFixed(2)}\\pi\\text{ cm}$`;
+                const wrong3 = `$l = ${(R*R*ang/360).toFixed(2)}\\pi\\text{ cm}$`;
+                
+                const rad = ang * Math.PI / 180;
+                const x2 = 100 + 80 * Math.cos(-rad);
+                const y2 = 100 + 80 * Math.sin(-rad);
+                const isLarge = ang > 180 ? 1 : 0;
+                
+                const svgCode = `
+<div style="text-align: center; margin: 15px 0;">
+  <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(0,0,0,0.1)" stroke-width="1.5" />
+    <path d="M 180 100 A 80 80 0 ${isLarge} 0 ${x2} ${y2}" fill="none" stroke="red" stroke-width="3" />
+    <line x1="100" y1="100" x2="180" y2="100" stroke="black" />
+    <line x1="100" y1="100" x2="${x2}" y2="${y2}" stroke="black" />
+    <text x="140" y="90" font-size="12" font-family="sans-serif">${ang}&deg;</text>
+  </svg>
+</div>`;
+                const exp = `Công thức tính độ dài cung tròn là $l = \\frac{\\pi R n}{180}$.\n` +
+                            `Thay $R = ${R}, n = ${ang}$ vào công thức:\n` +
+                            `$l = \\frac{\\pi \\cdot ${R} \\cdot ${ang}}{180} = ${piStr}\\text{ cm} \\approx ${l}\\text{ cm}$.\n` + svgCode;
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b15_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            }
+        }
+        return q;
     },
     b15_d2: function(count=5) {
-        return this.generic_algebra('b15_d2', `Dạng 2: Tính diện tích hình tròn, hình quạt tròn và những yếu tố liên quan`, count);
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const isQuat = Math.random() > 0.5;
+            const R = Math.floor(Math.random()*8)+2;
+            if (!isQuat) {
+                const text = `Tính diện tích hình tròn có bán kính $R = ${R}\\text{ cm}$.`;
+                const ansStr = `$S = ${R*R}\\pi\\text{ cm}^2$`;
+                const wrong1 = `$S = ${2*R}\\pi\\text{ cm}^2$`;
+                const wrong2 = `$S = ${R}\\pi\\text{ cm}^2$`;
+                const wrong3 = `$S = ${R*R}\\text{ cm}^2$`;
+                const svgCode = `
+<div style="text-align: center; margin: 15px 0;">
+  <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="100" cy="100" r="80" fill="rgba(0,0,255,0.2)" stroke="blue" stroke-width="2" />
+    <circle cx="100" cy="100" r="3" fill="red" />
+    <line x1="100" y1="100" x2="180" y2="100" stroke="black" stroke-width="2" />
+    <text x="135" y="95" font-size="14" font-family="sans-serif">R = ${R}</text>
+  </svg>
+</div>`;
+                const exp = `Công thức tính diện tích hình tròn là $S = \\pi R^2$.\n` +
+                            `Thay $R = ${R}$ vào, ta được $S = \\pi \\cdot ${R}^2 = ${R*R}\\pi\\text{ cm}^2$.\n` + svgCode;
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b15_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else {
+                const ang = (Math.floor(Math.random()*12)+3)*10;
+                const text = `Tính diện tích hình quạt tròn bán kính $R = ${R}\\text{ cm}$ và có số đo cung là $n = ${ang}^\\circ$.`;
+                
+                const num = R * R * ang;
+                const den = 360;
+                const gcd = function(a, b) { return b === 0 ? a : gcd(b, a % b); };
+                const g = gcd(num, den);
+                const n1 = num/g, d1 = den/g;
+                const piStr = (d1 === 1) ? (n1 === 1 ? "\\pi" : `${n1}\\pi`) : `\\frac{${n1}\\pi}{${d1}}`;
+                
+                const ansStr = `$S = ${piStr}\\text{ cm}^2$`;
+                const wrong1 = `$S = \\frac{${n1+1}\\pi}{${d1}}\\text{ cm}^2$`;
+                const wrong2 = `$S = \\frac{${n1}\\pi}{${d1+2}}\\text{ cm}^2$`;
+                const wrong3 = `$S = ${(R*ang/180).toFixed(2)}\\pi\\text{ cm}^2$`;
+                
+                const rad = ang * Math.PI / 180;
+                const x2 = 100 + 80 * Math.cos(-rad);
+                const y2 = 100 + 80 * Math.sin(-rad);
+                const isLarge = ang > 180 ? 1 : 0;
+                
+                const svgCode = `
+<div style="text-align: center; margin: 15px 0;">
+  <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(0,0,0,0.1)" stroke-width="1.5" />
+    <path d="M 100 100 L 180 100 A 80 80 0 ${isLarge} 0 ${x2} ${y2} Z" fill="rgba(255,165,0,0.4)" stroke="orange" stroke-width="2" />
+    <text x="140" y="90" font-size="12" font-family="sans-serif">${ang}&deg;</text>
+  </svg>
+</div>`;
+                const exp = `Công thức tính diện tích hình quạt tròn là $S = \\frac{\\pi R^2 n}{360}$.\n` +
+                            `Thay $R = ${R}, n = ${ang}$ vào, ta được:\n` +
+                            `$S = \\frac{\\pi \\cdot ${R}^2 \\cdot ${ang}}{360} = ${piStr}\\text{ cm}^2$.\n` + svgCode;
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b15_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            }
+        }
+        return q;
     },
     b15_d3: function(count=5) {
-        return this.generic_algebra('b15_d3', `Dạng 3: Tính diện tích hình vành khăn, hình viên phân và những yếu tố liên quan`, count);
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const r = Math.floor(Math.random()*4)+2; // 2 to 5
+            const R = r + Math.floor(Math.random()*4)+2; // r+2 to r+5
+            const text = `Tính diện tích hình vành khăn giới hạn bởi hai đường tròn đồng tâm có bán kính $R = ${R}\\text{ cm}$ và $r = ${r}\\text{ cm}$.`;
+            const S = (R*R - r*r);
+            const ansStr = `$S = ${S}\\pi\\text{ cm}^2$`;
+            const wrong1 = `$S = ${S*2}\\pi\\text{ cm}^2$`;
+            const wrong2 = `$S = ${(R-r)*(R-r)}\\pi\\text{ cm}^2$`;
+            const wrong3 = `$S = ${R*R + r*r}\\pi\\text{ cm}^2$`;
+            
+            const rSvg = Math.round((r/R) * 80);
+            const svgCode = `
+<div style="text-align: center; margin: 15px 0;">
+  <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="100" cy="100" r="80" fill="rgba(0,128,0,0.3)" />
+    <circle cx="100" cy="100" r="${rSvg}" fill="white" stroke="black" />
+    <circle cx="100" cy="100" r="80" fill="none" stroke="black" />
+    <circle cx="100" cy="100" r="3" fill="red" />
+    <line x1="100" y1="100" x2="180" y2="100" stroke="black" />
+    <text x="145" y="95" font-size="12" font-family="sans-serif">R</text>
+    <line x1="100" y1="100" x2="${100 - rSvg}" y2="100" stroke="black" />
+    <text x="${100 - rSvg/2}" y="95" font-size="12" font-family="sans-serif">r</text>
+  </svg>
+</div>`;
+            const exp = `Diện tích hình vành khăn bằng diện tích hình tròn lớn trừ đi diện tích hình tròn nhỏ.\n` +
+                        `Công thức: $S = \\pi R^2 - \\pi r^2 = \\pi(R^2 - r^2)$.\n` +
+                        `Thay $R = ${R}, r = ${r}$ vào, ta được: $S = \\pi(${R}^2 - ${r}^2) = \\pi(${R*R} - ${r*r}) = ${S}\\pi\\text{ cm}^2$.\n` + svgCode;
+            const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+            q.push({ id: 'b15_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+        }
+        return q;
     },
     b16_d1: function(count=5) {
-        return this.generic_geometry('b16_d1', `Dạng 1: Xác định vị trí tương đối của đường thẳng và đường tròn`, count);
-    },
-    b16_d2: function(count=5) {
-        return this.generic_geometry('b16_d2', `Dạng 2: Nhận biết một đường thẳng là tiếp tuyến của đường tròn`, count);
-    },
-    b16_d3: function(count=5) {
-        return this.generic_geometry('b16_d3', `Dạng 2: Bài toán liên quan đến tính độ dài`, count);
-    },
-    b16_d4: function(count=5) {
-        return this.generic_algebra('b16_d4', `Dạng 3: Bài toán vận dụng tính chất tiếp tuyến`, count);
-    },
-    b16_d5: function(count=5) {
-        return this.generic_system('b16_d5', `Dạng 4: Chứng minh một số tính chất và hệ thức hình học`, count);
-    },
-    b16_d6: function(count=5) {
-        return this.generic_algebra('b16_d6', `Dạng 5: Một số bài toán liên quan đến cực trị hình học`, count);
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const R = Math.floor(Math.random()*5)+4; // 4 to 8
+            const type = Math.floor(Math.random()*3); // 0: d<R, 1: d=R, 2: d>R
+            let d = R;
+            let ansStr, wrong1, wrong2, state, svgCode;
+            if (type === 0) {
+                d = R - Math.floor(Math.random()*2) - 1; // 1 to 3 less
+                ansStr = `Đường thẳng cắt đường tròn (tại 2 điểm phân biệt)`;
+                wrong1 = `Đường thẳng tiếp xúc với đường tròn (tại 1 điểm)`;
+                wrong2 = `Đường thẳng và đường tròn không giao nhau`;
+                state = "cắt";
+                const chordHalf = Math.sqrt(R*R - d*d);
+                svgCode = `<svg width="200" height="200"><circle cx="100" cy="100" r="80" fill="none" stroke="blue" /><circle cx="100" cy="100" r="3" fill="red" /><line x1="20" y1="${100 + d*10}" x2="180" y2="${100 + d*10}" stroke="black" stroke-width="2" /><line x1="100" y1="100" x2="100" y2="${100 + d*10}" stroke="green" stroke-dasharray="4" /><text x="105" y="${100 + d*5}">d = ${d}</text></svg>`;
+            } else if (type === 1) {
+                ansStr = `Đường thẳng tiếp xúc với đường tròn (tại 1 điểm)`;
+                wrong1 = `Đường thẳng cắt đường tròn (tại 2 điểm phân biệt)`;
+                wrong2 = `Đường thẳng và đường tròn không giao nhau`;
+                state = "tiếp xúc";
+                svgCode = `<svg width="200" height="200"><circle cx="100" cy="100" r="80" fill="none" stroke="blue" /><circle cx="100" cy="100" r="3" fill="red" /><line x1="20" y1="180" x2="180" y2="180" stroke="black" stroke-width="2" /><line x1="100" y1="100" x2="100" y2="180" stroke="green" stroke-dasharray="4" /><text x="105" y="140">d = R = ${R}</text></svg>`;
+            } else {
+                d = R + Math.floor(Math.random()*3) + 1;
+                ansStr = `Đường thẳng và đường tròn không giao nhau`;
+                wrong1 = `Đường thẳng cắt đường tròn (tại 2 điểm phân biệt)`;
+                wrong2 = `Đường thẳng tiếp xúc với đường tròn (tại 1 điểm)`;
+                state = "không giao nhau";
+                svgCode = `<svg width="200" height="200"><circle cx="100" cy="100" r="60" fill="none" stroke="blue" /><circle cx="100" cy="100" r="3" fill="red" /><line x1="20" y1="${100 + d*8}" x2="180" y2="${100 + d*8}" stroke="black" stroke-width="2" /><line x1="100" y1="100" x2="100" y2="${100 + d*8}" stroke="green" stroke-dasharray="4" /><text x="105" y="${100 + d*4}">d = ${d}</text></svg>`;
+            }
+            
+            const text = `Cho đường tròn (O) có bán kính $R = ${R}\\text{ cm}$. Gọi $d$ là khoảng cách từ tâm O đến đường thẳng $a$. Biết $d = ${d}\\text{ cm}$. Hỏi vị trí tương đối của đường thẳng $a$ và đường tròn (O) là gì?`;
+            const exp = `Ta so sánh khoảng cách $d$ và bán kính $R$:\n` +
+                        `$d = ${d}, R = ${R} \\implies d ${type===0 ? "<" : (type===1 ? "=" : ">")} R$.\n` +
+                        `Vậy đường thẳng ${state} đường tròn.\n` +
+                        `<div style="text-align: center; margin: 15px 0;">${svgCode}</div>`;
+            
+            const opts = this.shuffle([ansStr, wrong1, wrong2]);
+            q.push({ id: 'b16_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+        }
+        return q;
     },
     b17_d1: function(count=5) {
-        return this.generic_geometry('b17_d1', `Dạng 1: Xác định vị trí tương đối của hai đường tròn`, count);
+        const q = [];
+        for(let i=0; i<count; i++) {
+            const R = Math.floor(Math.random()*3)+6; // 6 to 8
+            const r = Math.floor(Math.random()*3)+2; // 2 to 4
+            const type = Math.floor(Math.random()*5); // 0: cắt, 1: tx ngoài, 2: ngoài nhau, 3: tx trong, 4: đựng nhau
+            let d = 0;
+            let ansStr, wrong1, wrong2, wrong3;
+            
+            if (type === 0) { // Cắt nhau: R-r < d < R+r
+                d = R;
+                ansStr = "Cắt nhau"; wrong1 = "Tiếp xúc ngoài"; wrong2 = "Ngoài nhau"; wrong3 = "Tiếp xúc trong";
+            } else if (type === 1) { // Tiếp xúc ngoài: d = R+r
+                d = R + r;
+                ansStr = "Tiếp xúc ngoài"; wrong1 = "Cắt nhau"; wrong2 = "Ngoài nhau"; wrong3 = "Tiếp xúc trong";
+            } else if (type === 2) { // Ngoài nhau: d > R+r
+                d = R + r + 2;
+                ansStr = "Ngoài nhau"; wrong1 = "Cắt nhau"; wrong2 = "Tiếp xúc ngoài"; wrong3 = "Đựng nhau";
+            } else if (type === 3) { // Tiếp xúc trong: d = R-r
+                d = R - r;
+                ansStr = "Tiếp xúc trong"; wrong1 = "Cắt nhau"; wrong2 = "Tiếp xúc ngoài"; wrong3 = "Đựng nhau";
+            } else { // Đựng nhau: d < R-r
+                d = R - r - 1;
+                ansStr = "Đựng nhau"; wrong1 = "Tiếp xúc trong"; wrong2 = "Cắt nhau"; wrong3 = "Ngoài nhau";
+            }
+            
+            const text = `Cho hai đường tròn (O; $R$) và (O'; $r$) có bán kính lần lượt là $R = ${R}\\text{ cm}$, $r = ${r}\\text{ cm}$. Biết khoảng cách nối tâm $OO' = ${d}\\text{ cm}$. Hãy xác định vị trí tương đối của hai đường tròn.`;
+            const exp = `Ta xét các tổng và hiệu: $R + r = ${R} + ${r} = ${R+r}$ và $R - r = ${R} - ${r} = ${R-r}$.\n` +
+                        `Vì khoảng cách $OO' = d = ${d}$. So sánh, ta thấy:\n` +
+                        (type===0 ? `$R - r < d < R + r$ (${R-r} < ${d} < ${R+r}). Vậy hai đường tròn cắt nhau.` :
+                         type===1 ? `$d = R + r$ (${d} = ${R+r}). Vậy hai đường tròn tiếp xúc ngoài.` :
+                         type===2 ? `$d > R + r$ (${d} > ${R+r}). Vậy hai đường tròn ở ngoài nhau.` :
+                         type===3 ? `$d = R - r$ (${d} = ${R-r}). Vậy hai đường tròn tiếp xúc trong.` :
+                         `$d < R - r$ (${d} < ${R-r}). Vậy đường tròn (O) đựng đường tròn (O').`);
+            
+            const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+            q.push({ id: 'b17_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+        }
+        return q;
     },
     b17_d2: function(count=5) {
         return this.generic_geometry('b17_d2', `Dạng 2: Các bài toán liên quan đến hai đường tròn tiếp xúc nhau`, count);
