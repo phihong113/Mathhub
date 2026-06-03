@@ -366,7 +366,7 @@ const Generators = {
                 
                 const exp = `Ta so sánh khoảng cách từ điểm đến tâm (d = OA) với bán kính R của đường tròn:\n` +
                             `Ở đây, d = ${d} cm, R = ${R} cm.\n` +
-                            `Vì ${exp_pos} nên điểm A ${pos} đường tròn (O).`;
+                            `Vì ${exp_pos} nên điểm A ${pos} đường tròn (O).` + `\n<div style="text-align: center; margin: 15px 0;">\n  <svg width="220" height="170" viewBox="0 0 220 170" xmlns="http://www.w3.org/2000/svg">\n    <circle cx="100" cy="85" r="${R*10}" fill="none" stroke="blue" stroke-width="1.5" />\n    <circle cx="100" cy="85" r="3" fill="red" />\n    <text x="95" y="75" font-size="14" font-family="sans-serif">O</text>\n    <line x1="100" y1="85" x2="100" y2="${85 - R*10}" stroke="green" stroke-dasharray="4" stroke-width="1.5" />\n    <text x="105" y="${85 - R*5}" font-size="14" font-family="sans-serif" fill="green">R</text>\n    <line x1="100" y1="85" x2="${100 + d*10}" y2="85" stroke="purple" stroke-width="2" />\n    <circle cx="${100 + d*10}" cy="85" r="4" fill="purple" />\n    <text x="${100 + d*10 - 5}" y="105" font-size="14" font-family="sans-serif" fill="purple">A</text>\n    <text x="${100 + d*5 - 5}" y="80" font-size="14" font-family="sans-serif" fill="purple">d</text>\n  </svg>\n</div>`;
                             
                 const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
                 q.push({ id: 'b13_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
@@ -382,7 +382,7 @@ const Generators = {
                 const exp = `Vì I là trung điểm của AB nên khoảng cách từ A đến I là: \\( AI = \\frac{AB}{2} = \\frac{${l}}{2} = ${l/2} \\) (cm).\n` +
                             `Bán kính của đường tròn là R = ${l/2} cm.\n` +
                             `Ta thấy khoảng cách AI đúng bằng bán kính R (AI = R = ${l/2} cm).\n` +
-                            `Vậy điểm I nằm trên đường tròn (A; ${l/2} cm).`;
+                            `Vậy điểm I nằm trên đường tròn (A; ${l/2} cm).` + `\n<div style="text-align: center; margin: 15px 0;">\n  <svg width="220" height="150" viewBox="0 0 220 150" xmlns="http://www.w3.org/2000/svg">\n    <circle cx="50" cy="75" r="60" fill="none" stroke="blue" stroke-width="1.5" />\n    <line x1="50" y1="75" x2="170" y2="75" stroke="black" stroke-width="2" />\n    <circle cx="50" cy="75" r="3" fill="red" />\n    <text x="45" y="65" font-size="14" font-family="sans-serif">A</text>\n    <circle cx="170" cy="75" r="3" fill="red" />\n    <text x="165" y="65" font-size="14" font-family="sans-serif">B</text>\n    <circle cx="110" cy="75" r="4" fill="purple" />\n    <text x="105" y="65" font-size="14" font-family="sans-serif" fill="purple">I</text>\n  </svg>\n</div>`;
                 
                 const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
                 q.push({ id: 'b13_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
@@ -406,7 +406,7 @@ const Generators = {
                 
                 const exp = `Theo tính chất đối xứng của đường tròn:\n` +
                             `- Đường tròn có tâm đối xứng, và tâm đối xứng duy nhất chính là tâm của đường tròn đó.\n` +
-                            `- Mỗi đường thẳng đi qua tâm đều chia đường tròn thành 2 phần bằng nhau và chồng khít lên nhau, do đó đường tròn có vô số trục đối xứng.`;
+                            `- Mỗi đường thẳng đi qua tâm đều chia đường tròn thành 2 phần bằng nhau và chồng khít lên nhau, do đó đường tròn có vô số trục đối xứng.` + `\n<div style="text-align: center; margin: 15px 0;">\n  <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">\n    <circle cx="100" cy="100" r="70" fill="none" stroke="blue" stroke-width="1.5" />\n    <circle cx="100" cy="100" r="3" fill="red" />\n    <text x="105" y="95" font-size="14" font-family="sans-serif">O</text>\n    <line x1="20" y1="100" x2="180" y2="100" stroke="green" stroke-dasharray="4" stroke-width="1" />\n    <line x1="100" y1="20" x2="100" y2="180" stroke="green" stroke-dasharray="4" stroke-width="1" />\n    <line x1="43" y1="43" x2="157" y2="157" stroke="green" stroke-dasharray="4" stroke-width="1" />\n    <line x1="43" y1="157" x2="157" y2="43" stroke="green" stroke-dasharray="4" stroke-width="1" />\n  </svg>\n</div>`;
                 
                 const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
                 q.push({ id: 'b13_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
@@ -418,7 +418,7 @@ const Generators = {
                 const wrong3 = `Đường thẳng d nằm hoàn toàn ngoài đường tròn.`;
                 
                 const exp = `Hình tròn / Đường tròn có trục đối xứng là bất kỳ đường thẳng nào đi qua tâm O của nó.\n` +
-                            `Chỉ có đường thẳng đi qua tâm mới là trục đối xứng của đường tròn.`;
+                            `Chỉ có đường thẳng đi qua tâm mới là trục đối xứng của đường tròn.` + `\n<div style="text-align: center; margin: 15px 0;">\n  <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">\n    <circle cx="100" cy="100" r="70" fill="none" stroke="blue" stroke-width="1.5" />\n    <circle cx="100" cy="100" r="3" fill="red" />\n    <text x="105" y="95" font-size="14" font-family="sans-serif">O</text>\n    <line x1="20" y1="120" x2="180" y2="80" stroke="red" stroke-width="2" />\n    <text x="185" y="85" font-size="14" font-family="sans-serif" fill="red">d</text>\n  </svg>\n</div>`;
                 
                 const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
                 q.push({ id: 'b13_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
@@ -432,7 +432,7 @@ const Generators = {
                 const exp = `Vì M thuộc (O) nên khoảng cách OM = R.\n` +
                             `Vì M' đối xứng với M qua tâm O nên O là trung điểm của MM'. Suy ra OM' = OM = R.\n` +
                             `Do đó M' cũng thuộc đường tròn (O).\n` +
-                            `Hơn nữa, 3 điểm M, O, M' thẳng hàng (do tính đối xứng qua điểm O), nên MM' là dây cung đi qua tâm, tức là đường kính của (O).`;
+                            `Hơn nữa, 3 điểm M, O, M' thẳng hàng (do tính đối xứng qua điểm O), nên MM' là dây cung đi qua tâm, tức là đường kính của (O).` + `\n<div style="text-align: center; margin: 15px 0;">\n  <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">\n    <circle cx="100" cy="100" r="70" fill="none" stroke="blue" stroke-width="1.5" />\n    <line x1="30" y1="100" x2="170" y2="100" stroke="black" stroke-width="1.5" />\n    <circle cx="100" cy="100" r="3" fill="red" />\n    <text x="95" y="90" font-size="14" font-family="sans-serif">O</text>\n    <circle cx="170" cy="100" r="4" fill="purple" />\n    <text x="175" y="95" font-size="14" font-family="sans-serif" fill="purple">M</text>\n    <circle cx="30" cy="100" r="4" fill="purple" />\n    <text x="15" y="95" font-size="14" font-family="sans-serif" fill="purple">M'</text>\n  </svg>\n</div>`;
                 
                 const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
                 q.push({ id: 'b13_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
