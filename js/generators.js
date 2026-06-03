@@ -1031,54 +1031,66 @@ const Generators = {
     b16_d2: function(count=5) {
         const q = [];
         for(let i=0; i<count; i++) {
-            // Pythagore triple for OAB
-            // R = OB (radius)
-            // d = OA (distance)
-            // l = AB (tangent length)
-            const m = Math.floor(Math.random()*4)+2; // 2 to 5
-            const n = Math.floor(Math.random()*(m-1))+1; // 1 to m-1
-            
-            const a = m*m - n*n;
-            const b = 2*m*n;
-            const c = m*m + n*n;
-            
-            // Randomize whether it's actually a tangent (right triangle) or not
-            const isTangent = Math.random() > 0.4;
-            const R = a;
-            const d = c;
-            const l = isTangent ? b : b + Math.floor(Math.random()*3) + 1;
-            
-            const text = `Cho đường tròn (O; $R = ${R}\\text{ cm}$). Điểm A cách tâm O một khoảng $OA = ${d}\\text{ cm}$. Lấy điểm B trên đường tròn sao cho $AB = ${l}\\text{ cm}$. Khẳng định nào sau đây là đúng?`;
-            
-            let ansStr, wrong1, wrong2, wrong3;
-            if (isTangent) {
-                ansStr = `Đường thẳng AB là tiếp tuyến của (O)`;
-                wrong1 = `Đường thẳng AB cắt (O) tại 2 điểm`;
-                wrong2 = `Đường thẳng AB không giao nhau với (O)`;
-                wrong3 = `Đường thẳng AB đi qua tâm O`;
+            const type = Math.floor(Math.random()*2);
+            if (type === 0) {
+                const m = Math.floor(Math.random()*4)+2;
+                const n = Math.floor(Math.random()*(m-1))+1;
+                const a = m*m - n*n;
+                const b = 2*m*n;
+                const c = m*m + n*n;
+                
+                const isTangent = Math.random() > 0.4;
+                const R = a;
+                const d = c;
+                const l = isTangent ? b : b + Math.floor(Math.random()*3) + 1;
+                
+                const text = `Cho đường tròn (O; \\( R = ${R}\\text{ cm} \\)). Điểm A cách tâm O một khoảng \\( OA = ${d}\\text{ cm} \\). Lấy điểm B trên đường tròn sao cho \\( AB = ${l}\\text{ cm} \\). Khẳng định nào sau đây là đúng?`;
+                
+                let ansStr, wrong1, wrong2, wrong3;
+                if (isTangent) {
+                    ansStr = `Đường thẳng AB là tiếp tuyến của (O)`;
+                    wrong1 = `Đường thẳng AB cắt (O) tại 2 điểm`;
+                    wrong2 = `Đường thẳng AB không giao nhau với (O)`;
+                    wrong3 = `Đường thẳng AB đi qua tâm O`;
+                } else {
+                    ansStr = `Đường thẳng AB không phải là tiếp tuyến của (O)`;
+                    wrong1 = `Đường thẳng AB là tiếp tuyến của (O)`;
+                    wrong2 = `Đường thẳng AB vuông góc với OA`;
+                    wrong3 = `Đường thẳng AB vuông góc với đường tròn`;
+                }
+                
+                const exp = `Ta có \\( OB = R = ${R} \\), \\( OA = ${d} \\), \\( AB = ${l} \\).\n` +
+                            `Xét \\( OB^2 + AB^2 = ${R}^2 + ${l}^2 = ${R*R + l*l} \\).\n` +
+                            `Và \\( OA^2 = ${d}^2 = ${d*d} \\).\n` +
+                            (isTangent ? `Vì \\( OB^2 + AB^2 = OA^2 \\), suy ra \\( \\Delta OAB \\) vuông tại B (định lý Pythagore đảo).\n` +
+                                         `Do đó \\( OB \\perp AB \\) tại B nằm trên (O). Vậy AB là tiếp tuyến của (O).` 
+                                       : `Vì \\( OB^2 + AB^2 \\neq OA^2 \\), suy ra \\( \\Delta OAB \\) không vuông tại B.\n` +
+                                         `Do đó AB không vuông góc với bán kính OB tại B, nên AB không phải là tiếp tuyến.`);
+                
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b16_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
             } else {
-                ansStr = `Đường thẳng AB không phải là tiếp tuyến của (O)`;
-                wrong1 = `Đường thẳng AB là tiếp tuyến của (O)`;
-                wrong2 = `Đường thẳng AB vuông góc với OA`;
-                wrong3 = `Đường thẳng AB vuông góc với đường tròn`;
+                const R = Math.floor(Math.random()*10)+5;
+                const text = `Cho đường tròn (O; \\( R = ${R}\\text{ cm} \\)) và một đường thẳng \\( a \\). Gọi \\( d \\) là khoảng cách từ tâm O đến đường thẳng \\( a \\). Để đường thẳng \\( a \\) là tiếp tuyến của đường tròn (O) thì khoảng cách \\( d \\) phải bằng bao nhiêu?`;
+                
+                const ansStr = `\\( d = ${R}\\text{ cm} \\)`;
+                const wrong1 = `\\( d < ${R}\\text{ cm} \\)`;
+                const wrong2 = `\\( d > ${R}\\text{ cm} \\)`;
+                const wrong3 = `\\( d = ${R*2}\\text{ cm} \\)`;
+                
+                const exp = `Theo định lý về vị trí tương đối giữa đường thẳng và đường tròn:\n` +
+                            `Đường thẳng là tiếp tuyến của đường tròn (tiếp xúc với đường tròn) khi và chỉ khi khoảng cách từ tâm đến đường thẳng bằng đúng bán kính.\n` +
+                            `Vậy \\( d = R = ${R}\\text{ cm} \\).`;
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b16_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
             }
-            
-            const exp = `Ta có $OB = R = ${R}$, $OA = ${d}$, $AB = ${l}$.\n` +
-                        `Xét $OB^2 + AB^2 = ${R}^2 + ${l}^2 = ${R*R + l*l}$.\n` +
-                        `Và $OA^2 = ${d}^2 = ${d*d}$.\n` +
-                        (isTangent ? `Vì $OB^2 + AB^2 = OA^2$, suy ra $\\Delta OAB$ vuông tại B (định lý Pythagore đảo).\n` +
-                                     `Do đó $OB \\perp AB$ tại B nằm trên (O). Vậy AB là tiếp tuyến của (O).` 
-                                   : `Vì $OB^2 + AB^2 \\neq OA^2$, suy ra $\\Delta OAB$ không vuông tại B.\n` +
-                                     `Do đó AB không vuông góc với bán kính OB tại B, nên AB không phải là tiếp tuyến.`);
-            
-            const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
-            q.push({ id: 'b16_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
         }
         return q;
     },
     b16_d3: function(count=5) {
         const q = [];
         for(let i=0; i<count; i++) {
+            const type = Math.floor(Math.random()*2);
             const m = Math.floor(Math.random()*4)+2;
             const n = Math.floor(Math.random()*(m-1))+1;
             const a = m*m - n*n;
@@ -1089,14 +1101,15 @@ const Generators = {
             const l = b;
             const d = c;
             
-            const text = `Từ điểm A cách tâm O một khoảng $d = ${d}\\text{ cm}$, kẻ tiếp tuyến AB với đường tròn (O; $R = ${R}\\text{ cm}$) (B là tiếp điểm). Tính độ dài đoạn thẳng AB.`;
-            
-            const ansStr = `$AB = ${l}\\text{ cm}$`;
-            const wrong1 = `$AB = ${l + 1}\\text{ cm}$`;
-            const wrong2 = `$AB = ${Math.abs(l - 2)}\\text{ cm}$`;
-            const wrong3 = `$AB = ${d - R}\\text{ cm}$`;
-            
-            const svgCode = `
+            if (type === 0) {
+                const text = `Từ điểm A cách tâm O một khoảng \\( d = ${d}\\text{ cm} \\), kẻ tiếp tuyến AB với đường tròn (O; \\( R = ${R}\\text{ cm} \\)) (B là tiếp điểm). Tính độ dài đoạn thẳng AB.`;
+                
+                const ansStr = `\\( AB = ${l}\\text{ cm} \\)`;
+                const wrong1 = `\\( AB = ${l + 1}\\text{ cm} \\)`;
+                const wrong2 = `\\( AB = ${Math.abs(l - 2)}\\text{ cm} \\)`;
+                const wrong3 = `\\( AB = ${d - R}\\text{ cm} \\)`;
+                
+                const svgCode = `
 <div style="text-align: center; margin: 15px 0;">
   <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
     <circle cx="100" cy="130" r="50" fill="none" stroke="blue" stroke-width="1.5" />
@@ -1111,41 +1124,99 @@ const Generators = {
     <line x1="100" y1="30" x2="140" y2="100" stroke="red" stroke-width="2" />
   </svg>
 </div>`;
-            const exp = `Vì AB là tiếp tuyến của (O) tại B nên $AB \\perp OB$ tại B.\n` +
-                        `Áp dụng định lý Pythagore vào tam giác vuông ABO, ta có:\n` +
-                        `$OA^2 = AB^2 + OB^2 \\implies AB^2 = OA^2 - OB^2 = ${d}^2 - ${R}^2 = ${l*l}$.\n` +
-                        `Vậy $AB = \\sqrt{${l*l}} = ${l}\\text{ cm}$.\n` + svgCode;
-            
-            const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
-            q.push({ id: 'b16_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+                const exp = `Vì AB là tiếp tuyến của (O) tại B nên \\( AB \\perp OB \\) tại B.\n` +
+                            `Áp dụng định lý Pythagore vào tam giác vuông ABO, ta có:\n` +
+                            `\\( OA^2 = AB^2 + OB^2 \\implies AB^2 = OA^2 - OB^2 = ${d}^2 - ${R}^2 = ${l*l} \\).\n` +
+                            `Vậy \\( AB = \\sqrt{${l*l}} = ${l}\\text{ cm} \\).\n` + svgCode;
+                
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b16_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else {
+                const text = `Từ điểm A nằm ngoài đường tròn (O; \\( R = ${R}\\text{ cm} \\)), kẻ tiếp tuyến AB đến đường tròn (B là tiếp điểm). Biết độ dài tiếp tuyến \\( AB = ${l}\\text{ cm} \\). Tính khoảng cách từ A đến tâm O.`;
+                
+                const ansStr = `\\( OA = ${d}\\text{ cm} \\)`;
+                const wrong1 = `\\( OA = ${d + 1}\\text{ cm} \\)`;
+                const wrong2 = `\\( OA = ${Math.abs(d - 2)}\\text{ cm} \\)`;
+                const wrong3 = `\\( OA = ${l + R}\\text{ cm} \\)`;
+                
+                const exp = `Vì AB là tiếp tuyến của (O) tại B nên \\( AB \\perp OB \\) tại B. Xét tam giác vuông ABO:\n` +
+                            `Áp dụng định lý Pythagore:\n` +
+                            `\\( OA^2 = AB^2 + OB^2 = ${l}^2 + ${R}^2 = ${d*d} \\).\n` +
+                            `Vậy \\( OA = \\sqrt{${d*d}} = ${d}\\text{ cm} \\).`;
+                
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b16_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            }
         }
         return q;
     },
     b16_d4: function(count=5) {
         const q = [];
         for(let i=0; i<count; i++) {
-            const h = (Math.floor(Math.random()*20)+10) * 10; // 100 to 300 meters
-            const R = 6400; // km
-            const h_km = h / 1000;
-            
-            const text = `Một trạm quan sát nằm ở độ cao $h = ${h}\\text{ m}$ so với mực nước biển. Biết bán kính Trái Đất xấp xỉ $R = 6400\\text{ km}$. Tính tầm nhìn xa tối đa (khoảng cách từ trạm đến đường chân trời) làm tròn đến 2 chữ số thập phân.`;
-            
-            const d2 = (R + h_km)*(R + h_km) - R*R;
-            const d = Math.sqrt(d2);
-            const ansStr = `$${d.toFixed(2)}\\text{ km}$`;
-            const wrong1 = `$${(d + 10).toFixed(2)}\\text{ km}$`;
-            const wrong2 = `$${(d / 2).toFixed(2)}\\text{ km}$`;
-            const wrong3 = `$${Math.sqrt(h_km*h_km + R*R).toFixed(2)}\\text{ km}$`;
-            
-            const exp = `Giả sử A là vị trí trạm quan sát, O là tâm Trái Đất, B là điểm xa nhất nhìn thấy trên mặt đất.\n` +
-                        `Khi đó, khoảng cách nhìn xa nhất chính là tiếp tuyến AB. Ta có $AB \\perp OB$.\n` +
-                        `Đổi $h = ${h}\\text{ m} = ${h_km}\\text{ km}$. Khoảng cách từ A đến tâm Trái Đất là $OA = R + h = 6400 + ${h_km} = ${6400 + h_km}\\text{ km}$.\n` +
-                        `Áp dụng định lý Pythagore trong $\\Delta ABO$ vuông tại B:\n` +
-                        `$AB^2 = OA^2 - OB^2 = (6400 + ${h_km})^2 - 6400^2 \\approx ${d2.toFixed(4)}$.\n` +
-                        `Suy ra $AB \\approx \\sqrt{${d2.toFixed(4)}} \\approx ${d.toFixed(2)}\\text{ km}$.`;
-            
-            const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
-            q.push({ id: 'b16_d4_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            const type = Math.floor(Math.random()*2);
+            if (type === 0) {
+                const h = (Math.floor(Math.random()*20)+10) * 10; // 100 to 300 meters
+                const R = 6400; // km
+                const h_km = h / 1000;
+                
+                const text = `Một trạm quan sát nằm ở độ cao \\( h = ${h}\\text{ m} \\) so với mực nước biển. Biết bán kính Trái Đất xấp xỉ \\( R = 6400\\text{ km} \\). Tính tầm nhìn xa tối đa (khoảng cách từ trạm đến đường chân trời) làm tròn đến 2 chữ số thập phân.`;
+                
+                const d2 = (R + h_km)*(R + h_km) - R*R;
+                const d = Math.sqrt(d2);
+                const ansStr = `\\( ${d.toFixed(2)}\\text{ km} \\)`;
+                const wrong1 = `\\( ${(d + 10).toFixed(2)}\\text{ km} \\)`;
+                const wrong2 = `\\( ${(d / 2).toFixed(2)}\\text{ km} \\)`;
+                const wrong3 = `\\( ${Math.sqrt(h_km*h_km + R*R).toFixed(2)}\\text{ km} \\)`;
+                
+                const exp = `Giả sử A là vị trí trạm quan sát, O là tâm Trái Đất, B là điểm xa nhất nhìn thấy trên mặt đất.\n` +
+                            `Khi đó, khoảng cách nhìn xa nhất chính là tiếp tuyến AB. Ta có \\( AB \\perp OB \\).\n` +
+                            `Đổi \\( h = ${h}\\text{ m} = ${h_km}\\text{ km} \\). Khoảng cách từ A đến tâm Trái Đất là \\( OA = R + h = 6400 + ${h_km} = ${6400 + h_km}\\text{ km} \\).\n` +
+                            `Áp dụng định lý Pythagore trong \\( \\Delta ABO \\) vuông tại B:\n` +
+                            `\\( AB^2 = OA^2 - OB^2 = (6400 + ${h_km})^2 - 6400^2 \\approx ${d2.toFixed(4)} \\).\n` +
+                            `Suy ra \\( AB \\approx \\sqrt{${d2.toFixed(4)}} \\approx ${d.toFixed(2)}\\text{ km} \\).`;
+                
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b16_d4_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else {
+                const angles = [60, 90, 120];
+                const angle = angles[Math.floor(Math.random()*angles.length)];
+                const R = Math.floor(Math.random()*5)*2 + 4; // 4, 6, 8, 10
+                
+                const text = `Từ điểm M nằm ngoài đường tròn (O; \\( R = ${R}\\text{ cm} \\)), kẻ hai tiếp tuyến MA, MB đến đường tròn (A, B là hai tiếp điểm). Biết góc \\( \\widehat{AMB} = ${angle}^\\circ \\). Tính độ dài đoạn thẳng OM.`;
+                
+                const halfAngle = angle / 2;
+                // sin(halfAngle) = OB / OM => OM = R / sin(halfAngle)
+                let OM = 0;
+                let OM_str = "";
+                let wrong1, wrong2, wrong3;
+                if (angle === 60) {
+                    OM = R / 0.5; // sin 30 = 0.5
+                    OM_str = `${OM}`;
+                    wrong1 = `${OM/2}`; wrong2 = `${OM+2}`; wrong3 = `${R * Math.sqrt(3)}`;
+                } else if (angle === 90) {
+                    OM = R * Math.sqrt(2);
+                    OM_str = `${R}\\sqrt{2}`;
+                    wrong1 = `${R}\\sqrt{3}`; wrong2 = `${R*2}`; wrong3 = `${R}`;
+                } else if (angle === 120) {
+                    OM = R / (Math.sqrt(3)/2);
+                    OM_str = `\\frac{${2*R}\\sqrt{3}}{3}`;
+                    wrong1 = `${R}\\sqrt{3}`; wrong2 = `${2*R}`; wrong3 = `\\frac{${R}\\sqrt{3}}{3}`;
+                }
+                
+                const ansStr = `\\( OM = ${OM_str}\\text{ cm} \\)`;
+                const opt1 = `\\( OM = ${wrong1}\\text{ cm} \\)`;
+                const opt2 = `\\( OM = ${wrong2}\\text{ cm} \\)`;
+                const opt3 = `\\( OM = ${wrong3}\\text{ cm} \\)`;
+                
+                const exp = `Theo tính chất hai tiếp tuyến cắt nhau, OM là tia phân giác của góc \\( \\widehat{AMB} \\).\n` +
+                            `Do đó \\( \\widehat{AMO} = \\frac{1}{2}\\widehat{AMB} = \\frac{${angle}^\\circ}{2} = ${halfAngle}^\\circ \\).\n` +
+                            `Trong tam giác vuông OAM (vuông tại A do MA là tiếp tuyến):\n` +
+                            `\\( \\sin(\\widehat{AMO}) = \\frac{OA}{OM} \\implies OM = \\frac{R}{\\sin(${halfAngle}^\\circ)} \\).\n` +
+                            `Thay số vào ta tính được \\( OM = ${OM_str}\\text{ cm} \\).`;
+                
+                const opts = this.shuffle([ansStr, opt1, opt2, opt3]);
+                q.push({ id: 'b16_d4_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            }
         }
         return q;
     },

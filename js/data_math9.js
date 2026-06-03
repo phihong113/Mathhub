@@ -488,7 +488,7 @@ const math9Data = {
                     },
                     {
                         "id": "b16_d3",
-                        "title": "Dạng 2: Bài toán liên quan đến tính độ dài",
+                        "title": "Dạng 3: Bài toán liên quan đến tính độ dài",
                         "generator": "b16_d3"
                     },
                     {
