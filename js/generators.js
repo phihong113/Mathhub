@@ -751,7 +751,7 @@ const Generators = {
     b15_d1: function(count=5) {
         const q = [];
         for(let i=0; i<count; i++) {
-            const type = Math.floor(Math.random()*3); // 0: chu vi, 1: độ dài cung, 2: bánh xe
+            const type = i % 3;
             if (type === 0) {
                 const R = Math.floor(Math.random()*8)+2;
                 const text = `Tính độ dài đường tròn (chu vi) có bán kính \\( R = ${R}\\text{ cm} \\).`;
@@ -838,7 +838,7 @@ const Generators = {
     b15_d2: function(count=5) {
         const q = [];
         for(let i=0; i<count; i++) {
-            const type = Math.floor(Math.random()*2); // 0: biết l và R, 1: biết n và R
+            const type = i % 2;
             const R = Math.floor(Math.random()*15)+5; // 5 to 19
             
             if (type === 0) {
@@ -917,7 +917,7 @@ const Generators = {
     b15_d3: function(count=5) {
         const q = [];
         for(let i=0; i<count; i++) {
-            const isVanhKhuyen = Math.random() > 0.5;
+            const isVanhKhuyen = (i % 2 === 0);
             
             if (isVanhKhuyen) {
                 const r = Math.floor(Math.random()*4)+2;
@@ -1031,7 +1031,7 @@ const Generators = {
     b16_d2: function(count=5) {
         const q = [];
         for(let i=0; i<count; i++) {
-            const type = Math.floor(Math.random()*2);
+            const type = i % 2;
             if (type === 0) {
                 const m = Math.floor(Math.random()*4)+2;
                 const n = Math.floor(Math.random()*(m-1))+1;
@@ -1090,7 +1090,7 @@ const Generators = {
     b16_d3: function(count=5) {
         const q = [];
         for(let i=0; i<count; i++) {
-            const type = Math.floor(Math.random()*2);
+            const type = i % 2;
             const m = Math.floor(Math.random()*4)+2;
             const n = Math.floor(Math.random()*(m-1))+1;
             const a = m*m - n*n;
@@ -1153,7 +1153,7 @@ const Generators = {
     b16_d4: function(count=5) {
         const q = [];
         for(let i=0; i<count; i++) {
-            const type = Math.floor(Math.random()*2);
+            const type = i % 2;
             if (type === 0) {
                 const h = (Math.floor(Math.random()*20)+10) * 10; // 100 to 300 meters
                 const R = 6400; // km

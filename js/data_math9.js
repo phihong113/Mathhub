@@ -493,17 +493,17 @@ const math9Data = {
                     },
                     {
                         "id": "b16_d4",
-                        "title": "Dạng 3: Bài toán vận dụng tính chất tiếp tuyến",
+                        "title": "Dạng 4: Bài toán vận dụng tính chất tiếp tuyến",
                         "generator": "b16_d4"
                     },
                     {
                         "id": "b16_d5",
-                        "title": "Dạng 4: Chứng minh một số tính chất và hệ thức hình học",
+                        "title": "Dạng 5: Chứng minh một số tính chất và hệ thức hình học",
                         "generator": "b16_d5"
                     },
                     {
                         "id": "b16_d6",
-                        "title": "Dạng 5: Một số bài toán liên quan đến cực trị hình học",
+                        "title": "Dạng 6: Một số bài toán liên quan đến cực trị hình học",
                         "generator": "b16_d6"
                     }
                 ]
