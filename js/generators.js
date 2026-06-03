@@ -751,14 +751,14 @@ const Generators = {
     b15_d1: function(count=5) {
         const q = [];
         for(let i=0; i<count; i++) {
-            const isArc = Math.random() > 0.5;
-            const R = Math.floor(Math.random()*8)+2;
-            if (!isArc) {
-                const text = `Tính độ dài đường tròn (chu vi) có bán kính $R = ${R}\\text{ cm}$.`;
-                const ansStr = `$C = ${2*R}\\pi\\text{ cm}$`;
-                const wrong1 = `$C = ${R}\\pi\\text{ cm}$`;
-                const wrong2 = `$C = ${R*R}\\pi\\text{ cm}$`;
-                const wrong3 = `$C = ${2*R}\\text{ cm}$`;
+            const type = Math.floor(Math.random()*3); // 0: chu vi, 1: độ dài cung, 2: bánh xe
+            if (type === 0) {
+                const R = Math.floor(Math.random()*8)+2;
+                const text = `Tính độ dài đường tròn (chu vi) có bán kính \\( R = ${R}\\text{ cm} \\).`;
+                const ansStr = `\\( C = ${2*R}\\pi\\text{ cm} \\)`;
+                const wrong1 = `\\( C = ${R}\\pi\\text{ cm} \\)`;
+                const wrong2 = `\\( C = ${R*R}\\pi\\text{ cm} \\)`;
+                const wrong3 = `\\( C = ${2*R}\\text{ cm} \\)`;
                 
                 const svgCode = `
 <div style="text-align: center; margin: 15px 0;">
@@ -769,13 +769,14 @@ const Generators = {
     <text x="135" y="95" font-size="14" font-family="sans-serif">R = ${R}</text>
   </svg>
 </div>`;
-                const exp = `Công thức tính chu vi đường tròn là $C = 2\\pi R$.\n` +
-                            `Thay $R = ${R}$ vào, ta được $C = 2 \\times ${R} \\times \\pi = ${2*R}\\pi\\text{ cm}$.\n` + svgCode;
+                const exp = `Công thức tính chu vi đường tròn là \\( C = 2\\pi R \\).\n` +
+                            `Thay \\( R = ${R} \\) vào, ta được \\( C = 2 \\times ${R} \\times \\pi = ${2*R}\\pi\\text{ cm} \\).\n` + svgCode;
                 const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
                 q.push({ id: 'b15_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
-            } else {
+            } else if (type === 1) {
+                const R = Math.floor(Math.random()*8)+2;
                 const ang = (Math.floor(Math.random()*12)+3)*10;
-                const text = `Tính độ dài cung tròn $n = ${ang}^\\circ$ của đường tròn bán kính $R = ${R}\\text{ cm}$.`;
+                const text = `Tính độ dài cung tròn \\( n = ${ang}^\\circ \\) của đường tròn bán kính \\( R = ${R}\\text{ cm} \\).`;
                 const l = (Math.PI * R * ang / 180).toFixed(2);
                 
                 const num = R * ang;
@@ -785,10 +786,10 @@ const Generators = {
                 const n1 = num/g, d1 = den/g;
                 const piStr = (d1 === 1) ? (n1 === 1 ? "\\pi" : `${n1}\\pi`) : `\\frac{${n1}\\pi}{${d1}}`;
                 
-                const ansStr = `$l = ${piStr}\\text{ cm} \\approx ${l}\\text{ cm}$`;
-                const wrong1 = `$l = \\frac{${n1+1}\\pi}{${d1}}\\text{ cm}$`;
-                const wrong2 = `$l = ${(R*ang*2/180).toFixed(2)}\\pi\\text{ cm}$`;
-                const wrong3 = `$l = ${(R*R*ang/360).toFixed(2)}\\pi\\text{ cm}$`;
+                const ansStr = `\\( l = ${piStr}\\text{ cm} \\approx ${l}\\text{ cm} \\)`;
+                const wrong1 = `\\( l = \\frac{${n1+1}\\pi}{${d1}}\\text{ cm} \\)`;
+                const wrong2 = `\\( l = ${(R*ang*2/180).toFixed(2)}\\pi\\text{ cm} \\)`;
+                const wrong3 = `\\( l = ${(R*R*ang/360).toFixed(2)}\\pi\\text{ cm} \\)`;
                 
                 const rad = ang * Math.PI / 180;
                 const x2 = 100 + 80 * Math.cos(-rad);
@@ -805,9 +806,29 @@ const Generators = {
     <text x="140" y="90" font-size="12" font-family="sans-serif">${ang}&deg;</text>
   </svg>
 </div>`;
-                const exp = `Công thức tính độ dài cung tròn là $l = \\frac{\\pi R n}{180}$.\n` +
-                            `Thay $R = ${R}, n = ${ang}$ vào công thức:\n` +
-                            `$l = \\frac{\\pi \\cdot ${R} \\cdot ${ang}}{180} = ${piStr}\\text{ cm} \\approx ${l}\\text{ cm}$.\n` + svgCode;
+                const exp = `Công thức tính độ dài cung tròn là \\( l = \\frac{\\pi R n}{180} \\).\n` +
+                            `Thay \\( R = ${R}, n = ${ang} \\) vào công thức:\n` +
+                            `\\( l = \\frac{\\pi \\cdot ${R} \\cdot ${ang}}{180} = ${piStr}\\text{ cm} \\approx ${l}\\text{ cm} \\).\n` + svgCode;
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b15_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else {
+                const d = (Math.floor(Math.random()*4)+6) * 10; // 60, 70, 80, 90
+                const ratio = Math.floor(Math.random()*2) + 2; // 2, 3
+                const loops = Math.floor(Math.random()*6) + 5; // 5 to 10
+                
+                const text = `Bánh xe đạp có đường kính \\( d = ${d}\\text{ cm} \\). Khi giò đĩa quay 1 vòng thì bánh xe quay được ${ratio} vòng. Hỏi chiếc xe đạp di chuyển được quãng đường bao nhiêu mét sau khi người đạp xe đạp ${loops} vòng liên tục?`;
+                const totalLoops = loops * ratio;
+                const s_cm = totalLoops * d;
+                const s_m = s_cm / 100;
+                
+                const ansStr = `\\( S = ${s_m}\\pi\\text{ m} \\)`;
+                const wrong1 = `\\( S = ${(loops*d/100)}\\pi\\text{ m} \\)`;
+                const wrong2 = `\\( S = ${s_m}\\text{ m} \\)`;
+                const wrong3 = `\\( S = ${(totalLoops*d/200)}\\pi\\text{ m} \\)`;
+                
+                const exp = `Chu vi của bánh xe là: \\( C = \\pi d = ${d}\\pi\\text{ (cm)} \\).\n` +
+                            `Khi đạp giò đĩa ${loops} vòng thì bánh xe quay được: \\( ${loops} \\times ${ratio} = ${totalLoops} \\) vòng.\n` +
+                            `Quãng đường xe di chuyển được: \\( S = ${totalLoops} \\times ${d}\\pi = ${s_cm}\\pi\\text{ (cm)} = ${s_m}\\pi\\text{ (m)} \\).`;
                 const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
                 q.push({ id: 'b15_d1_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
             }
@@ -817,14 +838,15 @@ const Generators = {
     b15_d2: function(count=5) {
         const q = [];
         for(let i=0; i<count; i++) {
-            const isQuat = Math.random() > 0.5;
+            const type = Math.floor(Math.random()*3); // 0: tròn, 1: quạt, 2: AB=R
             const R = Math.floor(Math.random()*8)+2;
-            if (!isQuat) {
-                const text = `Tính diện tích hình tròn có bán kính $R = ${R}\\text{ cm}$.`;
-                const ansStr = `$S = ${R*R}\\pi\\text{ cm}^2$`;
-                const wrong1 = `$S = ${2*R}\\pi\\text{ cm}^2$`;
-                const wrong2 = `$S = ${R}\\pi\\text{ cm}^2$`;
-                const wrong3 = `$S = ${R*R}\\text{ cm}^2$`;
+            
+            if (type === 0) {
+                const text = `Tính diện tích hình tròn có bán kính \\( R = ${R}\\text{ cm} \\).`;
+                const ansStr = `\\( S = ${R*R}\\pi\\text{ cm}^2 \\)`;
+                const wrong1 = `\\( S = ${2*R}\\pi\\text{ cm}^2 \\)`;
+                const wrong2 = `\\( S = ${R}\\pi\\text{ cm}^2 \\)`;
+                const wrong3 = `\\( S = ${R*R}\\text{ cm}^2 \\)`;
                 const svgCode = `
 <div style="text-align: center; margin: 15px 0;">
   <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
@@ -834,13 +856,13 @@ const Generators = {
     <text x="135" y="95" font-size="14" font-family="sans-serif">R = ${R}</text>
   </svg>
 </div>`;
-                const exp = `Công thức tính diện tích hình tròn là $S = \\pi R^2$.\n` +
-                            `Thay $R = ${R}$ vào, ta được $S = \\pi \\cdot ${R}^2 = ${R*R}\\pi\\text{ cm}^2$.\n` + svgCode;
+                const exp = `Công thức tính diện tích hình tròn là \\( S = \\pi R^2 \\).\n` +
+                            `Thay \\( R = ${R} \\) vào, ta được \\( S = \\pi \\cdot ${R}^2 = ${R*R}\\pi\\text{ cm}^2 \\).\n` + svgCode;
                 const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
                 q.push({ id: 'b15_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
-            } else {
+            } else if (type === 1) {
                 const ang = (Math.floor(Math.random()*12)+3)*10;
-                const text = `Tính diện tích hình quạt tròn bán kính $R = ${R}\\text{ cm}$ và có số đo cung là $n = ${ang}^\\circ$.`;
+                const text = `Tính diện tích hình quạt tròn bán kính \\( R = ${R}\\text{ cm} \\) và có số đo cung là \\( n = ${ang}^\\circ \\).`;
                 
                 const num = R * R * ang;
                 const den = 360;
@@ -849,10 +871,10 @@ const Generators = {
                 const n1 = num/g, d1 = den/g;
                 const piStr = (d1 === 1) ? (n1 === 1 ? "\\pi" : `${n1}\\pi`) : `\\frac{${n1}\\pi}{${d1}}`;
                 
-                const ansStr = `$S = ${piStr}\\text{ cm}^2$`;
-                const wrong1 = `$S = \\frac{${n1+1}\\pi}{${d1}}\\text{ cm}^2$`;
-                const wrong2 = `$S = \\frac{${n1}\\pi}{${d1+2}}\\text{ cm}^2$`;
-                const wrong3 = `$S = ${(R*ang/180).toFixed(2)}\\pi\\text{ cm}^2$`;
+                const ansStr = `\\( S = ${piStr}\\text{ cm}^2 \\)`;
+                const wrong1 = `\\( S = \\frac{${n1+1}\\pi}{${d1}}\\text{ cm}^2 \\)`;
+                const wrong2 = `\\( S = \\frac{${n1}\\pi}{${d1+2}}\\text{ cm}^2 \\)`;
+                const wrong3 = `\\( S = ${(R*ang/180).toFixed(2)}\\pi\\text{ cm}^2 \\)`;
                 
                 const rad = ang * Math.PI / 180;
                 const x2 = 100 + 80 * Math.cos(-rad);
@@ -867,9 +889,40 @@ const Generators = {
     <text x="140" y="90" font-size="12" font-family="sans-serif">${ang}&deg;</text>
   </svg>
 </div>`;
-                const exp = `Công thức tính diện tích hình quạt tròn là $S = \\frac{\\pi R^2 n}{360}$.\n` +
-                            `Thay $R = ${R}, n = ${ang}$ vào, ta được:\n` +
-                            `$S = \\frac{\\pi \\cdot ${R}^2 \\cdot ${ang}}{360} = ${piStr}\\text{ cm}^2$.\n` + svgCode;
+                const exp = `Công thức tính diện tích hình quạt tròn là \\( S = \\frac{\\pi R^2 n}{360} \\).\n` +
+                            `Thay \\( R = ${R}, n = ${ang} \\) vào, ta được:\n` +
+                            `\\( S = \\frac{\\pi \\cdot ${R}^2 \\cdot ${ang}}{360} = ${piStr}\\text{ cm}^2 \\).\n` + svgCode;
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b15_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else {
+                const text = `Cho hình quạt tròn AOB giới hạn bởi hai bán kính OA, OB và cung AB (thuộc đường tròn bán kính \\( R = ${R}\\text{ cm} \\)) sao cho dây cung \\( AB = ${R}\\text{ cm} \\). Hãy tìm số đo cung AB và diện tích hình quạt AOB.`;
+                
+                const S_num = R * R * 60;
+                const S_den = 360;
+                const g = function(a,b){ return b?arguments.callee(b,a%b):a; }(S_num, S_den);
+                const S_str = (S_den/g === 1) ? ((S_num/g) === 1 ? "\\pi" : `${S_num/g}\\pi`) : `\\frac{${S_num/g}\\pi}{${S_den/g}}`;
+                
+                const ansStr = `Số đo cung AB = \\( 60^\\circ \\), \\( S = ${S_str}\\text{ cm}^2 \\)`;
+                const wrong1 = `Số đo cung AB = \\( 90^\\circ \\), \\( S = \\frac{${R*R}\\pi}{4}\\text{ cm}^2 \\)`;
+                const wrong2 = `Số đo cung AB = \\( 45^\\circ \\), \\( S = \\frac{${R*R}\\pi}{8}\\text{ cm}^2 \\)`;
+                const wrong3 = `Số đo cung AB = \\( 60^\\circ \\), \\( S = ${S_num/S_den}\\text{ cm}^2 \\)`;
+                
+                const rad = 60 * Math.PI / 180;
+                const x2 = 100 + 80 * Math.cos(-rad);
+                const y2 = 100 + 80 * Math.sin(-rad);
+                const svgCode = `
+<div style="text-align: center; margin: 15px 0;">
+  <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(0,0,0,0.1)" stroke-width="1.5" />
+    <path d="M 100 100 L 180 100 A 80 80 0 0 0 ${x2} ${y2} Z" fill="rgba(255,165,0,0.4)" stroke="orange" stroke-width="2" />
+    <line x1="180" y1="100" x2="${x2}" y2="${y2}" stroke="green" stroke-dasharray="4" />
+    <text x="150" y="80" font-size="12" font-family="sans-serif">AB = R</text>
+  </svg>
+</div>`;
+                const exp = `Xét \\( \\Delta AOB \\) có \\( OA = OB = R \\) (bán kính) và \\( AB = R \\) (giả thiết).\n` +
+                            `Suy ra \\( \\Delta AOB \\) là tam giác đều, do đó góc ở tâm \\( \\widehat{AOB} = 60^\\circ \\).\n` +
+                            `Số đo cung AB bằng góc ở tâm chắn cung đó nên số đo cung AB là \\( 60^\\circ \\).\n` +
+                            `Diện tích hình quạt là: \\( S = \\frac{\\pi R^2 n}{360} = \\frac{\\pi \\cdot ${R}^2 \\cdot 60}{360} = ${S_str}\\text{ cm}^2 \\).\n` + svgCode;
                 const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
                 q.push({ id: 'b15_d2_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
             }
@@ -879,17 +932,20 @@ const Generators = {
     b15_d3: function(count=5) {
         const q = [];
         for(let i=0; i<count; i++) {
-            const r = Math.floor(Math.random()*4)+2; // 2 to 5
-            const R = r + Math.floor(Math.random()*4)+2; // r+2 to r+5
-            const text = `Tính diện tích hình vành khăn giới hạn bởi hai đường tròn đồng tâm có bán kính $R = ${R}\\text{ cm}$ và $r = ${r}\\text{ cm}$.`;
-            const S = (R*R - r*r);
-            const ansStr = `$S = ${S}\\pi\\text{ cm}^2$`;
-            const wrong1 = `$S = ${S*2}\\pi\\text{ cm}^2$`;
-            const wrong2 = `$S = ${(R-r)*(R-r)}\\pi\\text{ cm}^2$`;
-            const wrong3 = `$S = ${R*R + r*r}\\pi\\text{ cm}^2$`;
+            const isVanhKhuyen = Math.random() > 0.5;
             
-            const rSvg = Math.round((r/R) * 80);
-            const svgCode = `
+            if (isVanhKhuyen) {
+                const r = Math.floor(Math.random()*4)+2;
+                const R = r + Math.floor(Math.random()*4)+2;
+                const text = `Tính diện tích hình vành khuyên giới hạn bởi hai đường tròn đồng tâm có bán kính \\( R = ${R}\\text{ cm} \\) và \\( r = ${r}\\text{ cm} \\).`;
+                const S = (R*R - r*r);
+                const ansStr = `\\( S = ${S}\\pi\\text{ cm}^2 \\)`;
+                const wrong1 = `\\( S = ${S*2}\\pi\\text{ cm}^2 \\)`;
+                const wrong2 = `\\( S = ${(R-r)*(R-r)}\\pi\\text{ cm}^2 \\)`;
+                const wrong3 = `\\( S = ${R*R + r*r}\\pi\\text{ cm}^2 \\)`;
+                
+                const rSvg = Math.round((r/R) * 80);
+                const svgCode = `
 <div style="text-align: center; margin: 15px 0;">
   <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
     <circle cx="100" cy="100" r="80" fill="rgba(0,128,0,0.3)" />
@@ -897,16 +953,52 @@ const Generators = {
     <circle cx="100" cy="100" r="80" fill="none" stroke="black" />
     <circle cx="100" cy="100" r="3" fill="red" />
     <line x1="100" y1="100" x2="180" y2="100" stroke="black" />
-    <text x="145" y="95" font-size="12" font-family="sans-serif">R</text>
+    <text x="145" y="95" font-size="12" font-family="sans-serif">R = ${R}</text>
     <line x1="100" y1="100" x2="${100 - rSvg}" y2="100" stroke="black" />
-    <text x="${100 - rSvg/2}" y="95" font-size="12" font-family="sans-serif">r</text>
+    <text x="${100 - rSvg/2}" y="95" font-size="12" font-family="sans-serif">r = ${r}</text>
   </svg>
 </div>`;
-            const exp = `Diện tích hình vành khăn bằng diện tích hình tròn lớn trừ đi diện tích hình tròn nhỏ.\n` +
-                        `Công thức: $S = \\pi R^2 - \\pi r^2 = \\pi(R^2 - r^2)$.\n` +
-                        `Thay $R = ${R}, r = ${r}$ vào, ta được: $S = \\pi(${R}^2 - ${r}^2) = \\pi(${R*R} - ${r*r}) = ${S}\\pi\\text{ cm}^2$.\n` + svgCode;
-            const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
-            q.push({ id: 'b15_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+                const exp = `Diện tích hình vành khuyên bằng diện tích hình tròn lớn trừ đi diện tích hình tròn nhỏ.\n` +
+                            `Công thức: \\( S = \\pi R^2 - \\pi r^2 = \\pi(R^2 - r^2) \\).\n` +
+                            `Thay \\( R = ${R}, r = ${r} \\) vào, ta được: \\( S = \\pi(${R}^2 - ${r}^2) = \\pi(${R*R} - ${r*r}) = ${S}\\pi\\text{ cm}^2 \\).\n` + svgCode;
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b15_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            } else {
+                const R = Math.floor(Math.random()*4)*2 + 4; // 4, 6, 8, 10
+                // Góc 90 cho dễ tính diện tích tam giác vuông cân
+                const text = `Tính diện tích hình viên phân giới hạn bởi cung AB và dây AB, biết góc ở tâm \\( \\widehat{AOB} = 90^\\circ \\) và bán kính đường tròn \\( R = ${R}\\text{ cm} \\).`;
+                
+                const S_quat_num = R * R * 90;
+                const S_quat_den = 360;
+                const g = function(a,b){ return b?arguments.callee(b,a%b):a; }(S_quat_num, S_quat_den);
+                const piTerm = (S_quat_den/g === 1) ? ((S_quat_num/g) === 1 ? "\\pi" : `${S_quat_num/g}\\pi`) : `\\frac{${S_quat_num/g}\\pi}{${S_quat_den/g}}`;
+                
+                const S_tri = (R * R) / 2;
+                
+                const ansStr = `\\( S = ${piTerm} - ${S_tri}\\text{ (cm}^2\\text{)} \\)`;
+                const wrong1 = `\\( S = ${piTerm} - ${R*R}\\text{ (cm}^2\\text{)} \\)`;
+                const wrong2 = `\\( S = \\frac{${R*R}\\pi}{2} - ${S_tri}\\text{ (cm}^2\\text{)} \\)`;
+                const wrong3 = `\\( S = ${piTerm} + ${S_tri}\\text{ (cm}^2\\text{)} \\)`;
+                
+                const rad = 90 * Math.PI / 180;
+                const x2 = 100 + 80 * Math.cos(-rad);
+                const y2 = 100 + 80 * Math.sin(-rad);
+                const svgCode = `
+<div style="text-align: center; margin: 15px 0;">
+  <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(0,0,0,0.1)" stroke-width="1.5" />
+    <path d="M 180 100 A 80 80 0 0 0 ${x2} ${y2} Z" fill="rgba(255,0,0,0.5)" stroke="red" stroke-width="2" />
+    <path d="M 100 100 L 180 100 L ${x2} ${y2} Z" fill="none" stroke="black" stroke-dasharray="4" />
+  </svg>
+</div>`;
+                const exp = `Diện tích hình quạt tròn ứng với cung \\( 90^\\circ \\) là:\n` +
+                            `\\( S_{quat} = \\frac{\\pi \\cdot ${R}^2 \\cdot 90}{360} = ${piTerm}\\text{ cm}^2 \\).\n` +
+                            `Vì \\( \\widehat{AOB} = 90^\\circ \\) nên \\( \\Delta AOB \\) là tam giác vuông cân tại O.\n` +
+                            `Diện tích \\( \\Delta AOB \\) là: \\( S_{\\Delta} = \\frac{1}{2} OA \\cdot OB = \\frac{1}{2} \\cdot ${R} \\cdot ${R} = ${S_tri}\\text{ cm}^2 \\).\n` +
+                            `Diện tích hình viên phân = \\( S_{quat} - S_{\\Delta} = ${piTerm} - ${S_tri}\\text{ (cm}^2\\text{)} \\).\n` + svgCode;
+                const opts = this.shuffle([ansStr, wrong1, wrong2, wrong3]);
+                q.push({ id: 'b15_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(ansStr), explanation: exp });
+            }
         }
         return q;
     },
