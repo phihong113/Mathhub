@@ -538,6 +538,20 @@ footer {
 
 /* === MOBILE APP-LIKE PRACTICE UI === */
 @media (max-width: 768px) {
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .card-grid .topic-card {
+        padding: 12px;
+        border-radius: 12px;
+    }
+    
+    .card-grid .topic-title {
+        font-size: 0.9rem;
+    }
+    
     .practice-container {
         padding-left: 15px;
         padding-right: 15px;
