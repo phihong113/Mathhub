@@ -12,13 +12,41 @@ document.addEventListener('DOMContentLoaded', () => {
         const container = document.getElementById(containerId);
         if (!container) return;
 
+        const colors = ['#8b5cf6', '#10b981', '#f59e0b', '#ec4899', '#3b82f6', '#14b8a6', '#f43f5e', '#6366f1'];
         let html = '';
         allTopics.forEach((topic, index) => {
+            const color = colors[index % colors.length];
+            const views = Math.floor(Math.random() * 800) + 500;
+            const viewsStr = '1.' + String(views).padStart(3, '0');
+            
+            let iconClass = 'fa-book';
+            const lowerTitle = topic.title.toLowerCase();
+            if (lowerTitle.includes('phương trình')) iconClass = 'fa-equals';
+            else if (lowerTitle.includes('căn')) iconClass = 'fa-square-root-variable';
+            else if (lowerTitle.includes('tam giác') || lowerTitle.includes('lượng giác')) iconClass = 'fa-ruler-triangle';
+            else if (lowerTitle.includes('đường tròn') || lowerTitle.includes('cung')) iconClass = 'fa-circle-notch';
+            else if (lowerTitle.includes('hàm số')) iconClass = 'fa-chart-line';
+
             html += `
-                <div class="tree-node" style="position: relative; border: 1px solid rgba(0,0,0,0.05); border-radius: 8px; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.02); transition: all 0.3s;">
-                    <div id="header-chapter-${index}" class="tree-header" onclick="toggleTree('chapter-${index}')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; min-height: 80px;">
-                        <h4 style="margin: 0; font-size: 1rem; color: var(--text-primary); line-height: 1.4; font-weight: 600;">${topic.title}</h4>
-                        <i class="fa-solid fa-chevron-down" id="icon-chapter-${index}" style="transition: transform 0.3s; margin-left: 10px; color: var(--primary);"></i>
+                <div class="tree-node" style="position: relative; border-radius: 8px; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: all 0.3s; border-top: 5px solid ${color}; display: flex; flex-direction: column;">
+                    <div id="header-chapter-${index}" class="tree-header" onclick="toggleTree('chapter-${index}')" style="padding: 15px 15px 10px 15px; cursor: pointer; display: flex; flex-direction: column; flex-grow: 1; min-height: 100px;">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-grow: 1;">
+                            <h4 style="margin: 0; font-size: 1rem; color: #111827; line-height: 1.4; font-weight: 600; flex-grow: 1;">${topic.title}</h4>
+                            <div style="background: ${color}1A; color: ${color}; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1.1rem;">
+                                <i class="fa-solid ${iconClass}"></i>
+                            </div>
+                            <div style="display: flex; align-items: center; height: 36px;">
+                                <i class="fa-solid fa-chevron-down" id="icon-chapter-${index}" style="transition: transform 0.3s; color: #6b7280;"></i>
+                            </div>
+                        </div>
+                        <div style="margin-top: 15px; padding-top: 10px; border-top: 1px dashed #e5e7eb; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: #6b7280; font-weight: 500;">
+                            <div>
+                                <i class="fa-regular fa-eye" style="margin-right: 4px;"></i> ${viewsStr}
+                            </div>
+                            <div>
+                                <i class="fa-solid fa-star" style="color: #fbbf24; margin-right: 2px;"></i> 4.9/5
+                            </div>
+                        </div>
                     </div>
                     <div class="tree-body" id="body-chapter-${index}" style="display: none; position: absolute; top: calc(100% + 5px); left: 0; width: 800px; max-width: 90vw; background: #fff; z-index: 1000; padding: 25px; border-radius: 12px; box-shadow: 0 15px 50px rgba(0,0,0,0.15); border: 1px solid rgba(0,0,0,0.05);">
                         <h5 style="margin-top: 0; margin-bottom: 20px; font-size: 1.1rem; color: var(--primary); border-bottom: 2px solid rgba(0,0,0,0.05); padding-bottom: 10px;">Các dạng bài tập:</h5>
