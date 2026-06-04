@@ -173,7 +173,46 @@
         const type = urlParams.get('type');
 
         document.addEventListener('DOMContentLoaded', () => {
-            if(id && window.math9Data) {
+            if (type === 'custom_test') {
+                const ids = urlParams.get('ids').split(',');
+                const diff = urlParams.get('diff');
+                document.getElementById('practice-title').innerText = "Bài Kiểm Tra Tự Chọn";
+                document.getElementById('practice-meta').innerText = `Mức độ: ${diff === 'hard' ? 'Khó (Khá - Giỏi)' : 'Vừa (Cơ bản - Khá)'}`;
+                
+                currentQuestions = [];
+                // Search for all selected ids
+                ['algebra', 'geometry'].forEach(cat => {
+                    if (window.math9Data[cat]) {
+                        window.math9Data[cat].topics.forEach(topic => {
+                            topic.practice.forEach(item => {
+                                if (ids.includes(item.id)) {
+                                    if (item.generator && window.MathGenerators && window.MathGenerators[item.generator]) {
+                                        // diff hard: maybe generate 3 questions, medium: 2 questions
+                                        const count = diff === 'hard' ? 3 : 2;
+                                        const qList = window.MathGenerators[item.generator](count);
+                                        currentQuestions = currentQuestions.concat(qList);
+                                    } else if (item.questions && item.questions.length > 0) {
+                                        const randomIndex = Math.floor(Math.random() * item.questions.length);
+                                        currentQuestions.push(item.questions[randomIndex]);
+                                    }
+                                }
+                            });
+                        });
+                    }
+                });
+                
+                if (currentQuestions.length > 0) {
+                    // shuffle
+                    currentQuestions.sort(() => Math.random() - 0.5);
+                    // limit to max 40 questions to avoid freezing
+                    if(currentQuestions.length > 40) currentQuestions = currentQuestions.slice(0, 40);
+                    renderQuestions();
+                } else {
+                    document.getElementById('questions-container').innerHTML = 
+                        '<div class="question-card text-center">Nội dung bài tập đang được cập nhật. Vui lòng quay lại sau!</div>';
+                    document.getElementById('submit-btn').style.display = 'none';
+                }
+            } else if(id && window.math9Data) {
                 let item = null;
                 let topicTitle = "";
                 let dataCategory = "";

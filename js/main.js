@@ -211,3 +211,65 @@ window.switchSubject = function(subject) {
         tabBtns[1].classList.add('active');
     }
 }
+
+
+// --- Test Config Functions ---
+window.openTestConfig = function() {
+    const container = document.getElementById('config-tree-container');
+    let html = '<ul style="list-style: none; padding: 0; margin: 0;">';
+    
+    ['algebra', 'geometry'].forEach(cat => {
+        if (!window.math9Data[cat]) return;
+        html += `<li style="margin-bottom: 15px;">
+            <div style="font-weight: 700; color: var(--primary); margin-bottom: 10px; font-size: 1.1rem; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px;">${window.math9Data[cat].title}</div>
+            <ul style="list-style: none; padding-left: 10px;">`;
+            
+        window.math9Data[cat].topics.forEach((topic, tIdx) => {
+            html += `<li style="margin-bottom: 12px; background: #f8fafc; padding: 10px; border-radius: 8px; border: 1px solid #f1f5f9;">
+                <label style="display: flex; align-items: center; font-weight: 600; cursor: pointer; margin-bottom: 8px; color: var(--primary-dark);">
+                    <input type="checkbox" class="config-lesson-cb" data-target=".config-type-cb-${cat}-${tIdx}" onchange="toggleLessonCb(this)" style="margin-right: 10px; transform: scale(1.2);">
+                    ${topic.title}
+                </label>
+                <ul style="list-style: none; padding-left: 28px; display: flex; flex-direction: column; gap: 6px;">`;
+                
+            topic.practice.forEach((item, iIdx) => {
+                let parts = item.title.split(':');
+                let desc = parts.length > 1 ? parts.slice(1).join(':').trim() : item.title;
+                html += `<li>
+                    <label style="display: flex; align-items: flex-start; cursor: pointer; color: #475569; font-size: 0.95rem;">
+                        <input type="checkbox" class="config-type-cb config-type-cb-${cat}-${tIdx}" value="${item.id}" style="margin-right: 10px; margin-top: 4px;">
+                        <span>${desc}</span>
+                    </label>
+                </li>`;
+            });
+            html += `</ul></li>`;
+        });
+        html += `</ul></li>`;
+    });
+    
+    html += '</ul>';
+    container.innerHTML = html;
+    document.getElementById('test-config-modal').style.display = 'block';
+};
+
+window.closeTestConfig = function() {
+    document.getElementById('test-config-modal').style.display = 'none';
+};
+
+window.toggleLessonCb = function(checkbox) {
+    const targets = document.querySelectorAll(checkbox.getAttribute('data-target'));
+    targets.forEach(cb => cb.checked = checkbox.checked);
+};
+
+window.generateCustomTest = function() {
+    const checkboxes = document.querySelectorAll('.config-type-cb:checked');
+    if (checkboxes.length === 0) {
+        alert('Vui lòng chọn ít nhất một dạng bài tập!');
+        return;
+    }
+    const selectedIds = Array.from(checkboxes).map(cb => cb.value);
+    const difficulty = document.getElementById('test-difficulty').value;
+    
+    const encodedIds = encodeURIComponent(selectedIds.join(','));
+    window.location.href = `practice.html?type=custom_test&ids=${encodedIds}&diff=${difficulty}`;
+};
