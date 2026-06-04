@@ -4017,15 +4017,15 @@ Ta có: \\( \\sqrt{${n1}} \\cdot \\sqrt{${n2}} = \\sqrt{${n1} \\cdot ${n2}} = \\
             const exp = `Áp dụng quy tắc khai phương một thương: \\( \\sqrt{\\frac{a}{b}} = \\frac{\\sqrt{a}}{\\sqrt{b}} \\).
 Ta có: \\( \\sqrt{\\frac{${a2}}{${b2}}} = \\frac{\\sqrt{${a2}}}{\\sqrt{${b2}}} = \\frac{${a}}{${b}} = ${fracStr} \\).`;
             
-            const optArr = [fracStr, wrong1, wrong2, wrong3];
+            const optArr = [`\\( ${fracStr} \\)`, `\\( ${wrong1} \\)`, `\\( ${wrong2} \\)`, `\\( ${wrong3} \\)`];
             const optSet = new Set(optArr);
             let c = 2;
             while(optSet.size < 4) {
-                optSet.add(this.formatFraction ? this.formatFraction(a+c, b) : `${a+c}/${b}`);
+                optSet.add(`\\( ${this.formatFraction ? this.formatFraction(a+c, b) : `${a+c}/${b}`} \\)`);
                 c++;
             }
             const opts = this.shuffle(Array.from(optSet).slice(0, 4));
-            q.push({ id: 'b8_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(fracStr), explanation: exp });
+            q.push({ id: 'b8_d3_'+i, text, options: opts, correctAnswer: opts.indexOf(`\\( ${fracStr} \\)`), explanation: exp });
         }
         return q;
     },
