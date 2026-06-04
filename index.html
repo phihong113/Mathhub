@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,17 +13,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
-    
+
     <!-- MathJax Configuration -->
     <script>
-      window.MathJax = {
-        tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
-      };
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+        };
     </script>
     <!-- MathJax for rendering Math formulas -->
     <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
+
 <body>
     <header class="navbar">
         <div class="container nav-content">
@@ -50,16 +52,28 @@
         <!-- Hero Section -->
         <section class="hero" style="padding: 40px 0; display: block;">
             <div class="container" style="width: 100%;">
-                <div style="background: linear-gradient(135deg, #4f46e5, #0ea5e9); border-radius: 20px; padding: 60px 40px; text-align: center; color: white; box-shadow: 0 20px 40px rgba(79, 70, 229, 0.3); position: relative; overflow: hidden; width: 100%;">
+                <div
+                    style="background: linear-gradient(135deg, #4f46e5, #0ea5e9); border-radius: 20px; padding: 60px 40px; text-align: center; color: white; box-shadow: 0 20px 40px rgba(79, 70, 229, 0.3); position: relative; overflow: hidden; width: 100%;">
                     <!-- Decorations -->
-                    <div style="position: absolute; top: -50px; left: -50px; width: 200px; height: 200px; background: rgba(255,255,255,0.1); border-radius: 50%; filter: blur(20px);"></div>
-                    <div style="position: absolute; bottom: -80px; right: -20px; width: 250px; height: 250px; background: rgba(255,255,255,0.1); border-radius: 50%; filter: blur(30px);"></div>
-                    
-                    <h1 style="font-size: 3.2rem; font-weight: 800; margin-bottom: 20px; position: relative; z-index: 2; line-height: 1.2; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">CƠ HỘI ĐẦU TƯ &<br>HỢP TÁC PHÁT TRIỂN</h1>
-                    <p style="font-size: 1.25rem; max-width: 800px; margin: 0 auto 30px auto; opacity: 0.95; line-height: 1.6; position: relative; z-index: 2;">
-                        MathHub đang trên đà vươn lên thành nền tảng giáo dục trực tuyến hàng đầu. Chúng tôi tìm kiếm các nhà đầu tư và đối tác chiến lược để cùng mở rộng quy mô, chia sẻ lợi nhuận và kiến tạo hệ sinh thái học tập số toàn diện.
+                    <div
+                        style="position: absolute; top: -50px; left: -50px; width: 200px; height: 200px; background: rgba(255,255,255,0.1); border-radius: 50%; filter: blur(20px);">
+                    </div>
+                    <div
+                        style="position: absolute; bottom: -80px; right: -20px; width: 250px; height: 250px; background: rgba(255,255,255,0.1); border-radius: 50%; filter: blur(30px);">
+                    </div>
+
+                    <h1
+                        style="font-size: 3.2rem; font-weight: 800; margin-bottom: 20px; position: relative; z-index: 2; line-height: 1.2; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                        HỢP TÁC PHÁT TRIỂN</h1>
+                    <p
+                        style="font-size: 1.25rem; max-width: 800px; margin: 0 auto 30px auto; opacity: 0.95; line-height: 1.6; position: relative; z-index: 2;">
+                        Chúng tôi đang cố gắng hoàn thành hệ thống luyện tập môn Toán từ lớp 6 đến lớp 12 với đa dạng
+                        bài tập và kiểu trả lời câu hỏi. Chúng tôi tìm kiếm các nhà đầu tư để cùng mở rộng quy mô, chia
+                        sẻ kiến thức cũng như các hướng đi tiếp theo để hoàn thiện 1 hệ sinh thái trong lĩnh vực Toán
+                        học!
                     </p>
-                    <div style="display: inline-block; background: white; color: var(--primary); padding: 15px 35px; border-radius: 50px; font-weight: 700; font-size: 1.25rem; box-shadow: 0 10px 20px rgba(0,0,0,0.15); position: relative; z-index: 2; cursor: pointer; transition: transform 0.2s;">
+                    <div
+                        style="display: inline-block; background: white; color: var(--primary); padding: 15px 35px; border-radius: 50px; font-weight: 700; font-size: 1.25rem; box-shadow: 0 10px 20px rgba(0,0,0,0.15); position: relative; z-index: 2; cursor: pointer; transition: transform 0.2s;">
                         <i class="fa-solid fa-handshake" style="margin-right: 10px;"></i> Liên hệ Zalo: 0935.080804
                     </div>
                 </div>
@@ -71,8 +85,11 @@
             <div class="main-content">
                 <div id="all-chapters-section" class="subject-section" style="display: block;">
                     <div class="content-module">
-                        <h3 style="text-align: center; font-size: 2rem; margin-bottom: 30px; color: var(--primary-light);">Chương Trình Toán Lớp 9 (17 Bài)</h3>
-                        <div id="all-practice-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; align-items: start;">
+                        <h3
+                            style="text-align: center; font-size: 2rem; margin-bottom: 30px; color: var(--primary-light);">
+                            Chương Trình Toán Lớp 9 (17 Bài)</h3>
+                        <div id="all-practice-grid"
+                            style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; align-items: start;">
                             <!-- Populated by JS -->
                         </div>
                     </div>
@@ -91,4 +108,5 @@
     <script src="js/data_math9.js"></script>
     <script src="js/main.js"></script>
 </body>
+
 </html>
