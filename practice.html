@@ -176,24 +176,36 @@
             if (type === 'custom_test') {
                 const ids = urlParams.get('ids').split(',');
                 const diff = urlParams.get('diff');
+                const totalNum = parseInt(urlParams.get('num')) || 10;
                 document.getElementById('practice-title').innerText = "Bài Kiểm Tra Tự Chọn";
-                document.getElementById('practice-meta').innerText = `Mức độ: ${diff === 'hard' ? 'Khó (Khá - Giỏi)' : 'Vừa (Cơ bản - Khá)'}`;
+                document.getElementById('practice-meta').innerText = `Mức độ: ${diff === 'hard' ? 'Khó (Khá - Giỏi)' : 'Vừa (Cơ bản - Khá)'} | ${totalNum} Câu`;
                 
                 currentQuestions = [];
+                
+                // Calculate questions per type
+                let perType = Math.floor(totalNum / ids.length);
+                let remainder = totalNum % ids.length;
+
                 // Search for all selected ids
                 ['algebra', 'geometry'].forEach(cat => {
                     if (window.math9Data[cat]) {
                         window.math9Data[cat].topics.forEach(topic => {
                             topic.practice.forEach(item => {
                                 if (ids.includes(item.id)) {
-                                    if (item.generator && window.MathGenerators && window.MathGenerators[item.generator]) {
-                                        // diff hard: maybe generate 3 questions, medium: 2 questions
-                                        const count = diff === 'hard' ? 3 : 2;
-                                        const qList = window.MathGenerators[item.generator](count);
-                                        currentQuestions = currentQuestions.concat(qList);
-                                    } else if (item.questions && item.questions.length > 0) {
-                                        const randomIndex = Math.floor(Math.random() * item.questions.length);
-                                        currentQuestions.push(item.questions[randomIndex]);
+                                    let count = perType + (remainder > 0 ? 1 : 0);
+                                    if (remainder > 0) remainder--;
+                                    
+                                    if (count > 0) {
+                                        if (item.generator && window.MathGenerators && window.MathGenerators[item.generator]) {
+                                            const qList = window.MathGenerators[item.generator](count);
+                                            currentQuestions = currentQuestions.concat(qList);
+                                        } else if (item.questions && item.questions.length > 0) {
+                                            // Fallback to static questions
+                                            for(let i=0; i<count; i++) {
+                                                const randomIndex = Math.floor(Math.random() * item.questions.length);
+                                                currentQuestions.push(item.questions[randomIndex]);
+                                            }
+                                        }
                                     }
                                 }
                             });

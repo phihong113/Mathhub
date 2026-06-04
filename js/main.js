@@ -233,11 +233,16 @@ window.openTestConfig = function() {
 
     allTopics.forEach((topic, tIdx) => {
         html += `<li style="margin-bottom: 12px; background: #f8fafc; padding: 10px; border-radius: 8px; border: 1px solid #f1f5f9;">
-            <label style="display: flex; align-items: center; font-weight: 600; cursor: pointer; margin-bottom: 8px; color: var(--primary-dark);">
-                <input type="checkbox" class="config-lesson-cb" data-target=".config-type-cb-${tIdx}" onchange="toggleLessonCb(this)" style="margin-right: 10px; transform: scale(1.2);">
-                ${topic.title}
-            </label>
-            <ul style="list-style: none; padding-left: 28px; display: flex; flex-direction: column; gap: 6px;">`;
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <label style="display: flex; align-items: center; font-weight: 600; cursor: pointer; margin-bottom: 0; color: var(--primary-dark); flex-grow: 1;">
+                    <input type="checkbox" class="config-lesson-cb" data-target=".config-type-cb-${tIdx}" onchange="toggleLessonCb(this)" style="margin-right: 10px; transform: scale(1.2);">
+                    ${topic.title}
+                </label>
+                <button onclick="toggleConfigTree(${tIdx})" style="background: transparent; border: none; cursor: pointer; color: #64748b; padding: 5px; margin-left: 10px;">
+                    <i class="fa-solid fa-chevron-down" id="config-tree-icon-${tIdx}" style="transition: transform 0.3s;"></i>
+                </button>
+            </div>
+            <ul id="config-tree-body-${tIdx}" style="display: none; list-style: none; padding-left: 28px; flex-direction: column; gap: 6px; margin-top: 10px;">`;
             
         topic.practice.forEach((item, iIdx) => {
             let parts = item.title.split(':');
@@ -257,6 +262,18 @@ window.openTestConfig = function() {
     document.getElementById('test-config-modal').style.display = 'block';
 };
 
+window.toggleConfigTree = function(idx) {
+    const body = document.getElementById(`config-tree-body-${idx}`);
+    const icon = document.getElementById(`config-tree-icon-${idx}`);
+    if (body.style.display === 'none' || body.style.display === '') {
+        body.style.display = 'flex';
+        icon.style.transform = 'rotate(180deg)';
+    } else {
+        body.style.display = 'none';
+        icon.style.transform = 'rotate(0deg)';
+    }
+};
+
 window.closeTestConfig = function() {
     document.getElementById('test-config-modal').style.display = 'none';
 };
@@ -274,7 +291,8 @@ window.generateCustomTest = function() {
     }
     const selectedIds = Array.from(checkboxes).map(cb => cb.value);
     const difficulty = document.getElementById('test-difficulty').value;
+    const numQs = document.getElementById('test-num-qs').value || 10;
     
     const encodedIds = encodeURIComponent(selectedIds.join(','));
-    window.location.href = `practice.html?type=custom_test&ids=${encodedIds}&diff=${difficulty}`;
+    window.location.href = `practice.html?type=custom_test&ids=${encodedIds}&diff=${difficulty}&num=${numQs}`;
 };
