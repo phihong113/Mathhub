@@ -27,16 +27,35 @@ document.addEventListener('DOMContentLoaded', () => {
             else if (lowerTitle.includes('đường tròn') || lowerTitle.includes('cung')) iconClass = 'fa-circle-notch';
             else if (lowerTitle.includes('hàm số')) iconClass = 'fa-chart-line';
 
+            let titlePrefix = "";
+            let titleContent = topic.title;
+            const colonIndex = topic.title.indexOf(':');
+            if (colonIndex > -1) {
+                titlePrefix = topic.title.substring(0, colonIndex).trim();
+                titleContent = topic.title.substring(colonIndex + 1).trim();
+            } else {
+                titleContent = topic.title;
+            }
+
             html += `
                 <div class="tree-node" style="position: relative; border-radius: 8px; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: all 0.3s; border-top: 5px solid ${color}; display: flex; flex-direction: column;">
                     <div id="header-chapter-${index}" class="tree-header" onclick="toggleTree('chapter-${index}')" style="padding: 15px 15px 10px 15px; cursor: pointer; display: flex; flex-direction: column; flex-grow: 1; min-height: 100px;">
                         <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-grow: 1;">
-                            <h4 style="margin: 0; font-size: 1rem; color: #111827; line-height: 1.4; font-weight: 600; flex-grow: 1;">${topic.title}</h4>
-                            <div style="background: ${color}1A; color: ${color}; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1.1rem;">
-                                <i class="fa-solid ${iconClass}"></i>
+                            <div style="flex-grow: 1; display: flex; flex-direction: column; align-items: flex-start;">
+                                <div style="display: inline-block; background: ${color}; color: white; padding: 4px 10px; border-radius: 4px; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px; text-transform: uppercase;">
+                                    ${titlePrefix || 'BÀI HỌC'}
+                                </div>
+                                <h4 style="margin: 0; font-size: 1.05rem; color: #111827; line-height: 1.4; font-weight: 600;">
+                                    ${titleContent}
+                                </h4>
                             </div>
-                            <div style="display: flex; align-items: center; height: 36px;">
-                                <i class="fa-solid fa-chevron-down" id="icon-chapter-${index}" style="transition: transform 0.3s; color: #6b7280;"></i>
+                            <div style="display: flex; gap: 8px; align-items: flex-start;">
+                                <div style="background: ${color}1A; color: ${color}; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1.1rem;">
+                                    <i class="fa-solid ${iconClass}"></i>
+                                </div>
+                                <div style="display: flex; align-items: center; height: 36px;">
+                                    <i class="fa-solid fa-chevron-down" id="icon-chapter-${index}" style="transition: transform 0.3s; color: #6b7280;"></i>
+                                </div>
                             </div>
                         </div>
                         <div style="margin-top: 15px; padding-top: 10px; border-top: 1px dashed #e5e7eb; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: #6b7280; font-weight: 500;">
