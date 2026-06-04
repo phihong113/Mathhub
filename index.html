@@ -49,32 +49,121 @@
             </div>
         </div>
 
-        <!-- Hero Section -->
-        <section class="hero" style="padding: 40px 0; display: block;">
+        <style>
+            @media (max-width: 900px) {
+                .investor-banner {
+                    flex-direction: column !important;
+                    padding: 40px 20px !important;
+                }
+                .investor-banner .left-content {
+                    padding: 0 0 40px 0 !important;
+                    text-align: center;
+                }
+                .investor-banner .left-content p {
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+                .investor-banner .left-content h1 {
+                    font-size: 2.5rem !important;
+                }
+                .investor-banner .right-content {
+                    padding-right: 0 !important;
+                    min-height: auto !important;
+                    transform: scale(0.9);
+                }
+                .investor-banner .floating-accent-1 {
+                    top: -20px !important;
+                    right: 0 !important;
+                }
+                .investor-banner .floating-accent-2 {
+                    bottom: -20px !important;
+                    left: 0 !important;
+                }
+            }
+        </style>
+        <section class="hero" style="padding: 60px 0; display: block; overflow: visible;">
             <div class="container" style="width: 100%;">
-                <div
-                    style="background: linear-gradient(135deg, #4f46e5, #0ea5e9); border-radius: 20px; padding: 60px 40px; text-align: center; color: white; box-shadow: 0 20px 40px rgba(79, 70, 229, 0.3); position: relative; overflow: hidden; width: 100%;">
-                    <!-- Decorations -->
-                    <div
-                        style="position: absolute; top: -50px; left: -50px; width: 200px; height: 200px; background: rgba(255,255,255,0.1); border-radius: 50%; filter: blur(20px);">
+                <div class="investor-banner" style="background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%); border-radius: 24px; padding: 0; text-align: left; color: white; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4); position: relative; overflow: hidden; width: 100%; display: flex; align-items: center; border: 1px solid rgba(255,255,255,0.1);">
+                    
+                    <!-- Decorative glowing orbs -->
+                    <div style="position: absolute; top: -100px; left: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(99,102,241,0.3) 0%, rgba(0,0,0,0) 70%); border-radius: 50%; z-index: 1;"></div>
+                    <div style="position: absolute; bottom: -150px; right: -50px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(14,165,233,0.2) 0%, rgba(0,0,0,0) 70%); border-radius: 50%; z-index: 1;"></div>
+                    
+                    <!-- Left Content -->
+                    <div class="left-content" style="flex: 1; padding: 60px 50px; position: relative; z-index: 2;">
+                        <div style="display: inline-block; background: rgba(56, 189, 248, 0.1); color: #38bdf8; padding: 6px 16px; border-radius: 50px; font-size: 0.9rem; font-weight: 700; margin-bottom: 20px; border: 1px solid rgba(56, 189, 248, 0.2); letter-spacing: 1px; text-transform: uppercase;">
+                            <i class="fa-solid fa-rocket" style="margin-right: 8px;"></i> Tầm nhìn giáo dục số
+                        </div>
+                        
+                        <h1 style="font-size: 3.5rem; font-weight: 800; margin-bottom: 24px; line-height: 1.15; letter-spacing: -0.02em; background: linear-gradient(to right, #fff, #93c5fd); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                            HỢP TÁC<br>PHÁT TRIỂN
+                        </h1>
+                        
+                        <p style="font-size: 1.15rem; color: #cbd5e1; margin-bottom: 40px; line-height: 1.7; max-width: 550px;">
+                            Chúng tôi đang hoàn thiện hệ thống luyện tập môn Toán từ lớp 6 đến lớp 12 với kho dữ liệu đồ sộ và thuật toán sinh đề thông minh. Hãy trở thành đối tác chiến lược để cùng mở rộng quy mô, chia sẻ giá trị và kiến tạo một hệ sinh thái EdTech hàng đầu.
+                        </p>
+                        
+                        <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+                            <a href="https://zalo.me/0935080804" target="_blank" style="display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; padding: 16px 36px; border-radius: 50px; font-weight: 600; font-size: 1.1rem; box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4); text-decoration: none; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.1);">
+                                <i class="fa-solid fa-handshake" style="margin-right: 12px; font-size: 1.2rem;"></i> Liên hệ: 0935.080804
+                            </a>
+                        </div>
                     </div>
-                    <div
-                        style="position: absolute; bottom: -80px; right: -20px; width: 250px; height: 250px; background: rgba(255,255,255,0.1); border-radius: 50%; filter: blur(30px);">
-                    </div>
+                    
+                    <!-- Right Content (Glassmorphism UI Illustration) -->
+                    <div class="right-content" style="flex: 1; position: relative; height: 100%; min-height: 450px; display: flex; align-items: center; justify-content: center; z-index: 2; padding-right: 40px;">
+                        <!-- Main Glass Card -->
+                        <div style="width: 320px; background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 30px; box-shadow: 0 25px 50px rgba(0,0,0,0.2); position: relative; z-index: 3; transform: perspective(1000px) rotateY(-5deg) translateY(-10px);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 15px;">
+                                <div style="color: #94a3b8; font-size: 0.9rem; font-weight: 500;">Hệ sinh thái MathHub</div>
+                                <div style="background: rgba(16, 185, 129, 0.2); color: #34d399; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;">ĐANG PHÁT TRIỂN</div>
+                            </div>
+                            
+                            <!-- Stat Row 1 -->
+                            <div style="display: flex; align-items: center; margin-bottom: 20px; background: rgba(255,255,255,0.02); padding: 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
+                                <div style="width: 40px; height: 40px; background: rgba(56, 189, 248, 0.15); color: #38bdf8; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 1.2rem;">
+                                    <i class="fa-solid fa-graduation-cap"></i>
+                                </div>
+                                <div>
+                                    <div style="font-weight: 700; color: white; font-size: 1.1rem;">Khối lớp 6 - 12</div>
+                                    <div style="color: #94a3b8; font-size: 0.85rem;">Phủ sóng toàn diện</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Stat Row 2 -->
+                            <div style="display: flex; align-items: center; margin-bottom: 20px; background: rgba(255,255,255,0.02); padding: 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
+                                <div style="width: 40px; height: 40px; background: rgba(167, 139, 250, 0.15); color: #a78bfa; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 1.2rem;">
+                                    <i class="fa-solid fa-database"></i>
+                                </div>
+                                <div>
+                                    <div style="font-weight: 700; color: white; font-size: 1.1rem;">Kho dữ liệu lớn</div>
+                                    <div style="color: #94a3b8; font-size: 0.85rem;">Hàng ngàn bài tập mẫu</div>
+                                </div>
+                            </div>
 
-                    <h1
-                        style="font-size: 3.2rem; font-weight: 800; margin-bottom: 20px; position: relative; z-index: 2; line-height: 1.2; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                        HỢP TÁC PHÁT TRIỂN</h1>
-                    <p
-                        style="font-size: 1.25rem; max-width: 800px; margin: 0 auto 30px auto; opacity: 0.95; line-height: 1.6; position: relative; z-index: 2;">
-                        Chúng tôi đang cố gắng hoàn thành hệ thống luyện tập môn Toán từ lớp 6 đến lớp 12 với đa dạng
-                        bài tập và kiểu trả lời câu hỏi. Chúng tôi tìm kiếm các nhà đầu tư để cùng mở rộng quy mô, chia
-                        sẻ kiến thức cũng như các hướng đi tiếp theo để hoàn thiện 1 hệ sinh thái trong lĩnh vực Toán
-                        học!
-                    </p>
-                    <div
-                        style="display: inline-block; background: white; color: var(--primary); padding: 15px 35px; border-radius: 50px; font-weight: 700; font-size: 1.25rem; box-shadow: 0 10px 20px rgba(0,0,0,0.15); position: relative; z-index: 2; cursor: pointer; transition: transform 0.2s;">
-                        <i class="fa-solid fa-handshake" style="margin-right: 10px;"></i> Liên hệ Zalo: 0935.080804
+                            <!-- Stat Row 3 -->
+                            <div style="display: flex; align-items: center; background: rgba(255,255,255,0.02); padding: 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
+                                <div style="width: 40px; height: 40px; background: rgba(251, 191, 36, 0.15); color: #fbbf24; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 1.2rem;">
+                                    <i class="fa-solid fa-microchip"></i>
+                                </div>
+                                <div>
+                                    <div style="font-weight: 700; color: white; font-size: 1.1rem;">Sinh đề tự động</div>
+                                    <div style="color: #94a3b8; font-size: 0.85rem;">Thuật toán thông minh</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Floating Accent Cards -->
+                        <div class="floating-accent-1" style="position: absolute; top: 40px; right: 20px; background: linear-gradient(135deg, #f43f5e, #e11d48); color: white; padding: 15px 20px; border-radius: 16px; font-weight: 700; box-shadow: 0 15px 30px rgba(225, 29, 72, 0.3); z-index: 4; display: flex; align-items: center; transform: rotate(5deg); border: 1px solid rgba(255,255,255,0.2);">
+                            <i class="fa-solid fa-chart-pie" style="margin-right: 10px; font-size: 1.2rem;"></i> Chia sẻ lợi nhuận
+                        </div>
+                        
+                        <div class="floating-accent-2" style="position: absolute; bottom: 60px; left: 10px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); color: white; padding: 15px; border-radius: 16px; font-weight: 600; box-shadow: 0 15px 30px rgba(0,0,0,0.2); z-index: 4; display: flex; align-items: center; transform: rotate(-5deg); border: 1px solid rgba(255,255,255,0.1);">
+                            <div style="width: 30px; height: 30px; background: #10b981; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
+                                <i class="fa-solid fa-check" style="font-size: 0.8rem;"></i>
+                            </div>
+                            Sẵn sàng ra mắt
+                        </div>
                     </div>
                 </div>
             </div>
