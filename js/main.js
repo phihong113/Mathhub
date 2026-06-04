@@ -218,31 +218,36 @@ window.openTestConfig = function() {
     const container = document.getElementById('config-tree-container');
     let html = '<ul style="list-style: none; padding: 0; margin: 0;">';
     
+    let allTopics = [];
     ['algebra', 'geometry'].forEach(cat => {
-        if (!window.math9Data[cat]) return;
-        html += `<li style="margin-bottom: 15px;">
-            <div style="font-weight: 700; color: var(--primary); margin-bottom: 10px; font-size: 1.1rem; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px;">${window.math9Data[cat].title}</div>
-            <ul style="list-style: none; padding-left: 10px;">`;
+        if (window.math9Data[cat]) {
+            allTopics = allTopics.concat(window.math9Data[cat].topics.map(t => ({...t, cat})));
+        }
+    });
+    
+    allTopics.sort((a, b) => {
+        let numA = parseInt(a.id.replace('bai', ''));
+        let numB = parseInt(b.id.replace('bai', ''));
+        return numA - numB;
+    });
+
+    allTopics.forEach((topic, tIdx) => {
+        html += `<li style="margin-bottom: 12px; background: #f8fafc; padding: 10px; border-radius: 8px; border: 1px solid #f1f5f9;">
+            <label style="display: flex; align-items: center; font-weight: 600; cursor: pointer; margin-bottom: 8px; color: var(--primary-dark);">
+                <input type="checkbox" class="config-lesson-cb" data-target=".config-type-cb-${tIdx}" onchange="toggleLessonCb(this)" style="margin-right: 10px; transform: scale(1.2);">
+                ${topic.title}
+            </label>
+            <ul style="list-style: none; padding-left: 28px; display: flex; flex-direction: column; gap: 6px;">`;
             
-        window.math9Data[cat].topics.forEach((topic, tIdx) => {
-            html += `<li style="margin-bottom: 12px; background: #f8fafc; padding: 10px; border-radius: 8px; border: 1px solid #f1f5f9;">
-                <label style="display: flex; align-items: center; font-weight: 600; cursor: pointer; margin-bottom: 8px; color: var(--primary-dark);">
-                    <input type="checkbox" class="config-lesson-cb" data-target=".config-type-cb-${cat}-${tIdx}" onchange="toggleLessonCb(this)" style="margin-right: 10px; transform: scale(1.2);">
-                    ${topic.title}
+        topic.practice.forEach((item, iIdx) => {
+            let parts = item.title.split(':');
+            let desc = parts.length > 1 ? parts.slice(1).join(':').trim() : item.title;
+            html += `<li>
+                <label style="display: flex; align-items: flex-start; cursor: pointer; color: #475569; font-size: 0.95rem;">
+                    <input type="checkbox" class="config-type-cb config-type-cb-${tIdx}" value="${item.id}" style="margin-right: 10px; margin-top: 4px;">
+                    <span>${desc}</span>
                 </label>
-                <ul style="list-style: none; padding-left: 28px; display: flex; flex-direction: column; gap: 6px;">`;
-                
-            topic.practice.forEach((item, iIdx) => {
-                let parts = item.title.split(':');
-                let desc = parts.length > 1 ? parts.slice(1).join(':').trim() : item.title;
-                html += `<li>
-                    <label style="display: flex; align-items: flex-start; cursor: pointer; color: #475569; font-size: 0.95rem;">
-                        <input type="checkbox" class="config-type-cb config-type-cb-${cat}-${tIdx}" value="${item.id}" style="margin-right: 10px; margin-top: 4px;">
-                        <span>${desc}</span>
-                    </label>
-                </li>`;
-            });
-            html += `</ul></li>`;
+            </li>`;
         });
         html += `</ul></li>`;
     });
