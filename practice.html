@@ -178,42 +178,82 @@
                 let topicTitle = "";
                 let dataCategory = "";
                 
-                // Search across both algebra and geometry
-                for (const category of ['algebra', 'geometry']) {
-                    if (window.math9Data[category]) {
-                        for (const topic of window.math9Data[category].topics) {
-                            const found = topic.practice.find(i => i.id === id);
-                            if (found) {
-                                item = found;
-                                topicTitle = topic.title;
+                if (type === 'mixed') {
+                    let lessonTopic = null;
+                    for (const category of ['algebra', 'geometry']) {
+                        if (window.math9Data[category]) {
+                            lessonTopic = window.math9Data[category].topics.find(t => t.id === id);
+                            if (lessonTopic) {
                                 dataCategory = window.math9Data[category].title;
                                 break;
                             }
                         }
                     }
-                    if (item) break;
-                }
-                
-                if(item) {
-                    document.getElementById('practice-title').innerText = item.title;
-                    document.getElementById('practice-meta').innerText = `${dataCategory} - ${topicTitle}`;
-                    
-                    if (item.generator && window.MathGenerators && window.MathGenerators[item.generator]) {
-                        // Gọi hàm đẻ câu hỏi tự động
-                        currentQuestions = window.MathGenerators[item.generator](2);
-                        renderQuestions();
-                    } else if(item.questions && item.questions.length > 0) {
-                        // Dùng data tĩnh (nếu có)
-                        currentQuestions = item.questions;
-                        renderQuestions();
+                    if (lessonTopic) {
+                        document.getElementById('practice-title').innerText = "Luyện Tập Tổng Hợp";
+                        document.getElementById('practice-meta').innerText = `${dataCategory} - ${lessonTopic.title}`;
+                        
+                        currentQuestions = [];
+                        lessonTopic.practice.forEach(pItem => {
+                            if (pItem.generator && window.MathGenerators && window.MathGenerators[pItem.generator]) {
+                                const qList = window.MathGenerators[pItem.generator](1);
+                                currentQuestions = currentQuestions.concat(qList);
+                            } else if (pItem.questions && pItem.questions.length > 0) {
+                                // Nếu dùng tĩnh thì lấy random 1 câu
+                                const randomIndex = Math.floor(Math.random() * pItem.questions.length);
+                                currentQuestions.push(pItem.questions[randomIndex]);
+                            }
+                        });
+                        
+                        if (currentQuestions.length > 0) {
+                            renderQuestions();
+                        } else {
+                            document.getElementById('questions-container').innerHTML = 
+                                '<div class="question-card text-center">Nội dung bài tập tổng hợp đang được cập nhật. Vui lòng quay lại sau!</div>';
+                            document.getElementById('submit-btn').style.display = 'none';
+                        }
                     } else {
-                        document.getElementById('questions-container').innerHTML = 
-                            '<div class="question-card text-center">Nội dung bài tập đang được cập nhật. Vui lòng quay lại sau!</div>';
+                        document.getElementById('practice-title').innerText = "Không tìm thấy bài học";
                         document.getElementById('submit-btn').style.display = 'none';
                     }
                 } else {
-                    document.getElementById('practice-title').innerText = "Không tìm thấy bài tập";
-                    document.getElementById('submit-btn').style.display = 'none';
+                    // Search across both algebra and geometry for single category
+                    for (const category of ['algebra', 'geometry']) {
+                        if (window.math9Data[category]) {
+                            for (const topic of window.math9Data[category].topics) {
+                                const found = topic.practice.find(i => i.id === id);
+                                if (found) {
+                                    item = found;
+                                    topicTitle = topic.title;
+                                    dataCategory = window.math9Data[category].title;
+                                    break;
+                                }
+                            }
+                        }
+                        if (item) break;
+                    }
+                    
+                    if(item) {
+                        document.getElementById('practice-title').innerText = item.title;
+                        document.getElementById('practice-meta').innerText = `${dataCategory} - ${topicTitle}`;
+                        
+                        if (item.generator && window.MathGenerators && window.MathGenerators[item.generator]) {
+                            // Gọi hàm đẻ câu hỏi tự động
+                            currentQuestions = window.MathGenerators[item.generator](2);
+                            renderQuestions();
+                        } else if(item.questions && item.questions.length > 0) {
+                            // Dùng data tĩnh (nếu có)
+                            currentQuestions = item.questions;
+                            renderQuestions();
+                        } else {
+                            document.getElementById('questions-container').innerHTML = 
+                                '<div class="question-card text-center">Nội dung bài tập đang được cập nhật. Vui lòng quay lại sau!</div>';
+                            document.getElementById('submit-btn').style.display = 'none';
+                        }
+                    } else {
+                        document.getElementById('practice-title').innerText = "Không tìm thấy bài tập";
+                        document.getElementById('submit-btn').style.display = 'none';
+                    }
                 }
             }
         });

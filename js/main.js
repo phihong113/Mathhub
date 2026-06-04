@@ -40,6 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             
             html += `
+                        <div class="topic-card" onclick="handleCardClick('${topic.id}', 'mixed', 'lesson')" style="background: var(--primary); border: none; border-radius: 8px; padding: 15px; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3); display: flex; align-items: center; justify-content: center; min-height: 100px;">
+                            <div style="color: #fff; font-weight: 600; font-size: 1.1rem; text-align: center;">
+                                <i class="fa-solid fa-graduation-cap" style="font-size: 1.5rem; margin-bottom: 10px; display: block;"></i>
+                                Luyện Tập<br>Tổng Hợp Bài
+                            </div>
+                        </div>
                         </div>
                     </div>
                 </div>`;
